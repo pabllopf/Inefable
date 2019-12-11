@@ -3,7 +3,89 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Object
+  - Attack
+  - Player_Camera
+  - Tree
+  - TileForest
+  - Terrein
+  - ZombieSpawn
+  - Terrain
+  - Occusion2D
+  - Text
+  - InitMenu
+  - MainMenu
+  - LoadBar
+  - Pet
+  - Animal
+  - A1
+  - A2
+  - A3
+  - A4
+  - A5
+  - A6
+  - A7
+  - A8
+  - A9
+  - Coin
+  - Heart
+  - Chest
+  - Skull
+  - Clock
+  - Rock
+  - Potion
+  - Grass
+  - Cartel
+  - Flower
+  - Cristal
+  - Destroyable
+  - HitMachine
+  - Dialogue
+  - NPC
+  - Portal
+  - Item
+  - Trap
+  - Key
+  - Bullet
+  - Witch
+  - PotionBlue
+  - PotionPurple
+  - PotionYellow
+  - PotionRed
+  - PC
+  - A10
+  - A11
+  - A12
+  - A13
+  - A14
+  - A15
+  - A16
+  - A17
+  - A18
+  - A19
+  - A20
+  - A21
+  - A22
+  - A23
+  - A24
+  - A25
+  - A26
+  - StartPanel
+  - SoundTrack
+  - MainPanel
+  - NewButtons
+  - NormalButtons
+  - PopUpPanel
+  - A27
+  - A28
+  - A29
+  - A30
+  - A31
+  - A32
+  - A33
+  - A34
   layers:
   - Default
   - TransparentFX
@@ -13,13 +95,13 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Animal
+  - Object
+  - Traduce
+  - Pet
+  - Player_Enemy
   - 
   - 
   - 
@@ -38,6 +120,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: foregound
+    uniqueID: 1490126623
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Animal
+    uniqueID: 4273945511
     locked: 0
