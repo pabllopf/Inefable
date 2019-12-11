@@ -22,7 +22,7 @@ Use Unity 5 2018+
 
 [GitHub](https://github.com/) for versioning.
 
-## Authors
+## Author
 
 * **Pablo Perdomo Falcón** - [Pabllopf](https://github.com/pabllopf)
 
@@ -32,5 +32,5 @@ GNU General Public License v3.0
 
 ## Acknowledgments
 
-* Thanks to my father and my friends for considering this challenge.
+* Thanks to my family and my friends for considering this challenge.
 * Thanks to Raúl for giving me some ideas.  [RaulLozanoPonce](https://github.com/RaulLozanoPonce).
