@@ -1,5 +1,5 @@
 # Inefable
-Roguelike 2D created with Unity 5. 
+Roguelike 2d with random dungeon generation, role components and pixel art style (available on IOS, Android, Windows, Linux and MacOs).
 
 ## Getting Started
 
