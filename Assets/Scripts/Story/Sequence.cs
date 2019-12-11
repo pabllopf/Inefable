@@ -1,7 +1,7 @@
-﻿//-----------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Sequence.cs" company="UnMedioStudio">Open Source</copyright>
-//-----------------------------------------------------------------------
+// <copyright file="Sequence.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.UI;
 

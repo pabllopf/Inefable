@@ -1,7 +1,7 @@
-﻿//-----------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Story.cs" company="UnMedioStudio">Open Source</copyright>
-//-----------------------------------------------------------------------
+// <copyright file="Story.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
