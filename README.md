@@ -22,8 +22,6 @@ Use Unity 5 2018+
 
 [GitHub](https://github.com/) for versioning.
 
-For the versions available, see the [tags on this repository](https://github.com/pabllopf/Inefable). 
-
 ## Authors
 
 * **Pablo Perdomo Falcón** - [Pabllopf](https://github.com/pabllopf)
