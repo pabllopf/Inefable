@@ -23,6 +23,11 @@ public class Health : MonoBehaviour
     /// <summary>The shield object</summary>
     private GameObject shieldOBJ;
 
+    public void Awake()
+    {
+        Stats.Current = new Stats();
+    }
+
     /// <summary>Starts this instance.</summary>
     public void Start()
     {

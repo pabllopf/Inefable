@@ -51,6 +51,9 @@ public class Player : MonoBehaviour
     /// <summary>The inventory</summary>
     private Inventory inventory;
 
+    /// <summary>The pet</summary>
+    private Pet pet;
+
     /// <summary>The animator</summary>
     private Animator animator;
 
@@ -166,6 +169,19 @@ public class Player : MonoBehaviour
 
             case "Key":
                 MonoBehaviour.Destroy(obj.gameObject);
+                break;
+
+            case "Pet":
+                if (pet)
+                {
+                    pet.LeaveOwner();
+                    pet = null;
+                }
+                else
+                {
+                    pet = obj.GetComponent<Pet>();
+                    pet.SetOwner(gameObject);
+                }
                 break;
         }
     }
