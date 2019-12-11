@@ -553,9 +553,9 @@ MonoBehaviour:
     quantityMax: 34
     position: 5
     dungeon: 0
-  - item: {fileID: 3132833763953888203, guid: 5826e24479d12b94baddc3d55ffe76ed, type: 3}
+  - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
     quantityMin: 1
-    quantityMax: 1
+    quantityMax: 9
     position: 1
     dungeon: 2
   - item: {fileID: 1037379602364782, guid: 3bac12dde24c07147b4b4c56af524e9e, type: 3}
@@ -593,11 +593,6 @@ MonoBehaviour:
     quantityMax: 34
     position: 1
     dungeon: 1
-  - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
-    quantityMin: 1
-    quantityMax: 5
-    position: 1
-    dungeon: 2
   styleMaps:
   - name: ClasicGeon
     dungeon: 1

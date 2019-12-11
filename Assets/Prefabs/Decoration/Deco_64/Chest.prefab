@@ -119,16 +119,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2493011478083059926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3f0e46b3f8f5db4caa20b6def098758, type: 3}
+  m_Script: {fileID: 11500000, guid: a2af0df86acdbf64999ea250f59ef95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   openChest: {fileID: 4714410783012859700, guid: daa10eb5731338443a14f1a95e8e4c26,
     type: 3}
   items:
-  - {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
-  - {fileID: 1381999859985268, guid: f305886ffb736f24d8fc956e9815a803, type: 3}
-  - {fileID: 1764778046426134, guid: 78267a45f8f9682438d78bdec8a80774, type: 3}
-  - {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
+  - {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
+  - {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
+  - {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
+  - {fileID: 1325099382827930, guid: 2d8f6e4d6f33b2948ab54c3131f77478, type: 3}
 --- !u!114 &1026719475338772144
 MonoBehaviour:
   m_ObjectHideFlags: 0
