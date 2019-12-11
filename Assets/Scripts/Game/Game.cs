@@ -17,28 +17,28 @@ public class Game : MonoBehaviour
     /// <summary>Resets this instance.</summary>
     public static void Reset()
     {
-        Setting.Current = new Setting();
+        Settings.Current = new Settings();
         Game.Save();
     }
 
     /// <summary>Saves this instance.</summary>
     public static void Save()
     {
-        Encrypt(JsonUtility.ToJson(Setting.Current), key, Application.persistentDataPath + "/Setting.json");
+        Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Setting.json");
     }
 
     /// <summary>Loads this instance.</summary>
     public static void Load()
     {
-        Setting.Current = new Setting();
+        Settings.Current = new Settings();
         if (File.Exists(Application.persistentDataPath + "/Setting.json"))
         {
-            Setting.Current = JsonUtility.FromJson<Setting>(Decrypt(key, Application.persistentDataPath + "/Setting.json"));
+            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Setting.json"));
         }
         else
         {
-            Encrypt(JsonUtility.ToJson(Setting.Current), key, Application.persistentDataPath + "/Setting.json");
-            Setting.Current = JsonUtility.FromJson<Setting>(Decrypt(key, Application.persistentDataPath + "/Setting.json"));
+            Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Setting.json");
+            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Setting.json"));
         }
     }
 

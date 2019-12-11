@@ -28,17 +28,17 @@ public class Language : MonoBehaviour
             string[] value = fLines[i].Split(';');
 
             // 0 is spanish
-            if (Setting.Current.Language == 0)
+            if (Settings.Current.Language == 0)
             {
                 language.Add(value[0], value[1]);
             }
             // 1 is english
-            if (Setting.Current.Language == 1)
+            if (Settings.Current.Language == 1)
             {
                 language.Add(value[0], value[2]);
             }
             // 2 is french
-            if (Setting.Current.Language == 2)
+            if (Settings.Current.Language == 2)
             {
                 language.Add(value[0], value[3]);
             }

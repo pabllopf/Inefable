@@ -108,7 +108,7 @@ public class MainMenu : MonoBehaviour
     /// <summary>Get the buttons panel.</summary>
     private void InitButtonsPanel()
     {
-        if (Setting.Current.HasSaveGame)
+        if (Settings.Current.HasSaveGame)
         {
             this.buttonsPanel = GameObject.FindGameObjectWithTag("NormalButtons").gameObject;
 
@@ -208,7 +208,7 @@ public class MainMenu : MonoBehaviour
     {
         this.currentController = controller;
 
-        Setting.Current.Plattform = controller;
+        Settings.Current.Plattform = controller;
         Game.Save();
         Language.Translate();
 
@@ -411,7 +411,7 @@ public class MainMenu : MonoBehaviour
     private void YesNewAdventure()
     {
         Game.Reset();
-        Setting.Current.HasSaveGame = true;
+        Settings.Current.HasSaveGame = true;
         Game.Save();
         SceneManager.LoadScene(this.sceneToLoad);
     }
