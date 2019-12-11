@@ -38,6 +38,42 @@ TextureImporter:
   - first:
       213: -2693641334832668538
     second: PC_11
+  - first:
+      213: -1928200300737814378
+    second: Computer_0
+  - first:
+      213: -1417400593713708136
+    second: Computer_1
+  - first:
+      213: -4234159622298737130
+    second: Computer_2
+  - first:
+      213: 8648726954729752633
+    second: Computer_3
+  - first:
+      213: -8005984628153883616
+    second: Computer_4
+  - first:
+      213: -3334455670416319352
+    second: Computer_5
+  - first:
+      213: 3752207423680860611
+    second: Computer_6
+  - first:
+      213: -2128196322386198037
+    second: Computer_7
+  - first:
+      213: -8187445071196928378
+    second: Computer_8
+  - first:
+      213: -4546924752322410101
+    second: Computer_9
+  - first:
+      213: 7026199070130013610
+    second: Computer_10
+  - first:
+      213: -8950467817338105731
+    second: Computer_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -158,7 +194,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PC_0
+      name: Computer_0
       rect:
         serializedVersion: 2
         x: 10
@@ -172,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68e85c5f0ffdda14f89884f2aa048cea
-      internalID: -5778590093982927133
+      spriteID: 09eb759ef1886904e8f4da94148b2d64
+      internalID: -1928200300737814378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_1
+      name: Computer_1
       rect:
         serializedVersion: 2
         x: 42
@@ -193,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c20aa7980675d0b45981c74754ca1e12
-      internalID: 1341951855039238538
+      spriteID: 8cab6247df0bade41bcd7a645aa524fa
+      internalID: -1417400593713708136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_2
+      name: Computer_2
       rect:
         serializedVersion: 2
         x: 74
@@ -214,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6f48292792b0ef4ab41558c960584c9
-      internalID: 1252354279565329153
+      spriteID: 5928d07ebdc35c34ea572b65db41f1c4
+      internalID: -4234159622298737130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_3
+      name: Computer_3
       rect:
         serializedVersion: 2
         x: 106
@@ -235,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc663491a79e866499df2865041d6b5b
-      internalID: 411557490847500162
+      spriteID: bac51da2350d2ca4e818db0740347b66
+      internalID: 8648726954729752633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_4
+      name: Computer_4
       rect:
         serializedVersion: 2
         x: 9
@@ -256,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6562c003bcb4a8147904572b7afd31ce
-      internalID: 6552657634297009707
+      spriteID: 037dfb4274a6a9a47ab444955f6967fd
+      internalID: -8005984628153883616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_5
+      name: Computer_5
       rect:
         serializedVersion: 2
         x: 41
@@ -277,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 627be410394b2a343b0aedcb476b453d
-      internalID: -6893851535811529201
+      spriteID: 09ff68c34873ec745b7f7d895209eecf
+      internalID: -3334455670416319352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_6
+      name: Computer_6
       rect:
         serializedVersion: 2
         x: 73
@@ -298,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad0d812d3a8ddb4468fad50011d3513d
-      internalID: -3936000452674267285
+      spriteID: c3d1a2794fd2eb64ebdd6b58fe4106f3
+      internalID: 3752207423680860611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_7
+      name: Computer_7
       rect:
         serializedVersion: 2
         x: 105
@@ -319,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d104e51d59bca414b92265a67ce53b76
-      internalID: 7848044809928152401
+      spriteID: 342dfc6de32352946ad953781434bdab
+      internalID: -2128196322386198037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_8
+      name: Computer_8
       rect:
         serializedVersion: 2
         x: 9
@@ -340,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9edf0a274c442f24aa0c187ef328ad38
-      internalID: 8624034538222849326
+      spriteID: 900231bc94c5c734e8173ebe4471916a
+      internalID: -8187445071196928378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_9
+      name: Computer_9
       rect:
         serializedVersion: 2
         x: 41
@@ -361,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9bc3b74a3d17b446a27dab5c2b5f43a
-      internalID: 7331319547816935788
+      spriteID: bbb35ef481f47c8409503389944c00d0
+      internalID: -4546924752322410101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_10
+      name: Computer_10
       rect:
         serializedVersion: 2
         x: 73
@@ -382,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6248d84c72804c4e9cf2a7f483fbd0c
-      internalID: -2021819684137480787
+      spriteID: fed87419e0aac7841bfbe4817ed8b997
+      internalID: 7026199070130013610
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC_11
+      name: Computer_11
       rect:
         serializedVersion: 2
         x: 105
@@ -403,8 +439,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5a39a8a9e2e5bb44b17ad38984952d1
-      internalID: -2693641334832668538
+      spriteID: b292a3228930e5e4c891d89825b6c69e
+      internalID: -8950467817338105731
       vertices: []
       indices: 
       edges: []
