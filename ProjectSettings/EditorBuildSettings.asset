@@ -9,9 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Foreword.unity
+    guid: bf327fd60cea14a43b99362fbef9bb02
+  - enabled: 1
     path: Assets/Scenes/House.unity
     guid: 13a14ce0a8cbcb543bcca7c3d346a9fb
   - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 12a892db3631a5b44990042508449167
+  - enabled: 1
     path: Assets/Scenes/Town.unity
     guid: 751c1e63e88daed4ca4e05b0f1a96bfb
+  - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: da984012efae97746949ac85ae68d64c
+  - enabled: 1
+    path: Assets/Scenes/Epilogue.unity
+    guid: cf664522955cfc943a78b13c493e80bc
   m_configObjects: {}
