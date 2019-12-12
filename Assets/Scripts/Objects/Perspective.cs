@@ -1,10 +1,10 @@
-﻿//-----------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Perspective.cs" company="UnMedioStudio">Open Source</copyright>
-//-----------------------------------------------------------------------
+// <copyright file="Perspective.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
 using UnityEngine;
 
-/// <summary>Class to control a column.</summary>
+/// <summary>Class to control the perspective of a object.</summary>
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Occlusion))]

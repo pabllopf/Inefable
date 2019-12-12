@@ -6435,6 +6435,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2553267897227867437, guid: b69f7ca92b65b7d46a9a50e0b149e4cc,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2421257498471141843, guid: b69f7ca92b65b7d46a9a50e0b149e4cc,
         type: 3}
       propertyPath: m_Layer
@@ -6569,11 +6574,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553267897227867437, guid: b69f7ca92b65b7d46a9a50e0b149e4cc,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b69f7ca92b65b7d46a9a50e0b149e4cc, type: 3}
@@ -8828,7 +8828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08190c58a36ee39409e7271d3f6d9b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typePortal: 4
 --- !u!1001 &1460633924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10070,6 +10069,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757894351900237260, guid: 7c45b9c3b1ec1974b8419af112e49de0,
+        type: 3}
+      propertyPath: orderLayerBack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757894351900237260, guid: 7c45b9c3b1ec1974b8419af112e49de0,
+        type: 3}
+      propertyPath: orderLayerFront
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c45b9c3b1ec1974b8419af112e49de0, type: 3}

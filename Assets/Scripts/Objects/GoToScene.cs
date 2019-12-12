@@ -1,38 +1,23 @@
-﻿using UnityEngine;
+﻿//------------------------------------------------------------------------------------------
+// <author>Pablo Perdomo Falcón</author>
+// <copyright file="GoToScene.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum TypePortal { EnterDungeon, ExitDungeon, EnterCity, GoHome, GoShop};
-
+/// <summary>Load scene with a collision</summary>
 public class GoToScene : MonoBehaviour
 {
-    public TypePortal typePortal;
+    /// <summary>The scene</summary>
+    private string scene = string.Empty;
 
+    /// <summary>Called when [collision enter].</summary>
+    /// <param name="collision2D">The collision</param>
     public void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if (!collision2D.collider.CompareTag("Player")) { return; }
-        switch (typePortal)
+        if (collision2D.collider.CompareTag("Player")) 
         {
-            case TypePortal.EnterDungeon:
-                SceneManager.LoadScene("Dungeon", LoadSceneMode.Single);
-                break;
-
-            case TypePortal.ExitDungeon:
-                Game.Save();
-                SceneManager.LoadScene("House", LoadSceneMode.Single);
-                break;
-
-            case TypePortal.GoHome:
-                SceneManager.LoadScene("House", LoadSceneMode.Single);
-                break;
-
-            case TypePortal.EnterCity:
-                SceneManager.LoadScene("Town", LoadSceneMode.Single);
-                break;
-            case TypePortal.GoShop:
-                SceneManager.LoadScene("Shop", LoadSceneMode.Single);
-                break;
-            default:
-                break;
-        };
+            SceneManager.LoadScene(this.scene, LoadSceneMode.Single);
+        }
     }
 }
