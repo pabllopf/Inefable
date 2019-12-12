@@ -2,11 +2,10 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Stats.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using UnityEngine;
 
 /// <summary>Save the current stats of the player.</summary>
 [System.Serializable]
-public class Stats : MonoBehaviour
+public class Stats 
 {
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
