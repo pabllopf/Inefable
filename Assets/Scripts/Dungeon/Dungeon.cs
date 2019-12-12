@@ -149,20 +149,13 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.2f);
 
-        if (Random.Range(0, 5) == 4)
-        {
-            this.StartCoroutine(this.LoadShop(Language.GetSentence("A30")));
-        }
-        else
-        {
-            this.GenerateRoomsAndCorridors();
-            this.StartCoroutine(this.CreatedRoomsAndCorridors(Language.GetSentence("A27")));
-        }
+        this.GenerateRoomsAndCorridors();
+        this.StartCoroutine(this.CreatedRoomsAndCorridors(Language.GetSentence("A27")));
     }
 
     /// <summary>Load the shop.</summary>
@@ -174,10 +167,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.2f);
 
         SceneManager.LoadScene("Shop", LoadSceneMode.Single);
     }
@@ -191,10 +184,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.2f);
 
         this.PrintRoomsInBoard();
         this.PrintCorridorsInBoard();
@@ -213,10 +206,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.2f);
 
         this.SpawnItems();
         this.StartCoroutine(this.FinalDetails(Language.GetSentence("A29")));
@@ -231,10 +224,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.2f);
 
         MonoBehaviour.Destroy(this.mainCamera);
         MonoBehaviour.Destroy(this.startInterface);

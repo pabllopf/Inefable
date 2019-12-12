@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 99f354e45596ea545845c798b20a879e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a50158122675d4741918f30f220d7be3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2931549018618805333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced5b10f11c914c418dae2803c6ee079, type: 3}
+  m_Script: {fileID: 11500000, guid: 08190c58a36ee39409e7271d3f6d9b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typePortal: 0
+  scene: Dungeon

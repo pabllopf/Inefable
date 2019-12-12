@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class GoToScene : MonoBehaviour
 {
     /// <summary>The scene</summary>
+    [SerializeField]
     private string scene = string.Empty;
 
     /// <summary>Called when [collision enter].</summary>
