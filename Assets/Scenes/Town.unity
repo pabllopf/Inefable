@@ -227,7 +227,7 @@ Tilemap:
   - first: {x: -3, y: -4, z: 0}
     second:
       m_TileIndex: 0
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -281,7 +281,7 @@ Tilemap:
   - first: {x: -3, y: -3, z: 0}
     second:
       m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -761,12 +761,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 0809bf73a59c51349ab40ead3c4c6d7e, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 99a680b0bffc1d74caaca70edba8cab9, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: e1c50049ec18550478935acef4c34aa4, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 240d1b0b76715e8429de10eb41305bac, type: 3}
+    m_Data: {fileID: 21300000, guid: 99a680b0bffc1d74caaca70edba8cab9, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 9980b4bd61fdd7545aa1df8cfbc65a79, type: 3}
   - m_RefCount: 4
@@ -781,8 +781,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 264ad7ce08cb4b04e86cadaadb06f58c, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: cf23d6797751f994cae16578aade962e, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 240d1b0b76715e8429de10eb41305bac, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: b82de24f96e53cb489dd14cba1b8cbbc, type: 3}
   - m_RefCount: 3
@@ -888,7 +888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxClouds: 200
-  timeToChangeDir: 10
+  timeToChangeDir: 5
   clouds:
   - {fileID: 5853182814022761329, guid: a502bb0f53ee25c4a99d4b18866e4e67, type: 3}
   - {fileID: 5535918548644433217, guid: 65cce72225e9f8749af4adc70c3747d4, type: 3}
@@ -898,6 +898,7 @@ MonoBehaviour:
   - {fileID: 8768439101863297770, guid: b2dbec88d1c3f1e4eb64954dfaeb6bbd, type: 3}
   xRange: {x: -50, y: 50}
   yRange: {x: -50, y: 50}
+  groups: []
 --- !u!4 &280948288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7874359013565991252, guid: bb6a58a6136cb4a4db5e2c872dac7dad,
