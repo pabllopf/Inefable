@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6981021499129756499}
   - component: {fileID: 6981021499129756498}
   m_Layer: 0
-  m_Name: Tree_3
+  m_Name: TreeT3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6981021499129756527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419755fd9a9642e4093be79589a5e07f, type: 3}
+  m_Script: {fileID: 11500000, guid: 142f07a5f69ae1b46b2f873d0e8d5d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   orderLayerFront: 2

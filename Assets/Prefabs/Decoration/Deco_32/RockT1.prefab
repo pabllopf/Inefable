@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1645095764030643932}
   - component: {fileID: 3936269932668144177}
   m_Layer: 0
-  m_Name: Rock_1
+  m_Name: RockT1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4390033149433182506, guid: 7db204df118344b41b4c7c034fe8de17,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

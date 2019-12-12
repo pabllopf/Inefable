@@ -114,6 +114,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452f8326773f3544592f042590a8201f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToChangeDirection: 1
+  timeToChangeDirection: 2
   speed: 2
-  lastDirection: 0

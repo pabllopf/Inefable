@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 689e870051723a247b158542f0038444
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5957410499083171980
+    second: T4House_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -108,7 +111,28 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: T4House_0
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 4
+        width: 56
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6560df3a2005b646a0051437a2346f9
+      internalID: 5957410499083171980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

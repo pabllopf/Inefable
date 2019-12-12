@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: dd7a72ce3dea50f4cabf043424b72cb9
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -1783308576382164670
+    second: Flowers_4_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -108,7 +111,28 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Flowers_4_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 0
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35e9cc283576bf469f0201947b2822a
+      internalID: -1783308576382164670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
