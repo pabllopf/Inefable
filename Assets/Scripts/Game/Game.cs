@@ -11,44 +11,63 @@ using UnityEngine;
 /// <summary>Manage the game.</summary>
 public class Game : MonoBehaviour
 {
-    /// <summary>The key</summary>
-    private static readonly string key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435";
+    private static string key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435";
 
-    /// <summary>Resets this instance.</summary>
-    public static void Reset()
+    public static void ResetSettings()
     {
         Settings.Current = new Settings();
-        Game.Save();
+        Game.SaveSettings();
     }
 
-    /// <summary>Saves this instance.</summary>
-    public static void Save()
+    public static void SaveSettings()
     {
-        Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Setting.json");
+        Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Settings.json");
     }
 
-    /// <summary>Loads this instance.</summary>
-    public static void Load()
+    public static void LoadSettings()
     {
         Settings.Current = new Settings();
-        if (File.Exists(Application.persistentDataPath + "/Setting.json"))
+        if (File.Exists(Application.persistentDataPath + "/Settings.json"))
         {
-            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Setting.json"));
+            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Settings.json"));
         }
         else
         {
-            Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Setting.json");
-            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Setting.json"));
+            Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Settings.json");
+            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Settings.json"));
         }
     }
 
-    /// <summary>Encrypts the specified data.</summary>
-    /// <param name="data">The data.</param>
-    /// <param name="key">The key.</param>
-    /// <param name="pathFile">The path file.</param>
+    public static void ResetStats()
+    {
+        Stats.Current = new Stats();
+        Game.SaveStats();
+    }
+
+    public static void SaveStats()
+    {
+        Encrypt(JsonUtility.ToJson(Stats.Current), key, Application.persistentDataPath + "/Stats.json");
+    }
+
+    public static void LoadStats()
+    {
+        Stats.Current = new Stats();
+        if (File.Exists(Application.persistentDataPath + "/Stats.json"))
+        {
+            Stats.Current = JsonUtility.FromJson<Stats>(Decrypt(key, Application.persistentDataPath + "/Stats.json"));
+        }
+        else
+        {
+            Encrypt(JsonUtility.ToJson(Stats.Current), key, Application.persistentDataPath + "/Stats.json");
+            Stats.Current = JsonUtility.FromJson<Stats>(Decrypt(key, Application.persistentDataPath + "/Stats.json"));
+        }
+    }
+
+
     private static void Encrypt(string data, string key, string pathFile)
     {
         byte[] stringToEncrypt = UTF8Encoding.UTF8.GetBytes(data);
+
 
         TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
         MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
@@ -66,15 +85,13 @@ public class Game : MonoBehaviour
         tdes.Clear();
     }
 
-    /// <summary>Decrypts the specified key.</summary>
-    /// <param name="key">The key.</param>
-    /// <param name="pathFile">The path file.</param>
-    /// <returns>The data decrypted</returns>
     private static string Decrypt(string key, string pathFile)
     {
+        string result = "";
         string stringEncrypt = File.ReadAllText(pathFile);
 
         byte[] arrayEncrypt = Convert.FromBase64String(stringEncrypt);
+
 
         MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
         byte[] keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
@@ -86,7 +103,7 @@ public class Game : MonoBehaviour
         tdes.Padding = PaddingMode.PKCS7;
 
         ICryptoTransform desEncrypt = tdes.CreateDecryptor();
-        string result = Encoding.UTF8.GetString(desEncrypt.TransformFinalBlock(arrayEncrypt, 0, arrayEncrypt.Length));
+        result = UTF8Encoding.UTF8.GetString(desEncrypt.TransformFinalBlock(arrayEncrypt, 0, arrayEncrypt.Length));
         tdes.Clear();
 
         return result;

@@ -102,7 +102,7 @@ public class Dungeon : MonoBehaviour
     /// <summary>Run before all</summary>
     private void Awake()
     {
-        Game.Load();
+        Game.LoadSettings();
         Language.Translate();
     }
 

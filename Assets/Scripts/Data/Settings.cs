@@ -7,28 +7,23 @@
 [System.Serializable]
 public class Settings
 {
+    /// <summary>The current</summary>
+    public static Settings Current;
+
+    /// <summary>The has save game</summary>
+    public bool HasSaveGame;
+
+    /// <summary>The language</summary>
+    public int Language;
+
+    /// <summary>The plattform</summary>
+    public string Plattform;
+
     /// <summary>Initializes a new instance of the <see cref="Settings"/> class.</summary>
     public Settings()
     {
         this.HasSaveGame = false;
         this.Language = 1;
-        this.Plattform = "Xbox";
+        this.Plattform = "Computer";
     }
-
-    /// <summary>Gets or sets the current.</summary>
-    /// <value>The current.</value>
-    public static Settings Current { get; set; }
-
-    /// <summary>Gets or sets a value indicating whether this instance has save game.</summary>
-    /// <value>
-    /// <c>true</c> if this instance has save game; otherwise, <c>false</c>.</value>
-    public bool HasSaveGame { get; set; }
-
-    /// <summary>Gets or sets the language.</summary>
-    /// <value>The language.</value>
-    public int Language { get; set; }
-
-    /// <summary>Gets or sets the platform.</summary>
-    /// <value>The platform.</value>
-    public string Plattform { get; set; }
 }

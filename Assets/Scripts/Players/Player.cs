@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
     /// <summary>The speed move</summary>
     private int speedMove = 3;
 
+    /// <summary>The can move</summary>
+    private bool canMove = true;
+
     /// <summary>The joystick</summary>
     private Joystick joystick;
 
@@ -63,7 +66,8 @@ public class Player : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     public void Awake()
     {
-        Game.Load();
+        Game.LoadSettings();
+        Game.LoadStats();
         Language.Translate();
     }
 
@@ -76,12 +80,13 @@ public class Player : MonoBehaviour
         this.health = this.GetComponent<Health>();
         this.wallet = this.GetComponent<Wallet>();
         this.inventory = this.GetComponent<Inventory>();
+        this.canMove = true;
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && this.canMove)
         {
             if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
             {
@@ -172,16 +177,17 @@ public class Player : MonoBehaviour
                 break;
 
             case "Pet":
-                if (pet)
+                if (this.pet)
                 {
-                    pet.LeaveOwner();
-                    pet = null;
+                    this.pet.LeaveOwner();
+                    this.pet = null;
                 }
                 else
                 {
-                    pet = obj.GetComponent<Pet>();
-                    pet.SetOwner(gameObject);
+                    this.pet = obj.GetComponent<Pet>();
+                    this.pet.SetOwner(this.gameObject);
                 }
+
                 break;
         }
     }
@@ -191,5 +197,12 @@ public class Player : MonoBehaviour
     {
         this.position = new Vector2(250, 250);
         this.position.Set(250, 250);
+    }
+
+    /// <summary>Moves the specified state.</summary>
+    /// <param name="state">if set to <c>true</c> [state].</param>
+    public void Move(bool state) 
+    {
+        this.canMove = state;
     }
 }

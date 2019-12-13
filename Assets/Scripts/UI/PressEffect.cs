@@ -35,6 +35,12 @@ public class PressEffect : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
+        if (Settings.Current.Plattform == "Mobile") 
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+
         this.currentImage = this.GetComponent<Image>();
         this.LoadSprites(this.type);
     }

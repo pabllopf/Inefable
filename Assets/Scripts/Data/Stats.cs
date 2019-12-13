@@ -7,6 +7,14 @@
 [System.Serializable]
 public class Stats 
 {
+    public static Stats Current;
+
+    public int Health;
+
+    public int Shield;
+
+    public int Wallet;
+
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
     {
@@ -14,20 +22,4 @@ public class Stats
         this.Shield = 100;
         this.Wallet = 0;
     }
-
-    /// <summary>Gets or sets the current.</summary>
-    /// <value>The current.</value>
-    public static Stats Current { get; set; }
-
-    /// <summary>Gets or sets the health.</summary>
-    /// <value>The health.</value>
-    public int Health { get; set; }
-
-    /// <summary>Gets or sets the shield.</summary>
-    /// <value>The shield.</value>
-    public int Shield { get; set; }
-
-    /// <summary>Gets or sets the wallet.</summary>
-    /// <value>The wallet.</value>
-    public int Wallet { get; set; }
 }

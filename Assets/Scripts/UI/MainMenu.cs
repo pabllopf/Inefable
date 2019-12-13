@@ -55,7 +55,8 @@ public class MainMenu : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     public void Awake()
     {
-        Game.Load();
+        Game.LoadSettings();
+        Game.LoadStats();
         Language.Translate();
         Cursor.visible = false;
 
@@ -78,6 +79,7 @@ public class MainMenu : MonoBehaviour
     /// <summary>Creates new adventure.</summary>
     public void NewAdventure()
     {
+        this.PlayClip(this.acceptClip);
         this.mainPanel.SetActive(false);
         this.popUpPanel.SetActive(true);
         this.popUpNewAdventure.SetActive(true);
@@ -87,18 +89,21 @@ public class MainMenu : MonoBehaviour
     /// <summary>Continues the adventure.</summary>
     public void ContinueAdventure()
     {
-        Game.Load();
+        this.PlayClip(this.acceptClip);
+        Game.LoadSettings();
         SceneManager.LoadScene(this.sceneToLoad);
     }
 
     /// <summary>Communities this instance.</summary>
     public void Community()
     {
+        this.PlayClip(this.acceptClip);
     }
 
     /// <summary>Exits the game.</summary>
     public void ExitGame()
     {
+        this.PlayClip(this.acceptClip);
         this.popUpPanel.SetActive(true);
         this.popUpExit.SetActive(true);
         this.mainPanel.SetActive(false);
@@ -209,7 +214,7 @@ public class MainMenu : MonoBehaviour
         this.currentController = controller;
 
         Settings.Current.Plattform = controller;
-        Game.Save();
+        Game.SaveSettings();
         Language.Translate();
 
         this.startPanel.SetActive(false);
@@ -410,15 +415,18 @@ public class MainMenu : MonoBehaviour
     /// <summary>Yeses the new adventure.</summary>
     private void YesNewAdventure()
     {
-        Game.Reset();
+        this.PlayClip(this.acceptClip);
+        Game.ResetSettings();
         Settings.Current.HasSaveGame = true;
-        Game.Save();
+        Settings.Current.Plattform = currentController;
+        Game.SaveSettings();
         SceneManager.LoadScene(this.sceneToLoad);
     }
 
     /// <summary>Noes the new adventure.</summary>
     private void NoNewAdventure()
     {
+        this.PlayClip(this.acceptClip);
         this.mainPanel.SetActive(true);
         this.popUpPanel.SetActive(false);
         this.popUpNewAdventure.SetActive(false);
@@ -428,12 +436,14 @@ public class MainMenu : MonoBehaviour
     /// <summary>Yeses the exit game.</summary>
     private void YesExitGame()
     {
+        this.PlayClip(this.acceptClip);
         Application.Quit();
     }
 
     /// <summary>Noes the exit game.</summary>
     private void NoExitGame()
     {
+        this.PlayClip(this.acceptClip);
         this.mainPanel.SetActive(true);
         this.popUpPanel.SetActive(false);
         this.popUpExit.SetActive(false);

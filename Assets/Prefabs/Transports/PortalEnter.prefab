@@ -141,4 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08190c58a36ee39409e7271d3f6d9b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Dungeon
+  scene: Town
