@@ -170,7 +170,7 @@ public class Dungeon : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         SceneManager.LoadScene("Shop", LoadSceneMode.Single);
     }
@@ -187,7 +187,7 @@ public class Dungeon : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         this.PrintRoomsInBoard();
         this.PrintCorridorsInBoard();
@@ -209,7 +209,7 @@ public class Dungeon : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         this.SpawnItems();
         this.StartCoroutine(this.FinalDetails(Language.GetSentence("A29")));
@@ -227,7 +227,7 @@ public class Dungeon : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         MonoBehaviour.Destroy(this.mainCamera);
         MonoBehaviour.Destroy(this.startInterface);

@@ -20,11 +20,17 @@ public class PauseMenu : MonoBehaviour
     /// <summary>The pause menu panel</summary>
     private GameObject pauseMenuPanel = null;
 
+    /// <summary>The panel center controls</summary>
+    private GameObject panelCenterControls = null;
+
+    /// <summary>The panel center audio</summary>
+    private GameObject panelCenterAudio = null;
+
     /// <summary>The panel center graphics</summary>
     private GameObject panelCenterGraphics = null;
 
     /// <summary>The selectors</summary>
-    private List<GameObject> leftSelectors = null;
+    private List<GameObject> leftListOfSelectors = null;
 
     /// <summary>The selectors</summary>
     private List<GameObject> centerSelectors = null;
@@ -38,11 +44,17 @@ public class PauseMenu : MonoBehaviour
     /// <summary>The continue button</summary>
     private GameObject continueButton = null;
 
+    /// <summary>The controls button</summary>
+    private GameObject controlsButton = null;
+
+    /// <summary>The audio button</summary>
+    private GameObject audioButton = null;
+
     /// <summary>The graphics button</summary>
     private GameObject graphicsButton = null;
 
     /// <summary>The synchronize button</summary>
-    private GameObject vSyncButton = null;
+    private GameObject vsyncButton = null;
 
     /// <summary>The continue button</summary>
     private GameObject returnGraphicsButton = null;
@@ -64,7 +76,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>Pauses this instance.</summary>
     public void Pause()
     {
-        if (pauseMenuPanel.activeSelf)
+        if (this.pauseMenuPanel.activeSelf)
         {
             this.pauseMenuPanel.SetActive(false);
             return;
@@ -79,9 +91,19 @@ public class PauseMenu : MonoBehaviour
     /// <summary>Continues this instance.</summary>
     public void Continue() 
     {
-        this.Pause(false);
+        this.PausePlayer(false);
         this.pauseMenuPanel.SetActive(false);
         Game.SaveSettings();
+    }
+
+    /// <summary>Controls this instance.</summary>
+    public void Controls() 
+    {
+    }
+
+    /// <summary>Audios this instance.</summary>
+    public void Audio() 
+    {
     }
 
     /// <summary>Graphics this instance.</summary>
@@ -90,11 +112,13 @@ public class PauseMenu : MonoBehaviour
         this.panelCenterGraphics.SetActive(true);
     }
 
+    /// <summary>the synchronize button action.</summary>
     public void VSyncButtonAction() 
     {
         QualitySettings.vSyncCount = 0;
     }
 
+    /// <summary>Returns the graphics.</summary>
     public void ReturnGraphics()
     {
         this.panelCenterGraphics.SetActive(false);
@@ -118,8 +142,6 @@ public class PauseMenu : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        Debug.Log(Settings.Current.Plattform);
-        Debug.Log(Application.persistentDataPath);
         this.InitMainParameters();
         this.DetectController();
     }
@@ -129,40 +151,64 @@ public class PauseMenu : MonoBehaviour
     {
         this.pauseMenuPanel = this.transform.Find("Interface/PauseMenu").gameObject;
 
-        this.pauseButton = this.transform.Find("Interface/PauseButton").gameObject;
-        this.pauseButton.GetComponent<Button>().onClick.AddListener(() => { Pause(); });
-        this.pauseButton.SetActive(false);
+        this.SetLeftPanel();
 
-        this.centerSelectors = new List<GameObject>(1);
-        
-        this.panelCenterGraphics = this.transform.Find("Interface/PauseMenu/PanelCenterGraphics").gameObject;
-
-        this.vSyncButton = this.panelCenterGraphics.transform.Find("VSync").gameObject;
-        this.centerSelectors.Add(this.vSyncButton.transform.Find("Selector").gameObject);
-        this.vSyncButton.GetComponent<Button>().onClick.AddListener(() => { VSyncButtonAction(); });
-
-        this.returnGraphicsButton = this.panelCenterGraphics.transform.Find("Return").gameObject;
-        this.centerSelectors.Add(this.returnGraphicsButton.transform.Find("Selector").gameObject);
-        this.returnGraphicsButton.GetComponent<Button>().onClick.AddListener(() => { ReturnGraphics(); });
-        
-        this.leftSelectors = new List<GameObject>(2);
-
-        this.continueButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Continue").gameObject;
-        this.leftSelectors.Add(this.continueButton.transform.Find("Selector").gameObject);
-        this.continueButton.GetComponent<Button>().onClick.AddListener(() => { Continue(); });
-
-        this.graphicsButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Graphics").gameObject;
-        this.leftSelectors.Add(this.graphicsButton.transform.Find("Selector").gameObject);
-        this.graphicsButton.GetComponent<Button>().onClick.AddListener(() => { Graphics(); });
-
-        this.exitButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Exit").gameObject;
-        this.leftSelectors.Add(this.exitButton.transform.Find("Selector").gameObject);
-        this.exitButton.GetComponent<Button>().onClick.AddListener(() => { Exit(); });
+        this.SetPanelCenterControls();
+        this.SetPanelCenterAudio();
+        this.SetPanelCenterGraphics();
 
         this.audioSource = this.GetComponent<AudioSource>();
 
-        this.panelCenterGraphics.SetActive(false);
         this.pauseMenuPanel.SetActive(false);
+    }
+
+    /// <summary>Sets the left panel.</summary>
+    private void SetLeftPanel() 
+    {
+        this.continueButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Continue").gameObject;
+        this.controlsButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Controls").gameObject;
+        this.audioButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Audio").gameObject;
+        this.graphicsButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Graphics").gameObject;
+        this.exitButton = this.transform.Find("Interface/PauseMenu/LeftPanel/Exit").gameObject;
+
+        this.leftListOfSelectors = new List<GameObject>(5)
+        {
+            this.continueButton.transform.Find("Selector").gameObject,
+            this.controlsButton.transform.Find("Selector").gameObject,
+            this.audioButton.transform.Find("Selector").gameObject,
+            this.graphicsButton.transform.Find("Selector").gameObject,
+            this.exitButton.transform.Find("Selector").gameObject
+        };
+
+        this.continueButton.GetComponent<Button>().onClick.AddListener(()   => { Continue();    });
+        this.controlsButton.GetComponent<Button>().onClick.AddListener(()   => { Controls();    });
+        this.audioButton.GetComponent<Button>().onClick.AddListener(()      => { Audio();       });
+        this.graphicsButton.GetComponent<Button>().onClick.AddListener(()   => { Graphics();    });
+        this.exitButton.GetComponent<Button>().onClick.AddListener(()       => { Exit();        });
+    }
+
+    /// <summary>Sets the panel center controls.</summary>
+    private void SetPanelCenterControls()
+    {
+        this.panelCenterControls = this.transform.Find("Interface/PauseMenu/PanelCenterControls").gameObject;
+
+        this.panelCenterControls.SetActive(false);
+    }
+
+    /// <summary>Sets the panel center audio.</summary>
+    private void SetPanelCenterAudio() 
+    {
+        this.panelCenterAudio = this.transform.Find("Interface/PauseMenu/PanelCenterAudio").gameObject;
+
+        this.panelCenterAudio.SetActive(false);
+    }
+
+    /// <summary>Sets the panel center graphics.</summary>
+    private void SetPanelCenterGraphics()
+    {
+        this.panelCenterGraphics = this.transform.Find("Interface/PauseMenu/PanelCenterGraphics").gameObject;
+
+        this.panelCenterGraphics.SetActive(false);
     }
 
     /// <summary>Detects the input.</summary>
@@ -203,15 +249,15 @@ public class PauseMenu : MonoBehaviour
     {
         this.DetectInput();
 
-        if (this.pauseMenuPanel.activeSelf && !panelCenterGraphics.activeSelf) 
+        if (this.pauseMenuPanel.activeSelf && !this.panelCenterGraphics.activeSelf) 
         {
-            this.ShiftInMenu(leftSelectors);
+            this.ShiftInMenu(this.leftListOfSelectors);
             return;
         }
 
-        if (this.pauseMenuPanel.activeSelf && panelCenterGraphics.activeSelf)
+        if (this.pauseMenuPanel.activeSelf && this.panelCenterGraphics.activeSelf)
         {
-            this.ShiftInMenu(centerSelectors);
+            this.ShiftInMenu(this.centerSelectors);
             return;
         }
     }
@@ -219,13 +265,30 @@ public class PauseMenu : MonoBehaviour
     /// <summary>Detects the input.</summary>
     private void DetectInput() 
     {
-        if (Input.GetKeyDown(KeyCode.Escape) )
+        if (Settings.Current.Plattform == "Computer")
         {
-            this.Pause();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                this.PausePlayer(true);
+                this.Pause();
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                this.PausePlayer(false);
+                this.Pause();
+                return;
+            }
+        }
+
+        if (Settings.Current.Plattform == "Xbox")
+        {
         }
     }
 
     /// <summary>Shifts the in menu.</summary>
+    /// <param name="selectors">The selectors.</param>
     private void ShiftInMenu(List<GameObject> selectors)
     {
         this.UpdateButtons(Settings.Current.Plattform);
@@ -281,7 +344,8 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    /// <summary>Goes up in menu.</summary>
+    /// <summary>Goes up.</summary>
+    /// <param name="selectors">The selectors.</param>
     private void GoUp(List<GameObject> selectors)
     {
         for (int i = 0; i < selectors.Count; i++)
@@ -299,7 +363,8 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    /// <summary>Goes down in menu.</summary>
+    /// <summary>Goes down.</summary>
+    /// <param name="selectors">The selectors.</param>
     private void GoDown(List<GameObject> selectors)
     {
         for (int i = 0; i < selectors.Count; i++)
@@ -317,7 +382,8 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    /// <summary>Action the selector.</summary>
+    /// <summary>Actions the selector.</summary>
+    /// <param name="selectors">The selectors.</param>
     private void ActionSelector(List<GameObject> selectors)
     {
         this.PlayClip(this.acceptClip);
@@ -332,7 +398,7 @@ public class PauseMenu : MonoBehaviour
 
     /// <summary>Pauses the specified state.</summary>
     /// <param name="state">if set to <c>true</c> [state].</param>
-    private void Pause(bool state)
+    private void PausePlayer(bool state)
     {
         if (state == true)
         {

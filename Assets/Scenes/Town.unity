@@ -5513,7 +5513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d6ff79a9e059045a35f8a556ec272f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxClouds: 200
+  maxClouds: 300
   timeToChangeDir: 5
   clouds:
   - {fileID: 5853182814022761329, guid: a502bb0f53ee25c4a99d4b18866e4e67, type: 3}
@@ -5523,8 +5523,8 @@ MonoBehaviour:
   - {fileID: 7589865942443153354, guid: 46f6d1b3041d32d44823f2de5562cd90, type: 3}
   - {fileID: 8768439101863297770, guid: b2dbec88d1c3f1e4eb64954dfaeb6bbd, type: 3}
   - {fileID: 7902244259166581223, guid: 54783a1f914c5594b981bbbea9c692eb, type: 3}
-  xRange: {x: -50, y: 50}
-  yRange: {x: -50, y: 50}
+  xRange: {x: -25, y: 25}
+  yRange: {x: -25, y: 25}
   groups: []
 --- !u!1001 &241661470
 PrefabInstance:
