@@ -45,32 +45,32 @@ public class Player : MonoBehaviour
     /// <summary>The time to close bar</summary>
     private float timeToCloseBar = 10f;
 
-    /// <summary>The timereset</summary>
+    /// <summary>The time reset</summary>
     private float timeReset = 10f;
 
     /// <summary>The joystick</summary>
-    private Joystick joystick;
+    private Joystick joystick = null;
 
     /// <summary>The health</summary>
-    private Health health;
+    private Health health = null;
 
     /// <summary>The wallet</summary>
-    private Wallet wallet;
+    private Wallet wallet = null;
 
     /// <summary>The inventory</summary>
-    private Inventory inventory;
+    private Inventory inventory = null;
 
     /// <summary>The pet</summary>
-    private Pet pet;
+    private Pet pet = null;
 
     /// <summary>The animator</summary>
-    private Animator animator;
+    private Animator animator = null;
 
     /// <summary>The UI animator</summary>
-    private Animator uiAnimator;
+    private Animator uiAnimator = null;
 
     /// <summary>The rigid body</summary>
-    private Rigidbody2D rigbody2D;
+    private Rigidbody2D rigbody2D = null;
 
     /// <summary>Awakes this instance.</summary>
     public void Awake()
@@ -206,6 +206,34 @@ public class Player : MonoBehaviour
                     this.pet.SetOwner(this.gameObject);
                 }
 
+                break;
+            case "PotionRed":
+                if (inventory.HasSpace())
+                {
+                    inventory.AddItem(obj.tag,obj.GetComponent<Icon>().GetIcon());
+                    Destroy(obj.gameObject);
+                }
+                break;
+            case "PotionBlue":
+                if (inventory.HasSpace())
+                {
+                    inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    Destroy(obj.gameObject);
+                }
+                break;
+            case "PotionPurple":
+                if (inventory.HasSpace())
+                {
+                    inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    Destroy(obj.gameObject);
+                }
+                break;
+            case "PotionYellow":
+                if (inventory.HasSpace())
+                {
+                    inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    Destroy(obj.gameObject);
+                }
                 break;
         }
     }

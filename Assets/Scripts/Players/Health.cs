@@ -9,20 +9,21 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     /// <summary>The health</summary>
-    private int health;
+    public int health;
 
     /// <summary>The health UI</summary>
-    private Scrollbar healthUI;
+    public Scrollbar healthUI;
 
     /// <summary>The shield</summary>
-    private int shield;
+    public int shield;
 
     /// <summary>The shield UI</summary>
-    private Scrollbar shieldUI;
+    public Scrollbar shieldUI;
 
     /// <summary>The shield object</summary>
     private GameObject shieldOBJ;
 
+    /// <summary>Awakes this instance.</summary>
     public void Awake()
     {
         Stats.Current = new Stats();
@@ -31,9 +32,9 @@ public class Health : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.healthUI = transform.Find("Interface").Find("HealthUI").GetComponent<Scrollbar>();
-        this.shieldUI = transform.Find("Interface").Find("ShieldUI").GetComponent<Scrollbar>();
-        this.shieldOBJ = transform.Find("Interface").Find("ShieldUI").gameObject;
+        this.healthUI = transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();
+        this.shieldUI = transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
+        this.shieldOBJ = transform.Find("Interface/Bar/Shield").gameObject;
 
         this.health = Stats.Current.Health;
         this.healthUI.size = (float)this.health / 100;
@@ -51,7 +52,6 @@ public class Health : MonoBehaviour
             this.health += amount;
             Stats.Current.Health = this.health;
             this.healthUI.size = (float)this.health / 100;
-            Effect.Play("Health", amount, this.transform);
         }
     }
 
@@ -64,7 +64,6 @@ public class Health : MonoBehaviour
             this.shield -= amount;
             Stats.Current.Shield = this.shield;
             this.shieldUI.size = (float)this.shield / 100;
-            Effect.Play("Shield", 0, this.transform);
         }
         else
         {
@@ -75,7 +74,6 @@ public class Health : MonoBehaviour
                 this.health -= amount;
                 Stats.Current.Health = this.health;
                 this.healthUI.size = (float)this.health / 100;
-                Effect.Play("Damage", amount, this.transform);
             }
         }
     }
@@ -87,7 +85,6 @@ public class Health : MonoBehaviour
         Stats.Current.Shield = this.shield;
         this.shieldOBJ.SetActive(true);
         this.shieldUI.size = (float)this.shield / 100;
-        Effect.Play("Shield", 100, this.transform);
     }
 
     /// <summary>Put full the health.</summary>
@@ -96,6 +93,5 @@ public class Health : MonoBehaviour
         this.health = 100;
         Stats.Current.Health = this.health;
         this.healthUI.size = (float)this.health / 100;
-        Effect.Play("Health", 100, this.transform);
     }
 }

@@ -127,6 +127,7 @@ public class PauseMenu : MonoBehaviour
     public void Exit()
     {
         Game.SaveSettings();
+        Game.SaveStats();
         SceneManager.LoadScene(this.sceneToLoad);
     }
 

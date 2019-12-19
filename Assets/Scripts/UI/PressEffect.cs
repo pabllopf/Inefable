@@ -18,6 +18,9 @@ public class PressEffect : MonoBehaviour
     private Sprite[] xbox = new Sprite[2];
 
     /// <summary>The type</summary>
+    public bool active = true;
+
+    /// <summary>The type</summary>
     private string type = "Computer";
 
     /// <summary>The sprites</summary>
@@ -48,9 +51,12 @@ public class PressEffect : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        this.index = (int)(Time.timeSinceLevelLoad * this.frameForSeconds);
-        this.index %= this.sprites.Length;
-        this.currentImage.sprite = this.sprites[this.index];
+        if (this.active) 
+        {
+            this.index = (int)(Time.timeSinceLevelLoad * this.frameForSeconds);
+            this.index %= this.sprites.Length;
+            this.currentImage.sprite = this.sprites[this.index];
+        }
     }
 
     /// <summary>Loads the sprites.</summary>
@@ -74,5 +80,18 @@ public class PressEffect : MonoBehaviour
         {
             Debug.Log("Falta animaciones en " + this.gameObject.name);
         }
+    }
+
+    /// <summary>Starts the effect.</summary>
+    public void StartEffect() 
+    {
+        this.active = true;
+    }
+
+    /// <summary>Stops the effect.</summary>
+    public void StopEffect()
+    {
+        this.active = false;
+        this.currentImage.sprite = this.sprites[1];
     }
 }

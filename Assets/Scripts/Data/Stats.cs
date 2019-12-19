@@ -19,7 +19,7 @@ public class Stats
     public Stats()
     {
         this.Health = 100;
-        this.Shield = 100;
+        this.Shield = 0;
         this.Wallet = 0;
     }
 }

@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6d45910ea47f74ab0968e18c08b3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2421003709118850157, guid: b69f7ca92b65b7d46a9a50e0b149e4cc, type: 3}
+  player: {fileID: 631702901663353594, guid: b69f7ca92b65b7d46a9a50e0b149e4cc, type: 3}
   playerCamera: {fileID: 1304876317242396044, guid: 360e4fa594469a64790e28b6a45dc340,
     type: 3}
   items:

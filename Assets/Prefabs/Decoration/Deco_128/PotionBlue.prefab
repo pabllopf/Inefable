@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 95853418275661496}
   - component: {fileID: 114319148900667988}
   - component: {fileID: -1196791188504771167}
+  - component: {fileID: -6725577253382083343}
   m_Layer: 0
-  m_Name: Potion_Blue
-  m_TagString: Potion
+  m_Name: PotionBlue
+  m_TagString: PotionBlue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1661139615138848}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0b1ad155fc1ee448ac8ff411e3fb8bb, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -131,3 +132,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1875
+--- !u!114 &-6725577253382083343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661139615138848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: -2960987388250247192, guid: d731e245c11ab0e46b8d66a572c84cbd, type: 3}

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 95621767060649184}
   - component: {fileID: 58083796125557804}
   - component: {fileID: 114084298551262116}
+  - component: {fileID: -7066732298956942842}
   m_Layer: 0
-  m_Name: Potion_Purple
-  m_TagString: Potion
+  m_Name: PotionPurple
+  m_TagString: PotionPurple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1325099382827930}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 49d6377f72e4fad43b8b6464fc758c0e, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -131,3 +132,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7066732298956942842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325099382827930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: -8145410532683639919, guid: d22368a84ef2ad942b38c394ef436018, type: 3}

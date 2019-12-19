@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 95849178524704562}
   - component: {fileID: 114744351334569106}
   - component: {fileID: 58261312472496226}
+  - component: {fileID: -711368473370447267}
   m_Layer: 0
-  m_Name: Potion_Red
-  m_TagString: Potion
+  m_Name: PotionRed
+  m_TagString: PotionRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1461994297141650}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 646cc4b74daf81c4bbcaa69f6a4675e0, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -131,3 +132,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1875
+--- !u!114 &-711368473370447267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461994297141650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 7964675745351040275, guid: e3af0daf6bf60294b92ab1980a4a494a, type: 3}
