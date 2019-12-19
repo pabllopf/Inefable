@@ -24,6 +24,6 @@ public class Settings
     {
         this.HasSaveGame = false;
         this.Language = 1;
-        this.Plattform = "Computer";
+        this.Plattform = "Mobile";
     }
 }
