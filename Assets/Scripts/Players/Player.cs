@@ -15,6 +15,9 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Player : MonoBehaviour
 {
+    /// <summary>The open</summary>
+    private const string Open = "Open";
+
     /// <summary>The run</summary>
     private const string Run = "Run";
 
@@ -39,8 +42,11 @@ public class Player : MonoBehaviour
     /// <summary>The speed move</summary>
     private int speedMove = 3;
 
-    /// <summary>The can move</summary>
-    private bool canMove = true;
+    /// <summary>The time to close bar</summary>
+    private float timeToCloseBar = 10f;
+
+    /// <summary>The timereset</summary>
+    private float timeReset = 10f;
 
     /// <summary>The joystick</summary>
     private Joystick joystick;
@@ -60,6 +66,9 @@ public class Player : MonoBehaviour
     /// <summary>The animator</summary>
     private Animator animator;
 
+    /// <summary>The UI animator</summary>
+    private Animator uiAnimator;
+
     /// <summary>The rigid body</summary>
     private Rigidbody2D rigbody2D;
 
@@ -74,19 +83,18 @@ public class Player : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.joystick = this.transform.Find("Interface").Find("Joystick").GetComponent<Joystick>();
         this.animator = this.GetComponent<Animator>();
+        this.uiAnimator = this.transform.Find("Interface/Bar").GetComponent<Animator>();
         this.rigbody2D = this.GetComponent<Rigidbody2D>();
         this.health = this.GetComponent<Health>();
         this.wallet = this.GetComponent<Wallet>();
         this.inventory = this.GetComponent<Inventory>();
-        this.canMove = true;
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Input.anyKey && this.canMove)
+        if (Input.anyKey || Input.touchCount > 0)
         {
             if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
             {
@@ -123,10 +131,20 @@ public class Player : MonoBehaviour
 
                 this.animator.SetBool(Run, true);
             }
+
+            this.uiAnimator.SetBool(Open, true);
+            this.timeToCloseBar = this.timeReset;
         }
         else
         {
             this.animator.SetBool(Run, false);
+
+            this.timeToCloseBar -= Time.deltaTime;
+            if (this.timeToCloseBar <= 0) 
+            {
+                this.timeToCloseBar = this.timeReset;
+                this.uiAnimator.SetBool(Open, false);
+            }
         }
     }
 
@@ -197,12 +215,5 @@ public class Player : MonoBehaviour
     {
         this.position = new Vector2(250, 250);
         this.position.Set(250, 250);
-    }
-
-    /// <summary>Moves the specified state.</summary>
-    /// <param name="state">if set to <c>true</c> [state].</param>
-    public void Move(bool state) 
-    {
-        this.canMove = state;
     }
 }

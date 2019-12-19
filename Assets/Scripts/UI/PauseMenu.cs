@@ -91,7 +91,6 @@ public class PauseMenu : MonoBehaviour
     /// <summary>Continues this instance.</summary>
     public void Continue() 
     {
-        this.PausePlayer(false);
         this.pauseMenuPanel.SetActive(false);
         Game.SaveSettings();
     }
@@ -269,14 +268,12 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                this.PausePlayer(true);
                 this.Pause();
                 return;
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                this.PausePlayer(false);
                 this.Pause();
                 return;
             }
@@ -393,20 +390,6 @@ public class PauseMenu : MonoBehaviour
             {
                 selector.transform.parent.GetComponent<Button>().onClick.Invoke();
             }
-        }
-    }
-
-    /// <summary>Pauses the specified state.</summary>
-    /// <param name="state">if set to <c>true</c> [state].</param>
-    private void PausePlayer(bool state)
-    {
-        if (state == true)
-        {
-            this.GetComponent<Player>().Move(false);
-        }
-        else 
-        {
-            this.GetComponent<Player>().Move(true);
         }
     }
 
