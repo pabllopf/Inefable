@@ -119,19 +119,6 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (this.joystick.Horizontal > 0 || this.joystick.Horizontal < 0 || this.joystick.Vertical > 0 || this.joystick.Vertical < 0)
-            {
-                this.position = this.rigbody2D.position;
-
-                this.direction.Set(this.joystick.Horizontal, this.joystick.Vertical);
-                this.direction.Normalize();
-
-                this.animator.SetFloat(Horizontal, this.direction.x);
-                this.animator.SetFloat(Vertical, this.direction.y);
-
-                this.animator.SetBool(Run, true);
-            }
-
             this.uiAnimator.SetBool(Open, true);
             this.timeToCloseBar = this.timeReset;
         }
@@ -208,32 +195,36 @@ public class Player : MonoBehaviour
 
                 break;
             case "PotionRed":
-                if (inventory.HasSpace())
+                if (this.inventory.HasSpace())
                 {
-                    inventory.AddItem(obj.tag,obj.GetComponent<Icon>().GetIcon());
-                    Destroy(obj.gameObject);
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    MonoBehaviour.Destroy(obj.gameObject);
                 }
+
                 break;
             case "PotionBlue":
-                if (inventory.HasSpace())
+                if (this.inventory.HasSpace())
                 {
-                    inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
-                    Destroy(obj.gameObject);
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    MonoBehaviour.Destroy(obj.gameObject);
                 }
+
                 break;
             case "PotionPurple":
-                if (inventory.HasSpace())
+                if (this.inventory.HasSpace())
                 {
-                    inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
-                    Destroy(obj.gameObject);
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    MonoBehaviour.Destroy(obj.gameObject);
                 }
+
                 break;
             case "PotionYellow":
-                if (inventory.HasSpace())
+                if (this.inventory.HasSpace())
                 {
-                    inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
-                    Destroy(obj.gameObject);
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().GetIcon());
+                    MonoBehaviour.Destroy(obj.gameObject);
                 }
+
                 break;
         }
     }

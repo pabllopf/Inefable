@@ -217,7 +217,7 @@ public class Inventory : MonoBehaviour
                     break;
             }
             inventory[position] = "";
-            this.itemsIcon[position].sprite = null;
+            this.itemsIcon[position].gameObject.SetActive(false);
             this.CheckSlots();
         }
     }

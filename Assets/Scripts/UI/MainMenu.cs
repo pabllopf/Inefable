@@ -417,9 +417,11 @@ public class MainMenu : MonoBehaviour
     {
         this.PlayClip(this.acceptClip);
         Game.ResetSettings();
+        Game.ResetStats();
         Settings.Current.HasSaveGame = true;
         Settings.Current.Plattform = currentController;
         Game.SaveSettings();
+        Game.SaveStats();
         SceneManager.LoadScene(this.sceneToLoad);
     }
 
