@@ -22,13 +22,10 @@ public class Stats
     /// <summary>The wallet</summary>
     public int Wallet;
 
-    public string Slot1;
-    public string Slot2;
-    public string Slot3;
+    /// <summary>The sprite item</summary>
+    public List<Sprite> SpriteItem;
 
-    public Sprite Icon1;
-    public Sprite Icon2;
-    public Sprite Icon3;
+    public List<string> TagItem;
 
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
@@ -37,12 +34,19 @@ public class Stats
         this.Shield = 0;
         this.Wallet = 0;
 
-        this.Slot1 = "";
-        this.Slot2 = "";
-        this.Slot3 = "";
+        this.SpriteItem = new List<Sprite>
+        {
+            null,
+            null,
+            null
+        };
 
-        this.Icon1 = null;
-        this.Icon2 = null;
-        this.Icon3 = null;
+        this.TagItem = new List<string>
+        {
+            "",
+            "",
+            ""
+        };
+
     }
 }
