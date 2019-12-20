@@ -63,7 +63,6 @@ public class Game : MonoBehaviour
         }
     }
 
-
     private static void Encrypt(string data, string key, string pathFile)
     {
         byte[] stringToEncrypt = UTF8Encoding.UTF8.GetBytes(data);

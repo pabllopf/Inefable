@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
     /// <summary>The slot 3</summary>
     private PressEffect slot3 = null;
 
+    /// <summary>The items icon</summary>
     private List<Image> itemsIcon = null;
 
     /// <summary>The item1</summary>
@@ -41,33 +42,37 @@ public class Inventory : MonoBehaviour
     /// <summary>The item3</summary>
     private Image item3 = null;
 
-    /// <summary>The potion red</summary>
+    /// <summary>The audio source</summary>
+    private AudioSource audioSource = null;
+
+    /// <summary>The take item</summary>
     [SerializeField]
-    private Sprite PotionRed = null;
+    private AudioClip takeItem = null;
 
-    /// <summary>The potion blue</summary>
-    [SerializeField]
-    private Sprite PotionBlue = null;
-
-    /// <summary>The potion purple</summary>
+    /// <summary>The use item</summary>
     [SerializeField] 
-    private Sprite PotionPurple = null;
+    private AudioClip useItem = null;
 
-    /// <summary>The potion yellow</summary>
-    [SerializeField] 
-    private Sprite PotionYellow = null;
+    public void Awake()
+    {
+        Game.LoadStats();
+    }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.CreateEmptyInventory();
+        this.inventory = new Dictionary<int, string>();
+        this.inventory[0] = "";
+        this.inventory[1] = "";
+        this.inventory[2] = "";
+
+        this.audioSource = this.GetComponent<AudioSource>();
 
         this.uiAnimator = this.transform.Find("Interface/Inventory").GetComponent<Animator>();
 
         this.slot1 = this.transform.Find("Interface/Inventory/Slot1/Image").GetComponent<PressEffect>();
         this.slot2 = this.transform.Find("Interface/Inventory/Slot2/Image").GetComponent<PressEffect>();
         this.slot3 = this.transform.Find("Interface/Inventory/Slot3/Image").GetComponent<PressEffect>();
-
 
         this.itemsIcon = new List<Image>();
         
@@ -82,6 +87,9 @@ public class Inventory : MonoBehaviour
         this.item3 = this.transform.Find("Interface/Inventory/Slot3/Item").GetComponent<Image>();
         this.item3.gameObject.SetActive(false);
         this.itemsIcon.Add(this.item3);
+
+        this.LoadInventory();
+        this.CheckSlots();
     }
 
     /// <summary>Updates this instance.</summary>
@@ -108,56 +116,61 @@ public class Inventory : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                UseItem(0);
+                this.UseItem(0);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                UseItem(1);
+                this.UseItem(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                UseItem(2);
+                this.UseItem(2);
             }
         }
     }
 
     /// <summary>Adds the item.</summary>
-    /// <param name="obj">The object.</param>
+    /// <param name="item">The item.</param>
+    /// <param name="itemsIcon">The items icon.</param>
     public void AddItem(string item, Sprite itemsIcon) 
     {
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = 0; i < this.inventory.Count; i++)
         {
-            if (this.inventory[i] == "")
+            if (this.inventory[i] == string.Empty)
             {
+                this.PlayClip(this.takeItem);
                 this.inventory[i] = item;
                 this.itemsIcon[i].gameObject.SetActive(true);
                 this.itemsIcon[i].sprite = itemsIcon;
                 this.CheckSlots();
+                this.SaveInventory();
                 break;
             }
         }
     }
+
     /// <summary>Determines whether this instance has space.</summary>
     /// <returns>
-    ///   <c>true</c> if this instance has space; otherwise, <c>false</c>.</returns>
+    /// <c>true</c> if this instance has space; otherwise, <c>false</c>.</returns>
     public bool HasSpace()
     {
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = 0; i < this.inventory.Count; i++)
         {
-            if (inventory[i] == "")
+            if (this.inventory[i] == string.Empty)
             {
                 return true;
             }
         }
+
         return false;
     }
 
     /// <summary>Checks the slots.</summary>
     private void CheckSlots() 
     {
-        if (this.inventory[0] == "")
+        if (this.inventory[0] == string.Empty)
         {
             this.slot1.StopEffect();
         }
@@ -166,7 +179,7 @@ public class Inventory : MonoBehaviour
             this.slot1.StartEffect();
         }
 
-        if (this.inventory[1] == "")
+        if (this.inventory[1] == string.Empty)
         {
             this.slot2.StopEffect();
         }
@@ -175,7 +188,7 @@ public class Inventory : MonoBehaviour
             this.slot2.StartEffect();
         }
 
-        if (this.inventory[2] == "")
+        if (this.inventory[2] == string.Empty)
         {
             this.slot3.StopEffect();
         }
@@ -185,22 +198,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    /// <summary>Creates the empty inventory.</summary>
-    private void CreateEmptyInventory()
-    {
-        for (int i = 0; i < size; i++)
-        {
-            inventory.Add(i, "");
-        }
-    }
-
     /// <summary>Uses the item.</summary>
     /// <param name="position">The position.</param>
     private void UseItem(int position)
     {
-        if (inventory[position] != "")
+        if (this.inventory[position] != string.Empty)
         {
-            switch (inventory[position])
+            switch (this.inventory[position])
             {
                 case "PotionRed":
                     this.GetComponent<Health>().FullHealth();
@@ -216,9 +220,82 @@ public class Inventory : MonoBehaviour
                 case "PotionYellow":
                     break;
             }
-            inventory[position] = "";
+
+            this.PlayClip(this.useItem);
+            this.inventory[position] = string.Empty;
+            this.itemsIcon[position].sprite = null;
             this.itemsIcon[position].gameObject.SetActive(false);
             this.CheckSlots();
+            this.SaveInventory();
         }
+    }
+
+    private void LoadInventory() 
+    {
+        this.inventory[0] = Stats.Current.Slot1;
+        this.inventory[1] = Stats.Current.Slot2;
+        this.inventory[2] = Stats.Current.Slot3;
+
+        if (Stats.Current.Icon1 != null) 
+        {
+            this.itemsIcon[0].gameObject.SetActive(true);
+            this.itemsIcon[0].sprite = Stats.Current.Icon1;
+        }
+
+        if (Stats.Current.Icon2 != null)
+        {
+            this.itemsIcon[1].gameObject.SetActive(true);
+            this.itemsIcon[1].sprite = Stats.Current.Icon2;
+        }
+
+        if (Stats.Current.Icon3 != null)
+        {
+            this.itemsIcon[2].gameObject.SetActive(true);
+            this.itemsIcon[2].sprite = Stats.Current.Icon3;
+        }
+    }
+
+    private void SaveInventory() 
+    {
+        Stats.Current.Slot1 = this.inventory[0];
+        Stats.Current.Slot2 = this.inventory[1];
+        Stats.Current.Slot3 = this.inventory[2];
+
+        if (this.itemsIcon[0].sprite != null)
+        {
+            Stats.Current.Icon1 = this.itemsIcon[0].sprite;
+        }
+        else 
+        {
+            Stats.Current.Icon1 = null;
+        }
+
+        if (this.itemsIcon[1].sprite != null)
+        {
+            Stats.Current.Icon2 = this.itemsIcon[1].sprite;
+        }
+        else
+        {
+            Stats.Current.Icon2 = null;
+        }
+
+        if (this.itemsIcon[2].sprite != null)
+        {
+            Stats.Current.Icon3 = this.itemsIcon[2].sprite;
+        }
+        else
+        {
+            Stats.Current.Icon3 = null;
+        }
+
+        Game.SaveStats();
+    }
+
+    /// <summary>Plays the clip.</summary>
+    /// <param name="clip">The clip.</param>
+    private void PlayClip(AudioClip clip)
+    {
+        this.audioSource.clip = clip;
+        this.audioSource.Play();
     }
 }
