@@ -77,23 +77,27 @@ public class Wallet : MonoBehaviour
     public void TakeCoin()
     {
         this.wallet++;
-        Stats.Current.Wallet = this.wallet;
         this.walletUI.text = this.wallet.ToString() + " $";
         this.animator.SetBool(Open, true);
         this.timeCounter = this.resetCounter;
         this.PlayClip(this.takeCoin);
+
+        Stats.Current.Wallet = this.wallet;
+        Game.SaveStats();
     }
 
     /// <summary>Takes the out.</summary>
     /// <param name="amount">The amount.</param>
     public void TakeOut(int amount)
     {
-        this.wallet--;
-        Stats.Current.Wallet = this.wallet;
+        this.wallet--;  
         this.walletUI.text = this.wallet.ToString() + " $";
         this.animator.SetBool(Open, true);
         this.timeCounter = this.resetCounter;
         this.PlayClip(this.spendCoin);
+
+        Stats.Current.Wallet = this.wallet;
+        Game.SaveStats();
     }
 
     /// <summary>Plays the clip.</summary>
