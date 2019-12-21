@@ -497,7 +497,7 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_EncodingQuality: 0
   m_BuildTargetGroupLightmapSettings: []
-  playModeTestRunnerEnabled: 0
+  playModeTestRunnerEnabled: 1
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
   enableInternalProfiler: 0

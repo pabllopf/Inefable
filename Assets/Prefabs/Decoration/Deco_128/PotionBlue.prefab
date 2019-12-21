@@ -144,4 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: -2960987388250247192, guid: d731e245c11ab0e46b8d66a572c84cbd, type: 3}
+  iconName: PotionRed
+  iconSprite: {fileID: 0}
