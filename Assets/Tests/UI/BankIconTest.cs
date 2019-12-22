@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="IconTest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="BankIconTest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
 using NUnit.Framework;
@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 /// <summary>Test the icon class</summary>
-public class IconTest 
+public class BankIconTest 
 {
     /// <summary>Tests the load icon.</summary>
     /// <returns>Return none.</returns>

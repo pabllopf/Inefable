@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
         this.wallet = this.GetComponent<Wallet>();
         this.inventory = this.GetComponent<Inventory>();
         this.mobileUI = this.transform.Find("Interface/Mobile").gameObject;
-        this.joystick = this.mobileUI.transform.Find("Joystick").GetComponent<Joystick>();
+        this.joystick = this.transform.Find("Interface/Mobile/Joystick").GetComponent<Joystick>();
 
         this.buttonA = this.mobileUI.transform.Find("Buttons/ButtonA").gameObject;
         this.buttonB = this.mobileUI.transform.Find("Buttons/ButtonB").gameObject;
@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
 
         if (Settings.Current.Plattform == "Mobile")
         {
-            if (!this.mobileUI.activeSelf) 
+            if (!this.mobileUI.activeSelf)
             {
                 this.mobileUI.SetActive(true);
             }
@@ -195,6 +195,14 @@ public class Player : MonoBehaviour
             if (Input.GetButtonDown("ButtonA"))
             {
                 this.StartCoroutine("StartAttack");
+            }
+        }
+
+        if (Settings.Current.Plattform == "Mobile")
+        {
+            if (!this.mobileUI.activeSelf) 
+            {
+                this.mobileUI.SetActive(true);
             }
         }
     }
