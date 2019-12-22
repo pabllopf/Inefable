@@ -2,10 +2,8 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Icon.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using NUnit.Framework;
-using System;
 using System.Collections;
-using UnityEditor;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
@@ -21,8 +19,8 @@ public class Icon : MonoBehaviour
     [SerializeField]
     private Sprite iconSprite = null;
 
-    /// <summary>Awakes this instance.</summary>
-    public void Awake()
+    /// <summary>Starts this instance.</summary>
+    public void Start()
     {
         this.iconSprite = Resources.Load<Sprite>("Icons/" + this.iconName);
     }
@@ -34,24 +32,10 @@ public class Icon : MonoBehaviour
         return this.iconSprite;
     }
 
-    public String GetIconName()
+    /// <summary>Gets the name of the icon.</summary>
+    /// <returns>Return the icon name.</returns>
+    public string GetIconName()
     {
         return this.iconName;
-    }
-}
-
-public class IconTests
-{
-    [UnityTest]
-    public IEnumerator Test_Load_Icon()
-    {
-        SceneManager.LoadScene("House");
-        yield return null;
-        Icon[] icons = GameObject.FindObjectsOfType<Icon>();
-        foreach (Icon icon in icons) 
-        {
-            Assert.IsNotNull(icon.GetIcon(), "Icon of "+ icon.gameObject.name + " is null.");
-            Assert.AreEqual(icon.GetIcon().name, icon.GetIconName());
-        }
     }
 }

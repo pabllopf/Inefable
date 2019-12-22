@@ -48,6 +48,15 @@ public class Player : MonoBehaviour
     /// <summary>The time reset</summary>
     private float timeReset = 10f;
 
+    /// <summary>The mobile UI</summary>
+    private GameObject mobileUI = null;
+
+    /// <summary>The button a</summary>
+    private GameObject buttonA = null;
+
+    /// <summary>The button b</summary>
+    private GameObject buttonB = null;
+
     /// <summary>The joystick</summary>
     private Joystick joystick = null;
 
@@ -89,48 +98,103 @@ public class Player : MonoBehaviour
         this.health = this.GetComponent<Health>();
         this.wallet = this.GetComponent<Wallet>();
         this.inventory = this.GetComponent<Inventory>();
+        this.mobileUI = this.transform.Find("Interface/Mobile").gameObject;
+        this.joystick = this.mobileUI.transform.Find("Joystick").GetComponent<Joystick>();
+
+        this.buttonA = this.mobileUI.transform.Find("Buttons/ButtonA").gameObject;
+        this.buttonB = this.mobileUI.transform.Find("Buttons/ButtonB").gameObject;
+
+        this.mobileUI.SetActive(false);
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Input.anyKey || Input.touchCount > 0)
+        this.ControlBar();
+
+        if (Settings.Current.Plattform == "Computer")
         {
             if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
             {
                 this.position = this.rigbody2D.position;
-
                 this.direction.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
                 this.direction.Normalize();
-
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
-
                 this.animator.SetBool(Run, true);
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    this.StartCoroutine("StartRoll");
-                }
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    this.StartCoroutine("StartAttack");
-                }
+            }
+            else
+            {
+                this.animator.SetBool(Run, false);
             }
 
-            this.uiAnimator.SetBool(Open, true);
-            this.timeToCloseBar = this.timeReset;
-        }
-        else
-        {
-            this.animator.SetBool(Run, false);
-
-            this.timeToCloseBar -= Time.deltaTime;
-            if (this.timeToCloseBar <= 0) 
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                this.timeToCloseBar = this.timeReset;
-                this.uiAnimator.SetBool(Open, false);
+                this.StartCoroutine("StartRoll");
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                this.StartCoroutine("StartAttack");
+            }
+        }
+
+        if (Settings.Current.Plattform == "Xbox")
+        {
+            if (Input.GetAxisRaw("LeftJoystickX") > 0 || Input.GetAxisRaw("LeftJoystickX") < 0 || Input.GetAxisRaw("LeftJoystickY") > 0 || Input.GetAxisRaw("LeftJoystickY") < 0)
+            {
+                this.position = this.rigbody2D.position;
+                this.direction.Set(Input.GetAxisRaw("LeftJoystickX"), Input.GetAxisRaw("LeftJoystickY"));
+                this.direction.Normalize();
+                this.animator.SetFloat(Horizontal, this.direction.x);
+                this.animator.SetFloat(Vertical, this.direction.y);
+                this.animator.SetBool(Run, true);
+            }
+            else
+            {
+                this.animator.SetBool(Run, false);
+            }
+
+            if (Input.GetButtonDown("ButtonY"))
+            {
+                this.StartCoroutine("StartRoll");
+            }
+
+            if (Input.GetButtonDown("ButtonA"))
+            {
+                this.StartCoroutine("StartAttack");
+            }
+        }
+
+        if (Settings.Current.Plattform == "Mobile")
+        {
+            if (!this.mobileUI.activeSelf) 
+            {
+                this.mobileUI.SetActive(true);
+            }
+
+            if (this.joystick.Horizontal > 0 || this.joystick.Horizontal < 0 || this.joystick.Vertical > 0 || this.joystick.Vertical < 0)
+            {
+                this.position = this.rigbody2D.position;
+                this.direction.Set(this.joystick.Horizontal, this.joystick.Vertical);
+                this.direction.Normalize();
+                this.animator.SetFloat(Horizontal, this.direction.x);
+                this.animator.SetFloat(Vertical, this.direction.y);
+                this.animator.SetBool(Run, true);
+            }
+            else
+            {
+                this.animator.SetBool(Run, false);
+            }
+
+            if (Input.GetButtonDown("ButtonY"))
+            {
+                this.StartCoroutine("StartRoll");
+            }
+
+            if (Input.GetButtonDown("ButtonA"))
+            {
+                this.StartCoroutine("StartAttack");
             }
         }
     }
@@ -234,5 +298,24 @@ public class Player : MonoBehaviour
     {
         this.position = new Vector2(250, 250);
         this.position.Set(250, 250);
+    }
+
+    /// <summary>Controls the bar.</summary>
+    private void ControlBar() 
+    {
+        if (Input.anyKey || Input.touches.Length > 0)
+        {
+            this.uiAnimator.SetBool(Open, true);
+            this.timeToCloseBar = this.timeReset;
+        }
+        else
+        {
+            this.timeToCloseBar -= Time.deltaTime;
+            if (this.timeToCloseBar <= 0)
+            {
+                this.timeToCloseBar = this.timeReset;
+                this.uiAnimator.SetBool(Open, false);
+            }
+        }
     }
 }

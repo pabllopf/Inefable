@@ -21,6 +21,9 @@ public class Inventory : MonoBehaviour
     /// <summary>The UI animator</summary>
     private Animator uiAnimator = null;
 
+    /// <summary>The main button</summary>
+    private GameObject mainButton = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
@@ -43,6 +46,9 @@ public class Inventory : MonoBehaviour
     {
         this.audioSource = this.GetComponent<AudioSource>();
         this.uiAnimator = this.transform.Find("Interface/Inventory").GetComponent<Animator>();
+
+        this.mainButton = this.transform.Find("Interface/CircleInventory").gameObject;
+        this.mainButton.GetComponent<Button>().onClick.AddListener(() => { ControlInventory(); });
 
         this.pressEffects = new List<PressEffect>
         {
@@ -69,9 +75,9 @@ public class Inventory : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Input.anyKey) 
+        if (Settings.Current.Plattform == "Computer") 
         {
-            if (Input.GetKeyDown(KeyCode.I)) 
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 if (this.uiAnimator.GetBool(Open))
                 {
@@ -79,7 +85,7 @@ public class Inventory : MonoBehaviour
                     this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StartEffect();
                     return;
                 }
-                else 
+                else
                 {
                     this.uiAnimator.SetBool(Open, true);
                     this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StopEffect();
@@ -101,6 +107,44 @@ public class Inventory : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 this.UseItem(2);
+            }
+        }
+
+        if (Settings.Current.Plattform == "Xbox")
+        {
+            if (Input.GetButtonDown("ButtonX"))
+            {
+                if (this.uiAnimator.GetBool(Open))
+                {
+                    this.uiAnimator.SetBool(Open, false);
+                    this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StartEffect();
+                    return;
+                }
+                else
+                {
+                    this.uiAnimator.SetBool(Open, true);
+                    this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StopEffect();
+                    this.CheckSlots();
+                    return;
+                }
+            }
+
+            if (Input.GetAxisRaw("PadY") > 0)
+            {
+                this.UseItem(0);
+                return;
+            }
+
+            if (Input.GetAxisRaw("PadX") < 0)
+            {
+                this.UseItem(1);
+                return;
+            }
+
+            if (Input.GetAxisRaw("PadX") > 0)
+            {
+                this.UseItem(2);
+                return;
             }
         }
     }
@@ -145,15 +189,35 @@ public class Inventory : MonoBehaviour
     /// <summary>Checks the slots.</summary>
     private void CheckSlots() 
     {
-        for (int i = 0; i < 3; i++) 
+        if (Settings.Current.Plattform == "Xbox" || Settings.Current.Plattform == "Computer") 
         {
-            if (this.inventory[i].sprite == null)
+            for (int i = 0; i < 3; i++)
             {
-                this.pressEffects[i].StopEffect();
+                if (this.inventory[i].sprite == null)
+                {
+                    this.pressEffects[i].StopEffect();
+                }
+                else
+                {
+                    this.pressEffects[i].StartEffect();
+                }
             }
-            else 
+        }
+    }
+
+    public void ControlInventory() 
+    {
+        if (Settings.Current.Plattform == "Mobile")
+        {
+            if (this.uiAnimator.GetBool(Open))
             {
-                this.pressEffects[i].StartEffect();
+                this.uiAnimator.SetBool(Open, false);
+                return;
+            }
+            else
+            {
+                this.uiAnimator.SetBool(Open, true);
+                return;
             }
         }
     }
@@ -162,7 +226,7 @@ public class Inventory : MonoBehaviour
     /// <param name="position">The position.</param>
     private void UseItem(int position)
     {
-        if (this.inventory[position] != null)
+        if (this.inventory[position].sprite != null)
         {
             switch (this.inventory[position].tag)
             {
