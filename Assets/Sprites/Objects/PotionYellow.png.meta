@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: d731e245c11ab0e46b8d66a572c84cbd
+guid: 25305825eab44434693293f7ffa8c632
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2960987388250247192
-    second: Potion_Blue_0
+      213: -2117329449298311983
+    second: Potion_Yellow_0
   - first:
-      213: 37472772066143383
-    second: Potion_Blue_1
+      213: -8704222195080164809
+    second: Potion_Yellow_1
   - first:
-      213: -88026173847048496
-    second: Potion_Blue_2
+      213: 4603066601666904669
+    second: Potion_Yellow_2
   - first:
-      213: -7465664426604924426
-    second: Potion_Blue_3
+      213: -3847863487960792570
+    second: Potion_Yellow_3
+  - first:
+      213: 8393895198962170332
+    second: PotionYellow_0
+  - first:
+      213: -5078349639163419982
+    second: PotionYellow_1
+  - first:
+      213: 1479210138019995102
+    second: PotionYellow_2
+  - first:
+      213: -635473060636153752
+    second: PotionYellow_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -134,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Potion_Blue_0
+      name: PotionYellow_0
       rect:
         serializedVersion: 2
         x: 12
@@ -148,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8164d1509c900a043a224489719a1a6e
-      internalID: -2960987388250247192
+      spriteID: b10fd0ac5edf4234490916923cc551a6
+      internalID: 8393895198962170332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potion_Blue_1
+      name: PotionYellow_1
       rect:
         serializedVersion: 2
         x: 45
@@ -169,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af3119aabe1a24341b707cea63dd174f
-      internalID: 37472772066143383
+      spriteID: 29b8c02cbf002194ab0ce97e3f168d6f
+      internalID: -5078349639163419982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potion_Blue_2
+      name: PotionYellow_2
       rect:
         serializedVersion: 2
         x: 12
@@ -190,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa25940f8f4f5af459418ee8af7daf59
-      internalID: -88026173847048496
+      spriteID: 50b24260a44a495448eb428dacc04926
+      internalID: 1479210138019995102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potion_Blue_3
+      name: PotionYellow_3
       rect:
         serializedVersion: 2
         x: 44
@@ -211,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c06de9ed94dac6d4285a56ce12552681
-      internalID: -7465664426604924426
+      spriteID: a657ff3a64c433145b2a278f5a166464
+      internalID: -635473060636153752
       vertices: []
       indices: 
       edges: []

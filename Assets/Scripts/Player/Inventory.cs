@@ -24,6 +24,15 @@ public class Inventory : MonoBehaviour
     /// <summary>The main button</summary>
     private GameObject mainButton = null;
 
+    /// <summary>The slot 1 button</summary>
+    private GameObject slot1Button = null;
+
+    /// <summary>The slot 2 button</summary>
+    private GameObject slot2Button = null;
+
+    /// <summary>The slot 3 button</summary>
+    private GameObject slot3Button = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
@@ -49,6 +58,15 @@ public class Inventory : MonoBehaviour
 
         this.mainButton = this.transform.Find("Interface/CircleInventory").gameObject;
         this.mainButton.GetComponent<Button>().onClick.AddListener(() => { ControlInventory(); });
+
+        this.slot1Button = this.transform.Find("Interface/Inventory/Slot1").gameObject;
+        this.slot1Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(0); });
+
+        this.slot2Button = this.transform.Find("Interface/Inventory/Slot2").gameObject;
+        this.slot2Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(1); });
+
+        this.slot3Button = this.transform.Find("Interface/Inventory/Slot3").gameObject;
+        this.slot3Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(2); });
 
         this.pressEffects = new List<PressEffect>
         {
@@ -186,25 +204,7 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    /// <summary>Checks the slots.</summary>
-    private void CheckSlots() 
-    {
-        if (Settings.Current.Plattform == "Xbox" || Settings.Current.Plattform == "Computer") 
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                if (this.inventory[i].sprite == null)
-                {
-                    this.pressEffects[i].StopEffect();
-                }
-                else
-                {
-                    this.pressEffects[i].StartEffect();
-                }
-            }
-        }
-    }
-
+    /// <summary>Controls the inventory.</summary>
     public void ControlInventory() 
     {
         if (Settings.Current.Plattform == "Mobile")
@@ -224,7 +224,7 @@ public class Inventory : MonoBehaviour
 
     /// <summary>Uses the item.</summary>
     /// <param name="position">The position.</param>
-    private void UseItem(int position)
+    public void UseItem(int position)
     {
         if (this.inventory[position].sprite != null)
         {
@@ -252,6 +252,25 @@ public class Inventory : MonoBehaviour
             this.CheckSlots();
             this.PlayClip(this.useItem);
             this.SaveInventory();
+        }
+    }
+
+    /// <summary>Checks the slots.</summary>
+    private void CheckSlots()
+    {
+        if (Settings.Current.Plattform == "Xbox" || Settings.Current.Plattform == "Computer")
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (this.inventory[i].sprite == null)
+                {
+                    this.pressEffects[i].StopEffect();
+                }
+                else
+                {
+                    this.pressEffects[i].StartEffect();
+                }
+            }
         }
     }
 

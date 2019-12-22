@@ -35,9 +35,6 @@ public class PauseMenu : MonoBehaviour
     /// <summary>The selectors</summary>
     private List<GameObject> centerSelectors = null;
 
-    /// <summary>The selectors</summary>
-    private List<GameObject> rightSelectors = null;
-
     /// <summary>The pause button</summary>
     private GameObject pauseButton = null;
 
@@ -53,12 +50,6 @@ public class PauseMenu : MonoBehaviour
     /// <summary>The graphics button</summary>
     private GameObject graphicsButton = null;
 
-    /// <summary>The synchronize button</summary>
-    private GameObject vsyncButton = null;
-
-    /// <summary>The continue button</summary>
-    private GameObject returnGraphicsButton = null;
-
     /// <summary>The exit button</summary>
     private GameObject exitButton = null;
 
@@ -68,10 +59,6 @@ public class PauseMenu : MonoBehaviour
     /// <summary>The accept clip</summary>
     [SerializeField]
     private AudioClip acceptClip = null;
-
-    /// <summary>The cancel clip</summary>
-    [SerializeField]
-    private AudioClip cancelClip = null;
 
     /// <summary>Pauses this instance.</summary>
     public void Pause()
@@ -150,6 +137,10 @@ public class PauseMenu : MonoBehaviour
     private void InitMainParameters() 
     {
         this.pauseMenuPanel = this.transform.Find("Interface/PauseMenu").gameObject;
+
+        this.pauseButton = this.transform.Find("Interface/PauseButton").gameObject;
+        this.pauseButton.GetComponent<Button>().onClick.AddListener(() => { Pause(); });
+        this.pauseButton.SetActive(false);
 
         this.SetLeftPanel();
 

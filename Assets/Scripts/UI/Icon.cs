@@ -2,18 +2,14 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Icon.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TestTools;
 
 /// <summary>Default icon of a object.</summary>
 public class Icon : MonoBehaviour
 {
     /// <summary>The icon name</summary>
     [SerializeField] 
-    private string iconName;
+    private string iconName = string.Empty;
 
     /// <summary>The icon</summary>
     [SerializeField]

@@ -9,6 +9,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class PressEffect : MonoBehaviour
 {
+    /// <summary>The frame for seconds</summary>
+    private readonly float frameForSeconds = 2;
+
     /// <summary>The computer</summary>
     [SerializeField]
     private Sprite[] computer = new Sprite[2];
@@ -18,16 +21,13 @@ public class PressEffect : MonoBehaviour
     private Sprite[] xbox = new Sprite[2];
 
     /// <summary>The type</summary>
-    public bool active = true;
+    private bool active = true;
 
     /// <summary>The type</summary>
     private string type = "Computer";
 
     /// <summary>The sprites</summary>
     private Sprite[] sprites = null;
-
-    /// <summary>The frame for seconds</summary>
-    private float frameForSeconds = 2;
 
     /// <summary>The current sprite</summary>
     private Image currentImage;
@@ -91,7 +91,7 @@ public class PressEffect : MonoBehaviour
     /// <summary>Stops the effect.</summary>
     public void StopEffect()
     {
-        this.active = false;
         this.currentImage.sprite = this.sprites[1];
+        this.active = false;
     }
 }

@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: 8429626716889302879
     second: Potion_Red_3
+  - first:
+      213: 4704929228616946384
+    second: PotionRed_0
+  - first:
+      213: 6541495613093111123
+    second: PotionRed_1
+  - first:
+      213: -401354914987414017
+    second: PotionRed_2
+  - first:
+      213: -2056189545340563455
+    second: PotionRed_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -134,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Potion_Red_0
+      name: PotionRed_0
       rect:
         serializedVersion: 2
         x: 12
@@ -148,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc8f35ffc2e4be449b1e7a90cb3b605f
-      internalID: 7964675745351040275
+      spriteID: 6210a1b21d2ae7c4fa6cdd8514d47504
+      internalID: 4704929228616946384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potion_Red_1
+      name: PotionRed_1
       rect:
         serializedVersion: 2
         x: 45
@@ -169,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 666c2e47f5bec2546b117ef5eec8ecbb
-      internalID: -3710299378289672410
+      spriteID: 5b3f2f19127dfcd44bfbdf41d186e7a2
+      internalID: 6541495613093111123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potion_Red_2
+      name: PotionRed_2
       rect:
         serializedVersion: 2
         x: 12
@@ -190,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5ddfe76917c9d346a4083e7089401de
-      internalID: 7980658796513698128
+      spriteID: e95cc422d391a904db4cb49b97e8afd7
+      internalID: -401354914987414017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potion_Red_3
+      name: PotionRed_3
       rect:
         serializedVersion: 2
         x: 44
@@ -211,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45778d00ad4045741ade606541ba9865
-      internalID: 8429626716889302879
+      spriteID: ab752d4b5493642448a63c255ad5d15a
+      internalID: -2056189545340563455
       vertices: []
       indices: 
       edges: []
