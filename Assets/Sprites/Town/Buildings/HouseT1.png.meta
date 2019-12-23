@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -939589835738719804
     second: T6House_0
+  - first:
+      213: 2186136307506187626
+    second: HouseT1_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -113,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: T6House_0
+      name: HouseT1_0
       rect:
         serializedVersion: 2
         x: 42
@@ -127,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 578273d3abe3eaa4a84fe208a6a7c2b1
-      internalID: -939589835738719804
+      spriteID: bc6fe4aed9c0ba746935b3f8ee26d6ec
+      internalID: 2186136307506187626
       vertices: []
       indices: 
       edges: []

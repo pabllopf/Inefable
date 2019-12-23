@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 7db204df118344b41b4c7c034fe8de17
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2195346886439433698
+    second: RockT1_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rock_1_0
+      name: RockT1_0
       rect:
         serializedVersion: 2
         x: 7
@@ -124,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b7701e1c210e4d498b6ee7350e22827
-      internalID: 4390033149433182506
+      spriteID: ff343660de090dd4d813dd3e3f40a773
+      internalID: 2195346886439433698
       vertices: []
       indices: 
       edges: []

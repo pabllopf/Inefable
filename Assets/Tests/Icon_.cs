@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="BankIconTest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="Icon_.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
 using NUnit.Framework;
@@ -9,15 +9,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 /// <summary>Test the icon class</summary>
-public class BankIconTest 
+public class Icon_ 
 {
-    /// <summary>Tests the load icon.</summary>
-    /// <returns>Return none.</returns>
+    /// <summary>Tests to load icon of resources.</summary>
+    /// <returns>Return none</returns>
     [UnityTest]
-    public IEnumerator TestToLoadIconOfResources()
+    public IEnumerator Test_To_Load_Icon_Of_Resources()
     {
         SceneManager.LoadScene("House");
+        
         yield return null;
+
         Icon[] icons = GameObject.FindObjectsOfType<Icon>();
         foreach (Icon icon in icons)
         {

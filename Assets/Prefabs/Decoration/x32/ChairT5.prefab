@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7811672222987307281}
   - component: {fileID: 6395432581850386592}
   m_Layer: 0
-  m_Name: Chair_1
+  m_Name: ChairT5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1526134371302366800, guid: 1eda51e5ebeae7b46a5c451d5066f763,
+  m_Sprite: {fileID: 7471768142809753799, guid: 1eda51e5ebeae7b46a5c451d5066f763,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
