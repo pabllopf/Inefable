@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 961338a51055347469008a537cfc3d6d
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5324526655359685722
+    second: TourcheT1_0
+  - first:
+      213: -6721409990173169935
+    second: TourcheT1_1
+  - first:
+      213: -191201479126979657
+    second: TourcheT1_2
+  - first:
+      213: 7149192710169209031
+    second: TourcheT1_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -122,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tourche_0
+      name: TourcheT1_0
       rect:
         serializedVersion: 2
         x: 13
@@ -136,14 +148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a278a0faea989f4d901e3fc68c21f05
-      internalID: 3759566840674090344
+      spriteID: 8ecd6a964d7026444a63cb2111738515
+      internalID: 5324526655359685722
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tourche_1
+      name: TourcheT1_1
       rect:
         serializedVersion: 2
         x: 45
@@ -157,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0982897fb39902f4eb30db238e5b4a74
-      internalID: -6519994850347667815
+      spriteID: f45041a672a4ffc408afd4b146a4bdb7
+      internalID: -6721409990173169935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tourche_2
+      name: TourcheT1_2
       rect:
         serializedVersion: 2
         x: 13
@@ -178,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c65f110732f04b4999f806e93c14108
-      internalID: -932213494066830530
+      spriteID: 11c4b613c0e445a4a95344b56e74283e
+      internalID: -191201479126979657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tourche_3
+      name: TourcheT1_3
       rect:
         serializedVersion: 2
         x: 45
@@ -199,8 +211,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c02726dfa85f8249845df0b8b6190fb
-      internalID: 6117488289666929182
+      spriteID: 4d205ae66031f674fb8bf86bda605869
+      internalID: 7149192710169209031
       vertices: []
       indices: 
       edges: []

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5996223590993933588}
   - component: {fileID: 4185698616106688561}
   m_Layer: 0
-  m_Name: Chandelier
+  m_Name: TourcheT2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1976063245373077020, guid: 3fc39b52be8e1e843b2f44beffea7b60,
+  m_Sprite: {fileID: 9042878307366621533, guid: 3fc39b52be8e1e843b2f44beffea7b60,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,7 +92,7 @@ Animator:
   m_GameObject: {fileID: 6601958234789661278}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 444e91ed64c8fb84ca02a5995d0deda2, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

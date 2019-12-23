@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7164417432893384001}
   - component: {fileID: 9213688481556661684}
   m_Layer: 0
-  m_Name: Switch_1
+  m_Name: SwitchT1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -5208355285442298755, guid: 86b25e59a244f5348be0a5046529385c,
+  m_Sprite: {fileID: -3002455635085534937, guid: 86b25e59a244f5348be0a5046529385c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -5337159410277229379
     second: Bomb_3
+  - first:
+      213: -3996962644470224046
+    second: BombT1_0
+  - first:
+      213: -3428517718918005402
+    second: BombT1_1
+  - first:
+      213: -7756018349799815506
+    second: BombT1_2
+  - first:
+      213: 2382964248162430846
+    second: BombT1_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -134,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bomb_0
+      name: BombT1_0
       rect:
         serializedVersion: 2
         x: 13
@@ -148,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab0365989f6fc3b4286c5bbab5b2a8f4
-      internalID: -1483665779731714255
+      spriteID: c8813a1f5c87bfd40a0157880e319631
+      internalID: -3996962644470224046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bomb_1
+      name: BombT1_1
       rect:
         serializedVersion: 2
         x: 45
@@ -169,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e985b0c694aaeb48ad06ec7702cbe95
-      internalID: -1902917897002446259
+      spriteID: 275a12576e853b847bf45c5af49ab8e8
+      internalID: -3428517718918005402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bomb_2
+      name: BombT1_2
       rect:
         serializedVersion: 2
         x: 13
@@ -190,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29f01354a6cbeed45bba7ee07958d805
-      internalID: -5839540051515997725
+      spriteID: 0bc64662928f4af4798bc3d9ae079bda
+      internalID: -7756018349799815506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bomb_3
+      name: BombT1_3
       rect:
         serializedVersion: 2
         x: 43
@@ -211,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b8b7601c38b3ec46a6fbac35d734c87
-      internalID: -5337159410277229379
+      spriteID: d55deece6be882d4d99353c7cc8ff4e9
+      internalID: 2382964248162430846
       vertices: []
       indices: 
       edges: []

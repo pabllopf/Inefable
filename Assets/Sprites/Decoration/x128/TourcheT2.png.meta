@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 3fc39b52be8e1e843b2f44beffea7b60
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 9042878307366621533
+    second: TourcheT2_0
+  - first:
+      213: -2540249481507383442
+    second: TourcheT2_1
+  - first:
+      213: -8085362444444041238
+    second: TourcheT2_2
+  - first:
+      213: -3501819524401999361
+    second: TourcheT2_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -86,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chandelier_0
+      name: TourcheT2_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 10
         y: 32
-        width: 32
-        height: 32
+        width: 12
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -100,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3024e51925bbc944783f4b12574bd1a5
-      internalID: 1976063245373077020
+      spriteID: 6ce08bbc34bb61d44887b069d5c95058
+      internalID: 9042878307366621533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chandelier_1
+      name: TourcheT2_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 42
         y: 32
-        width: 32
-        height: 32
+        width: 12
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 177c96d859d5d6b41bd273f96b95eac9
-      internalID: -4748549010482785610
+      spriteID: c28e780b7f63c04479292244e7ea88ef
+      internalID: -2540249481507383442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chandelier_2
+      name: TourcheT2_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 10
         y: 0
-        width: 32
-        height: 32
+        width: 12
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1db9f339c0fa4948a64031b9bc46fdb
-      internalID: 1532017102122886430
+      spriteID: acba6554bcd562340b0643fe384a3988
+      internalID: -8085362444444041238
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chandelier_3
+      name: TourcheT2_3
       rect:
         serializedVersion: 2
-        x: 32
+        x: 42
         y: 0
-        width: 32
-        height: 32
+        width: 12
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b20d97849ba0734482bbf8534650c0d
-      internalID: -5375149405959807729
+      spriteID: 7600ae8aaf7c5d84280930ccf85b6998
+      internalID: -3501819524401999361
       vertices: []
       indices: 
       edges: []

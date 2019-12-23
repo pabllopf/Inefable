@@ -1,7 +1,13 @@
 fileFormatVersion: 2
 guid: c160e428adb20614db2540c322cb4fe0
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 1062787084683572753
+    second: SwitchT2_0
+  - first:
+      213: 1899186164919969552
+    second: SwitchT2_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -86,7 +92,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Switch_0
+      name: SwitchT2_0
       rect:
         serializedVersion: 2
         x: 9
@@ -100,14 +106,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e944c8f0f249be441808e322aff63032
-      internalID: -1494352897237206093
+      spriteID: c1b3d87ee10710b4e9b60e01e8072e58
+      internalID: 1062787084683572753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Switch_1
+      name: SwitchT2_1
       rect:
         serializedVersion: 2
         x: 41
@@ -121,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1df821be7c823074b830e0dba24e4fe0
-      internalID: 5207117429831932417
+      spriteID: f58e5ac190f100a4c843de6d02c6f398
+      internalID: 1899186164919969552
       vertices: []
       indices: 
       edges: []

@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 4714410783012859700
     second: Chest_1
+  - first:
+      213: -8084228343636872099
+    second: ChestT1_0
+  - first:
+      213: 7562885213161557206
+    second: ChestT1_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -128,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chest_0
+      name: ChestT1_0
       rect:
         serializedVersion: 2
         x: 9
@@ -142,14 +148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d81d8acc5b289d44b5d1d8139cb67b4
-      internalID: -5281422124547630143
+      spriteID: e5e910b6fefc28d4190442f2a9daaa96
+      internalID: -8084228343636872099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest_1
+      name: ChestT1_1
       rect:
         serializedVersion: 2
         x: 41
@@ -163,8 +169,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df8c8af1c0d703441a734a19b45a778c
-      internalID: 4714410783012859700
+      spriteID: 8d9ac2a7576b96d47a876b3b0ae1f32c
+      internalID: 7562885213161557206
       vertices: []
       indices: 
       edges: []
