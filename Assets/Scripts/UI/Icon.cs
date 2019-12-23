@@ -7,18 +7,13 @@ using UnityEngine;
 /// <summary>Default icon of a object.</summary>
 public class Icon : MonoBehaviour
 {
-    /// <summary>The icon name</summary>
-    [SerializeField] 
-    private string iconName = string.Empty;
-
     /// <summary>The icon</summary>
-    [SerializeField]
     private Sprite iconSprite = null;
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.iconSprite = Resources.Load<Sprite>("Icons/" + this.iconName);
+        this.iconSprite = Resources.Load<Sprite>("Icons/" + this.gameObject.tag);
     }
 
     /// <summary>Gets the icon.</summary>
@@ -32,6 +27,6 @@ public class Icon : MonoBehaviour
     /// <returns>Return the icon name.</returns>
     public string GetIconName()
     {
-        return this.iconName;
+        return this.gameObject.tag;
     }
 }

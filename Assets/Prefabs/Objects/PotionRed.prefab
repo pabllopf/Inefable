@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4095771386437366}
   - component: {fileID: 212948381872242896}
   - component: {fileID: 95849178524704562}
-  - component: {fileID: 114744351334569106}
   - component: {fileID: 58261312472496226}
+  - component: {fileID: 114744351334569106}
   - component: {fileID: -711368473370447267}
   m_Layer: 0
   m_Name: PotionRed
@@ -104,18 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114744351334569106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461994297141650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &58261312472496226
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -132,6 +120,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1875
+--- !u!114 &114744351334569106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461994297141650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-711368473370447267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,5 +144,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconName: PotionRed
-  iconSprite: {fileID: 0}

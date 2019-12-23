@@ -38,14 +38,16 @@ public class PressEffect : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        if (Settings.Current.Plattform == "Mobile") 
+        if (Settings.Current.Plattform == "Mobile")
         {
             this.gameObject.SetActive(false);
             return;
         }
-
-        this.currentImage = this.GetComponent<Image>();
-        this.LoadSprites(this.type);
+        else 
+        {
+            this.currentImage = this.GetComponent<Image>();
+            this.LoadSprites(this.type);
+        }
     }
 
     /// <summary>Updates this instance.</summary>
@@ -85,13 +87,19 @@ public class PressEffect : MonoBehaviour
     /// <summary>Starts the effect.</summary>
     public void StartEffect() 
     {
-        this.active = true;
+        if (Settings.Current.Plattform != "Mobile")
+        {
+            this.active = true;
+        }
     }
 
     /// <summary>Stops the effect.</summary>
     public void StopEffect()
     {
-        this.currentImage.sprite = this.sprites[1];
-        this.active = false;
+        if (Settings.Current.Plattform != "Mobile")
+        {
+            this.currentImage.sprite = this.sprites[1];
+            this.active = false;
+        }
     }
 }
