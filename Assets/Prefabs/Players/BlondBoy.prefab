@@ -1017,13 +1017,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 2904581842442623640, guid: 42618e63b0a3e7a43880edd82e7be690,
+  m_Sprite: {fileID: 5021154340700164846, guid: 42618e63b0a3e7a43880edd82e7be690,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.59375, y: 0.84375}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1047,7 +1047,7 @@ Animator:
   m_GameObject: {fileID: 877936488688487885}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf6467203b1c08e44b81c6e7354e2a70, type: 2}
+  m_Controller: {fileID: 9100000, guid: 005bc189cb5973a4584e01462feddd61, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1088,7 +1088,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 192eba441a639e04a868da1afaedac38, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1145,10 +1145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9443954d9eaf7fb43a2b953a6a83084c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  healthUI: {fileID: 0}
-  shield: 0
-  shieldUI: {fileID: 0}
 --- !u!114 &877936488688487882
 MonoBehaviour:
   m_ObjectHideFlags: 0

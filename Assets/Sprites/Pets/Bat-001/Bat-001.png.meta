@@ -1,151 +1,103 @@
 fileFormatVersion: 2
-guid: d5e5934043ff5024ab48fa17c8814675
+guid: aaacdf68bc9c20f4996e4e051668aeca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8820715720815460284
-    second: Ship_0
+      213: 8647823593821616703
+    second: Bat_0
   - first:
-      213: -3876855153373189597
-    second: Ship_1
+      213: 5681806813702538305
+    second: Bat_1
   - first:
-      213: -3638915416353919606
-    second: Ship_2
+      213: 697682191857345388
+    second: Bat_2
   - first:
-      213: 2227524988284003772
-    second: Ship_3
+      213: 6993031405965254486
+    second: Bat_3
   - first:
-      213: -4567166467494461625
-    second: Ship_4
+      213: -8835117555573905559
+    second: Bat_4
   - first:
-      213: -6349621633965948980
-    second: Ship_5
+      213: -1477298914128971197
+    second: Bat_5
   - first:
-      213: -7762088732943770002
-    second: Ship_6
+      213: -1085711696175172977
+    second: Bat_6
   - first:
-      213: 6434908385747100577
-    second: Ship_7
+      213: -650004520372281371
+    second: Bat_7
   - first:
-      213: 4752394321373314233
-    second: Ship_8
+      213: 5596611908343470214
+    second: Bat_8
   - first:
-      213: -2586147624276132951
-    second: Ship_9
+      213: -2103701215377653077
+    second: Bat_9
   - first:
-      213: -8941719328002050661
-    second: Ship_10
+      213: -9149983406214727455
+    second: Bat_10
   - first:
-      213: -8852907087957533723
-    second: Ship_11
+      213: 8822500520823344939
+    second: Bat_11
   - first:
-      213: -3422533557881991169
-    second: Ship_12
+      213: 8094889547237836083
+    second: Bat_12
   - first:
-      213: 231611899649052980
-    second: Ship_13
+      213: 3715899403775863448
+    second: Bat_13
   - first:
-      213: -1371746429950553420
-    second: Ship_14
+      213: 4419668502950860722
+    second: Bat_14
   - first:
-      213: -4940031589002978103
-    second: Ship_15
+      213: -3428020802489031309
+    second: Bat_15
   - first:
-      213: -1055202075554198476
-    second: T1Boat_0
+      213: 2335474360711294644
+    second: Bat-001_0
   - first:
-      213: 4382364880650370004
-    second: T1Boat_1
+      213: -7686670617224288200
+    second: Bat-001_1
   - first:
-      213: -582608679271988813
-    second: T1Boat_2
+      213: 5090018298842886659
+    second: Bat-001_2
   - first:
-      213: 3268166031086021115
-    second: T1Boat_3
+      213: -1027524042628142885
+    second: Bat-001_3
   - first:
-      213: 9082729524661987586
-    second: T1Boat_4
+      213: 6935665365370516158
+    second: Bat-001_4
   - first:
-      213: -3722362394892705718
-    second: T1Boat_5
+      213: 8526202389761402357
+    second: Bat-001_5
   - first:
-      213: -8066364877717587640
-    second: T1Boat_6
+      213: 29352781854004622
+    second: Bat-001_6
   - first:
-      213: -924813598437064487
-    second: T1Boat_7
+      213: -3366792772657015833
+    second: Bat-001_7
   - first:
-      213: 4433966336030696752
-    second: T1Boat_8
+      213: 2637526653342298549
+    second: Bat-001_8
   - first:
-      213: 7691037945612647612
-    second: T1Boat_9
+      213: -7689050940408111461
+    second: Bat-001_9
   - first:
-      213: -1037611010599777024
-    second: T1Boat_10
+      213: 4240947237213931708
+    second: Bat-001_10
   - first:
-      213: 7479667575605314796
-    second: T1Boat_11
+      213: 5892888394858975293
+    second: Bat-001_11
   - first:
-      213: 7595733902500780470
-    second: T1Boat_12
+      213: 4612765373057591981
+    second: Bat-001_12
   - first:
-      213: 7497106183899401159
-    second: T1Boat_13
+      213: 1966529201982416038
+    second: Bat-001_13
   - first:
-      213: -7113792827610371430
-    second: T1Boat_14
+      213: 7253739546701481090
+    second: Bat-001_14
   - first:
-      213: 4903727329759962085
-    second: T1Boat_15
-  - first:
-      213: 5484760878572909552
-    second: Boat-001_0
-  - first:
-      213: 4917003470812758617
-    second: Boat-001_1
-  - first:
-      213: -6082742866223922250
-    second: Boat-001_2
-  - first:
-      213: 336207985100420783
-    second: Boat-001_3
-  - first:
-      213: 2625024861734432662
-    second: Boat-001_4
-  - first:
-      213: -2182487731278804572
-    second: Boat-001_5
-  - first:
-      213: -4937351979050855581
-    second: Boat-001_6
-  - first:
-      213: -7813029472744452314
-    second: Boat-001_7
-  - first:
-      213: -1726773426488407763
-    second: Boat-001_8
-  - first:
-      213: 2184586262078764277
-    second: Boat-001_9
-  - first:
-      213: 4395087402420750353
-    second: Boat-001_10
-  - first:
-      213: -3896762489288052986
-    second: Boat-001_11
-  - first:
-      213: -1986319698514829466
-    second: Boat-001_12
-  - first:
-      213: 9023620779032592692
-    second: Boat-001_13
-  - first:
-      213: 2393250032412737660
-    second: Boat-001_14
-  - first:
-      213: -8742712287346844955
-    second: Boat-001_15
+      213: 2634037983776873198
+    second: Bat-001_15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -189,9 +141,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -204,7 +156,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -216,7 +168,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -228,7 +180,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -240,7 +192,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 256
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -254,13 +206,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boat-001_0
+      name: Bat-001_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
+        x: 2
+        y: 53
+        width: 12
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,20 +220,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd9ca21538f05ae45a2d979f0cef5fdf
-      internalID: 5484760878572909552
+      spriteID: e618c1265618a1e438abd296e2265af3
+      internalID: 2335474360711294644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_1
+      name: Bat-001_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
+        x: 18
+        y: 53
+        width: 12
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,20 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 863cf141421a258489c39dd4d1c098a4
-      internalID: 4917003470812758617
+      spriteID: 2c78f86e48ca3e54cad3df274836f154
+      internalID: -7686670617224288200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_2
+      name: Bat-001_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
+        x: 33
+        y: 53
+        width: 14
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,20 +262,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1e324fadad6f264fbc87e54a0b9696c
-      internalID: -6082742866223922250
+      spriteID: e735500f9ecc9af468a3d9e5aa532ad3
+      internalID: 5090018298842886659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_3
+      name: Bat-001_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 64
-        height: 64
+        x: 49
+        y: 53
+        width: 14
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,20 +283,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14b07500f0a00ab48a883b3cad26278d
-      internalID: 336207985100420783
+      spriteID: 1143cb3cc1d39c24caa506d3a7a805bb
+      internalID: -1027524042628142885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_4
+      name: Bat-001_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
+        x: 4
+        y: 37
+        width: 8
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,20 +304,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 406ca474ed7ff954f9ccf192742d7713
-      internalID: 2625024861734432662
+      spriteID: 38e02427d3b6d6746bd33e5076122dfc
+      internalID: 6935665365370516158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_5
+      name: Bat-001_5
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
+        x: 20
+        y: 37
+        width: 8
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,20 +325,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ce975b059ab0c643b8d6e92991698e1
-      internalID: -2182487731278804572
+      spriteID: c6a6f3cc6d6665c42999a2126882cfe8
+      internalID: 8526202389761402357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_6
+      name: Bat-001_6
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
+        x: 35
+        y: 37
+        width: 9
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,20 +346,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50f2df3a24170814aa7692134a39ff4e
-      internalID: -4937351979050855581
+      spriteID: dba1143c96558424d9ad78eab3018bc5
+      internalID: 29352781854004622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_7
+      name: Bat-001_7
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
-        width: 64
-        height: 64
+        x: 51
+        y: 37
+        width: 9
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -415,20 +367,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f4a8246677991442866ceb5e2d57f60
-      internalID: -7813029472744452314
+      spriteID: bb3a0fcd9055b6b4f851a00abf084c8c
+      internalID: -3366792772657015833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_8
+      name: Bat-001_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
+        x: 4
+        y: 20
+        width: 8
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -436,20 +388,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 791517012ad4b744d91950d27ac99675
-      internalID: -1726773426488407763
+      spriteID: 666644f75afdeb64b9bbfcb20754fcdb
+      internalID: 2637526653342298549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_9
+      name: Bat-001_9
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
+        x: 20
+        y: 20
+        width: 8
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -457,20 +409,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a34a3937cb1c52043bfb71d7d5d5b184
-      internalID: 2184586262078764277
+      spriteID: 7884436f16c305e409b55af81ed19507
+      internalID: -7689050940408111461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_10
+      name: Bat-001_10
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
+        x: 36
+        y: 21
+        width: 9
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,20 +430,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3096e671ad281354582a5afc7508592b
-      internalID: 4395087402420750353
+      spriteID: 4a9e46d8b6f561f469abd7f3f89365ad
+      internalID: 4240947237213931708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_11
+      name: Bat-001_11
       rect:
         serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
+        x: 52
+        y: 21
+        width: 9
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -499,20 +451,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fef00c2691656d44983ae88d37ce27a3
-      internalID: -3896762489288052986
+      spriteID: b5835f4aaa51ee340a804a5b016cf29c
+      internalID: 5892888394858975293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_12
+      name: Bat-001_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 2
+        y: 4
+        width: 12
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -520,20 +472,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ab6252ef28b82448a731bee002b9a8
-      internalID: -1986319698514829466
+      spriteID: a1e2fa4edd8127647838f5df8583dc6d
+      internalID: 4612765373057591981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_13
+      name: Bat-001_13
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
+        x: 18
+        y: 4
+        width: 12
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -541,20 +493,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97773efa4acfd7f40baec892b5037fe3
-      internalID: 9023620779032592692
+      spriteID: f5e182780b7d3b248bd5bde907076e41
+      internalID: 1966529201982416038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_14
+      name: Bat-001_14
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
+        x: 33
+        y: 5
+        width: 14
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -562,20 +514,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15e0c7955e0cf574a8e3c74b3a4a2129
-      internalID: 2393250032412737660
+      spriteID: 0c84c91e9f8c7ce4f9cf5b5dab435033
+      internalID: 7253739546701481090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Boat-001_15
+      name: Bat-001_15
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
+        x: 49
+        y: 5
+        width: 14
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -583,8 +535,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1c0d35c4e4d42c4dbd527b520d19480
-      internalID: -8742712287346844955
+      spriteID: 2764835be3bdcd145a5f1f2e69041d73
+      internalID: 2634037983776873198
       vertices: []
       indices: 
       edges: []
@@ -599,7 +551,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+  spritePackingTag: Bat
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 

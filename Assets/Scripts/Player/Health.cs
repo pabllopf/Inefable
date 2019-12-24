@@ -9,16 +9,16 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     /// <summary>The health</summary>
-    public int health;
+    private int health;
 
     /// <summary>The health UI</summary>
-    public Scrollbar healthUI;
+    private Scrollbar healthUI;
 
     /// <summary>The shield</summary>
-    public int shield;
+    private int shield;
 
     /// <summary>The shield UI</summary>
-    public Scrollbar shieldUI;
+    private Scrollbar shieldUI;
 
     /// <summary>The shield object</summary>
     private GameObject shieldOBJ;
