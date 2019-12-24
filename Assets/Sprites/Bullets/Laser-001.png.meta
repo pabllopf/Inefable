@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: 9082429109045791810
     second: Laser_0
+  - first:
+      213: 9095777804559900817
+    second: Laser-001_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -125,10 +128,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Laser_0
+      name: Laser-001_0
       rect:
         serializedVersion: 2
-        x: 14
+        x: 2
         y: 0
         width: 4
         height: 4
@@ -139,8 +142,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 232046dad4d78c04e9fdb42252763b7b
-      internalID: 9082429109045791810
+      spriteID: 4f91ba5ecf3fe7d4cb451fe1d4929405
+      internalID: 9095777804559900817
       vertices: []
       indices: 
       edges: []
