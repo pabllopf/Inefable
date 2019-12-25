@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114319148900667988}
   - component: {fileID: -6725577253382083343}
   m_Layer: 0
-  m_Name: Potion-000
+  m_Name: Potion-001
   m_TagString: PotionBlue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1661139615138848}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6f08fccb63997d14a8e873d1b74a77d2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 91b3a51e0eb797c409ad942473377b1f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

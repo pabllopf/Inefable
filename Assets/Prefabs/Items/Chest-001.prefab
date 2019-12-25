@@ -121,5 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2af0df86acdbf64999ea250f59ef95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openChest: {fileID: 0}
+  openChest: {fileID: -3358441300685141692, guid: daa10eb5731338443a14f1a95e8e4c26,
+    type: 3}
   items: []

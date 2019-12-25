@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114744351334569106}
   - component: {fileID: -711368473370447267}
   m_Layer: 0
-  m_Name: PotionRed
+  m_Name: Potion-003
   m_TagString: PotionRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1461994297141650}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2a72207eda202cc49bf35e9883abb6ae, type: 2}
+  m_Controller: {fileID: 9100000, guid: f2cf6badf89080d4bb774cca02ebc2aa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
