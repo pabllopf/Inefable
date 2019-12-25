@@ -34,6 +34,7 @@ public class Perspective : MonoBehaviour
         if (obj.CompareTag("Player"))
         {
             this.spriteRenderer.sortingOrder = this.orderLayerBack;
+            this.spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
         }
     }
 
@@ -44,6 +45,7 @@ public class Perspective : MonoBehaviour
         if (obj.CompareTag("Player"))
         {
             this.spriteRenderer.sortingOrder = this.orderLayerFront;
+            this.spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
         }
     }
 }
