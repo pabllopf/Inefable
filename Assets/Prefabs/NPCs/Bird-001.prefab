@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5092649523849321311}
   - component: {fileID: 9090195556204405989}
   m_Layer: 0
-  m_Name: Bird_1
+  m_Name: Bird-001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 8150999856816533186}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 552a7eb0bfa077040a1c00abc34224ed, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3f582449dd70f8a43a2897d5f58e3bdf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
