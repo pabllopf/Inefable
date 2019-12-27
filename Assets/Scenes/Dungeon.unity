@@ -44,15 +44,15 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 0
-    m_EnableRealtimeLightmaps: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
@@ -71,7 +71,7 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 2
+    m_MixedBakeMode: 1
     m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -523,74 +523,14 @@ MonoBehaviour:
     quantityMax: 20
     position: 1
     dungeon: 0
-  - item: {fileID: 2493011478083059926, guid: 35a5a113b3c54ba4a945900378392afb, type: 3}
-    quantityMin: 1
-    quantityMax: 23
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
-    quantityMin: 1
-    quantityMax: 1
-    position: 1
-    dungeon: 1
-  - item: {fileID: 2046771525346279308, guid: 0ed629468d494de41bb6ebbe8896a53c, type: 3}
-    quantityMin: 1
-    quantityMax: 50
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
-    quantityMin: 1
-    quantityMax: 5
-    position: 1
-    dungeon: 0
-  - item: {fileID: 6560458495200894233, guid: 7943a6ffcf825194ab0a30e852adf2dc, type: 3}
-    quantityMin: 1
-    quantityMax: 40
+  - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f, type: 3}
+    quantityMin: 67
+    quantityMax: 74
     position: 5
     dungeon: 0
-  - item: {fileID: 3948018681149159234, guid: 23da3ac07a29182429ea85f5e5d77af4, type: 3}
-    quantityMin: 1
-    quantityMax: 34
-    position: 5
-    dungeon: 0
-  - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
-    quantityMin: 1
-    quantityMax: 9
-    position: 1
-    dungeon: 2
-  - item: {fileID: 1037379602364782, guid: 3bac12dde24c07147b4b4c56af524e9e, type: 3}
-    quantityMin: 1
-    quantityMax: 37
-    position: 5
-    dungeon: 0
-  - item: {fileID: 1812639152264840, guid: ecba627fdd95ab7488b12bc0fd66d257, type: 3}
-    quantityMin: 1
-    quantityMax: 25
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
-    quantityMin: 0
-    quantityMax: 11
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
-    quantityMin: 1
-    quantityMax: 14
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1325099382827930, guid: 2d8f6e4d6f33b2948ab54c3131f77478, type: 3}
-    quantityMin: 1
-    quantityMax: 17
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
-    quantityMin: 1
-    quantityMax: 10
-    position: 1
-    dungeon: 0
-  - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8, type: 3}
-    quantityMin: 1
-    quantityMax: 34
+  - item: {fileID: 8131167399865811844, guid: 5df07369968610a4c98d84c3b739c390, type: 3}
+    quantityMin: 55
+    quantityMax: 76
     position: 1
     dungeon: 1
   styleMaps:

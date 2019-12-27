@@ -98,8 +98,11 @@ public class PressEffect : MonoBehaviour
     {
         if (Settings.Current.Plattform != "Mobile")
         {
-            this.currentImage.sprite = this.sprites[1];
-            this.active = false;
+            if (this.currentImage != null && this.sprites != null) 
+            {
+                this.currentImage.sprite = this.sprites[1];
+                this.active = false;
+            }
         }
     }
 }
