@@ -23,6 +23,15 @@ public class MainMenu : MonoBehaviour
     /// <summary>The start panel</summary>
     private GameObject startPanel = null;
 
+    /// <summary>The language panel</summary>
+    private GameObject languagePanel = null;
+
+    /// <summary>The languages</summary>
+    private List<string> languages = null;
+
+    /// <summary>The index languages</summary>
+    private int indexLanguages = 0;
+
     /// <summary>The main panel</summary>
     private GameObject mainPanel = null;
 
@@ -61,6 +70,7 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = false;
 
         this.startPanel = GameObject.FindGameObjectWithTag("StartPanel").gameObject;
+        this.languagePanel = GameObject.FindGameObjectWithTag("LanguagePanel").gameObject;
         this.mainPanel = GameObject.FindGameObjectWithTag("MainPanel").gameObject;
         this.InitPopUpPanel();
         this.InitButtonsPanel();
@@ -74,6 +84,12 @@ public class MainMenu : MonoBehaviour
         GameObject.FindGameObjectWithTag("NormalButtons").SetActive(false);
         this.popUpPanel.SetActive(false);
         this.mainPanel.SetActive(false);
+        this.languagePanel.SetActive(false);
+
+        this.languages = new List<string>();
+        this.languages.Add("Español");
+        this.languages.Add("English");
+        this.languages.Add("French");
     }
 
     /// <summary>Creates new adventure.</summary>
@@ -168,6 +184,12 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
+        if (this.languagePanel.activeSelf)
+        {
+            this.DetectLanguage();
+            return;
+        }
+
         if (this.mainPanel.activeSelf && !this.popUpPanel.activeSelf)
         {
             this.ShiftInMenu();
@@ -207,6 +229,57 @@ public class MainMenu : MonoBehaviour
         return;
     }
 
+    /// <summary>Detects the language.</summary>
+    private void DetectLanguage() 
+    {
+        Text mainText = this.languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
+
+        if (Input.GetKeyDown(KeyCode.W)) 
+        {
+            if (this.languages.IndexOf(mainText.text) >= 0) 
+            {
+                this.indexLanguages++;
+                if (this.indexLanguages >= this.languages.Count) 
+                {
+                    this.indexLanguages = 0;
+                }
+
+                mainText.text = this.languages[this.indexLanguages];
+                this.PlayClip(this.acceptClip);
+                return;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (this.languages.IndexOf(mainText.text) >= 0)
+            {
+                this.indexLanguages--;
+                if (this.indexLanguages < 0)
+                {
+                    this.indexLanguages = this.languages.Count - 1;
+                }
+
+                mainText.text = this.languages[this.indexLanguages];
+                this.PlayClip(this.acceptClip);
+                return;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y)) 
+        {
+            Settings.Current.Language = this.languages[this.indexLanguages];
+            Settings.Current.LanguageDefault = true;
+            Game.SaveSettings();
+            this.languagePanel.SetActive(false);
+            this.mainPanel.SetActive(true);
+            this.buttonsPanel.SetActive(true);
+            Language.Translate();
+            this.PlayClip(this.acceptClip);
+            return;
+        }
+    }
+
     /// <summary>Selects the controller.</summary>
     /// <param name="controller">The controller.</param>
     private void SelectController(string controller)
@@ -217,9 +290,17 @@ public class MainMenu : MonoBehaviour
         Game.SaveSettings();
         Language.Translate();
 
-        this.startPanel.SetActive(false);
-        this.mainPanel.SetActive(true);
-        this.buttonsPanel.SetActive(true);
+        if (Settings.Current.LanguageDefault)
+        {
+            this.startPanel.SetActive(false);
+            this.mainPanel.SetActive(true);
+            this.buttonsPanel.SetActive(true);
+        }
+        else 
+        {
+            this.startPanel.SetActive(false);
+            this.languagePanel.SetActive(true);
+        }
 
         this.PlayClip(this.acceptClip);
     }
@@ -419,7 +500,7 @@ public class MainMenu : MonoBehaviour
         Game.ResetSettings();
         Game.ResetStats();
         Settings.Current.HasSaveGame = true;
-        Settings.Current.Plattform = currentController;
+        Settings.Current.Plattform = this.currentController;
         Game.SaveSettings();
         Game.SaveStats();
         SceneManager.LoadScene(this.sceneToLoad);

@@ -86,6 +86,7 @@ TagManager:
   - A32
   - A33
   - A34
+  - LanguagePanel
   layers:
   - Default
   - TransparentFX

@@ -14,7 +14,10 @@ public class Settings
     public bool HasSaveGame;
 
     /// <summary>The language</summary>
-    public int Language;
+    public string Language;
+
+    /// <summary>The language default</summary>
+    public bool LanguageDefault;
 
     /// <summary>The plattform</summary>
     public string Plattform;
@@ -23,7 +26,8 @@ public class Settings
     public Settings()
     {
         this.HasSaveGame = false;
-        this.Language = 1;
-        this.Plattform = "Mobile";
+        this.Language = "English";
+        this.LanguageDefault = false;
+        this.Plattform = "Computer";
     }
 }
