@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------------------------
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>Manage the player of the game.</summary>
 [RequireComponent(typeof(SpriteRenderer))]
@@ -171,6 +172,8 @@ public class Player : MonoBehaviour
             if (!this.mobileUI.activeSelf)
             {
                 this.mobileUI.SetActive(true);
+                this.buttonA.GetComponent<Button>().onClick.AddListener(() => { this.AttackAction(); });
+                this.buttonB.GetComponent<Button>().onClick.AddListener(() => { this.RollAction(); });
             }
 
             if (this.joystick.Horizontal > 0 || this.joystick.Horizontal < 0 || this.joystick.Vertical > 0 || this.joystick.Vertical < 0)
@@ -186,24 +189,6 @@ public class Player : MonoBehaviour
             {
                 this.animator.SetBool(Run, false);
             }
-
-            if (Input.GetButtonDown("ButtonY"))
-            {
-                this.StartCoroutine("StartRoll");
-            }
-
-            if (Input.GetButtonDown("ButtonA"))
-            {
-                this.StartCoroutine("StartAttack");
-            }
-        }
-
-        if (Settings.Current.Plattform == "Mobile")
-        {
-            if (!this.mobileUI.activeSelf) 
-            {
-                this.mobileUI.SetActive(true);
-            }
         }
     }
 
@@ -211,6 +196,20 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         this.rigbody2D.MovePosition(this.position + (this.direction * (this.speedMove * Time.deltaTime)));
+    }
+
+    /// <summary>Rolls the action.</summary>
+    public void RollAction() 
+    {
+        this.StartCoroutine("StartRoll");
+        return;
+    }
+
+    /// <summary>Attacks the action.</summary>
+    public void AttackAction()
+    {
+        this.StartCoroutine("StartAttack");
+        return;
     }
 
     /// <summary>Starts the roll.</summary>

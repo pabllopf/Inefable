@@ -500,6 +500,7 @@ public class MainMenu : MonoBehaviour
         Game.ResetSettings();
         Game.ResetStats();
         Settings.Current.HasSaveGame = true;
+        Settings.Current.LanguageDefault = true;
         Settings.Current.Plattform = this.currentController;
         Game.SaveSettings();
         Game.SaveStats();
