@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
                 this.animator.SetBool(Run, false);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 this.StartCoroutine("StartRoll");
             }

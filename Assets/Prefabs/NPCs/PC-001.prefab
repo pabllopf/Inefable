@@ -241,7 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9aa8b3725d4c5a47adbcc3ee79d3723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exclamation: {fileID: 774980171}
+  dialogue:
+    name: PC
+    sentences: 120000001a00000016000000
 --- !u!114 &924425771
 MonoBehaviour:
   m_ObjectHideFlags: 0

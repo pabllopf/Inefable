@@ -343,13 +343,13 @@ public class MainMenu : MonoBehaviour
 
         if (this.currentController == "Xbox")
         {
-            if (Input.GetAxis("LeftJoystickY") < 0 && this.neutralStick == true)
+            if (Input.GetAxis("LeftJoystickY") > 0 && this.neutralStick == true)
             {
                 this.neutralStick = false;
                 this.GoUp();
             }
 
-            if (Input.GetAxis("LeftJoystickY") > 0 && this.neutralStick == true)
+            if (Input.GetAxis("LeftJoystickY") < 0 && this.neutralStick == true)
             {
                 this.neutralStick = false;
                 this.GoDown();
