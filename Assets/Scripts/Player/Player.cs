@@ -83,17 +83,13 @@ public class Player : MonoBehaviour
     /// <summary>The rigid body</summary>
     private Rigidbody2D rigbody2D = null;
 
-    /// <summary>Awakes this instance.</summary>
-    public void Awake()
+    /// <summary>Starts this instance.</summary>
+    public void Start()
     {
         Game.LoadSettings();
         Game.LoadStats();
         Language.Translate();
-    }
 
-    /// <summary>Starts this instance.</summary>
-    public void Start()
-    {
         this.animator = this.GetComponent<Animator>();
         this.uiAnimator = this.transform.Find("Interface/Bar").GetComponent<Animator>();
         this.rigbody2D = this.GetComponent<Rigidbody2D>();
