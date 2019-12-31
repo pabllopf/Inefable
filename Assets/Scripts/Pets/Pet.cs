@@ -4,7 +4,7 @@
 //------------------------------------------------------------------------------------------
 using UnityEngine;
 
-/// <summary>Control the pet.</summary>
+/// <summary>Control a pet.</summary>
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
@@ -20,11 +20,15 @@ public class Pet : MonoBehaviour
     /// <summary>The Horizontal</summary>
     private static readonly string Horizontal = "Horizontal";
 
+    /// <summary>The name</summary>
+    [SerializeField]
+    private string typePet = "";
+
     /// <summary>The owner</summary>
     private GameObject owner;
 
     /// <summary>The speed</summary>
-    private int speed = 3;
+    private int speed = 2;
 
     /// <summary>The direction</summary>
     private Vector2 direction;
@@ -34,6 +38,13 @@ public class Pet : MonoBehaviour
 
     /// <summary>The box Collider2D</summary>
     private BoxCollider2D boxCollider2D;
+
+    /// <summary>Gets the name.</summary>
+    /// <returns>Return name pet</returns>
+    public string GetName() 
+    {
+        return this.typePet;
+    }
 
     /// <summary>Sets the speed.</summary>
     /// <param name="speed">The speed.</param>
@@ -47,7 +58,7 @@ public class Pet : MonoBehaviour
     public void SetOwner(GameObject owner)
     {
         this.owner = owner;
-        this.boxCollider2D.enabled = false;
+        this.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     /// <summary>Leaves the owner.</summary>
@@ -60,6 +71,7 @@ public class Pet : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
+        this.tag = "Pet";
         this.animator = this.GetComponent<Animator>();
         this.boxCollider2D = this.GetComponent<BoxCollider2D>();
     }
@@ -67,14 +79,9 @@ public class Pet : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (!this.owner) 
-        { 
-            return; 
-        }
-
-        if (this.DistanceToOwner() >= Distance) 
-        { 
-            this.FollowOwner(); 
+        if (this.owner && this.DistanceToOwner() >= Distance) 
+        {
+            this.FollowOwner();
         }
     }
 
@@ -93,6 +100,7 @@ public class Pet : MonoBehaviour
         this.animator.SetFloat(Horizontal, this.direction.x);
         this.animator.SetFloat(Vertical, this.direction.y);
 
-        this.transform.position = Vector2.MoveTowards(this.transform.position, this.owner.transform.position, this.speed * Time.deltaTime);
+        this.transform.position = Vector3.LerpUnclamped(this.transform.position, this.owner.transform.position, this.speed * Time.deltaTime);
     }
+
 }

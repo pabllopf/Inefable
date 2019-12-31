@@ -3,6 +3,7 @@
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -106,6 +107,8 @@ public class Player : MonoBehaviour
         this.buttonB = this.mobileUI.transform.Find("Buttons/ButtonB").gameObject;
 
         this.mobileUI.SetActive(false);
+
+        this.HasPet();
     }
 
     /// <summary>Updates this instance.</summary>
@@ -257,11 +260,18 @@ public class Player : MonoBehaviour
                 {
                     this.pet.LeaveOwner();
                     this.pet = null;
+
+                    this.pet = obj.GetComponent<Pet>();
+                    this.pet.SetOwner(this.gameObject);
+                    Stats.Current.pet = this.pet.GetName();
+                    Game.SaveStats();
                 }
                 else
                 {
                     this.pet = obj.GetComponent<Pet>();
                     this.pet.SetOwner(this.gameObject);
+                    Stats.Current.pet = this.pet.GetName();
+                    Game.SaveStats();
                 }
 
                 break;
@@ -305,6 +315,17 @@ public class Player : MonoBehaviour
     {
         this.position = new Vector2(250, 250);
         this.position.Set(250, 250);
+    }
+
+    /// <summary>Determines whether this instance has pet.</summary>
+    private void HasPet() 
+    {
+        if (Stats.Current.pet != "") 
+        {
+            GameObject obj = Resources.Load<GameObject>("Pets/" + Stats.Current.pet);
+            GameObject petSpawn = Instantiate(obj, this.gameObject.transform.position, Quaternion.identity);
+            petSpawn.GetComponent<Pet>().SetOwner(this.gameObject);
+        }
     }
 
     /// <summary>Controls the bar.</summary>

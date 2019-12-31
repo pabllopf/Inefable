@@ -57,11 +57,11 @@ public class Language : MonoBehaviour
     /// <summary>Gets the sentence.</summary>
     /// <param name="key">The key.</param>
     /// <returns>The sentence.</returns>
-    public static string GetSentence(string key)
+    public static string GetSentence(Key key)
     {
-        if (language.ContainsKey(key))
+        if (language.ContainsKey(key.ToString()))
         {
-            return language[key];
+            return language[key.ToString()];
         }
 
         return null;

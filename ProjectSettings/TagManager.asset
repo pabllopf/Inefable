@@ -87,6 +87,7 @@ TagManager:
   - A33
   - A34
   - LanguagePanel
+  - DataPrefabs
   layers:
   - Default
   - TransparentFX

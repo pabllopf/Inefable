@@ -17,7 +17,7 @@ public class Dialogue
 
     /// <summary>The sentences</summary>
     [SerializeField]
-    private Sentence[] sentences = null;
+    private Key[] sentences = null;
 
     /// <summary>Get the name.</summary>
     /// <returns>The name.</returns>
@@ -30,7 +30,7 @@ public class Dialogue
     /// <returns>the sentence</returns>
     public string GetSentence()
     {
-        return Language.GetSentence(this.sentences[this.index].ToString());
+        return Language.GetSentence(this.sentences[this.index]);
     }
 
     /// <summary>Determines whether this instance has next.</summary>

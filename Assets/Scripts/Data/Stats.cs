@@ -25,7 +25,11 @@ public class Stats
     /// <summary>The sprite item</summary>
     public List<Sprite> SpriteItem;
 
+    /// <summary>The tag item</summary>
     public List<string> TagItem;
+
+    /// <summary>The pet</summary>
+    public string pet;
 
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
@@ -48,5 +52,6 @@ public class Stats
             ""
         };
 
+        this.pet = "";
     }
 }

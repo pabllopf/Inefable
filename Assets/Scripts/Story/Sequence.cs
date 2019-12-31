@@ -13,6 +13,10 @@ public class Sequence
     [SerializeField]
     private GameObject sequence = null;
 
+    /// <summary>The key</summary>
+    [SerializeField]
+    private Key key = Key.A1;
+
     /// <summary>The sentence</summary>
     private GameObject sentence;
 
@@ -25,8 +29,8 @@ public class Sequence
     public void Active() 
     {
         this.sequence.SetActive(true);
-        this.sentence = sequence.transform.Find("BlackArea/Text").gameObject;
-        this.sentence.GetComponent<Text>().text = Language.GetSentence(sentence.tag);
+        this.sentence = this.sequence.transform.Find("BlackArea/Text").gameObject;
+        this.sentence.GetComponent<Text>().text = Language.GetSentence(this.key);
     }
 
     /// <summary>Disable the sequence.</summary>

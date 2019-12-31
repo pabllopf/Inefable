@@ -18,21 +18,19 @@ public class Follow : MonoBehaviour
     /// <summary>The target position</summary>
     private Vector3 targetPos = Vector3.zero;
 
+    /// <summary>Starts this instance.</summary>
+    private void Start()
+    {
+        this.target = GameObject.FindWithTag("Player").transform;
+    }
+
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (!this.target) 
+        if (Vector2.Distance(this.transform.position, this.target.position) >= 0.5f) 
         {
-            this.target = GameObject.FindWithTag("Player").transform;
-            return;
+            this.targetPos = new Vector3(this.target.position.x, this.target.position.y, 0);
+            this.transform.position = Vector3.LerpUnclamped(this.transform.position, this.targetPos, this.speed * Time.deltaTime);
         }
-
-        if (Vector2.Distance(this.transform.position, this.target.position) < 0.5f) 
-        {
-            return;
-        }
-
-        this.targetPos = new Vector3(this.target.position.x, this.target.position.y, 0);
-        this.transform.position = Vector3.LerpUnclamped(this.transform.position, this.targetPos, this.speed * Time.deltaTime);
     }
 }

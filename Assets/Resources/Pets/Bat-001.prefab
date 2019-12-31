@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 114006925452989814}
   - component: {fileID: 114894216477895116}
   m_Layer: 0
-  m_Name: Bat
-  m_TagString: Pet
+  m_Name: Bat-001
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e30da5fb7d0e84abbad399568dd487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typePet: Bat-001
 --- !u!114 &114894216477895116
 MonoBehaviour:
   m_ObjectHideFlags: 0

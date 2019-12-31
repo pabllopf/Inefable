@@ -110,7 +110,7 @@ public class Dungeon : MonoBehaviour
     private void Start()
     {
         this.InitMainParameters();
-        this.StartCoroutine(this.InitComponents(Language.GetSentence("A26")));
+        this.StartCoroutine(this.InitComponents(Language.GetSentence(Key.A26)));
     }
 
     /// <summary>Initializes the main parameters</summary>
@@ -155,7 +155,7 @@ public class Dungeon : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         this.GenerateRoomsAndCorridors();
-        this.StartCoroutine(this.CreatedRoomsAndCorridors(Language.GetSentence("A27")));
+        this.StartCoroutine(this.CreatedRoomsAndCorridors(Language.GetSentence(Key.A27)));
     }
 
     /// <summary>Load the shop.</summary>
@@ -194,7 +194,7 @@ public class Dungeon : MonoBehaviour
         this.PrintWallsAndCornersInBoard();
         this.PrintBoardInGame();
 
-        this.StartCoroutine(this.GeneratedDungeon(Language.GetSentence("A28")));
+        this.StartCoroutine(this.GeneratedDungeon(Language.GetSentence(Key.A28)));
     }
 
     /// <summary>Generate the dungeon.</summary>
@@ -212,7 +212,7 @@ public class Dungeon : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         this.SpawnItems();
-        this.StartCoroutine(this.FinalDetails(Language.GetSentence("A29")));
+        this.StartCoroutine(this.FinalDetails(Language.GetSentence(Key.A29)));
     }
 
     /// <summary>Finish The Final Details</summary>

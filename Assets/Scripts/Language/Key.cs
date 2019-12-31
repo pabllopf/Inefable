@@ -1,10 +1,10 @@
 ﻿//-----------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Sentence.cs" company="UnMedioStudio">Open Source</copyright>
+// <copyright file="Key.cs" company="UnMedioStudio">Open Source</copyright>
 //-----------------------------------------------------------------------
 
 /// <summary>The Key dialogue.</summary>
-public enum Sentence
+public enum Key
 {
     /// <summary>The a1</summary>
     A1,
@@ -92,4 +92,19 @@ public enum Sentence
 
     /// <summary>The a30</summary>
     A30,
+
+    /// <summary>The a31</summary>
+    A31,
+
+    /// <summary>The a32</summary>
+    A32,
+
+    /// <summary>The a33</summary>
+    A33,
+
+    /// <summary>The a34</summary>
+    A34,
+
+    /// <summary>The a35</summary>
+    A35,
 }
