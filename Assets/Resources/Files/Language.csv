@@ -1,25 +1,25 @@
 ﻿Key;Spanish;English;French
-A1;Presiona para Comenzar;Press To Start;Debut
+A1;Presiona para comenzar;Press to start;Appuyez pour démarrer
 A2;Salir;Exit;Sortir
-A3;Español;Spanish;Francais(a3)
-A4;Inglés;English;Francais(a4)
-A5;Francés;French;Francais(a5)
+A3;Español;Spanish;Espagnol
+A4;Inglés;English;Anglais
+A5;Francés;French;Français
 A6;Reiniciar;Reset;Francais(a6)
-A7;Mobil;Mobile;Mobil
+A7;Confirmar;Confirm;Confirmer
 A8;Siguiente;Next;Suivant
-A9;Nueva Aventura;New Adventure;Francais(a9)
-A10;Continuar;Continue;Francais(a10)
-A11;Si;Yes;Francais
-A12;No;No;Francais
-A13;¿Deséa empezar una nueva aventura?;Do you want to start a new adventure?;Francais(a13)
-A14;Versión 0.01;Version 0.01;Francais
-A15;El producto que va a jugar a continuación se encuentra en desarrollo.;The product you are going to play is in development.;Francais
-A16;Entendido;Agreed;Francais
-A17;Comunidad;Community;Francais
-A18;¿Está usted seguro de que desea salir?;Do you want to exit?;Francais
+A9;Nueva Aventura;New Adventure;Nouvelle aventure
+A10;Continuar;Continue;Continuer
+A11;Si;Yes;Oui
+A12;No;No;Non
+A13;¿Deséa empezar una nueva aventura?;Do you want to start a new adventure?;Envie de commencer une nouvelle aventure?
+A14;V;V;F
+A15;p.;p.;p
+A16;Entendido;Agreed;Compris
+A17;Comunidad;Community;Communauté
+A18;¿Está usted seguro de que desea salir?;Do you want to exit?;Voulez-vous sortir?
 A19;Utiliza las teclas W y S para moverte por el menu.;Use the keyboard W and S to move in the menu;Francais(a19)
 A20;Utiliza el joystick para moverte por el menu.;Use the joystick to move in the menu;Francais(a20)
-A21;AJUSTES;SETTINGS;Francais(a21)
+A21;Seleccionar idioma;Select language;Sélectionner la langue
 A22;Controles;Controlers;Francais(a22)
 A23;Sonido;Audio;Francais(a23)
 A24;Gráficos;Graphics;Francais(a24)
@@ -32,4 +32,4 @@ A30;Un mercader salvaje ha aparecido.;A wild merchant has appeared.;Francais(A30
 A31;Creditos;Credits;Francais(A31)
 A32;Próximamente (presiona cualquier botón para volver);Coming Soon (press any key to come);Francais(A32)
 A33;Volver;Return;Francais(A33)
-A34;VSync;VSync;Francais(A33)
+A34;Presiona para confirmar;Press to confirm;Francais(A33)

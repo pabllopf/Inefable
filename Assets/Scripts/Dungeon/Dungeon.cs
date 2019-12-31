@@ -149,10 +149,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
 
         this.GenerateRoomsAndCorridors();
         this.StartCoroutine(this.CreatedRoomsAndCorridors(Language.GetSentence(Key.A27)));
@@ -167,10 +167,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
 
         SceneManager.LoadScene("Shop", LoadSceneMode.Single);
     }
@@ -184,10 +184,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
 
         this.PrintRoomsInBoard();
         this.PrintCorridorsInBoard();
@@ -206,10 +206,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
 
         this.SpawnItems();
         this.StartCoroutine(this.FinalDetails(Language.GetSentence(Key.A29)));
@@ -224,10 +224,10 @@ public class Dungeon : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             this.info.text += letter;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
 
         MonoBehaviour.Destroy(this.mainCamera);
         MonoBehaviour.Destroy(this.startInterface);

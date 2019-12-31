@@ -15,6 +15,6 @@ public class Version : MonoBehaviour
     private void Start()
     {
         this.version = this.transform.Find("Text").GetComponent<Text>();
-        this.version.text = Application.version + " Alpha";
+        this.version.text = Application.version;
     }
 }

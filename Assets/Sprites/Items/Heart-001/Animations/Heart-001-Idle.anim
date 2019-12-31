@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
+  m_Name: Heart-001-Idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,16 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1426897521247436095, guid: 25c4373984a686944a8a90c7ad265ce0,
+      value: {fileID: -6219609241969312862, guid: a8c60f66316e99d4d9a4f142168d900e,
         type: 3}
     - time: 0.083333336
-      value: {fileID: 3615560548669371149, guid: 25c4373984a686944a8a90c7ad265ce0,
+      value: {fileID: -8781125680227462461, guid: a8c60f66316e99d4d9a4f142168d900e,
+        type: 3}
+    - time: 0.16666667
+      value: {fileID: -5158833362399563898, guid: a8c60f66316e99d4d9a4f142168d900e,
+        type: 3}
+    - time: 0.25
+      value: {fileID: 5325678483553345759, guid: a8c60f66316e99d4d9a4f142168d900e,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,14 +50,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1426897521247436095, guid: 25c4373984a686944a8a90c7ad265ce0, type: 3}
-    - {fileID: 3615560548669371149, guid: 25c4373984a686944a8a90c7ad265ce0, type: 3}
+    - {fileID: -6219609241969312862, guid: a8c60f66316e99d4d9a4f142168d900e, type: 3}
+    - {fileID: -8781125680227462461, guid: a8c60f66316e99d4d9a4f142168d900e, type: 3}
+    - {fileID: -5158833362399563898, guid: a8c60f66316e99d4d9a4f142168d900e, type: 3}
+    - {fileID: 5325678483553345759, guid: a8c60f66316e99d4d9a4f142168d900e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.16666667
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

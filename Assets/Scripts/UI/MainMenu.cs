@@ -87,8 +87,8 @@ public class MainMenu : MonoBehaviour
         this.languagePanel.SetActive(false);
 
         this.languages = new List<string>();
-        this.languages.Add("Español");
         this.languages.Add("English");
+        this.languages.Add("Español");
         this.languages.Add("French");
     }
 
@@ -187,6 +187,8 @@ public class MainMenu : MonoBehaviour
         if (this.languagePanel.activeSelf)
         {
             this.DetectLanguage();
+            Settings.Current.Language = this.languages[this.indexLanguages];
+            Language.Translate();
             return;
         }
 
@@ -261,6 +263,7 @@ public class MainMenu : MonoBehaviour
                 }
 
                 mainText.text = this.languages[this.indexLanguages];
+
                 this.PlayClip(this.acceptClip);
                 return;
             }

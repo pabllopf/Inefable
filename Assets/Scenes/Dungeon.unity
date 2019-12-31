@@ -533,6 +533,16 @@ MonoBehaviour:
     quantityMax: 76
     position: 1
     dungeon: 1
+  - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
+    quantityMin: 1
+    quantityMax: 10
+    position: 1
+    dungeon: 1
+  - item: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
+    quantityMin: 1
+    quantityMax: 5
+    position: 1
+    dungeon: 1
   styleMaps:
   - name: ClasicGeon
     dungeon: 1
