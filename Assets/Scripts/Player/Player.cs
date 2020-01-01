@@ -65,6 +65,9 @@ public class Player : MonoBehaviour
     /// <summary>The health</summary>
     private Health health = null;
 
+    /// <summary>The health</summary>
+    private Shield shield = null;
+
     /// <summary>The wallet</summary>
     private Wallet wallet = null;
 
@@ -94,6 +97,7 @@ public class Player : MonoBehaviour
         this.uiAnimator = this.transform.Find("Interface/Bar").GetComponent<Animator>();
         this.rigbody2D = this.GetComponent<Rigidbody2D>();
         this.health = this.GetComponent<Health>();
+        this.shield = this.GetComponent<Shield>();
         this.wallet = this.GetComponent<Wallet>();
         this.inventory = this.GetComponent<Inventory>();
         this.mobileUI = this.transform.Find("Interface/Mobile").gameObject;
@@ -243,8 +247,11 @@ public class Player : MonoBehaviour
                 break;
 
             case "Heart":
-                this.health.Treat();
-                MonoBehaviour.Destroy(obj.gameObject);
+                if (this.health.CanAdd(10)) 
+                {
+                    this.health.Add(10);
+                    MonoBehaviour.Destroy(obj.gameObject);
+                }
                 break;
 
             case "Key":

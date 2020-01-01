@@ -101,7 +101,7 @@ public class Golem : MonoBehaviour
         if (frecuencyHit > 0) { frecuencyHit -= Time.deltaTime; return; }
 
         frecuencyHit = resetHit;
-        if (DistanceToTarget() <= attackRadio + hitRadio) { target.GetComponent<Health>().TakeDamage(); }
+        if (DistanceToTarget() <= attackRadio + hitRadio) { target.GetComponent<Health>().Take(5); }
     }
 
     private void FixedUpdate()

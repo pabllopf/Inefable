@@ -101,7 +101,7 @@ public class Goblin : MonoBehaviour, IEnemy
         if (frecuencyHit > 0) { frecuencyHit -= Time.deltaTime; return; }
 
         frecuencyHit = resetHit;
-        if (DistanceToTarget() <= attackRadio + hitRadio) { target.GetComponent<Health>().TakeDamage(); }
+        if (DistanceToTarget() <= attackRadio + hitRadio) { target.GetComponent<Health>().Take(4); }
     }
 
     public void FixedUpdate()

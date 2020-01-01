@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     {
         if (collider2D.CompareTag("Enemy")) { return; }
         
-        if (collider2D.CompareTag("Player")) { collider2D.GetComponent<Health>().TakeDamage(); }
+        if (collider2D.CompareTag("Player")) { collider2D.GetComponent<Health>().Take(5); }
 
         Destroy(this.gameObject);
     }

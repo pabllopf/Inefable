@@ -34,7 +34,7 @@ public class Stats
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
     {
-        this.Health = 100;
+        this.Health = 50;
         this.Shield = 0;
         this.Wallet = 0;
 

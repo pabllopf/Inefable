@@ -88,7 +88,7 @@ public class Suicide : MonoBehaviour
         
         yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length));
         
-        if (DistanceToTarget() <= attackRadio + boomRadio) { target.GetComponent<Health>().TakeDamage(); }
+        if (DistanceToTarget() <= attackRadio + boomRadio) { target.GetComponent<Health>().Take(5); }
         Destroy(this.gameObject);
     }
 

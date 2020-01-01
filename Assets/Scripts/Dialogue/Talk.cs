@@ -76,10 +76,7 @@ public class Talk : MonoBehaviour
     }
 
     /// <summary>Awakes this instance.</summary>
-    private void Awake()
-    {
-        Game.LoadSettings();
-    }
+    private void Awake() => Game.LoadSettings();
 
     /// <summary>Starts this instance.</summary>
     private void Start()

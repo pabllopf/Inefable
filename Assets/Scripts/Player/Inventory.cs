@@ -3,6 +3,7 @@
 // <copyright file="Inventory.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +42,7 @@ public class Inventory : MonoBehaviour
     private AudioClip takeItem = null;
 
     /// <summary>The use item</summary>
-    [SerializeField] 
+    [SerializeField]
     private AudioClip useItem = null;
 
     /// <summary>Awakes this instance.</summary>
@@ -93,7 +94,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Settings.Current.Plattform == "Computer") 
+        if (Settings.Current.Plattform == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -170,11 +171,11 @@ public class Inventory : MonoBehaviour
     /// <summary>Adds the item.</summary>
     /// <param name="tag">The tag.</param>
     /// <param name="item">The item.</param>
-    public void AddItem(string tag, Sprite item) 
+    public void AddItem(string tag, Sprite item)
     {
-        foreach (Image slot in this.inventory) 
+        foreach (Image slot in this.inventory)
         {
-            if (slot.sprite == null) 
+            if (slot.sprite == null)
             {
                 slot.gameObject.SetActive(true);
                 slot.sprite = item;
@@ -191,18 +192,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Determines whether this instance has space.</summary>
     /// <returns>
     /// <c>true</c> if this instance has space; otherwise, <c>false</c>.</returns>
-    public bool HasSpace()
-    {
-        foreach (Image slot in this.inventory)
-        {
-            if (slot.sprite == null)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public bool HasSpace() => this.inventory.Where(i => i.sprite == null).Any() ? true : false;
 
     /// <summary>Controls the inventory.</summary>
     public void ControlInventory() 
@@ -231,11 +221,11 @@ public class Inventory : MonoBehaviour
             switch (this.inventory[position].tag)
             {
                 case "PotionRed":
-                    this.GetComponent<Health>().FullHealth();
+                    this.GetComponent<Health>().Full();
                     break;
 
                 case "PotionBlue":
-                    this.GetComponent<Health>().FullShield();
+                    this.GetComponent<Shield>().Full();
                     break;
 
                 case "PotionPurple":
