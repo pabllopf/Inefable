@@ -5,16 +5,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Text))]
+
 /// <summary>Show the current version of the game.</summary>
 public class Version : MonoBehaviour
 {
-    /// <summary>The version</summary>
-    private Text version = null;
-
     /// <summary>Starts this instance.</summary>
-    private void Start()
-    {
-        this.version = this.transform.Find("Text").GetComponent<Text>();
-        this.version.text = Application.version;
-    }
+    public void Start() => GetComponent<Text>().text = Application.version;
 }
