@@ -23,8 +23,8 @@ public class Icon_
         Icon[] icons = GameObject.FindObjectsOfType<Icon>();
         foreach (Icon icon in icons)
         {
-            Assert.IsNotNull(icon.GetIcon(), "Icon of " + icon.gameObject.name + " is null.");
-            Assert.AreEqual(icon.GetIcon().name, icon.GetIconName());
+            Assert.IsNotNull(icon.Get(), "Icon of " + icon.gameObject.name + " is null.");
+            Assert.AreEqual(icon.Get().name, icon.Name);
         }
     }
 }
