@@ -1,55 +1,38 @@
-﻿using System.Collections.Generic;
+﻿//------------------------------------------------------------------------------------------
+// <author>Pablo Perdomo Falcón</author>
+// <copyright file="Chest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Occlusion))]
+
+/// <summary>Manage a chest of the game.</summary>
 public class Chest : MonoBehaviour
 {
-    public Sprite openChest;
-    private SpriteRenderer chest;
-    private BoxCollider2D boxCollider;
+    /// <summary>The open</summary>
+    private const string Open = "Open";
 
-    public List<GameObject> items;
+    /// <summary>The animator</summary>
+    private Animator animator = null;
 
-    private void Start()
+    /// <summary>The items</summary>
+    [SerializeField]
+    private List<GameObject> items;
+
+    /// <summary>Starts this instance.</summary>
+    public void Start()
     {
-        chest = GetComponent<SpriteRenderer>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        this.animator = this.GetComponent<Animator>();
     }
 
-    public void OpenChest(Transform player)
+    /// <summary>Opens up.</summary>
+    /// <param name="player">The player.</param>
+    public void OpenUp(Transform player)
     {
-        chest.sprite = openChest;
-        boxCollider.enabled = false;
-        SpawnRamdonObjects(player);
-    }
-
-    private void SpawnRamdonObjects(Transform player)
-    {
-        List<Vector3> positions = new List<Vector3>();
-        Vector3 pos1 = this.transform.position + new Vector3(0, 0.5f, 0);
-        Vector3 pos2 = this.transform.position + new Vector3(0, -0.5f, 0);
-        Vector3 pos3 = this.transform.position + new Vector3(0.5f, 0, 0);
-        Vector3 pos4 = this.transform.position + new Vector3(-0.5f, 0, 0);
-
-        positions.Add(pos1);
-        positions.Add(pos2);
-        positions.Add(pos3);
-        positions.Add(pos4);
-
-        foreach (GameObject item in items)
-        {
-            int ramdon = Random.Range(0, 2);
-            int counter = 0;
-            foreach (Vector3 pos in positions)
-            {
-                var collisions = Physics2D.OverlapCircleAll(pos, 0.2f);
-                if (collisions.Length == 0 && counter < ramdon)
-                {
-                    Instantiate(item, pos, Quaternion.identity);
-                    counter++;
-                }
-            }
-        }
+        this.animator.SetBool(Open, true);
     }
 }

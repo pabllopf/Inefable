@@ -8,28 +8,38 @@ using UnityEngine.UI;
 /// <summary>The shield of the player</summary>
 public class Shield : MonoBehaviour
 {
-    /// <summary>Gets or sets the health UI.</summary>
-    /// <value>The health UI.</value>
-    private Scrollbar shieldUI = null;
+    /// <summary>The shield UI</summary>
+    private Scrollbar scrollbar = null;
+
+    /// <summary>Gets a value indicating whether this instance has shield.</summary>
+    /// <value>
+    /// <c>true</c> if this instance has shield; otherwise, <c>false</c>.</value>
+    public bool HasShield => (Stats.Current.Shield > 0) ? true : false;
 
     /// <summary>Awakes this instance.</summary>
-    public void Awake() => Game.LoadStats();
+    public void Awake()
+    {
+        Game.LoadStats();
+    }
 
     /// <summary>Starts this instance.</summary>
-    public void Start() => this.shieldUI = this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
-
-    /// <summary>Updates this instance.</summary>
-    public void Update() => this.shieldUI.size = (float)Stats.Current.Shield / 100;
+    public void Start()
+    {
+        this.scrollbar = this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
+    }
 
     /// <summary>Takes the specified amount.</summary>
     /// <param name="amount">The amount.</param>
-    public void Take(int amount) => Stats.Current.Shield -= amount;
+    public void Take(int amount)
+    {
+        Stats.Current.Shield -= amount;
+        this.scrollbar.size = (float)Stats.Current.Shield / 100;
+    }
 
     /// <summary>Set full</summary>
-    public void Full() => Stats.Current.Shield = 100;
-
-    /// <summary>Determines whether this instance has shield.</summary>
-    /// <returns>
-    /// <c>true</c> if this instance has shield; otherwise, <c>false</c>.</returns>
-    public bool HasShield() => (Stats.Current.Shield > 0) ? true : false;
+    public void Full()
+    {
+        Stats.Current.Shield = 100;
+        this.scrollbar.size = (float)Stats.Current.Shield / 100;
+    }
 }

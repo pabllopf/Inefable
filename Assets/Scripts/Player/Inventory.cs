@@ -55,18 +55,18 @@ public class Inventory : MonoBehaviour
     public void Start()
     {
         this.audioSource = this.GetComponent<AudioSource>();
+
         this.uiAnimator = this.transform.Find("Interface/Inventory").GetComponent<Animator>();
 
+
         this.mainButton = this.transform.Find("Interface/CircleInventory").gameObject;
-        this.mainButton.GetComponent<Button>().onClick.AddListener(() => { ControlInventory(); });
-
         this.slot1Button = this.transform.Find("Interface/Inventory/Slot1").gameObject;
-        this.slot1Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(0); });
-
         this.slot2Button = this.transform.Find("Interface/Inventory/Slot2").gameObject;
-        this.slot2Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(1); });
-
         this.slot3Button = this.transform.Find("Interface/Inventory/Slot3").gameObject;
+
+        this.mainButton.GetComponent<Button>().onClick.AddListener(() => { ControlInventory(); });
+        this.slot1Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(0); });
+        this.slot2Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(1); });
         this.slot3Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(2); });
 
         this.pressEffects = new List<PressEffect>

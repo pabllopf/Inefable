@@ -3,7 +3,6 @@
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -242,14 +241,14 @@ public class Player : MonoBehaviour
         switch (obj.tag)
         {
             case "Coin":
-                this.wallet.TakeCoin();
+                this.wallet.AddCoin();
                 MonoBehaviour.Destroy(obj.gameObject);
                 break;
 
             case "Heart":
                 if (this.health.CanAdd(10)) 
                 {
-                    this.health.Add(10);
+                    this.health.Treat(10);
                     MonoBehaviour.Destroy(obj.gameObject);
                 }
                 break;

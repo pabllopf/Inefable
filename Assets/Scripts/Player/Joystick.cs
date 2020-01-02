@@ -1,7 +1,13 @@
-﻿using UnityEngine;
+﻿//------------------------------------------------------------------------------------------
+// <author>Pablo Perdomo Falcón</author>
+// <copyright file="Joystick.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
+using UnityEngine;
 using UnityEngine.EventSystems;
 
+public enum AxisOptions { Both, Horizontal, Vertical }
 
+/// <summary>The joystick control of mobile.</summary>
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
@@ -149,5 +155,3 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         return Vector2.zero;
     }
 }
-
-public enum AxisOptions { Both, Horizontal, Vertical }

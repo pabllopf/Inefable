@@ -8,7 +8,6 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     /// <summary>The target</summary>
-    [SerializeField]
     private Transform target = null;
 
     /// <summary>The speed</summary>

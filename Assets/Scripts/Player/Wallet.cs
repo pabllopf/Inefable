@@ -2,6 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Wallet.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +12,11 @@ public class Wallet : MonoBehaviour
     /// <summary>The open</summary>
     private const string Open = "Open";
 
-    /// <summary>The wallet</summary>
-    private int wallet = 0;
-
-    /// <summary>The time counter</summary>
-    private float timeCounter = 3f;
-
-    /// <summary>The reset counter</summary>
-    private float resetCounter = 3f;
+    /// <summary>The time to reset</summary>
+    private const float TimeToReset = 3f;
 
     /// <summary>The wallet UI</summary>
-    private Text walletUI = null;
+    private Text counterCoins = null;
 
     /// <summary>The animator</summary>
     private Animator animator = null;
@@ -31,73 +26,49 @@ public class Wallet : MonoBehaviour
 
     /// <summary>The take coin sound</summary>
     [SerializeField]
-    private AudioClip takeCoin = null;
+    private AudioClip takeClip = null;
 
     /// <summary>The spend coin</summary>
     [SerializeField]
-    private AudioClip spendCoin = null;
+    private AudioClip spendClip = null;
+
+    /// <summary>Awakes this instance.</summary>
+    public void Awake()
+    {
+        Game.LoadStats();
+    }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.wallet = Stats.Current.Wallet;
-
-        this.animator = transform.Find("Interface/CounterCoins").GetComponent<Animator>();
-
+        this.counterCoins = this.transform.Find("Interface/CounterCoins/Text").GetComponent<Text>();
+        this.animator = this.transform.Find("Interface/CounterCoins").GetComponent<Animator>();
         this.audioSource = this.GetComponent<AudioSource>();
 
-        this.walletUI = transform.Find("Interface/CounterCoins/Text").GetComponent<Text>();
-        this.walletUI.text = this.wallet.ToString() + " $";
-        this.animator.SetBool(Open, true);
-        this.timeCounter = this.resetCounter;
+        this.counterCoins.text = Stats.Current.Wallet + " $";
+
+        this.StartCoroutine(this.ControlUI(TimeToReset));
     }
 
-    /// <summary>Updates this instance.</summary>
-    public void Update()
+    /// <summary>Adds the coin.</summary>
+    public void AddCoin()
     {
-        if (this.animator.GetBool(Open))
-        {
-            this.timeCounter -= Time.deltaTime;
-            if (this.timeCounter <= 0) 
-            {
-                this.timeCounter = this.resetCounter;
-                this.animator.SetBool(Open, false);
-            }
-        }
+        Stats.Current.Wallet++;
+        this.counterCoins.text = Stats.Current.Wallet + " $";
+
+        this.PlayClip(this.takeClip);
+        this.StartCoroutine(this.ControlUI(TimeToReset));
     }
 
-    /// <summary>Gets the wallet.</summary>
-    /// <returns>The current amount of coins in the wallet.</returns>
-    public int GetWallet()
-    {
-        return this.wallet;
-    }
-
-    /// <summary>Takes the coin.</summary>
-    public void TakeCoin()
-    {
-        this.wallet++;
-        this.walletUI.text = this.wallet.ToString() + " $";
-        this.animator.SetBool(Open, true);
-        this.timeCounter = this.resetCounter;
-        this.PlayClip(this.takeCoin);
-
-        Stats.Current.Wallet = this.wallet;
-        Game.SaveStats();
-    }
-
-    /// <summary>Takes the out.</summary>
+    /// <summary>Spends the specified amount.</summary>
     /// <param name="amount">The amount.</param>
-    public void TakeOut(int amount)
+    public void Spend(int amount)
     {
-        this.wallet--;  
-        this.walletUI.text = this.wallet.ToString() + " $";
-        this.animator.SetBool(Open, true);
-        this.timeCounter = this.resetCounter;
-        this.PlayClip(this.spendCoin);
+        Stats.Current.Wallet -= amount;
+        this.counterCoins.text = Stats.Current.Wallet + " $";
 
-        Stats.Current.Wallet = this.wallet;
-        Game.SaveStats();
+        this.PlayClip(this.spendClip);
+        this.StartCoroutine(this.ControlUI(TimeToReset));
     }
 
     /// <summary>Plays the clip.</summary>
@@ -106,5 +77,15 @@ public class Wallet : MonoBehaviour
     {
         this.audioSource.clip = clip;
         this.audioSource.Play();
+    }
+
+    /// <summary>Controls the UI.</summary>
+    /// <param name="time">The time.</param>
+    /// <returns>Return none</returns>
+    private IEnumerator ControlUI(float time)
+    {
+        this.animator.SetBool(Open, true);
+        yield return new WaitForSeconds(time);
+        this.animator.SetBool(Open, false);
     }
 }
