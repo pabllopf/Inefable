@@ -17,7 +17,7 @@ public class Icon : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.iconSprite = Resources.Load<Sprite>("Icons/" + Name);
+        this.iconSprite = Resources.Load<Sprite>("Icons/" + this.Name);
     }
 
     /// <summary>Gets the get.</summary>

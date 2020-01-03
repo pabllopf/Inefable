@@ -11,6 +11,13 @@ public class Health : MonoBehaviour
     /// <summary>The scrollbar</summary>
     private Scrollbar scrollbar = null;
 
+    /// <summary>The audio source</summary>
+    private AudioSource audioSource = null;
+
+    /// <summary>The take</summary>
+    [SerializeField]
+    private AudioClip take = null;
+
     /// <summary>Gets a value indicating whether this instance is alive.</summary>
     /// <value>
     /// <c>true</c> if this instance is alive; otherwise, <c>false</c>.</value>
@@ -26,6 +33,7 @@ public class Health : MonoBehaviour
     public void Start()
     {
         this.scrollbar = this.transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();
+        this.audioSource = this.GetComponent<AudioSource>();
     }
 
     /// <summary>Treats the specified amount.</summary>
@@ -34,6 +42,7 @@ public class Health : MonoBehaviour
     {
         Stats.Current.Health += amount;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
+        this.PlayClip(this.take);
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -42,6 +51,7 @@ public class Health : MonoBehaviour
     {
         Stats.Current.Health -= amount;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
+        this.PlayClip(this.take);
     }
 
     /// <summary>Set full</summary>
@@ -49,6 +59,7 @@ public class Health : MonoBehaviour
     {
         Stats.Current.Health = 100;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
+        this.PlayClip(this.take);
     }
 
     /// <summary>Determines whether this instance can add the specified amount.</summary>
@@ -56,4 +67,12 @@ public class Health : MonoBehaviour
     /// <returns>
     /// <c>true</c> if this instance can add the specified amount; otherwise, <c>false</c>.</returns>
     public bool CanAdd(int amount) => ((Stats.Current.Health + amount) < 100) ? true : false;
+
+    /// <summary>Plays the clip.</summary>
+    /// <param name="clip">The clip.</param>
+    private void PlayClip(AudioClip clip)
+    {
+        this.audioSource.clip = clip;
+        this.audioSource.Play();
+    }
 }

@@ -11,6 +11,13 @@ public class Shield : MonoBehaviour
     /// <summary>The shield UI</summary>
     private Scrollbar scrollbar = null;
 
+    /// <summary>The audio source</summary>
+    private AudioSource audioSource = null;
+
+    /// <summary>The take</summary>
+    [SerializeField]
+    private AudioClip take = null;
+
     /// <summary>Gets a value indicating whether this instance has shield.</summary>
     /// <value>
     /// <c>true</c> if this instance has shield; otherwise, <c>false</c>.</value>
@@ -26,6 +33,7 @@ public class Shield : MonoBehaviour
     public void Start()
     {
         this.scrollbar = this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
+        this.audioSource = this.GetComponent<AudioSource>();
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -34,6 +42,7 @@ public class Shield : MonoBehaviour
     {
         Stats.Current.Shield -= amount;
         this.scrollbar.size = (float)Stats.Current.Shield / 100;
+        this.PlayClip(this.take);
     }
 
     /// <summary>Set full</summary>
@@ -41,5 +50,14 @@ public class Shield : MonoBehaviour
     {
         Stats.Current.Shield = 100;
         this.scrollbar.size = (float)Stats.Current.Shield / 100;
+        this.PlayClip(this.take);
+    }
+
+    /// <summary>Plays the clip.</summary>
+    /// <param name="clip">The clip.</param>
+    private void PlayClip(AudioClip clip)
+    {
+        this.audioSource.clip = clip;
+        this.audioSource.Play();
     }
 }
