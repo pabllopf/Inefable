@@ -219,18 +219,22 @@ public class Player : MonoBehaviour
     /// <summary>Attacks the action.</summary>
     public void AttackAction()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackVector, this.radiusAttack, LayerMask.GetMask("Enemy"));
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackVector, this.radiusAttack, LayerMask.GetMask("Default"));
 
         foreach (Collider2D collider in colliders) 
         {
             if (collider.CompareTag("Enemy")) 
             {
-                collider.gameObject.GetComponent<IEnemy>().TakeDamage(50);
+                collider.gameObject.GetComponent<IEnemy>().TakeDamage(50); 
+            }
+
+            if (collider.CompareTag("Chest")) 
+            {
+                collider.GetComponent<Chest>().OpenUp(1);
             }
         }
 
         this.animator.SetTrigger(Attack);
-       
         return;
     }
 
@@ -334,7 +338,7 @@ public class Player : MonoBehaviour
     /// <summary>Controls the bar.</summary>
     private void ControlBar() 
     {
-        if (Input.anyKey || Input.touches.Length > 0)
+        if (Input.anyKey || Input.touches.Length > 0 || Input.GetAxisRaw("LeftJoystickX") != 0)
         {
             this.uiAnimator.SetBool(Open, true);
             this.timeToCloseBar = this.timeReset;

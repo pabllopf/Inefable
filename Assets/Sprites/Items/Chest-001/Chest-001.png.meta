@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: daa10eb5731338443a14f1a95e8e4c26
+guid: 2e1404710b094b548ae6987e2b3cb3b2
 TextureImporter:
   internalIDToNameTable:
-  - first:
-      213: -5281422124547630143
-    second: Chest_0
-  - first:
-      213: 4714410783012859700
-    second: Chest_1
-  - first:
-      213: -8084228343636872099
-    second: ChestT1_0
-  - first:
-      213: 7562885213161557206
-    second: ChestT1_1
   - first:
       213: -7638281453389532784
     second: Chest-001_0
   - first:
       213: -3358441300685141692
     second: Chest-001_1
+  - first:
+      213: 9129878408082488048
+    second: Chest-001_2
+  - first:
+      213: -2379436011986902107
+    second: Chest-001_3
+  - first:
+      213: 3255503692887011320
+    second: Chest-001_4
+  - first:
+      213: -4222201238748799212
+    second: Chest-001_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -78,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -90,7 +90,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 64
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -102,8 +102,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 256
-    resizeAlgorithm: 1
+    maxTextureSize: 128
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -114,20 +114,8 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 256
-    resizeAlgorithm: 1
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 256
-    resizeAlgorithm: 1
+    maxTextureSize: 128
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -144,6 +132,90 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 9
+        y: 64
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c666956d1babb14fa531df50ca8950a
+      internalID: -7638281453389532784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-001_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 64
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1035360786ad17c468783da4a867c29a
+      internalID: -3358441300685141692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-001_2
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 32
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 071705a9523035e449b4508c23cbc0c0
+      internalID: 9129878408082488048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-001_3
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 32
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d60a85197fd75d4484c7b99b39d2582
+      internalID: -2379436011986902107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest-001_4
+      rect:
+        serializedVersion: 2
+        x: 9
         y: 0
         width: 14
         height: 11
@@ -154,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11ff116599094bc489fa415b624c5627
-      internalID: -7638281453389532784
+      spriteID: 31d4a09bfff3aa44682ae63cd387b4c4
+      internalID: 3255503692887011320
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chest-001_1
+      name: Chest-001_5
       rect:
         serializedVersion: 2
         x: 41
@@ -175,8 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc03b9a74fd9c554ea1ced715961760f
-      internalID: -3358441300685141692
+      spriteID: 829758f49a172ad4e933b9ac69d3e54f
+      internalID: -4222201238748799212
       vertices: []
       indices: 
       edges: []
@@ -191,7 +263,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: Deco64
+  spritePackingTag: Chest
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
