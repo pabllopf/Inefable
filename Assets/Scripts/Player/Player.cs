@@ -131,14 +131,14 @@ public class Player : MonoBehaviour
                 this.animator.SetBool(Run, false);
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                this.StartCoroutine("StartRoll");
+                this.animator.SetTrigger(Skill);
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                this.StartCoroutine("StartAttack");
+                this.animator.SetTrigger(Attack);
             }
         }
 
@@ -203,35 +203,15 @@ public class Player : MonoBehaviour
     /// <summary>Rolls the action.</summary>
     public void RollAction() 
     {
-        this.StartCoroutine("StartRoll");
+        this.animator.SetTrigger(Skill);
         return;
     }
 
     /// <summary>Attacks the action.</summary>
     public void AttackAction()
     {
-        this.StartCoroutine("StartAttack");
+        this.animator.SetTrigger(Attack);
         return;
-    }
-
-    /// <summary>Starts the roll.</summary>
-    /// <returns>Return none</returns>
-    public IEnumerator StartRoll()
-    {
-        this.gameObject.layer = 14;
-        this.animator.SetBool(Skill, true);
-        yield return new WaitForSeconds(this.animator.GetCurrentAnimatorStateInfo(0).length / 2);
-        this.animator.SetBool(Skill, false);
-        this.gameObject.layer = 0;
-    }
-
-    /// <summary>Starts the attack.</summary>
-    /// <returns>Return none</returns>
-    public IEnumerator StartAttack()
-    {
-        this.animator.SetBool(Attack, true);
-        yield return new WaitForSeconds(this.animator.GetCurrentAnimatorStateInfo(0).length / 2);
-        this.animator.SetBool(Attack, false);
     }
 
     /// <summary>Called when [trigger enter2 d].</summary>
@@ -251,6 +231,7 @@ public class Player : MonoBehaviour
                     this.health.Treat(10);
                     MonoBehaviour.Destroy(obj.gameObject);
                 }
+
                 break;
 
             case "Key":
@@ -322,7 +303,7 @@ public class Player : MonoBehaviour
     /// <summary>Determines whether this instance has pet.</summary>
     private void HasPet() 
     {
-        if (Stats.Current.pet != "") 
+        if (Stats.Current.pet != string.Empty) 
         {
             GameObject obj = Resources.Load<GameObject>("Pets/" + Stats.Current.pet);
             GameObject petSpawn = Instantiate(obj, this.gameObject.transform.position, Quaternion.identity);

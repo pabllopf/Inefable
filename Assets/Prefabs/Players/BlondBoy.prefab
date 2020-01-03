@@ -1481,8 +1481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b0ec89eaf813c4e812b85eeff49a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeCoin: {fileID: 8300000, guid: 8b0fd5d27ed3610428cd65b69bcd0a25, type: 3}
-  spendCoin: {fileID: 8300000, guid: 06cc606f789320649b447e1be4bde1f1, type: 3}
+  takeClip: {fileID: 8300000, guid: 8b0fd5d27ed3610428cd65b69bcd0a25, type: 3}
+  spendClip: {fileID: 8300000, guid: 06cc606f789320649b447e1be4bde1f1, type: 3}
 --- !u!114 &4242886432866657939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1495,6 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9443954d9eaf7fb43a2b953a6a83084c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  take: {fileID: 0}
 --- !u!114 &877936488688487882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,6 +1618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449f952df9758f74ab16ad142bd20950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  take: {fileID: 0}
 --- !u!1 &1492055192179984744
 GameObject:
   m_ObjectHideFlags: 0

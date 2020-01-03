@@ -6346,21 +6346,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7378342560330747403, guid: b69f7ca92b65b7d46a9a50e0b149e4cc,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 9.300049
-      objectReference: {fileID: 0}
-    - target: {fileID: 5044752940984671314, guid: b69f7ca92b65b7d46a9a50e0b149e4cc,
-        type: 3}
-      propertyPath: takeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 8b0fd5d27ed3610428cd65b69bcd0a25, type: 3}
-    - target: {fileID: 5044752940984671314, guid: b69f7ca92b65b7d46a9a50e0b149e4cc,
-        type: 3}
-      propertyPath: spendClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 06cc606f789320649b447e1be4bde1f1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b69f7ca92b65b7d46a9a50e0b149e4cc, type: 3}
 --- !u!1 &2049429758
