@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -19,7 +18,6 @@ public class Goblin : MonoBehaviour, IEnemy
     private Animator animator;
     private Rigidbody2D rigid2D;
     private BoxCollider2D boxCollider2D;
-    private CircleCollider2D circleCollider2D;
 
     private static readonly float speed = 2.5f;
     private static readonly float visionRadio = 5f;
@@ -36,13 +34,12 @@ public class Goblin : MonoBehaviour, IEnemy
         animator = GetComponent<Animator>();
         rigid2D = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        circleCollider2D = GetComponent<CircleCollider2D>();
 
         rigid2D.isKinematic = false;
         rigid2D.simulated = true;
         boxCollider2D.isTrigger = false;
-        circleCollider2D.isTrigger = true;
-        circleCollider2D.radius = visionRadio;
+
+        this.target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void OnTriggerStay2D(Collider2D collider2D)
@@ -55,8 +52,6 @@ public class Goblin : MonoBehaviour, IEnemy
 
     public void Update()
     {
-        if (!target) { return; }
-
         if (DistanceToTarget() > visionRadio) { HasNotTarget(); return; }
 
         if (DistanceToTarget() <= attackRadio) {AttactToTarget(); return; }
@@ -71,7 +66,6 @@ public class Goblin : MonoBehaviour, IEnemy
 
     private void HasNotTarget()
     {
-        target = null;
         direction = Vector3.zero;
     }
 

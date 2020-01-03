@@ -35,13 +35,19 @@ public class Player : MonoBehaviour
     private const string Horizontal = "Horizontal";
 
     /// <summary>The position</summary>
-    private Vector2 position = Vector2.zero;
+    private Vector3 position = Vector3.zero;
 
     /// <summary>The direction</summary>
-    private Vector2 direction = Vector2.zero;
+    private Vector3 direction = Vector3.zero;
+
+    /// <summary>The attack vector</summary>
+    private Vector3 attackVector = Vector3.zero;
 
     /// <summary>The speed move</summary>
     private int speedMove = 3;
+
+    /// <summary>The radius attack</summary>
+    private float radiusAttack = 0.5f;
 
     /// <summary>The time to close bar</summary>
     private float timeToCloseBar = 10f;
@@ -120,11 +126,12 @@ public class Player : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
             {
                 this.position = this.rigbody2D.position;
-                this.direction.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                this.direction.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
                 this.direction.Normalize();
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
+                this.attackVector = this.transform.position + (this.direction / 2);
             }
             else
             {
@@ -138,7 +145,7 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                this.animator.SetTrigger(Attack);
+                this.AttackAction();
             }
         }
 
@@ -147,11 +154,12 @@ public class Player : MonoBehaviour
             if (Input.GetAxisRaw("LeftJoystickX") > 0 || Input.GetAxisRaw("LeftJoystickX") < 0 || Input.GetAxisRaw("LeftJoystickY") > 0 || Input.GetAxisRaw("LeftJoystickY") < 0)
             {
                 this.position = this.rigbody2D.position;
-                this.direction.Set(Input.GetAxisRaw("LeftJoystickX"), Input.GetAxisRaw("LeftJoystickY"));
+                this.direction.Set(Input.GetAxisRaw("LeftJoystickX"), Input.GetAxisRaw("LeftJoystickY"), 0);
                 this.direction.Normalize();
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
+                this.attackVector = this.transform.position + (this.direction / 2);
             }
             else
             {
@@ -160,12 +168,12 @@ public class Player : MonoBehaviour
 
             if (Input.GetButtonDown("ButtonY"))
             {
-                this.StartCoroutine("StartRoll");
+                this.animator.SetTrigger(Skill);
             }
 
             if (Input.GetButtonDown("ButtonA"))
             {
-                this.StartCoroutine("StartAttack");
+                this.AttackAction();
             }
         }
 
@@ -181,11 +189,12 @@ public class Player : MonoBehaviour
             if (this.joystick.Horizontal > 0 || this.joystick.Horizontal < 0 || this.joystick.Vertical > 0 || this.joystick.Vertical < 0)
             {
                 this.position = this.rigbody2D.position;
-                this.direction.Set(this.joystick.Horizontal, this.joystick.Vertical);
+                this.direction.Set(this.joystick.Horizontal, this.joystick.Vertical, 0);
                 this.direction.Normalize();
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
+                this.attackVector = this.transform.position + (this.direction / 2);
             }
             else
             {
@@ -210,7 +219,18 @@ public class Player : MonoBehaviour
     /// <summary>Attacks the action.</summary>
     public void AttackAction()
     {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackVector, this.radiusAttack, LayerMask.GetMask("Enemy"));
+
+        foreach (Collider2D collider in colliders) 
+        {
+            if (collider.CompareTag("Enemy")) 
+            {
+                collider.gameObject.GetComponent<IEnemy>().TakeDamage(50);
+            }
+        }
+
         this.animator.SetTrigger(Attack);
+       
         return;
     }
 
@@ -296,8 +316,8 @@ public class Player : MonoBehaviour
     /// <summary>Sets the position.</summary>
     public void SetPosition() 
     {
-        this.position = new Vector2(250, 250);
-        this.position.Set(250, 250);
+        this.position = new Vector3(250, 250, 0);
+        this.position.Set(250, 250, 0);
     }
 
     /// <summary>Determines whether this instance has pet.</summary>
@@ -328,5 +348,12 @@ public class Player : MonoBehaviour
                 this.uiAnimator.SetBool(Open, false);
             }
         }
+    }
+
+    /// <summary>Called when [draw gizmos selected].</summary>
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.attackVector, this.radiusAttack);
     }
 }
