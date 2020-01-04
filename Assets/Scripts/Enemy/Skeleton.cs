@@ -39,7 +39,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     private const float VisionRadio = 4f;
 
     /// <summary>The attack radio</summary>
-    private const float AttackRadio = 0.7f;
+    private const float AttackRadio = 0.9f;
 
     /// <summary>The health</summary>
     private int health = 100;
