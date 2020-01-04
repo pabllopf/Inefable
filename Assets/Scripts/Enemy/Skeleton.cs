@@ -36,7 +36,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     private const float SpeedToMove = 1f;
 
     /// <summary>The vision radio</summary>
-    private const float VisionRadio = 5f;
+    private const float VisionRadio = 4f;
 
     /// <summary>The attack radio</summary>
     private const float AttackRadio = 0.7f;
@@ -91,6 +91,7 @@ public class Skeleton : MonoBehaviour, IEnemy
             {
                 this.direction = Vector3.zero;
                 this.animator.SetBool(Walk, false);
+                return;
             }
 
             if (this.DistanceToTarget() <= AttackRadio && !this.attacking)
@@ -124,6 +125,8 @@ public class Skeleton : MonoBehaviour, IEnemy
         }
     }
 
+    /// <summary>Hits this instance.</summary>
+    /// <returns>Return none</returns>
     public IEnumerator Hit() 
     {
         yield return new WaitForSeconds(0.2f);
@@ -190,12 +193,21 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.attacking = false;
     }
 
-
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
         this.audioSource.clip = clip;
         this.audioSource.Play();
+    }
+
+    /// <summary>Called when [draw gizmos selected].</summary>
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, VisionRadio);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, AttackRadio);
     }
 }

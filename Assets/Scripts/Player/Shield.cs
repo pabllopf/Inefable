@@ -33,6 +33,7 @@ public class Shield : MonoBehaviour
     public void Start()
     {
         this.scrollbar = this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
+        this.scrollbar.size = (float)Stats.Current.Shield / 100;
         this.audioSource = this.GetComponent<AudioSource>();
     }
 

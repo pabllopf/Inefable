@@ -9,6 +9,9 @@ using UnityEngine.UI;
 /// <summary>The health of the player</summary>
 public class Health : MonoBehaviour
 {
+    /// <summary>The shield</summary>
+    private Shield shield = null;
+
     /// <summary>The scrollbar</summary>
     private Scrollbar scrollbar = null;
 
@@ -41,8 +44,10 @@ public class Health : MonoBehaviour
     public void Start()
     {
         this.scrollbar = this.transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();
+        this.scrollbar.size = (float)Stats.Current.Health / 100;
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.audioSource = this.GetComponent<AudioSource>();
+        this.shield = this.GetComponent<Shield>();
     }
 
     /// <summary>Treats the specified amount.</summary>
@@ -58,9 +63,17 @@ public class Health : MonoBehaviour
     /// <param name="amount">The amount.</param>
     public void Take(int amount)
     {
-        Stats.Current.Health -= amount;
-        this.scrollbar.size = (float)Stats.Current.Health / 100;
-        this.StartCoroutine(this.HitEffect());
+        if (this.shield.HasShield)
+        {
+            this.shield.Take(amount);
+            this.StartCoroutine(this.HitEffect(Color.blue));
+        }
+        else 
+        {
+            Stats.Current.Health -= amount;
+            this.scrollbar.size = (float)Stats.Current.Health / 100;
+            this.StartCoroutine(this.HitEffect(Color.red));
+        }
     }
 
     /// <summary>Set full</summary>
@@ -79,12 +92,12 @@ public class Health : MonoBehaviour
 
     /// <summary>Hits this instance.</summary>
     /// <returns>Return none</returns>
-    public IEnumerator HitEffect()
+    public IEnumerator HitEffect(Color color)
     {
-        yield return new WaitForSeconds(0.2f);
-        this.spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.25f);
+        this.spriteRenderer.color = color;
         this.PlayClip(this.hitClip);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         this.spriteRenderer.color = Color.white;
     }
 
