@@ -1,105 +1,126 @@
-﻿using UnityEngine;
+﻿//------------------------------------------------------------------------------------------
+// <author>Pablo Perdomo Falcón</author>
+// <copyright file="Suicide.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
 using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Occlusion))]
-public class Suicide : MonoBehaviour
+
+/// <summary>Control a Suicide enemy</summary>
+public class Suicide : MonoBehaviour, IEnemy
 {
-    private Transform target;
-    private Vector3 direction;
+    /// <summary>The attack</summary>
+    private const string Attack = "Attack";
 
-    private Animator animator;
-    private Rigidbody2D rigid2D;
-    private BoxCollider2D boxCollider2D;
-    private CircleCollider2D circleCollider2D;
+    /// <summary>The vertical</summary>
+    private const string Vertical = "Vertical";
 
-    private static readonly float speed = 2f;
-    private static readonly float visionRadio = 6f;
-    private static readonly float attackRadio = 0.8f;
-    private static readonly float boomRadio = 0.5f;
+    /// <summary>The horizontal</summary>
+    private const string Horizontal = "Horizontal";
 
-    private static readonly string attack = "Attack";
-    private static readonly string vertical = "Vertical";
-    private static readonly string horizontal = "Horizontal";
+    /// <summary>The speed</summary>
+    private const float Speed = 1f;
 
-    private void Start()
+    /// <summary>The vision radio</summary>
+    private const float VisionRadio = 5f;
+
+    /// <summary>The attack radio</summary>
+    private const float AttackRadio = 1f;
+
+    /// <summary>The target</summary>
+    private Transform target = null;
+
+    /// <summary>The direction</summary>
+    private Vector3 direction = Vector3.zero;
+
+    /// <summary>The animator</summary>
+    private Animator animator = null;
+
+    /// <summary>The rigid2 d</summary>
+    private Rigidbody2D rigid2D = null;
+
+    /// <summary>Starts this instance.</summary>
+    public void Start()
     {
-        animator = GetComponent<Animator>();
-        rigid2D = GetComponent<Rigidbody2D>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
-        circleCollider2D = GetComponent<CircleCollider2D>();
-
-        rigid2D.isKinematic = false;
-        rigid2D.simulated = true;
-        boxCollider2D.isTrigger = false;
-        circleCollider2D.isTrigger = true;
-        circleCollider2D.radius = visionRadio;
+        this.animator = this.GetComponent<Animator>();
+        this.rigid2D = this.GetComponent<Rigidbody2D>();
+        this.target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void OnTriggerStay2D(Collider2D collider2D)
+    /// <summary>Updates this instance.</summary>
+    public void Update()
     {
-        if (collider2D.CompareTag("Player"))
+        if (this.DistanceToTarget() > VisionRadio)
         {
-            target = collider2D.transform;
+            this.direction = Vector3.zero;
+            return; 
         }
+
+        if (this.DistanceToTarget() <= AttackRadio)
+        { 
+            this.StartCoroutine(this.AttackToTarget()); 
+            return; 
+        }
+
+        this.FollowTarget();
     }
 
-    private void Update()
+    /// <summary>Update every frame.</summary>
+    public void FixedUpdate()
     {
-        if (!target) { return; }
-
-        if (DistanceToTarget() > visionRadio) { HasNotTarget(); return; }
-
-        if (DistanceToTarget() <= attackRadio){ StartCoroutine(AttactToTarget()); return; }
-
-        FollowTarget();
+        this.rigid2D.MovePosition(this.transform.position + (this.direction * Speed * Time.deltaTime));
     }
 
-    private float DistanceToTarget()
+    /// <summary>Distances to target.</summary>
+    /// <returns>Return the distance to the target</returns>
+    public float DistanceToTarget()
     {
-        return Vector2.Distance(this.transform.position, target.position);
+        return Vector2.Distance(this.transform.position, this.target.position);
     }
 
-    private void HasNotTarget()
+    /// <summary>Follows the target.</summary>
+    public void FollowTarget()
     {
-        target = null;
-        direction = Vector3.zero;
+        this.direction = this.target.position - this.transform.position;
+        this.direction.Normalize();
+
+        this.animator.SetFloat(Horizontal, this.direction.x);
+        this.animator.SetFloat(Vertical, this.direction.y);
     }
 
-    private void FollowTarget()
+    /// <summary>Takes the damage.</summary>
+    /// <param name="amount">Amount to take health</param>
+    public void TakeDamage(int amount)
     {
-        direction = target.position - this.transform.position;
-        direction.Normalize();
-
-        animator.SetFloat(horizontal, direction.x);
-        animator.SetFloat(vertical, direction.y);
+        MonoBehaviour.Destroy(this.gameObject);
     }
 
-    private IEnumerator AttactToTarget()
+    /// <summary>Dies this instance.</summary>
+    /// <returns>Return none</returns>
+    public IEnumerator Die() 
     {
-        animator.SetBool(attack, true);
-        direction = Vector3.zero;
-        boxCollider2D.enabled = false;
-        circleCollider2D.enabled = false;
+        return null;
+    }
+
+    /// <summary>Attack to target.</summary>
+    /// <returns>Return none</returns>
+    private IEnumerator AttackToTarget()
+    {
+        this.animator.SetBool(Attack, true);
+        this.direction = Vector3.zero;
         
-        yield return new WaitForSeconds((animator.GetCurrentAnimatorStateInfo(0).length));
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         
-        if (DistanceToTarget() <= attackRadio + boomRadio) { target.GetComponent<Health>().Take(5); }
-        Destroy(this.gameObject);
-    }
+        if (this.DistanceToTarget() <= AttackRadio) 
+        { 
+            this.target.GetComponent<Health>().Take(1); 
+        }
 
-    private void FixedUpdate()
-    {
-        rigid2D.MovePosition(this.transform.position + direction * speed * Time.deltaTime);
+        MonoBehaviour.Destroy(this.gameObject);
     }
-
-    public void TakeDamage() 
-    {
-        Destroy(this.gameObject);
-    }
-
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7042240309306118444}
   - component: {fileID: 2264429347479303975}
   - component: {fileID: 5064400005297249049}
-  - component: {fileID: 7026100387777469436}
   - component: {fileID: 4790399125490170445}
   - component: {fileID: 3251314907154241863}
   - component: {fileID: -4217795675468925999}
@@ -75,13 +74,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 1822855204025547156, guid: 16a15736982cf974cb11ed0a863fe056,
+  m_Sprite: {fileID: -2140195979458053779, guid: d8354bc04e85e3248822f8a8f29ae160,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.34375, y: 0.28125}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,35 +99,19 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0023391247, y: -0.38827825}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.34375, y: 0.28125}
-    newSize: {x: 0.34375, y: 0.28125}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34375, y: 0.28125}
+  m_Size: {x: 0.20940924, y: 0.22344351}
   m_EdgeRadius: 0
---- !u!58 &7026100387777469436
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2767541198190867391}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.171875
 --- !u!95 &4790399125490170445
 Animator:
   serializedVersion: 3
@@ -139,7 +122,7 @@ Animator:
   m_GameObject: {fileID: 2767541198190867391}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 283996ed3d98d5c46a408f15a57eac3a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
