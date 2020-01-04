@@ -46,6 +46,12 @@ public class Player : MonoBehaviour
     /// <summary>The speed move</summary>
     private int speedMove = 3;
 
+    /// <summary>The frecuency to attack</summary>
+    private float frecuencyToAttack = 0.25f;
+
+    /// <summary>The attacking</summary>
+    private bool attacking = false;
+
     /// <summary>The radius attack</summary>
     private float radiusAttack = 0.5f;
 
@@ -145,7 +151,10 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                this.AttackAction();
+                if (!this.attacking)
+                {
+                    this.StartCoroutine(this.AttackNow());
+                }
             }
         }
 
@@ -173,7 +182,10 @@ public class Player : MonoBehaviour
 
             if (Input.GetButtonDown("ButtonA"))
             {
-                this.AttackAction();
+                if (!this.attacking)
+                {
+                    this.StartCoroutine(this.AttackNow());
+                }
             }
         }
 
@@ -219,23 +231,36 @@ public class Player : MonoBehaviour
     /// <summary>Attacks the action.</summary>
     public void AttackAction()
     {
+        if (!this.attacking) 
+        {
+            this.StartCoroutine(this.AttackNow());
+        }
+    }
+
+    /// <summary>Attacks the now.</summary>
+    /// <returns>Return none</returns>
+    public IEnumerator AttackNow() 
+    {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackVector, this.radiusAttack, LayerMask.GetMask("Default"));
 
-        foreach (Collider2D collider in colliders) 
+        foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Enemy")) 
+            if (collider.CompareTag("Enemy"))
             {
-                collider.gameObject.GetComponent<IEnemy>().TakeDamage(50); 
+                collider.gameObject.GetComponent<IEnemy>().TakeDamage(25);
             }
 
-            if (collider.CompareTag("Chest")) 
+            if (collider.CompareTag("Chest"))
             {
                 collider.GetComponent<Chest>().OpenUp(1);
             }
         }
 
         this.animator.SetTrigger(Attack);
-        return;
+
+        this.attacking = true;
+        yield return new WaitForSeconds(this.frecuencyToAttack);
+        this.attacking = false;
     }
 
     /// <summary>Called when [trigger enter2 d].</summary>

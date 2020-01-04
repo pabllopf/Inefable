@@ -12,10 +12,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 
 /// <summary>Control a Skeleton to attack melee.</summary>
-public class Skeleton : MonoBehaviour
+public class Skeleton : MonoBehaviour, IEnemy
 {
     /// <summary>The die</summary>
-    private const string Die = "Die";
+    private const string Dead = "Dead";
 
     /// <summary>The walk</summary>
     private const string Walk = "Walk";
@@ -30,19 +30,16 @@ public class Skeleton : MonoBehaviour
     private const string Horizontal = "Horizontal";
 
     /// <summary>The hit</summary>
-    private static readonly float FrecuencyHit = 1f;
+    private const float FrecuencyToHit = 1.5f;
 
     /// <summary>The speed</summary>
-    private static readonly float Speed = 2.5f;
+    private const float SpeedToMove = 1f;
 
     /// <summary>The vision radio</summary>
-    private static readonly float VisionRadio = 5f;
+    private const float VisionRadio = 5f;
 
     /// <summary>The attack radio</summary>
-    private static readonly float AttackRadio = 1f;
-
-    /// <summary>The hit radio</summary>
-    private static readonly float HitRadio = 0.8f;
+    private const float AttackRadio = 0.7f;
 
     /// <summary>The health</summary>
     private int health = 100;
@@ -50,11 +47,17 @@ public class Skeleton : MonoBehaviour
     /// <summary>The attacking</summary>
     private bool attacking = false;
 
+    /// <summary>The dead</summary>
+    private bool deading = false;
+
     /// <summary>The target</summary>
     private Transform target = null;
 
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
+
+    /// <summary>The sprite renderer</summary>
+    private SpriteRenderer spriteRenderer = null;
 
     /// <summary>The animator</summary>
     private Animator animator = null;
@@ -62,40 +65,51 @@ public class Skeleton : MonoBehaviour
     /// <summary>The rigid2 d</summary>
     private Rigidbody2D rigid2D = null;
 
+    /// <summary>The audio source</summary>
+    private AudioSource audioSource = null;
+
+    /// <summary>The hit clip</summary>
+    [SerializeField]
+    private AudioClip hitClip = null;
+
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
+        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.animator = this.GetComponent<Animator>();
         this.rigid2D = this.GetComponent<Rigidbody2D>();
-
-        this.rigid2D.isKinematic = false;
-        this.rigid2D.simulated = true;
-
+        this.audioSource = this.GetComponent<AudioSource>();
         this.target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (this.DistanceToTarget() > VisionRadio) 
+        if (this.health > 0) 
         {
-            this.HasNotTarget(); 
-            return; 
-        }
+            if (this.DistanceToTarget() > VisionRadio)
+            {
+                this.direction = Vector3.zero;
+                this.animator.SetBool(Walk, false);
+            }
 
-        if (this.DistanceToTarget() <= AttackRadio)
-        {
-            this.AttactToTarget(); 
-            return; 
-        }
+            if (this.DistanceToTarget() <= AttackRadio && !this.attacking)
+            {
+                this.StartCoroutine(this.HitTarget());
+                return;
+            }
 
-        this.FollowTarget(); 
+            if (!this.attacking)
+            {
+                this.FollowTarget();
+            }
+        }
     }
 
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
-        this.rigid2D.MovePosition((this.transform.position + this.direction) * Speed * Time.deltaTime);
+        this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
     }
 
     /// <summary>Takes the damage.</summary>
@@ -103,24 +117,44 @@ public class Skeleton : MonoBehaviour
     public void TakeDamage(int damage)
     {
         this.health -= damage;
-        if (this.health <= 0) 
+        this.StartCoroutine(this.Hit());
+        if (this.health <= 0 && !this.deading) 
         {
-            this.animator.SetTrigger(Die);
-            MonoBehaviour.Destroy(this.gameObject);
+            this.StartCoroutine(this.Die());
         }
+    }
+
+    public IEnumerator Hit() 
+    {
+        yield return new WaitForSeconds(0.2f);
+        this.spriteRenderer.color = Color.red;
+        this.PlayClip(this.hitClip);
+        yield return new WaitForSeconds(0.1f);
+        this.spriteRenderer.color = Color.white;
+    }
+
+    /// <summary>Dies this instance.</summary>
+    /// <returns>Return none</returns>
+    public IEnumerator Die()
+    {
+        this.animator.SetTrigger(Dead);
+        this.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        this.deading = true;
+
+        yield return new WaitForSeconds(0.8f);
+
+        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
+        MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
+        MonoBehaviour.Destroy(this.GetComponent<Animator>());
+        MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
+        MonoBehaviour.Destroy(this.GetComponent<Rigidbody2D>());
     }
 
     /// <summary>Distances to target.</summary>
     /// <returns>Return the distance</returns>
-    private float DistanceToTarget()
+    public float DistanceToTarget()
     {
         return Vector2.Distance(this.transform.position, this.target.position);
-    }
-
-    /// <summary>Determines whether [has not target].</summary>
-    private void HasNotTarget()
-    {
-        this.direction = Vector3.zero;
     }
 
     /// <summary>Follows the target.</summary>
@@ -135,31 +169,33 @@ public class Skeleton : MonoBehaviour
         this.animator.SetFloat(Vertical, this.direction.y);
 
         this.animator.SetBool(Walk, true);
-    }
-
-    /// <summary>Attack to target.</summary>
-    private void AttactToTarget()
-    {
-        if ((this.DistanceToTarget() <= AttackRadio + HitRadio) && !this.attacking)
-        {
-            this.StartCoroutine(this.HitTarget());
-        }
+        this.GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
     /// <summary>Hits the target.</summary>
     /// <returns>Return none</returns>
     private IEnumerator HitTarget() 
     {
-        this.target.GetComponent<Health>().Take(4);
-        this.rigid2D.isKinematic = true;
-        this.direction = Vector3.zero;
-        
-        this.animator.SetBool(Walk, false);
-        this.animator.SetTrigger(Attack);
         this.attacking = true;
 
-        yield return new WaitForSeconds(FrecuencyHit);
+        this.target.GetComponent<Health>().Take(4);
+        this.direction = Vector3.zero;
+        this.animator.SetBool(Walk, false);
+        this.animator.SetTrigger(Attack);
+        this.rigid2D.isKinematic = true;
+        this.GetComponent<SpriteRenderer>().sortingOrder = 5;
+
+        yield return new WaitForSeconds(FrecuencyToHit);
 
         this.attacking = false;
+    }
+
+
+    /// <summary>Plays the clip.</summary>
+    /// <param name="clip">The clip.</param>
+    private void PlayClip(AudioClip clip)
+    {
+        this.audioSource.clip = clip;
+        this.audioSource.Play();
     }
 }

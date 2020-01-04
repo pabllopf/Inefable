@@ -2,6 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Health.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,19 @@ public class Health : MonoBehaviour
     /// <summary>The scrollbar</summary>
     private Scrollbar scrollbar = null;
 
+    /// <summary>The sprite renderer</summary>
+    private SpriteRenderer spriteRenderer = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
     /// <summary>The take</summary>
     [SerializeField]
-    private AudioClip take = null;
+    private AudioClip takeClip = null;
+
+    /// <summary>The hit</summary>
+    [SerializeField]
+    private AudioClip hitClip = null;
 
     /// <summary>Gets a value indicating whether this instance is alive.</summary>
     /// <value>
@@ -33,6 +41,7 @@ public class Health : MonoBehaviour
     public void Start()
     {
         this.scrollbar = this.transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();
+        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.audioSource = this.GetComponent<AudioSource>();
     }
 
@@ -42,7 +51,7 @@ public class Health : MonoBehaviour
     {
         Stats.Current.Health += amount;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
-        this.PlayClip(this.take);
+        this.PlayClip(this.takeClip);
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -51,7 +60,7 @@ public class Health : MonoBehaviour
     {
         Stats.Current.Health -= amount;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
-        this.PlayClip(this.take);
+        this.StartCoroutine(this.HitEffect());
     }
 
     /// <summary>Set full</summary>
@@ -59,7 +68,7 @@ public class Health : MonoBehaviour
     {
         Stats.Current.Health = 100;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
-        this.PlayClip(this.take);
+        this.PlayClip(this.takeClip);
     }
 
     /// <summary>Determines whether this instance can add the specified amount.</summary>
@@ -67,6 +76,17 @@ public class Health : MonoBehaviour
     /// <returns>
     /// <c>true</c> if this instance can add the specified amount; otherwise, <c>false</c>.</returns>
     public bool CanAdd(int amount) => ((Stats.Current.Health + amount) < 100) ? true : false;
+
+    /// <summary>Hits this instance.</summary>
+    /// <returns>Return none</returns>
+    public IEnumerator HitEffect()
+    {
+        yield return new WaitForSeconds(0.2f);
+        this.spriteRenderer.color = Color.red;
+        this.PlayClip(this.hitClip);
+        yield return new WaitForSeconds(0.2f);
+        this.spriteRenderer.color = Color.white;
+    }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
