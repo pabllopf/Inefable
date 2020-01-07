@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 44a76cda95d357d42b8776b16727a0e9
+guid: 700d94c3924df6446bce407e30319f19
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2649847697073447219
-    second: Dead_0
+      213: -2073863891597734045
+    second: DeadLeft_0
   - first:
-      213: -8293461521501190705
-    second: Dead_1
+      213: 3490445921131525952
+    second: DeadLeft_1
   - first:
-      213: -1631342717326862633
-    second: Dead_2
+      213: -1440728250949374474
+    second: DeadLeft_2
   - first:
-      213: -3927913518680497933
-    second: Dead_3
+      213: -5495739423072487344
+    second: DeadLeft_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dead_0
+      name: DeadLeft_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c65d352b110c3c45a0a331c26b9a835
-      internalID: 2649847697073447219
+      spriteID: 35eab1d1ddd632e41a99fdc2bff7543c
+      internalID: -2073863891597734045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_1
+      name: DeadLeft_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4591a915154d48248a74d17d1318804f
-      internalID: -8293461521501190705
+      spriteID: aebab6febe854fe41a48f06b3ae41a72
+      internalID: 3490445921131525952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_2
+      name: DeadLeft_2
       rect:
         serializedVersion: 2
         x: 0
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ab226164553e414e86e3391ecd6fde9
-      internalID: -1631342717326862633
+      spriteID: 85252673d62462d4596ccff745326ad3
+      internalID: -1440728250949374474
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_3
+      name: DeadLeft_3
       rect:
         serializedVersion: 2
         x: 32
@@ -199,8 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df310f4af4422684ab4532ed51b67a45
-      internalID: -3927913518680497933
+      spriteID: bc20a5647baa05d4384c48c6015c66fe
+      internalID: -5495739423072487344
       vertices: []
       indices: 
       edges: []
