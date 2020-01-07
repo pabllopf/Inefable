@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     private bool attacking = false;
 
     /// <summary>The radius attack</summary>
-    private float radiusAttack = 0.5f;
+    private float radiusAttack = 0.3f;
 
     /// <summary>The time to close bar</summary>
     private float timeToCloseBar = 10f;
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
-                this.attackVector = this.transform.position + (this.direction / 2);
+                this.attackVector = this.transform.position + (this.direction / 4);
             }
             else
             {
@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
-                this.attackVector = this.transform.position + (this.direction / 2);
+                this.attackVector = this.transform.position + (this.direction / 4);
             }
             else
             {
@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
-                this.attackVector = this.transform.position + (this.direction / 2);
+                this.attackVector = this.transform.position + (this.direction / 4);
             }
             else
             {
@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
-                collider.gameObject.GetComponent<IEnemy>().TakeDamage(25);
+                collider.gameObject.GetComponent<IEnemy>().TakeDamage(Random.Range(5,15));
             }
 
             if (collider.CompareTag("Chest"))

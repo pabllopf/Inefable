@@ -5,16 +5,13 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Occlusion))]
-[RequireComponent(typeof(Animator))]
-
 /// <summary>Control a Skeleton to attack melee.</summary>
 public class Skeleton : MonoBehaviour, IEnemy
 {
-    /// <summary>The die</summary>
+    /// <summary>The eXIT</summary>
+    private const string Exit = "Exit";
+
+    /// <summary>The Dead</summary>
     private const string Dead = "Dead";
 
     /// <summary>The walk</summary>
@@ -29,32 +26,38 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>The horizontal</summary>
     private const string Horizontal = "Horizontal";
 
-    /// <summary>The hit</summary>
-    private const float FrecuencyToHit = 1.5f;
-
     /// <summary>The speed</summary>
     private const float SpeedToMove = 1f;
 
     /// <summary>The vision radio</summary>
-    private const float VisionRadio = 4f;
+    private const float VisionRange = 4f;
 
-    /// <summary>The attack radio</summary>
-    private const float AttackRadio = 0.9f;
+    /// <summary>The attack range</summary>
+    private const float AttackRange = 1.5f;
 
-    /// <summary>The health</summary>
-    private int health = 100;
+    /// <summary>The attack circle</summary>
+    private const float AttackRadius = 0.2f;
 
-    /// <summary>The attacking</summary>
-    private bool attacking = false;
+    /// <summary>The frequency to attack</summary>
+    private const float FrequencyToAttack = 1.5f;
 
-    /// <summary>The dead</summary>
-    private bool deading = false;
+    /// <summary>The thrust</summary>
+    private const float Thrust = 3f;
+
+    /// <summary>The knock time</summary>
+    private const float KnockTime = 0.25f;
 
     /// <summary>The target</summary>
     private Transform target = null;
 
+    /// <summary>The health</summary>
+    private int health = 100;
+
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
+
+    /// <summary>The attack position</summary>
+    private Vector3 attackPosition = Vector3.zero;
 
     /// <summary>The sprite renderer</summary>
     private SpriteRenderer spriteRenderer = null;
@@ -72,6 +75,29 @@ public class Skeleton : MonoBehaviour, IEnemy
     [SerializeField]
     private AudioClip hitClip = null;
 
+    /// <summary>The attacking</summary>
+    private bool attacking = false;
+
+    /// <summary>The dead</summary>
+    private bool deading = false;
+
+    /// <summary>The hitting</summary>
+    private bool hitting = false;
+
+    /// <summary>Takes the damage.</summary>
+    /// <param name="damage">The damage.</param>
+    public void TakeDamage(int damage)
+    {
+        this.health -= damage;
+        if (this.health <= 0 && !this.deading)
+        {
+            this.StartCoroutine(this.Die());
+            return;
+        }
+
+        this.StartCoroutine(this.Hit());
+    }
+
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
@@ -79,6 +105,7 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.animator = this.GetComponent<Animator>();
         this.rigid2D = this.GetComponent<Rigidbody2D>();
         this.audioSource = this.GetComponent<AudioSource>();
+
         this.target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -87,22 +114,31 @@ public class Skeleton : MonoBehaviour, IEnemy
     {
         if (this.health > 0) 
         {
-            if (this.DistanceToTarget() > VisionRadio)
+            if (this.DistanceToTarget() <= VisionRange) 
+            {
+                if (!this.attacking)
+                {
+                    this.FollowTarget();
+                }
+
+                if (this.DistanceToTarget() <= AttackRange && !this.attacking)
+                {
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position + (this.direction / 3), AttackRadius, LayerMask.GetMask("Player"));
+                    foreach (Collider2D collider in colliders)
+                    {
+                        if (collider.CompareTag("Player"))
+                        {
+                            this.attackPosition = this.transform.position + (this.direction / 3);
+                            this.StartCoroutine(this.AttackToTheTarget());
+                            return;
+                        }
+                    }
+                } 
+            }
+            else
             {
                 this.direction = Vector3.zero;
                 this.animator.SetBool(Walk, false);
-                return;
-            }
-
-            if (this.DistanceToTarget() <= AttackRadio && !this.attacking)
-            {
-                this.StartCoroutine(this.HitTarget());
-                return;
-            }
-
-            if (!this.attacking)
-            {
-                this.FollowTarget();
             }
         }
     }
@@ -110,26 +146,23 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
-        this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
-    }
-
-    /// <summary>Takes the damage.</summary>
-    /// <param name="damage">The damage.</param>
-    public void TakeDamage(int damage)
-    {
-        this.health -= damage;
-        this.StartCoroutine(this.Hit());
-        if (this.health <= 0 && !this.deading) 
+        if (!this.hitting) 
         {
-            this.StartCoroutine(this.Die());
+            this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
         }
     }
 
     /// <summary>Hits this instance.</summary>
     /// <returns>Return none</returns>
-    public IEnumerator Hit() 
+    public IEnumerator Hit()
     {
-        yield return new WaitForSeconds(0.2f);
+        this.rigid2D.isKinematic = false;
+        this.hitting = true;
+        this.rigid2D.AddForce((this.transform.position - this.target.position).normalized * Thrust, ForceMode2D.Impulse);
+        this.StartCoroutine(this.HitEffect(this.rigid2D));
+        
+        yield return new WaitForSeconds(0.1f);
+        this.attackPosition = this.transform.position;
         this.spriteRenderer.color = Color.red;
         this.PlayClip(this.hitClip);
         yield return new WaitForSeconds(0.1f);
@@ -140,17 +173,21 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <returns>Return none</returns>
     public IEnumerator Die()
     {
+        this.spriteRenderer.color = Color.white;
+        this.animator.SetBool(Exit, true);
         this.animator.SetTrigger(Dead);
-        this.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        this.spriteRenderer.sortingOrder = 2;
         this.deading = true;
 
-        yield return new WaitForSeconds(0.8f);
-
-        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
         MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
-        MonoBehaviour.Destroy(this.GetComponent<Animator>());
         MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
+        MonoBehaviour.Destroy(this.GetComponent<AudioSource>());
         MonoBehaviour.Destroy(this.GetComponent<Rigidbody2D>());
+
+        yield return new WaitForSeconds(3f);
+
+        MonoBehaviour.Destroy(this.GetComponent<Animator>());
+        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
     }
 
     /// <summary>Distances to target.</summary>
@@ -175,26 +212,43 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
-    /// <summary>Hits the target.</summary>
-    /// <returns>Return none</returns>
-    private IEnumerator HitTarget() 
+
+    /// <summary>Attacks to the target.</summary>
+    /// <returns></returns>
+    private IEnumerator AttackToTheTarget()
     {
-        yield return new WaitForSeconds(FrecuencyToHit / 2);
-
         this.attacking = true;
-
-        this.animator.SetBool(Walk, false);
         this.direction = Vector3.zero;
+        this.animator.SetBool(Walk, false);
         this.rigid2D.isKinematic = true;
-        if (this.DistanceToTarget() <= AttackRadio)
+        this.spriteRenderer.sortingOrder = 5;
+
+        yield return new WaitForSeconds(FrequencyToAttack / 2);
+        this.animator.SetTrigger(Attack);
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackPosition, AttackRadius, LayerMask.GetMask("Player"));
+        foreach (Collider2D collider in colliders)
         {
-            this.target.GetComponent<Health>().Take(4);
-            this.animator.SetTrigger(Attack);
-            this.GetComponent<SpriteRenderer>().sortingOrder = 5;
+            if (collider.CompareTag("Player"))
+            {
+                this.target.GetComponent<Health>().Take(4);
+            }
         }
-        yield return new WaitForSeconds(FrecuencyToHit / 2);
+
+        yield return new WaitForSeconds(FrequencyToAttack / 2);
 
         this.attacking = false;
+    }
+
+    /// <summary>Hits the effect.</summary>
+    /// <param name="enemy">The enemy.</param>
+    /// <returns>Return none</returns>
+    private IEnumerator HitEffect(Rigidbody2D enemy)
+    {
+        yield return new WaitForSeconds(KnockTime);
+        enemy.velocity = Vector2.zero;
+        enemy.isKinematic = true;
+        this.hitting = false;
     }
 
     /// <summary>Plays the clip.</summary>
@@ -209,9 +263,15 @@ public class Skeleton : MonoBehaviour, IEnemy
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, VisionRadio);
+        Gizmos.DrawWireSphere(this.transform.position, VisionRange);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(this.transform.position, AttackRange);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, AttackRadio);
+        Gizmos.DrawWireSphere(this.transform.position + (this.direction / 3), AttackRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(this.attackPosition, AttackRadius);
     }
 }
