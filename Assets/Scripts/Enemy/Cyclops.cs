@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Skeleton.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="Cyclops.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
 using UnityEngine;
@@ -10,9 +10,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Occlusion))]
 [RequireComponent(typeof(Animator))]
-
-/// <summary>Control a Skeleton to attack melee.</summary>
-public class Skeleton : MonoBehaviour, IEnemy
+[RequireComponent(typeof(AudioSource))]
+/// <summary>Control a Cyclops enemy</summary>
+public class Cyclops : MonoBehaviour, IEnemy
 {
     /// <summary>The die</summary>
     private const string Dead = "Dead";
@@ -30,19 +30,19 @@ public class Skeleton : MonoBehaviour, IEnemy
     private const string Horizontal = "Horizontal";
 
     /// <summary>The hit</summary>
-    private const float FrecuencyToHit = 1.5f;
+    private const float FrecuencyToHit = 2f;
 
     /// <summary>The speed</summary>
-    private const float SpeedToMove = 1f;
+    private const float SpeedToMove = 0.5f;
 
     /// <summary>The vision radio</summary>
-    private const float VisionRadio = 4f;
+    private const float VisionRadio = 3f;
 
     /// <summary>The attack radio</summary>
-    private const float AttackRadio = 0.9f;
+    private const float AttackRadio = 1f;
 
     /// <summary>The health</summary>
-    private int health = 100;
+    private int health = 250;
 
     /// <summary>The attacking</summary>
     private bool attacking = false;
@@ -85,7 +85,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (this.health > 0) 
+        if (this.health > 0)
         {
             if (this.DistanceToTarget() > VisionRadio)
             {
@@ -110,16 +110,21 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
-        this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
+        if (this.DistanceToTarget() > AttackRadio)
+        {
+            this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
+        }
     }
 
     /// <summary>Takes the damage.</summary>
     /// <param name="damage">The damage.</param>
     public void TakeDamage(int damage)
     {
-        this.health -= damage;
-        this.StartCoroutine(this.Hit());
-        if (this.health <= 0 && !this.deading) 
+        if (this.health >  0) {
+            this.health -= damage;
+            this.StartCoroutine(this.Hit());
+        }
+        if (this.health <= 0 && !this.deading)
         {
             this.StartCoroutine(this.Die());
         }
@@ -127,7 +132,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     /// <summary>Hits this instance.</summary>
     /// <returns>Return none</returns>
-    public IEnumerator Hit() 
+    public IEnumerator Hit()
     {
         yield return new WaitForSeconds(0.2f);
         this.spriteRenderer.color = Color.red;
@@ -141,12 +146,12 @@ public class Skeleton : MonoBehaviour, IEnemy
     public IEnumerator Die()
     {
         this.animator.SetTrigger(Dead);
-        this.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        this.spriteRenderer.sortingOrder = 3;
         this.deading = true;
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(2f);
 
-        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
+        MonoBehaviour.Destroy(this.GetComponent<Cyclops>());
         MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
         MonoBehaviour.Destroy(this.GetComponent<Animator>());
         MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
@@ -172,12 +177,12 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.animator.SetFloat(Vertical, this.direction.y);
 
         this.animator.SetBool(Walk, true);
-        this.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        this.spriteRenderer.sortingOrder = 3;
     }
 
     /// <summary>Hits the target.</summary>
     /// <returns>Return none</returns>
-    private IEnumerator HitTarget() 
+    private IEnumerator HitTarget()
     {
         yield return new WaitForSeconds(FrecuencyToHit / 2);
 
