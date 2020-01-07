@@ -173,11 +173,11 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <returns>Return none</returns>
     public IEnumerator Die()
     {
-        this.spriteRenderer.color = Color.white;
         this.animator.SetBool(Exit, true);
         this.animator.SetTrigger(Dead);
         this.spriteRenderer.sortingOrder = 2;
         this.deading = true;
+        this.spriteRenderer.color = Color.white;
 
         MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
         MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
