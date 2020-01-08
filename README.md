@@ -1,4 +1,4 @@
-`0.01 Alpha`
+`Version 0.01`
 
 # Inefable
 Roguelike 2D with random dungeon generation, role components and pixel art style.
