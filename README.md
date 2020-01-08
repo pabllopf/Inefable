@@ -1,5 +1,5 @@
 # Inefable
-Roguelike 2d with random dungeon generation, role components and pixel art style (available on IOS, Android, Windows, Linux and MacOs).
+Roguelike 2D with random dungeon generation, role components and pixel art style.
 
 ## Getting Started
 
@@ -17,10 +17,6 @@ Use Unity 5 2018+
 * [StarUML](https://www.audacityteam.org/) - Diagram Class Editor
 * [Microsoft Office](https://www.microsoft.com/es-es/download/office.aspx) - Text Editor
 * [StyleCop](https://marketplace.visualstudio.com/items?itemName=ChrisDahlberg.StyleCop) - Enforce a set of style and consistency rules.
-
-## Versioning
-
-[GitHub](https://github.com/) for versioning.
 
 ## Author
 
