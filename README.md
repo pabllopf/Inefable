@@ -1,17 +1,9 @@
 # Inefable
 Roguelike 2D with random dungeon generation, role components and pixel art style.
 
-## Getting Started
-
-Clone and open with Unity 5.
-
-### Prerequisites
-
-Use Unity 5 2018+
-
 ## Built With
 
-* [Unity5](https://unity3d.com/) - Graphics Engine
+* [Unity 5](https://unity3d.com/) - Graphics Engine
 * [Gimp](https://www.gimp.org/) - Photo Editor
 * [Audacity](https://www.audacityteam.org/) - Sound Editor
 * [StarUML](https://www.audacityteam.org/) - Diagram Class Editor
