@@ -212,9 +212,8 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
-
     /// <summary>Attacks to the target.</summary>
-    /// <returns></returns>
+    /// <returns>Return none</returns>
     private IEnumerator AttackToTheTarget()
     {
         this.attacking = true;

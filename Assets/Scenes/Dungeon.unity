@@ -519,18 +519,18 @@ MonoBehaviour:
     type: 3}
   items:
   - item: {fileID: 1381999859985268, guid: f305886ffb736f24d8fc956e9815a803, type: 3}
-    quantityMin: 1
-    quantityMax: 20
+    quantityMin: 2
+    quantityMax: 10
     position: 1
     dungeon: 0
   - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f, type: 3}
-    quantityMin: 67
-    quantityMax: 74
+    quantityMin: 40
+    quantityMax: 45
     position: 5
     dungeon: 0
   - item: {fileID: 8131167399865811844, guid: 5df07369968610a4c98d84c3b739c390, type: 3}
-    quantityMin: 55
-    quantityMax: 76
+    quantityMin: 40
+    quantityMax: 45
     position: 1
     dungeon: 1
   - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
@@ -544,13 +544,108 @@ MonoBehaviour:
     position: 1
     dungeon: 1
   - item: {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
-    quantityMin: 11
-    quantityMax: 20
+    quantityMin: 1
+    quantityMax: 3
     position: 1
     dungeon: 0
   - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d, type: 3}
-    quantityMin: 49
-    quantityMax: 81
+    quantityMin: 20
+    quantityMax: 30
+    position: 1
+    dungeon: 0
+  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
+    quantityMin: 1
+    quantityMax: 8
+    position: 1
+    dungeon: 0
+  - item: {fileID: 1325099382827930, guid: 2d8f6e4d6f33b2948ab54c3131f77478, type: 3}
+    quantityMin: 1
+    quantityMax: 4
+    position: 1
+    dungeon: 0
+  - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
+    quantityMin: 43
+    quantityMax: 60
+    position: 1
+    dungeon: 0
+  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
+    quantityMin: 3
+    quantityMax: 11
+    position: 1
+    dungeon: 0
+  - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
+    quantityMin: 1
+    quantityMax: 10
+    position: 1
+    dungeon: 0
+  - item: {fileID: 2794298283999491934, guid: 97a52a8d9bca9194ebfc832cfdeb1b96, type: 3}
+    quantityMin: 1
+    quantityMax: 2
+    position: 1
+    dungeon: 0
+  - item: {fileID: 5828240417165718014, guid: 1405f17e00c0fc642ac5b950bb391142, type: 3}
+    quantityMin: 20
+    quantityMax: 30
+    position: 5
+    dungeon: 0
+  - item: {fileID: 6361844323419966233, guid: 089c08d3192260e44803c51bdcbe921d, type: 3}
+    quantityMin: 20
+    quantityMax: 30
+    position: 5
+    dungeon: 0
+  - item: {fileID: 8887822880789150303, guid: 0598cdadf43430348bbfc4f2c3607380, type: 3}
+    quantityMin: 3
+    quantityMax: 8
+    position: 1
+    dungeon: 0
+  - item: {fileID: 5095710159611601852, guid: 587560a13cf7f0245b45098b58814869, type: 3}
+    quantityMin: 9
+    quantityMax: 18
+    position: 1
+    dungeon: 0
+  - item: {fileID: 6030187148954993041, guid: b7c7cd127b12c0845a9bc3be3da13c37, type: 3}
+    quantityMin: 5
+    quantityMax: 8
+    position: 1
+    dungeon: 0
+  - item: {fileID: 8923795917845469594, guid: bc35624e0bbb3824eb0ac9ca40e86026, type: 3}
+    quantityMin: 4
+    quantityMax: 8
+    position: 1
+    dungeon: 0
+  - item: {fileID: 8705834718446250207, guid: 51e044f16f635b0408144212ac2f09b1, type: 3}
+    quantityMin: 7
+    quantityMax: 14
+    position: 1
+    dungeon: 0
+  - item: {fileID: 4610426706650274894, guid: 7356a90a7e26e8e419c11724c98d4432, type: 3}
+    quantityMin: 4
+    quantityMax: 9
+    position: 1
+    dungeon: 0
+  - item: {fileID: 5158723561012093291, guid: 82b87058551bf184991b0500f40e5718, type: 3}
+    quantityMin: 1
+    quantityMax: 2
+    position: 1
+    dungeon: 0
+  - item: {fileID: 6190867450943859309, guid: 7cd6a8f43e581b04f83d684b29f56818, type: 3}
+    quantityMin: 10
+    quantityMax: 25
+    position: 1
+    dungeon: 0
+  - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8, type: 3}
+    quantityMin: 15
+    quantityMax: 25
+    position: 1
+    dungeon: 0
+  - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668, type: 3}
+    quantityMin: 20
+    quantityMax: 25
+    position: 1
+    dungeon: 0
+  - item: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd, type: 3}
+    quantityMin: 1
+    quantityMax: 1
     position: 1
     dungeon: 0
   styleMaps:
