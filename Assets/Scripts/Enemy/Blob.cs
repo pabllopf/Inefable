@@ -187,7 +187,7 @@ public class Blob : MonoBehaviour, IEnemy
         yield return new WaitForSeconds(3f);
 
         MonoBehaviour.Destroy(this.GetComponent<Animator>());
-        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
+        MonoBehaviour.Destroy(this.GetComponent<Blob>());
     }
 
     /// <summary>Distances to target.</summary>

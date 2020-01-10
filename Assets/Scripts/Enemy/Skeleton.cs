@@ -176,6 +176,7 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.animator.SetBool(Exit, true);
         this.animator.SetTrigger(Dead);
         this.spriteRenderer.sortingOrder = 2;
+        this.hitting = true;
         this.deading = true;
         this.spriteRenderer.color = Color.white;
 

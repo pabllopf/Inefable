@@ -14,9 +14,6 @@ public interface IEnemy
     /// <summary>Updates this instance.</summary>
     void Update();
 
-    /// <summary>Update every frame.</summary>
-    void FixedUpdate();
-
     /// <summary>Takes the damage.</summary>
     /// <param name="amount">Amount to take health</param>
     void TakeDamage(int amount);
