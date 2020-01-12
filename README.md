@@ -1,4 +1,4 @@
-`Version 0.01`
+`Version 0.01 Alpha`
 
 ![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/Home/TopBanner.png)
 # Inefable
