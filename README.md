@@ -1,5 +1,6 @@
 `Version 0.01`
 
+![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/Home/TopBanner.png)
 # Inefable
 Roguelike 2D with random dungeon generation, role components and pixel art style.
 
@@ -8,8 +9,6 @@ Roguelike 2D with random dungeon generation, role components and pixel art style
 * [Unity 5](https://unity3d.com/) - Graphics Engine
 * [Gimp](https://www.gimp.org/) - Photo Editor
 * [Audacity](https://www.audacityteam.org/) - Sound Editor
-* [StarUML](https://www.audacityteam.org/) - Diagram Class Editor
-* [Microsoft Office](https://www.microsoft.com/es-es/download/office.aspx) - Text Editor
 * [StyleCop](https://marketplace.visualstudio.com/items?itemName=ChrisDahlberg.StyleCop) - Enforce a set of style and consistency rules.
 
 ## Author
