@@ -2,7 +2,7 @@
 
 ![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/Home/TopBanner.png)
 ## What is Inefable?
-> Inefable is a special Roguelike 2D with RPG, strategy and arcade components.
+> Roguelike 2D with RPG, strategy and arcade components.
 
 ## Built With
 * [Unity 5](https://unity3d.com/) - Graphics Engine
