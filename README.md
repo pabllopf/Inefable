@@ -1,11 +1,10 @@
 [`Version 0.01 Alpha`](https://github.com/pabllopf/Game-Inefable/wiki/0.01-Alpha)
 
 ![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/Home/TopBanner.png)
-# Inefable
-Roguelike 2D with random dungeon generation, role components and pixel art style.
+## What is Inefable?
+> Inefable is a special Roguelike 2D with RPG, strategy and arcade components.
 
 ## Built With
-
 * [Unity 5](https://unity3d.com/) - Graphics Engine
 * [Gimp](https://www.gimp.org/) - Photo Editor
 * [Audacity](https://www.audacityteam.org/) - Sound Editor
