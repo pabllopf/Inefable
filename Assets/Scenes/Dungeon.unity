@@ -517,166 +517,358 @@ MonoBehaviour:
   player: {fileID: 877936488688487885, guid: b69f7ca92b65b7d46a9a50e0b149e4cc, type: 3}
   playerCamera: {fileID: 1304876317242396044, guid: 360e4fa594469a64790e28b6a45dc340,
     type: 3}
-  items:
+  generalItems:
   - item: {fileID: 1381999859985268, guid: f305886ffb736f24d8fc956e9815a803, type: 3}
-    quantityMin: 2
-    quantityMax: 10
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f, type: 3}
-    quantityMin: 61
-    quantityMax: 67
-    position: 5
-    dungeon: 0
-  - item: {fileID: 8131167399865811844, guid: 5df07369968610a4c98d84c3b739c390, type: 3}
-    quantityMin: 54
-    quantityMax: 67
-    position: 1
-    dungeon: 0
-  - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
-    quantityMin: 1
-    quantityMax: 10
-    position: 1
-    dungeon: 1
-  - item: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
     quantityMin: 1
     quantityMax: 5
     position: 1
-    dungeon: 1
-  - item: {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
+  - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
+    quantityMin: 1
+    quantityMax: 5
+    position: 1
+  - item: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
     quantityMin: 1
     quantityMax: 3
     position: 1
-    dungeon: 0
-  - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d, type: 3}
-    quantityMin: 20
-    quantityMax: 30
-    position: 1
-    dungeon: 1
-  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
+  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
     quantityMin: 1
-    quantityMax: 8
+    quantityMax: 5
     position: 1
-    dungeon: 0
   - item: {fileID: 1325099382827930, guid: 2d8f6e4d6f33b2948ab54c3131f77478, type: 3}
     quantityMin: 1
-    quantityMax: 4
+    quantityMax: 5
     position: 1
-    dungeon: 0
-  - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
-    quantityMin: 43
-    quantityMax: 60
-    position: 1
-    dungeon: 1
-  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
-    quantityMin: 3
-    quantityMax: 11
-    position: 1
-    dungeon: 0
-  - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
+  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
     quantityMin: 1
-    quantityMax: 10
+    quantityMax: 5
     position: 1
-    dungeon: 0
-  - item: {fileID: 2794298283999491934, guid: 97a52a8d9bca9194ebfc832cfdeb1b96, type: 3}
+  - item: {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
     quantityMin: 1
-    quantityMax: 2
+    quantityMax: 5
     position: 1
-    dungeon: 0
-  - item: {fileID: 5828240417165718014, guid: 1405f17e00c0fc642ac5b950bb391142, type: 3}
-    quantityMin: 20
-    quantityMax: 30
-    position: 5
-    dungeon: 1
-  - item: {fileID: 6361844323419966233, guid: 089c08d3192260e44803c51bdcbe921d, type: 3}
-    quantityMin: 20
-    quantityMax: 30
-    position: 5
-    dungeon: 2
-  - item: {fileID: 8887822880789150303, guid: 0598cdadf43430348bbfc4f2c3607380, type: 3}
-    quantityMin: 3
-    quantityMax: 8
-    position: 1
-    dungeon: 1
-  - item: {fileID: 5095710159611601852, guid: 587560a13cf7f0245b45098b58814869, type: 3}
-    quantityMin: 9
-    quantityMax: 18
-    position: 1
-    dungeon: 2
-  - item: {fileID: 6030187148954993041, guid: b7c7cd127b12c0845a9bc3be3da13c37, type: 3}
-    quantityMin: 5
-    quantityMax: 8
-    position: 1
-    dungeon: 0
-  - item: {fileID: 8923795917845469594, guid: bc35624e0bbb3824eb0ac9ca40e86026, type: 3}
-    quantityMin: 4
-    quantityMax: 8
-    position: 1
-    dungeon: 1
-  - item: {fileID: 8705834718446250207, guid: 51e044f16f635b0408144212ac2f09b1, type: 3}
-    quantityMin: 7
-    quantityMax: 14
-    position: 1
-    dungeon: 1
-  - item: {fileID: 4610426706650274894, guid: 7356a90a7e26e8e419c11724c98d4432, type: 3}
-    quantityMin: 4
-    quantityMax: 9
-    position: 1
-    dungeon: 1
-  - item: {fileID: 5158723561012093291, guid: 82b87058551bf184991b0500f40e5718, type: 3}
-    quantityMin: 1
-    quantityMax: 2
-    position: 1
-    dungeon: 1
-  - item: {fileID: 6190867450943859309, guid: 7cd6a8f43e581b04f83d684b29f56818, type: 3}
-    quantityMin: 10
-    quantityMax: 25
-    position: 1
-    dungeon: 0
-  - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8, type: 3}
-    quantityMin: 15
-    quantityMax: 25
-    position: 1
-    dungeon: 1
-  - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668, type: 3}
-    quantityMin: 20
-    quantityMax: 25
-    position: 1
-    dungeon: 2
   - item: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd, type: 3}
     quantityMin: 1
     quantityMax: 1
     position: 1
-    dungeon: 0
-  - item: {fileID: 2118528844602804159, guid: c546ea04a5436a247a356740b25cbcd0, type: 3}
-    quantityMin: 20
-    quantityMax: 45
+  - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
+    quantityMin: 1
+    quantityMax: 3
     position: 1
-    dungeon: 2
-  - item: {fileID: 9024045807056091993, guid: 745615dc58dafb548b62a9abab56e480, type: 3}
-    quantityMin: 3
-    quantityMax: 19
-    position: 1
-    dungeon: 2
-  - item: {fileID: 503226107705168680, guid: d369e3001ed7a9045b94043b5cdaf72e, type: 3}
-    quantityMin: 3
-    quantityMax: 19
-    position: 1
-    dungeon: 2
-  - item: {fileID: 2366337612913526801, guid: 7ec11fa73902aef49966a2179266aa52, type: 3}
-    quantityMin: 3
-    quantityMax: 19
-    position: 1
-    dungeon: 2
-  styleMaps:
-  - name: ClasicGeon
-    dungeon: 1
-  - name: GroundGeon
-    dungeon: 2
-  - name: SandGeon
-    dungeon: 3
+  - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f, type: 3}
+    quantityMin: 55
+    quantityMax: 71
+    position: 5
+  dungeons:
   - name: AtlanTys
-    dungeon: 4
+    items:
+    - item: {fileID: 5187811806753155479, guid: 827789fe1287da4439e9a2238d3107cc,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1818924166664772752, guid: acb8b7b66508708419e6f072864d9396,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7205899972191141786, guid: ca1da029750c70c43b57d9aa3dbabfeb,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8246726132629827227, guid: 6b8bf14c6884f644382336e0f3654a2a,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8340145100676196251, guid: f8290e2f24c45a645af2540a4a6edeae,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 799311237642759215, guid: ce04ba15c2c885d438b652f8d81fa3fe, type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1835321093359545448, guid: 22258937f520f484a9b1f6383238da99,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 198088492250660942, guid: 6555a7a0e6748fe42999de1f37c796c5, type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 6232778765182166942, guid: df371944dfc5f9c49a1a3886855d970f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 2616183063227190300, guid: 46a5e9ccdcd31fb418ab6208398246d9,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 428216641761084044, guid: 632ba404d5679f04393b496640e1affd, type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4452909562303655424, guid: e8f12932e32dbb049b11df186cb31fa3,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4201559106372227265, guid: af5bf4e1386063446a556399548dfbb2,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 769865837552159989, guid: 470dbfa5fcd02a04d894cfbf52661916, type: 3}
+      quantityMin: 1
+      quantityMax: 2
+      position: 1
+    - item: {fileID: 4201559106372227265, guid: af5bf4e1386063446a556399548dfbb2,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 2
+      position: 1
+    - item: {fileID: 8723065342391272239, guid: bccedfdc6cb0b2e449f9416d7726209d,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 5528942828672778858, guid: 7cd105977b2ffb84e82c2c1ab0ea295a,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 5206911670580647685, guid: 2adacbedb10f0804a81061e46a338c62,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7827267542092052371, guid: 70d332761a7962b429e25887e9efe795,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 2
+      position: 1
+    - item: {fileID: 7311174198740533540, guid: 41628db72582f204abfd954514e92e65,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7859268821494649638, guid: 745ba631c4fd52342b9b3d361f499f35,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 872552486468013657, guid: 0fbf90a0c4af6924e825a4bf3adc0964, type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3513439440854823477, guid: 5744e23d6a9451c4ebe71940211373aa,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 511477752633190660, guid: d7766b8b90d3ca148a6f3ac2dc98e3a8, type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8596390839108972749, guid: 73f71bccf42ee3444acaffeb036bd233,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 6168540267739479158, guid: 8f5899b1ecafe024a995b9ada30c38b8,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4787760869453367346, guid: 23e3a346ef058e6488cc04397e1d4d1b,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4642376894521488634, guid: 8a4e38873e7907a438fbd7aabdb58c99,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1419561259924246320, guid: 54ed8e3453d0ead4b9508b9a07ee5cc1,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8915209391725881048, guid: 456449ce6260b2b478ec4eeedb1a343f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 2
+      position: 1
+    - item: {fileID: 3077350085068433165, guid: a1699aed2c525d54792206e68cd36ceb,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4349248665242750292, guid: 78ece430e5f9e624dba02f0406936bfd,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 6971022557279908234, guid: 9bd6706e0728d1a4fa9fdbef51fe5b06,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 5340388514211516366, guid: 16b6a46bfe085b94ca4d8d538ff655af,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7867964922535361530, guid: c452776b6f4c2e543b1118533f7ddb65,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7256165295047854280, guid: 51dd45954ede1394d8c35bb163c0b95f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 9071158946076515816, guid: 15ec2b78d766e02429e9872dcfcd9d0a,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 307097912304888758, guid: 147cc7091c3a045469c8d40c5e7130e4, type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 5876885173881764066, guid: c6a5b484f8314194698c22e513aac442,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7183002340033153816, guid: 0992aa1a940074d4282f855937c0a36d,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8839678898572949911, guid: 1f72c0839072a544a920af1fef1a120e,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3517079313194545775, guid: c48d82691b1f9b249a114a5e1da86f55,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7142240786115863255, guid: f720a59a9c78c324884f95b5bef03af3,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8219787026375470282, guid: f74dc28357efeda489c41409e803df5e,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4374509507188380055, guid: 0071774d2b40b9847815e8d6f55f12ae,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8057724596147449675, guid: a995fc85613a09b49b7d17afd019f3ff,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1020147558245290324, guid: 3dcd6318cc624f34784093d4f32a13ae,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3314926080702811013, guid: f90c7f41c06e7844d97346331a8cc70a,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 6504131875099478468, guid: 021aaaf0a1eb52d44bfaf55c0ed265a0,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1040253913332061332, guid: 1da23f8f417cac84eb2bfbcd2b42f9c4,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3416577343637631244, guid: 7af4f4f146729474b8087f642058679d,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1488564367360403520, guid: 56a5c51ca2fe3df4e9c1a8f7c8f07903,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 1252713605279615939, guid: 61c4a2e9285621b478ee97b2b3823494,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3194898154752745205, guid: b2a6861643768b143bef11a5604ed3e3,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8092428558188789548, guid: 84b44770feae8994ca83d5796f08330f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3902300471057115671, guid: 21706014bfe602d4e99c8009beb07738,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 5552164234416382014, guid: f0bb25a6144cee440bd76998ca31e499,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 6121584952629557514, guid: 2ea743bf9903fc74b8cf2f85aed8b990,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 2727470550585363770, guid: d277917b712607e4aad520486e00bf46,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0

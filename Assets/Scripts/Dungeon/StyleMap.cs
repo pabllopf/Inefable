@@ -2,6 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="StyleMap.cs" company="UnMedioStudio">Open Source</copyright>
 //-----------------------------------------------------------------------
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>Define and load a style to the dungeon</summary>
@@ -12,10 +13,9 @@ public class StyleMap
     [SerializeField]
     private string name = string.Empty;
 
-    /// <summary>The dungeon</summary>
+    /// <summary>The items</summary>
     [SerializeField]
-    [Range(1, 100)]
-    private int dungeon = 1;
+    private List<Item> items = null;
 
     /// <summary>The floor center</summary>
     private GameObject floorCenter;
@@ -133,17 +133,17 @@ public class StyleMap
         this.cornerInternalRightUp = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerIRU");
     }
 
-    /// <summary>Gets the dungeon</summary>
-    /// <returns>Return a integer with the number of the dungeon</returns>
-    public int GetDungeon() 
-    {
-        return this.dungeon;
-    }
-
     /// <summary>Gets the name</summary>
     /// <returns>Return a string with the name of the style dungeon</returns>
     public string GetName() 
     {
         return this.name;
+    }
+
+    /// <summary>Gets the items.</summary>
+    /// <returns>Return the items</returns>
+    public List<Item> GetItems() 
+    {
+        return this.items;
     }
 }

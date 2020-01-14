@@ -78,11 +78,11 @@ public class Dungeon : MonoBehaviour
 
     /// <summary>The items</summary>
     [SerializeField]
-    private List<Item> items = null;
+    private List<Item> generalItems = null;
 
     /// <summary>The style maps</summary>
     [SerializeField]
-    private List<StyleMap> styleMaps = null;
+    private List<StyleMap> dungeons = null;
 
     /// <summary>The style map</summary>
     private StyleMap styleMap;
@@ -127,7 +127,7 @@ public class Dungeon : MonoBehaviour
         this.corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
         this.corridorLength = Random.Range(MinCorridorLength, MaxCorridorLength);
 
-        this.styleMap = this.styleMaps[Random.Range(0, this.styleMaps.Count)];
+        this.styleMap = this.dungeons[Random.Range(0, this.dungeons.Count)];
         this.styleMap.LoadSprites();
 
         this.startInterface = GameObject.Find("Start_Interface");
@@ -211,7 +211,8 @@ public class Dungeon : MonoBehaviour
 
         yield return null;
 
-        this.SpawnItems();
+        this.SpawnGeneralsItems();
+        this.SpawnSpecialsItems();
         this.StartCoroutine(this.FinalDetails(Language.GetSentence(Key.A29)));
     }
 
@@ -433,38 +434,73 @@ public class Dungeon : MonoBehaviour
     }
 
     /// <summary>Spawns the items</summary>
-    private void SpawnItems()
+    private void SpawnGeneralsItems()
     {
-        foreach (Item item in this.items)
+        foreach (Item item in this.generalItems)
         {
-            if (item.GetDungeon() == this.styleMap.GetDungeon() || item.GetDungeon() == 0)
+            GameObject master = new GameObject();
+            master.name = item.GetItem().name;
+            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
+            int numSpawned = 0;
+
+            while (numSpawned < quantity)
             {
-                GameObject master = new GameObject();
-                master.name = item.GetItem().name;
-                int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
-                int numSpawned = 0;
-
-                while (numSpawned < quantity)
+                for (int x = 0; x < BoardWidth; x++)
                 {
-                    for (int x = 0; x < BoardWidth; x++)
+                    for (int y = 0; y < BoardHeight; y++)
                     {
-                        for (int y = 0; y < BoardHeight; y++)
+                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
                         {
-                            if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
+                            if (Random.Range(0, 1000) == 1)
                             {
-                                if (Random.Range(0, 100) == 1)
+                                this.board[x, y] = 255;
+                                numSpawned++;
+                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
+                                itemSpawned.transform.parent = master.transform;
+                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
                                 {
-                                    this.board[x, y] = 255;
-                                    numSpawned++;
-                                    var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
-                                    itemSpawned.transform.parent = master.transform;
-                                    foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
-                                    {
-                                        behaviour.enabled = false;
-                                    }
-
-                                    break;
+                                    behaviour.enabled = false;
                                 }
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>Spawns the items</summary>
+    private void SpawnSpecialsItems()
+    {
+        foreach (Item item in this.styleMap.GetItems())
+        {
+            GameObject master = new GameObject();
+            master.name = item.GetItem().name;
+            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
+            int numSpawned = 0;
+
+            while (numSpawned < quantity)
+            {
+                for (int x = 0; x < BoardWidth; x++)
+                {
+                    for (int y = 0; y < BoardHeight; y++)
+                    {
+                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
+                        {
+                            if (Random.Range(0, 1000) == 1)
+                            {
+                                this.board[x, y] = 255;
+                                numSpawned++;
+                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
+                                itemSpawned.transform.parent = master.transform;
+                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
+                                {
+                                    behaviour.enabled = false;
+                                }
+
+                                break;
                             }
                         }
                     }
