@@ -552,7 +552,7 @@ MonoBehaviour:
     quantityMin: 20
     quantityMax: 30
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
     quantityMin: 1
     quantityMax: 8
@@ -567,7 +567,7 @@ MonoBehaviour:
     quantityMin: 43
     quantityMax: 60
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
     quantityMin: 3
     quantityMax: 11
@@ -587,17 +587,17 @@ MonoBehaviour:
     quantityMin: 20
     quantityMax: 30
     position: 5
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 6361844323419966233, guid: 089c08d3192260e44803c51bdcbe921d, type: 3}
     quantityMin: 20
     quantityMax: 30
     position: 5
-    dungeon: 0
+    dungeon: 2
   - item: {fileID: 8887822880789150303, guid: 0598cdadf43430348bbfc4f2c3607380, type: 3}
     quantityMin: 3
     quantityMax: 8
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 5095710159611601852, guid: 587560a13cf7f0245b45098b58814869, type: 3}
     quantityMin: 9
     quantityMax: 18
@@ -612,7 +612,7 @@ MonoBehaviour:
     quantityMin: 4
     quantityMax: 8
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 8705834718446250207, guid: 51e044f16f635b0408144212ac2f09b1, type: 3}
     quantityMin: 7
     quantityMax: 14
@@ -622,12 +622,12 @@ MonoBehaviour:
     quantityMin: 4
     quantityMax: 9
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 5158723561012093291, guid: 82b87058551bf184991b0500f40e5718, type: 3}
     quantityMin: 1
     quantityMax: 2
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 6190867450943859309, guid: 7cd6a8f43e581b04f83d684b29f56818, type: 3}
     quantityMin: 10
     quantityMax: 25
@@ -637,7 +637,7 @@ MonoBehaviour:
     quantityMin: 15
     quantityMax: 25
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668, type: 3}
     quantityMin: 20
     quantityMax: 25
@@ -648,9 +648,31 @@ MonoBehaviour:
     quantityMax: 1
     position: 1
     dungeon: 0
+  - item: {fileID: 2118528844602804159, guid: c546ea04a5436a247a356740b25cbcd0, type: 3}
+    quantityMin: 20
+    quantityMax: 45
+    position: 1
+    dungeon: 2
+  - item: {fileID: 9024045807056091993, guid: 745615dc58dafb548b62a9abab56e480, type: 3}
+    quantityMin: 3
+    quantityMax: 19
+    position: 1
+    dungeon: 2
+  - item: {fileID: 503226107705168680, guid: d369e3001ed7a9045b94043b5cdaf72e, type: 3}
+    quantityMin: 3
+    quantityMax: 19
+    position: 1
+    dungeon: 2
+  - item: {fileID: 2366337612913526801, guid: 7ec11fa73902aef49966a2179266aa52, type: 3}
+    quantityMin: 3
+    quantityMax: 19
+    position: 1
+    dungeon: 2
   styleMaps:
   - name: ClasicGeon
     dungeon: 1
+  - name: GroundGeon
+    dungeon: 2
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0
