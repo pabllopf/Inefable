@@ -532,7 +532,7 @@ MonoBehaviour:
     quantityMin: 54
     quantityMax: 67
     position: 1
-    dungeon: 1
+    dungeon: 0
   - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
     quantityMin: 1
     quantityMax: 10
@@ -602,7 +602,7 @@ MonoBehaviour:
     quantityMin: 9
     quantityMax: 18
     position: 1
-    dungeon: 0
+    dungeon: 2
   - item: {fileID: 6030187148954993041, guid: b7c7cd127b12c0845a9bc3be3da13c37, type: 3}
     quantityMin: 5
     quantityMax: 8
@@ -617,7 +617,7 @@ MonoBehaviour:
     quantityMin: 7
     quantityMax: 14
     position: 1
-    dungeon: 0
+    dungeon: 1
   - item: {fileID: 4610426706650274894, guid: 7356a90a7e26e8e419c11724c98d4432, type: 3}
     quantityMin: 4
     quantityMax: 9
@@ -642,7 +642,7 @@ MonoBehaviour:
     quantityMin: 20
     quantityMax: 25
     position: 1
-    dungeon: 0
+    dungeon: 2
   - item: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd, type: 3}
     quantityMin: 1
     quantityMax: 1
@@ -675,6 +675,8 @@ MonoBehaviour:
     dungeon: 2
   - name: SandGeon
     dungeon: 3
+  - name: AtlanTys
+    dungeon: 4
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0
