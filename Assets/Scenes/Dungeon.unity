@@ -673,6 +673,8 @@ MonoBehaviour:
     dungeon: 1
   - name: GroundGeon
     dungeon: 2
+  - name: SandGeon
+    dungeon: 3
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0
