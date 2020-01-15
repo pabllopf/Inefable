@@ -25,6 +25,10 @@ public class StyleMap
     [SerializeField]
     private List<Item> pets = null;
 
+    /// <summary>The special floors</summary>
+    [SerializeField]
+    private List<Item> specialFloors = null;
+
     /// <summary>The floor center</summary>
     private GameObject floorCenter;
 
@@ -167,5 +171,12 @@ public class StyleMap
     public List<Item> GetPets()
     {
         return this.pets;
+    }
+
+    /// <summary>Gets the floors.</summary>
+    /// <returns>Return floors</returns>
+    public List<Item> GetFloors()
+    {
+        return this.specialFloors;
     }
 }

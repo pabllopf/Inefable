@@ -1006,6 +1006,7 @@ MonoBehaviour:
       position: 1
     enemys: []
     pets: []
+    specialFloors: []
   - name: Afterlife
     items:
     - item: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
@@ -1068,6 +1069,94 @@ MonoBehaviour:
       quantityMin: 5
       quantityMax: 26
       position: 1
+    - item: {fileID: 7599661577980238615, guid: 9329285d3a00d3344842931ee9f343ed,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 1057325897486914625, guid: 195110c145de7064783f1fae7f8a6c69,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 4406084393435920664, guid: d30e08094bf46f441a98dad0b7c853b8,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 3792622281800518772, guid: 2a7b91c1cbc1b184ca9513f92bbbd0cd,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 4725922604078684431, guid: c43574c3586c11540905d6c3509221f4,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 2911427291813253719, guid: d21b849710b716c428ae90b0f4736872,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 1277672210103570365, guid: 5c3452a809a6a324ba07f61b8eac35af,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 8821339950526232996, guid: 7fcd5d5007687114b9bedabf1f932548,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 2297464425588850860, guid: fe423d1da5ecb8c4b9f8403466be3367,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 446069016295019933, guid: f6e0b7c4b08ddeb4e8659359ac6351c7, type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 8160723911105247284, guid: 3c74259b337070b41a9fb61d08d23435,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 7015353912084660903, guid: 9f3da4edea1fccd469ef33ab164fb7ff,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 9020283676516489914, guid: af06f95b30f556644a3e5a4e2bdf1744,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 4650062366192433375, guid: 62577de25be0e2f499e94344e7f873d3,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 5489896890251847411, guid: 85be6510636861043a73c7a42ccb49f7,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 6952575790517739196, guid: 0c8c4950f7052ee488411e54c26b3f22,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 801685504570097522, guid: 2365c0d01d051be45a122e6905358196, type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    - item: {fileID: 5792570103841670678, guid: 76e473d857fe80844bb32ce37a7e35ad,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
     enemys:
     - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
         type: 3}
@@ -1079,10 +1168,36 @@ MonoBehaviour:
       quantityMin: 20
       quantityMax: 30
       position: 1
-    pets:
-    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
-      quantityMin: 1
-      quantityMax: 1
+    pets: []
+    specialFloors:
+    - item: {fileID: 4725922604078684431, guid: c43574c3586c11540905d6c3509221f4,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 24
+      position: 1
+    - item: {fileID: 2911427291813253719, guid: d21b849710b716c428ae90b0f4736872,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 24
+      position: 1
+    - item: {fileID: 1277672210103570365, guid: 5c3452a809a6a324ba07f61b8eac35af,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 24
+      position: 1
+    - item: {fileID: 8821339950526232996, guid: 7fcd5d5007687114b9bedabf1f932548,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 24
+      position: 1
+    - item: {fileID: 2297464425588850860, guid: fe423d1da5ecb8c4b9f8403466be3367,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 24
+      position: 1
+    - item: {fileID: 446069016295019933, guid: f6e0b7c4b08ddeb4e8659359ac6351c7, type: 3}
+      quantityMin: 10
+      quantityMax: 24
       position: 1
   - name: Foreshore
     items:
@@ -1271,6 +1386,7 @@ MonoBehaviour:
       position: 1
     enemys: []
     pets: []
+    specialFloors: []
   - name: Landlord
     items:
     - item: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
@@ -1312,7 +1428,12 @@ MonoBehaviour:
       quantityMin: 18
       quantityMax: 27
       position: 1
-    pets: []
+    pets:
+    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    specialFloors: []
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0

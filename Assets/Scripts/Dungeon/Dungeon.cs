@@ -215,6 +215,9 @@ public class Dungeon : MonoBehaviour
 
         yield return null;
 
+        this.SpawnFloorOptions();
+
+        yield return null;
         this.SpawnGeneralsItems();
         this.SpawnSpecialsItems();
         this.SpawnSpecialsEnemys();
@@ -435,6 +438,44 @@ public class Dungeon : MonoBehaviour
                 {
                     GameObject gameObject = MonoBehaviour.Instantiate(this.styleMap.SelectSprite(this.board[x, y]), new Vector2(x, y), Quaternion.identity);
                     gameObject.transform.parent = this.transform;
+                }
+            }
+        }
+    }
+
+    /// <summary>Spawns the items</summary>
+    private void SpawnFloorOptions()
+    {
+        foreach (Item item in this.styleMap.GetFloors())
+        {
+            GameObject master = new GameObject();
+            master.name = item.GetItem().name;
+            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
+            int numSpawned = 0;
+
+            while (numSpawned < quantity)
+            {
+                for (int x = 0; x < BoardWidth; x++)
+                {
+                    for (int y = 0; y < BoardHeight; y++)
+                    {
+                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
+                        {
+                            if (Random.Range(0, 1000) == 1)
+                            {
+                                this.board[x, y] = 1;
+                                numSpawned++;
+                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
+                                itemSpawned.transform.parent = master.transform;
+                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
+                                {
+                                    behaviour.enabled = false;
+                                }
+
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
