@@ -218,6 +218,7 @@ public class Dungeon : MonoBehaviour
         this.SpawnGeneralsItems();
         this.SpawnSpecialsItems();
         this.SpawnSpecialsEnemys();
+        this.SpawnSpecialsPets();
         this.StartCoroutine(this.FinalDetails(Language.GetSentence(Key.A29)));
     }
 
@@ -237,7 +238,7 @@ public class Dungeon : MonoBehaviour
 
         MonoBehaviour.Destroy(this.mainCamera);
         MonoBehaviour.Destroy(this.startInterface);
-        this.SpawnFinalBoss(new Vector2( this.rooms[this.rooms.Length - 1].GetXPos() + this.rooms[this.rooms.Length - 1].GetWidth() / 2, this.rooms[this.rooms.Length - 1].GetYPos() + this.rooms[this.rooms.Length - 1].GetHeight() / 2));
+        this.SpawnFinalBoss( new Vector2( this.rooms[this.rooms.Length - 1].GetXPos() + this.rooms[this.rooms.Length - 1].GetWidth() / 2, this.rooms[this.rooms.Length - 1].GetYPos() + this.rooms[this.rooms.Length - 1].GetHeight() / 2 ));
         this.SpawnPlayer(new Vector2(250, 250));
     }
 
@@ -519,6 +520,44 @@ public class Dungeon : MonoBehaviour
     private void SpawnSpecialsEnemys()
     {
         foreach (Item item in this.styleMap.GetEnemys())
+        {
+            GameObject master = new GameObject();
+            master.name = item.GetItem().name;
+            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
+            int numSpawned = 0;
+
+            while (numSpawned < quantity)
+            {
+                for (int x = 0; x < BoardWidth; x++)
+                {
+                    for (int y = 0; y < BoardHeight; y++)
+                    {
+                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
+                        {
+                            if (Random.Range(0, 1000) == 1)
+                            {
+                                this.board[x, y] = 255;
+                                numSpawned++;
+                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
+                                itemSpawned.transform.parent = master.transform;
+                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
+                                {
+                                    behaviour.enabled = false;
+                                }
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>Spawns the specials pets.</summary>
+    private void SpawnSpecialsPets()
+    {
+        foreach (Item item in this.styleMap.GetPets())
         {
             GameObject master = new GameObject();
             master.name = item.GetItem().name;

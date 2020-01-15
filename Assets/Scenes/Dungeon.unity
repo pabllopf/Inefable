@@ -1005,6 +1005,7 @@ MonoBehaviour:
       quantityMax: 73
       position: 1
     enemys: []
+    pets: []
   - name: Afterlife
     items:
     - item: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
@@ -1077,6 +1078,11 @@ MonoBehaviour:
         type: 3}
       quantityMin: 20
       quantityMax: 30
+      position: 1
+    pets:
+    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
+      quantityMin: 1
+      quantityMax: 1
       position: 1
   - name: Foreshore
     items:
@@ -1264,6 +1270,7 @@ MonoBehaviour:
       quantityMax: 6
       position: 1
     enemys: []
+    pets: []
   - name: Landlord
     items:
     - item: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
@@ -1295,7 +1302,17 @@ MonoBehaviour:
       quantityMin: 1
       quantityMax: 6
       position: 1
-    enemys: []
+    enemys:
+    - item: {fileID: 2118528844602804159, guid: c546ea04a5436a247a356740b25cbcd0,
+        type: 3}
+      quantityMin: 22
+      quantityMax: 32
+      position: 1
+    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
+      quantityMin: 18
+      quantityMax: 27
+      position: 1
+    pets: []
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4011047717397974}
   - component: {fileID: 212515765321575412}
   - component: {fileID: 58532366556261026}
+  - component: {fileID: 2152140160902405886}
   - component: {fileID: 114366197171699646}
   m_Layer: 0
   m_Name: Laser-001
@@ -99,6 +100,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.078125
+--- !u!50 &2152140160902405886
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559484637658900}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: da2a35da8106fb84e9777c449e76eea8, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &114366197171699646
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,35 +27,41 @@ public class Soccer : MonoBehaviour, IEnemy
     private const string Horizontal = "Horizontal";
 
     /// <summary>The speed</summary>
-    private const float SpeedToMove = 1.5f;
+    private const float SpeedToMove = 1f;
 
     /// <summary>The vision radio</summary>
-    private const float VisionRange = 5.5f;
+    private const float VisionRange = 4f;
 
     /// <summary>The attack range</summary>
-    private const float AttackRange = 4.5f;
+    private const float AttackRange = 1.5f;
+
+    /// <summary>The attack circle</summary>
+    private const float AttackRadius = 0.2f;
 
     /// <summary>The frequency to attack</summary>
-    private const float FrequencyToAttack = 1f;
-
-    /// <summary>The thrust</summary>
-    private const float Thrust = 2f;
-
-    /// <summary>The knock time</summary>
-    private const float KnockTime = 0.3f;
-
-    /// <summary>The target</summary>
-    private Transform target = null;
-
-    /// <summary>The health</summary>
-    private int health = 75;
+    private const float FrequencyToAttack = 1.5f;
 
     /// <summary>The bullet</summary>
     [SerializeField]
     private GameObject bullet = null;
 
+    /// <summary>The thrust</summary>
+    private const float Thrust = 3f;
+
+    /// <summary>The knock time</summary>
+    private const float KnockTime = 0.25f;
+
+    /// <summary>The target</summary>
+    private Transform target = null;
+
+    /// <summary>The health</summary>
+    private int health = 100;
+
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
+
+    /// <summary>The attack position</summary>
+    private Vector3 attackPosition = Vector3.zero;
 
     /// <summary>The sprite renderer</summary>
     private SpriteRenderer spriteRenderer = null;
@@ -87,7 +93,6 @@ public class Soccer : MonoBehaviour, IEnemy
     public void TakeDamage(int damage)
     {
         this.health -= damage;
-        this.StopAll();
         if (this.health <= 0 && !this.deading)
         {
             this.StartCoroutine(this.Die());
@@ -152,21 +157,22 @@ public class Soccer : MonoBehaviour, IEnemy
         this.StartCoroutine(this.HitEffect(this.rigid2D));
 
         yield return new WaitForSeconds(0.1f);
+        this.attackPosition = this.transform.position;
         this.spriteRenderer.color = Color.red;
         this.PlayClip(this.hitClip);
         yield return new WaitForSeconds(0.1f);
         this.spriteRenderer.color = Color.white;
-        this.hitting = false;
+        this.rigid2D.isKinematic = true;
     }
 
     /// <summary>Dies this instance.</summary>
     /// <returns>Return none</returns>
     public IEnumerator Die()
     {
-        this.hitting = true;
         this.animator.SetBool(Exit, true);
         this.animator.SetTrigger(Dead);
         this.spriteRenderer.sortingOrder = 2;
+        this.hitting = true;
         this.deading = true;
         this.spriteRenderer.color = Color.white;
 
@@ -178,7 +184,7 @@ public class Soccer : MonoBehaviour, IEnemy
         yield return new WaitForSeconds(3f);
 
         MonoBehaviour.Destroy(this.GetComponent<Animator>());
-        MonoBehaviour.Destroy(this.GetComponent<Soccer>());
+        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
     }
 
     /// <summary>Distances to target.</summary>
@@ -191,8 +197,6 @@ public class Soccer : MonoBehaviour, IEnemy
     /// <summary>Follows the target.</summary>
     private void FollowTarget()
     {
-        this.rigid2D.isKinematic = false;
-
         this.direction = this.target.position - this.transform.position;
         this.direction.Normalize();
 
@@ -210,7 +214,6 @@ public class Soccer : MonoBehaviour, IEnemy
         this.attacking = true;
         this.direction = Vector3.zero;
         this.animator.SetBool(Walk, false);
-        this.rigid2D.isKinematic = true;
         this.spriteRenderer.sortingOrder = 5;
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
@@ -235,14 +238,6 @@ public class Soccer : MonoBehaviour, IEnemy
         this.hitting = false;
     }
 
-    /// <summary>Stops all.</summary>
-    private void StopAll() 
-    {
-        this.StopAllCoroutines();
-        this.attacking = false;
-        this.hitting = false;
-    }
-
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
@@ -259,5 +254,11 @@ public class Soccer : MonoBehaviour, IEnemy
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, AttackRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position + (this.direction / 3), AttackRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(this.attackPosition, AttackRadius);
     }
 }

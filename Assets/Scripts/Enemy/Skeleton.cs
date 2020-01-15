@@ -167,6 +167,7 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.PlayClip(this.hitClip);
         yield return new WaitForSeconds(0.1f);
         this.spriteRenderer.color = Color.white;
+        this.rigid2D.isKinematic = true;
     }
 
     /// <summary>Dies this instance.</summary>
@@ -201,8 +202,6 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>Follows the target.</summary>
     private void FollowTarget()
     {
-        this.rigid2D.isKinematic = false;
-
         this.direction = this.target.position - this.transform.position;
         this.direction.Normalize();
 
@@ -220,7 +219,6 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.attacking = true;
         this.direction = Vector3.zero;
         this.animator.SetBool(Walk, false);
-        this.rigid2D.isKinematic = true;
         this.spriteRenderer.sortingOrder = 5;
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
