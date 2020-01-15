@@ -517,6 +517,8 @@ MonoBehaviour:
   player: {fileID: 877936488688487885, guid: b69f7ca92b65b7d46a9a50e0b149e4cc, type: 3}
   playerCamera: {fileID: 1304876317242396044, guid: 360e4fa594469a64790e28b6a45dc340,
     type: 3}
+  finalBoss: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd,
+    type: 3}
   generalItems:
   - item: {fileID: 1381999859985268, guid: f305886ffb736f24d8fc956e9815a803, type: 3}
     quantityMin: 1
@@ -532,34 +534,30 @@ MonoBehaviour:
     position: 1
   - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
     quantityMin: 1
-    quantityMax: 5
+    quantityMax: 4
     position: 1
   - item: {fileID: 1325099382827930, guid: 2d8f6e4d6f33b2948ab54c3131f77478, type: 3}
     quantityMin: 1
-    quantityMax: 5
+    quantityMax: 4
     position: 1
   - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
     quantityMin: 1
-    quantityMax: 5
+    quantityMax: 4
     position: 1
   - item: {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
     quantityMin: 1
-    quantityMax: 5
-    position: 1
-  - item: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd, type: 3}
-    quantityMin: 1
-    quantityMax: 1
+    quantityMax: 4
     position: 1
   - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
     quantityMin: 1
     quantityMax: 3
     position: 1
   - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f, type: 3}
-    quantityMin: 55
-    quantityMax: 71
+    quantityMin: 60
+    quantityMax: 90
     position: 5
   dungeons:
-  - name: AtlanTys
+  - name: Atlantys
     items:
     - item: {fileID: 5187811806753155479, guid: 827789fe1287da4439e9a2238d3107cc,
         type: 3}
@@ -999,13 +997,305 @@ MonoBehaviour:
       position: 1
     - item: {fileID: 2727470550585363770, guid: d277917b712607e4aad520486e00bf46,
         type: 3}
-      quantityMin: 1
+      quantityMin: 2
       quantityMax: 5
       position: 1
     - item: {fileID: 254462952908074430, guid: 4a84511f07e9dcb4cb15a96578f900ae, type: 3}
       quantityMin: 45
       quantityMax: 73
       position: 1
+    enemys: []
+  - name: Afterlife
+    items:
+    - item: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 4827289049806175297, guid: 1ee9ef33ae69752459b9801349ce2e2e,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 18
+      position: 5
+    - item: {fileID: 4009324050149035446, guid: 097b2992d16fe304ba214ae78476d1e4,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 14
+      position: 5
+    - item: {fileID: 1435341065194675076, guid: 7b787e2e44daced4bbaa2bbb9aa5fee1,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 8369970926437621636, guid: 21501c924c4393548825eef1d4ee29a5,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7951384098566456997, guid: 3aee3febf6da9a44bb01edf0f126d2c2,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 5512706929742432406, guid: 62b6a25fc6cfcad43b6935d2f92af203,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 2991040175751709577, guid: 5a03add70fb291b4a9efce5829126c1c,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3643533081097949778, guid: 3dad7d7ca8ba50a499c8a265cb832af5,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 7796735294550617886, guid: 8d4873d16ee216f4f8539f8dcfda1cbd,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 20
+      position: 1
+    - item: {fileID: 2176148125430791068, guid: da49422756daf0745b2049cef2cac26a,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 26
+      position: 1
+    enemys:
+    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+        type: 3}
+      quantityMin: 30
+      quantityMax: 40
+      position: 1
+    - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8,
+        type: 3}
+      quantityMin: 20
+      quantityMax: 30
+      position: 1
+  - name: Foreshore
+    items:
+    - item: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 2687139449768470786, guid: 62a4cc830057f5241859aff3aa48b1d2,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 8575814057883155670, guid: 5dd17f14b0c48774fbed4a0c446016ba,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 881572400309163323, guid: ecfec7e4fe04f424bac5e4e5e428a77a, type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 1418002004525905514, guid: b84315b6b11730349b561ae464f14209,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6104540607654767890, guid: 2d958fbb6ef4db349a4bdbf37610e8da,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 3857190637066406122, guid: bb974a60b57d550458ca9beaa03f3239,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 7278500161269428664, guid: 12f0a566d7a66c94d908079e2ac594e6,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6488404973736978278, guid: 86079c09fa25db64581471f4d1a917c2,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 2380329398536929212, guid: 533a9f57e52133749ac50378e4a46d8f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 7388090037708400490, guid: c0a3744f600f55642a11698326df8a4c,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6304072383275511242, guid: 376c2885ff9aa654a97f9a3c81874b32,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 3499185458171660795, guid: acd5d01a5703a67418d57e8ce6695998,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 4206125799132570047, guid: 0bf0fd97d74f6bb4788d6f110c8cd64e,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6750205659664104692, guid: ace47a989a4bd124da266337e93a0849,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 7673647004082327487, guid: bc40b71cae895ce47ba7b49bd8c3cda9,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 191163819608617499, guid: a536979f892d50243ad7207e4274026c, type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 9091407620710708305, guid: 782e1d293ef4f5c438baa5056b91157f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 7522168127295308746, guid: 1357e79fb94aeab47add3cfc8fee0e5b,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 1777629716911060862, guid: 4113d72d621206a41a79ac7546903681,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6070533712919502622, guid: 45dedc2999ee8d2489d4fbdbaf078588,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 5750803053063285242, guid: 599e34860e1defb49a67d329d80cf959,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6894372803672370666, guid: 046a81186ecb1b347aada7b159f84898,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6149344098148861249, guid: 493d3ee12748b7a499b745f6eba5c90c,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 2912465414705286259, guid: 6d83e0bac0fa4d9438f213fc965a5a8e,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 5545560213153553992, guid: 9629f551b47411f4297c1b58b25accb7,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 8463944030122291453, guid: e27731e07d9d7944d96621c44eff6b38,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 5043060324326848799, guid: 52907b1e64038764f81224c8668f3de6,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 3002195591219681751, guid: 7cdc0fe666ccf6d449648de14b553550,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 5630656112227581299, guid: 3ca302750fa1a034782ddfaba9bdd6d6,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 3245254330460108315, guid: ccafda1923eaa7448b1504337d87db40,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 4821216072036999873, guid: fd8ea1d5202962d448bf6dfb8e1162bf,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 4177670097215270262, guid: 13f23734aedd5eb43a7fade5a9472e22,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6089015100723486042, guid: 23336d6c37d75bc409eb3bc9aad1decb,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 1381558771751005304, guid: d8e22aaf04234604ebf4cd81bdd4dc8a,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 4790579457619316253, guid: 9581edba4a0802a46a75707ec31ccb7b,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    enemys: []
+  - name: Landlord
+    items:
+    - item: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 6693319548863229260, guid: 028a2e46c7e541a43a99be8c6f70da7f,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 4069495582778785942, guid: 215c271fbd384454f82f3036725d5670,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 2870702960043453953, guid: 5e77d90986a74f5429f92ba7d4af501b,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 7436823093116799167, guid: c02b3b0e8222f3f4d8584a8646e6c499,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    - item: {fileID: 1542141599974852040, guid: a85b5dd7bf024e649b8d5f7226ebf55d,
+        type: 3}
+      quantityMin: 1
+      quantityMax: 6
+      position: 1
+    enemys: []
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0
