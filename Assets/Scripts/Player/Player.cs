@@ -70,6 +70,10 @@ public class Player : MonoBehaviour
     /// <summary>The button b</summary>
     private GameObject buttonB = null;
 
+    /// <summary>The main camera</summary>
+    [SerializeField]
+    private GameObject mainCamera = null;
+
     /// <summary>The joystick</summary>
     private Joystick joystick = null;
 
@@ -96,6 +100,12 @@ public class Player : MonoBehaviour
 
     /// <summary>The rigid body</summary>
     private Rigidbody2D rigbody2D = null;
+
+    public void Awake()
+    {
+        this.position = this.transform.position;
+        Instantiate(mainCamera, this.transform.position, Quaternion.identity);
+    }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
@@ -340,13 +350,6 @@ public class Player : MonoBehaviour
 
                 break;
         }
-    }
-
-    /// <summary>Sets the position.</summary>
-    public void SetPosition() 
-    {
-        this.position = new Vector3(250, 250, 0);
-        this.position.Set(250, 250, 0);
     }
 
     /// <summary>Determines whether this instance has pet.</summary>

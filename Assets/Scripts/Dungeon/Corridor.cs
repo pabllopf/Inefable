@@ -23,20 +23,64 @@ public enum Direction
 /// <summary>Class that define a Corridor of a Dungeon</summary>
 public class Corridor
 {
-    /// <summary>The start x position</summary>
-    private int startXPos;
+    /// <summary>The x position</summary>
+    private readonly int xPos;
 
-    /// <summary>The start y position</summary>
-    private int startYPos;
+    /// <summary>The y position</summary>
+    private readonly int yPos;
 
     /// <summary>The width</summary>
-    private int width;
+    private readonly int width;
 
     /// <summary>The height</summary>
-    private int height;
+    private readonly int height;
 
     /// <summary>The direction</summary>
-    private Direction direction;
+    private readonly Direction direction;
+
+    /// <summary>Initializes a new instance of the <see cref="Corridor"/> class.</summary>
+    public Corridor() 
+    {
+    }
+
+    /// <summary>Initializes a new instance of the <see cref="Corridor"/> class.</summary>
+    /// <param name="xPos">The x position.</param>
+    /// <param name="yPos">The y position.</param>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="direction">The direction.</param>
+    public Corridor(int xPos, int yPos, int width, int height, Direction direction)
+    {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.width = width;
+        this.height = height;
+        this.direction = direction;
+    }
+
+    /// <summary>Gets the x position.</summary>
+    /// <value>The x position.</value>
+    public int XPos => this.xPos;
+
+    /// <summary>Gets the y position.</summary>
+    /// <value>The y position.</value>
+    public int YPos => this.yPos;
+
+    /// <summary>Gets the width.</summary>
+    /// <value>The width.</value>
+    public int Width => this.width;
+
+    /// <summary>Gets the height.</summary>
+    /// <value>The height.</value>
+    public int Height => this.height;
+
+    /// <summary>Gets the position.</summary>
+    /// <value>The position.</value>
+    public Vector2 Position => new Vector2(this.xPos, this.yPos);
+
+    /// <summary>Gets the direction.</summary>
+    /// <value>The direction.</value>
+    public Direction Direction => this.direction;
 
     /// <summary>Gets the end position x.</summary>
     /// <value>The end position x.</value>
@@ -46,15 +90,15 @@ public class Corridor
         {
             if (this.direction == Direction.North || this.direction == Direction.South) 
             {
-                return this.startXPos;
+                return this.xPos;
             }
 
             if (this.direction == Direction.East)
             {
-                return this.startXPos + this.height - 1;
+                return this.xPos + this.height - 1;
             }
 
-            return this.startXPos - this.height + 1;
+            return this.xPos - this.height + 1;
         }
     }
 
@@ -66,108 +110,76 @@ public class Corridor
         {
             if (this.direction == Direction.East || this.direction == Direction.West)
             {
-                return this.startYPos;
+                return this.yPos;
             }
 
             if (this.direction == Direction.North)
             {
-                return this.startYPos + this.height - 1;
+                return this.yPos + this.height - 1;
             }
 
-            return this.startYPos - this.height + 1;
+            return this.yPos - this.height + 1;
         }
     }
 
-    /// <summary>Setups the corridor.</summary>
+    /// <summary>Sets up.</summary>
     /// <param name="room">The room.</param>
     /// <param name="width">The width.</param>
-    /// <param name="length">The length.</param>
+    /// <param name="height">The height.</param>
     /// <param name="roomWidth">Width of the room.</param>
     /// <param name="roomHeight">Height of the room.</param>
     /// <param name="columns">The columns.</param>
     /// <param name="rows">The rows.</param>
     /// <param name="firstCorridor">if set to <c>true</c> [first corridor].</param>
-    public void SetupCorridor(Room room, int width, int length, int roomWidth, int roomHeight, int columns, int rows, bool firstCorridor)
+    /// <returns>Return the corridor</returns>
+    public static Corridor SetUp(Room room, int width, int height, int roomWidth, int roomHeight, int columns, int rows, bool firstCorridor)
     {
-        this.direction = (Direction)Random.Range(0, 4);
-        Direction oppositeDirection = (Direction)(((int)room.GetDirection() + 2) % 4);
+        int xPos = 0;
+        int yPos = 0;
+
+        Direction direction = (Direction)Random.Range(0, 4);
+        Direction oppositeDirection = (Direction)(((int)room.Direction + 2) % 4);
         
-        if (!firstCorridor && this.direction == oppositeDirection)
+        if (!firstCorridor && direction == oppositeDirection)
         {
-            int directionInt = (int)this.direction;
+            int directionInt = (int)direction;
             directionInt++;
             directionInt = directionInt % 4;
-            this.direction = (Direction)directionInt;
+            direction = (Direction)directionInt;
         }
 
-        this.height = length;
-        this.width = width;
+        int maxLength = height;
 
-        int maxLength = length;
-
-        switch (this.direction)
+        switch (direction)
         {
             case Direction.North:
-                this.startXPos = Random.Range(room.GetXPos(), room.GetXPos() + room.GetWidth() - 1);
-                this.startYPos = room.GetYPos() + room.GetHeight();
-                maxLength = rows - this.startYPos - roomHeight;
+                xPos = Random.Range(room.XPos, room.XPos + room.Width - 1);
+                yPos = room.YPos + room.Height;
+                maxLength = rows - yPos - roomHeight;
                 break;
 
             case Direction.East:
-                this.startXPos = room.GetXPos() + room.GetWidth();
-                this.startYPos = Random.Range(room.GetYPos(), room.GetYPos() + room.GetHeight() - 1);
-                maxLength = columns - this.startXPos - roomWidth;
+                xPos = room.XPos + room.Width;
+                yPos = Random.Range(room.YPos, room.YPos + room.Height - 1);
+                maxLength = columns - xPos - roomWidth;
                 break;
 
             case Direction.South:
-                this.startXPos = Random.Range(room.GetXPos(), room.GetXPos() + room.GetWidth());
-                this.startYPos = room.GetYPos();
-                maxLength = this.startYPos - roomHeight;
+                xPos = Random.Range(room.XPos, room.XPos + room.Width);
+                yPos = room.YPos;
+                maxLength = yPos - roomHeight;
                 break;
 
             case Direction.West:
-                this.startXPos = room.GetXPos();
-                this.startYPos = Random.Range(room.GetYPos(), room.GetYPos() + room.GetHeight());
-                maxLength = this.startXPos - roomWidth;
+                xPos = room.XPos;
+                yPos = Random.Range(room.YPos, room.YPos + room.Height);
+                maxLength = xPos - roomWidth;
                 break;
         }
 
-        this.height = Mathf.Clamp(this.height, 1, maxLength);
-        this.width = Mathf.Clamp(this.width, 1, maxLength);
-    }
+        height = Mathf.Clamp(height, 1, maxLength);
+        width = Mathf.Clamp(width, 1, maxLength);
 
-    /// <summary>Gets the start x position.</summary>
-    /// <returns>The start x position</returns>
-    public int GetStartXPos() 
-    {
-        return this.startXPos;
-    }
-
-    /// <summary>Gets the start y position.</summary>
-    /// <returns>The start y position</returns>
-    public int GetStartYPos()
-    {
-        return this.startYPos;
-    }
-
-    /// <summary>Gets the width.</summary>
-    /// <returns>The width</returns>
-    public int GetWidth()
-    {
-        return this.width;
-    }
-
-    /// <summary>Gets the height.</summary>
-    /// <returns>The height</returns>
-    public int GetHeight()
-    {
-        return this.height;
-    }
-
-    /// <summary>Gets the direction.</summary>
-    /// <returns>The direction</returns>
-    public Direction GetDirection()
-    {
-        return this.direction;
+        return new Corridor(xPos, yPos, width, height, direction);
     }
 }

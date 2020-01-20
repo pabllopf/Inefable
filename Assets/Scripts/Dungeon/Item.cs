@@ -52,6 +52,14 @@ public class Item
         return this.item;
     }
 
+    public string Name => this.item.name;
+
+    public int Quantity => Random.Range(this.quantityMin, this.quantityMax);
+
+    public int Position => this.position;
+
+    public GameObject Object => this.item;
+
     /// <summary>Gets the quantity minimum.</summary>
     /// <returns>The quantityMin</returns>
     public int GetQuantityMin() 

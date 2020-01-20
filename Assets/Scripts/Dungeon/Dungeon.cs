@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -41,40 +42,24 @@ public class Dungeon : MonoBehaviour
     /// <summary>The maximum corridor width</summary>
     private static readonly int MaxCorridorWidth = 9;
 
-    /// <summary>The minimum corridor length</summary>
-    private static readonly int MinCorridorLength = 7;
+    /// <summary>The minimum corridor height</summary>
+    private static readonly int MinCorridorHeight = 7;
 
-    /// <summary>The maximum corridor length</summary>
-    private static readonly int MaxCorridorLength = 10;
+    /// <summary>The maximum corridor height</summary>
+    private static readonly int MaxCorridorHeight = 10;
 
-    /// <summary>The board.</summary>
-    private int[,] board;
+    /// <summary>The board</summary>
+    private int[,] board = new int[BoardWidth, BoardHeight];
 
     /// <summary>The rooms.</summary>
-    private Room[] rooms;
+    private List<Room> rooms = new List<Room>();
 
     /// <summary>The corridors</summary>
-    private Corridor[] corridors;
-
-    /// <summary>The room width</summary>
-    private int roomWidth;
-
-    /// <summary>The room height</summary>
-    private int roomHeight;
-
-    /// <summary>The corridor width</summary>
-    private int corridorWidth;
-
-    /// <summary>The corridor length</summary>
-    private int corridorLength;
+    private List<Corridor> corridors = new List<Corridor>();
 
     /// <summary>The player</summary>
     [SerializeField]
     private GameObject player = null;
-
-    /// <summary>The camera</summary>
-    [SerializeField]
-    private GameObject playerCamera = null;
 
     /// <summary>The final boss</summary>
     [SerializeField]
@@ -103,6 +88,10 @@ public class Dungeon : MonoBehaviour
     /// <summary>The information</summary>
     private Text info;
 
+    /// <summary>Gets the number of rooms.</summary>
+    /// <value>The number of rooms.</value>
+    private int NumOfRooms => Random.Range(MinNumRooms, MaxNumRooms);
+
     /// <summary>Run before all</summary>
     private void Awake()
     {
@@ -113,24 +102,71 @@ public class Dungeon : MonoBehaviour
     /// <summary>Run when start the scene</summary>
     private void Start()
     {
-        this.InitMainParameters();
-        this.StartCoroutine(this.InitComponents(Language.GetSentence(Key.A26)));
+        this.StartCoroutine(this.Build());
     }
 
-    /// <summary>Initializes the main parameters</summary>
-    private void InitMainParameters()
+    /// <summary>Builds this instance.</summary>
+    /// <returns>Return none</returns>
+    private IEnumerator Build()
     {
-        this.board = new int[BoardWidth, BoardHeight];
+        this.SearchObjects();
 
-        this.rooms = new Room[Random.Range(MinNumRooms, MaxNumRooms)];
-        this.corridors = new Corridor[this.rooms.GetLength(0) - 1];
+        this.info.text = string.Empty;
+        foreach (char letter in Language.GetSentence(Key.A26).ToCharArray())
+        {
+            this.info.text += letter;
+            yield return null;
+        }
 
-        this.roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth);
-        this.roomHeight = Random.Range(MinRoomHeight, MaxRoomHeight);
+        this.CreateRooms(this.NumOfRooms);
+        this.CreateCorridors(this.rooms.Count - 1);
+        this.SetUpRoomsAndCorridors();
+        yield return new WaitForSeconds(0.2f);
 
-        this.corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
-        this.corridorLength = Random.Range(MinCorridorLength, MaxCorridorLength);
+        this.info.text = string.Empty;
+        foreach (char letter in Language.GetSentence(Key.A26).ToCharArray())
+        {
+            this.info.text += letter;
+            yield return null;
+        }
 
+        this.PrintRoomsInBoard();
+        this.PrintCorridorsInBoard();
+        this.PrintWallsAndCornersInBoard();
+        this.PrintBoardInGame();
+        yield return new WaitForSeconds(0.2f);
+
+        this.info.text = string.Empty;
+        foreach (char letter in Language.GetSentence(Key.A26).ToCharArray())
+        {
+            this.info.text += letter;
+            yield return null;
+        }
+
+        this.SpawnListOf(this.generalItems);
+        this.SpawnListOf(this.styleMap.GetFloors());
+        this.SpawnListOf(this.styleMap.GetItems());
+        this.SpawnListOf(this.styleMap.GetEnemys());
+        this.SpawnListOf(this.styleMap.GetPets());
+        yield return new WaitForSeconds(0.2f);
+
+        this.info.text = string.Empty;
+        foreach (char letter in Language.GetSentence(Key.A26).ToCharArray())
+        {
+            this.info.text += letter;
+            yield return null;
+        }
+
+        this.DestroyObject(this.startInterface);
+        this.DestroyObject(this.mainCamera);
+        this.SpawnBoss(new Vector2(this.rooms[this.rooms.Count - 1].XPos + (this.rooms[this.rooms.Count - 1].Width / 2), this.rooms[this.rooms.Count - 1].YPos + (this.rooms[this.rooms.Count - 1].Height / 2)), this.finalBoss);
+        this.SpawnPlayer(new Vector2(250, 250), this.player);
+        yield return new WaitForSeconds(0.2f);
+    }
+
+    /// <summary>Searches the objects.</summary>
+    private void SearchObjects()
+    {
         this.styleMap = this.dungeons[Random.Range(0, this.dungeons.Count)];
         this.styleMap.LoadSprites();
 
@@ -144,199 +180,132 @@ public class Dungeon : MonoBehaviour
         this.info = GameObject.Find("Start_Interface/PopUpMessage/PopUp/Info").GetComponent<Text>();
     }
 
-    /// <summary>Initialize the components.</summary>
-    /// <param name="message">The message</param>
-    /// <returns>Return None</returns>
-    private IEnumerator InitComponents(string message)
+    /// <summary>Creates the rooms.</summary>
+    /// <param name="amount">The amount.</param>
+    private void CreateRooms(int amount) 
     {
-        this.info.text = string.Empty;
-        foreach (char letter in message.ToCharArray())
+        for (int i = 0; i < amount; i++) 
         {
-            this.info.text += letter;
-            yield return null;
+            this.rooms.Add(new Room());
         }
-
-        yield return null;
-
-        this.GenerateRoomsAndCorridors();
-        this.StartCoroutine(this.CreatedRoomsAndCorridors(Language.GetSentence(Key.A27)));
     }
 
-    /// <summary>Load the shop.</summary>
-    /// <param name="message">The message</param>
-    /// <returns>Return None</returns>
-    private IEnumerator LoadShop(string message)
+    /// <summary>Creates the corridors.</summary>
+    /// <param name="amount">The amount.</param>
+    private void CreateCorridors(int amount)
     {
-        this.info.text = string.Empty;
-        foreach (char letter in message.ToCharArray())
+        for (int i = 0; i < amount; i++)
         {
-            this.info.text += letter;
-            yield return null;
+            this.corridors.Add(new Corridor());
         }
-
-        yield return null;
-
-        SceneManager.LoadScene("Shop", LoadSceneMode.Single);
     }
 
-    /// <summary>Create the rooms and corridors.</summary>
-    /// <param name="message">The message</param>
-    /// <returns>Return None</returns>
-    private IEnumerator CreatedRoomsAndCorridors(string message)
+    /// <summary>Sets up rooms and corridors.</summary>
+    private void SetUpRoomsAndCorridors()
     {
-        this.info.text = string.Empty;
-        foreach (char letter in message.ToCharArray())
+        int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth);
+        int roomHeight = Random.Range(MinRoomHeight, MaxRoomHeight);
+
+        int corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
+        int corridorLength = Random.Range(MinCorridorHeight, MaxCorridorHeight);
+
+        this.rooms[0] = Room.SetUp(roomWidth, roomHeight, BoardWidth, BoardHeight);
+        this.corridors[0] = Corridor.SetUp(this.rooms[0], corridorWidth, corridorLength, roomWidth, roomHeight, BoardWidth, BoardHeight, true);
+
+        for (int i = 1; i < this.rooms.Count; i++)
         {
-            this.info.text += letter;
-            yield return null;
-        }
+            roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth);
+            roomHeight = Random.Range(MinRoomHeight, MaxRoomHeight);
 
-        yield return null;
+            this.rooms[i] = Room.SetUp(roomWidth, roomHeight, BoardWidth, BoardHeight, this.corridors[i - 1]);
 
-        this.PrintRoomsInBoard();
-        this.PrintCorridorsInBoard();
-        this.PrintWallsAndCornersInBoard();
-        this.PrintBoardInGame();
-
-        this.StartCoroutine(this.GeneratedDungeon(Language.GetSentence(Key.A28)));
-    }
-
-    /// <summary>Generate the dungeon.</summary>
-    /// <param name="message">The message</param>
-    /// <returns>Return None</returns>
-    private IEnumerator GeneratedDungeon(string message)
-    {
-        this.info.text = string.Empty;
-        foreach (char letter in message.ToCharArray())
-        {
-            this.info.text += letter;
-            yield return null;
-        }
-
-        yield return null;
-
-        this.SpawnFloorOptions();
-
-        yield return null;
-        this.SpawnGeneralsItems();
-        this.SpawnSpecialsItems();
-        this.SpawnSpecialsEnemys();
-        this.SpawnSpecialsPets();
-        this.StartCoroutine(this.FinalDetails(Language.GetSentence(Key.A29)));
-    }
-
-    /// <summary>Finish The Final Details</summary>
-    /// <param name="message">The message</param>
-    /// <returns>Return None</returns>
-    private IEnumerator FinalDetails(string message)
-    {
-        this.info.text = string.Empty;
-        foreach (char letter in message.ToCharArray())
-        {
-            this.info.text += letter;
-            yield return null;
-        }
-
-        yield return null;
-
-        MonoBehaviour.Destroy(this.mainCamera);
-        MonoBehaviour.Destroy(this.startInterface);
-        this.SpawnFinalBoss( new Vector2( this.rooms[this.rooms.Length - 1].GetXPos() + this.rooms[this.rooms.Length - 1].GetWidth() / 2, this.rooms[this.rooms.Length - 1].GetYPos() + this.rooms[this.rooms.Length - 1].GetHeight() / 2 ));
-        this.SpawnPlayer(new Vector2(250, 250));
-    }
-
-    /// <summary>Generates the rooms and corridors</summary>
-    private void GenerateRoomsAndCorridors()
-    {
-        this.rooms[0] = new Room();
-        this.rooms[0].SetupFirstRoom(this.roomWidth, this.roomHeight, this.board.GetLength(0), this.board.GetLength(1));
-
-        this.corridors[0] = new Corridor();
-        this.corridors[0].SetupCorridor(this.rooms[0], this.corridorWidth, this.corridorLength, this.roomWidth, this.roomHeight, this.board.GetLength(0), this.board.GetLength(1), true);
-
-        for (int i = 1; i < this.rooms.Length; i++)
-        {
-            this.roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth);
-            this.roomHeight = Random.Range(MinRoomHeight, MaxRoomHeight);
-
-            this.rooms[i] = new Room();
-            this.rooms[i].SetupRoom(this.roomWidth, this.roomHeight, this.board.GetLength(0), this.board.GetLength(1), this.corridors[i - 1]);
-
-            if (i < this.corridors.Length)
+            if (i < this.corridors.Count)
             {
-                this.corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
-                this.corridorLength = Random.Range(MinCorridorLength, MaxCorridorLength);
+                corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
+                corridorLength = Random.Range(MinCorridorHeight, MaxCorridorHeight);
 
-                this.corridors[i] = new Corridor();
-                this.corridors[i].SetupCorridor(this.rooms[i], this.corridorWidth, this.corridorLength, this.roomWidth, this.roomHeight, this.board.GetLength(0), this.board.GetLength(1), false);
+                this.corridors[i] = Corridor.SetUp(this.rooms[i], corridorWidth, corridorLength, roomWidth, roomHeight, BoardWidth, BoardHeight, false);
             }
         }
     }
 
-    /// <summary>Prints the rooms in board</summary>
+    /// <summary>Prints the rooms in board.</summary>
     private void PrintRoomsInBoard()
     {
-        foreach (Room room in this.rooms)
-        {
-            for (int x = 0; x < room.GetWidth(); x++)
-            {
-                for (int y = 0; y < room.GetHeight(); y++)
-                {
-                    int xCoord = room.GetXPos() + x;
-                    int yCoord = room.GetYPos() + y;
-
-                    if (this.board[xCoord, yCoord] == 0)
-                    {
-                        this.board[xCoord, yCoord] = 1;
-                    }
-                }
-            }
-        }
+        this.rooms.ToList().ForEach(room => this.PrintInBoard(room.Width, room.Height, room.Position));
     }
 
-    /// <summary>Prints the corridors in board</summary>
+    /// <summary>Prints the corridors in board.</summary>
     private void PrintCorridorsInBoard()
     {
-        foreach (Corridor corridor in this.corridors)
+        this.corridors.ToList().ForEach(corridor => this.PrintInBoard(corridor.Width, corridor.Height, corridor.Position, corridor.Direction));
+    }
+
+    /// <summary>Prints the in board.</summary>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="position">The position.</param>
+    private void PrintInBoard(int width, int height, Vector2 position) 
+    {
+        for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < corridor.GetHeight(); y++)
+            for (int y = 0; y < height; y++)
             {
-                for (int x = -corridor.GetWidth() / 2; x < corridor.GetWidth() / 2; x++)
+                int xCoord = (int)position.x + x;
+                int yCoord = (int)position.y + y;
+
+                if (this.board[xCoord, yCoord] == 0)
                 {
-                    int xPos = corridor.GetStartXPos();
-                    int yPos = corridor.GetStartYPos();
-
-                    switch (corridor.GetDirection())
-                    {
-                        case Direction.North:
-                            yPos += y;
-                            break;
-                        case Direction.East:
-                            xPos += y;
-                            break;
-                        case Direction.South:
-                            yPos -= y;
-                            break;
-                        case Direction.West:
-                            xPos -= y;
-                            break;
-                    }
-
-                    if (this.board[xPos, yPos + x] == 0)
-                    {
-                        this.board[xPos, yPos + x] = 1;
-                    }
-
-                    if (this.board[xPos + x, yPos] == 0)
-                    {
-                        this.board[xPos + x, yPos] = 1;
-                    }
+                    this.board[xCoord, yCoord] = 1;
                 }
             }
         }
     }
 
-    /// <summary>Prints the walls and corners in board</summary>
+    /// <summary>Prints the in board.</summary>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="position">The position.</param>
+    /// <param name="direction">The direction.</param>
+    private void PrintInBoard(int width, int height, Vector2 position, Direction direction)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = -width / 2; x < width / 2; x++)
+            {
+                int xPos = (int)position.x;
+                int yPos = (int)position.y;
+
+                switch (direction)
+                {
+                    case Direction.North:
+                        yPos += y;
+                        break;
+                    case Direction.East:
+                        xPos += y;
+                        break;
+                    case Direction.South:
+                        yPos -= y;
+                        break;
+                    case Direction.West:
+                        xPos -= y;
+                        break;
+                }
+
+                if (this.board[xPos, yPos + x] == 0)
+                {
+                    this.board[xPos, yPos + x] = 1;
+                }
+
+                if (this.board[xPos + x, yPos] == 0)
+                {
+                    this.board[xPos + x, yPos] = 1;
+                }
+            }
+        }
+    }
+
+    /// <summary>Prints the walls and corners in board.</summary>
     private void PrintWallsAndCornersInBoard()
     {
         for (int x = 0; x < BoardWidth; x++)
@@ -427,7 +396,7 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    /// <summary>Prints the board in game</summary>
+    /// <summary>Prints the board in game.</summary>
     private void PrintBoardInGame()
     {
         for (int x = 0; x < BoardWidth; x++)
@@ -436,216 +405,60 @@ public class Dungeon : MonoBehaviour
             {
                 if (this.board[x, y] != 0) 
                 {
-                    GameObject gameObject = MonoBehaviour.Instantiate(this.styleMap.SelectSprite(this.board[x, y]), new Vector2(x, y), Quaternion.identity);
-                    gameObject.transform.parent = this.transform;
+                    MonoBehaviour.Instantiate(this.styleMap.SelectSprite(this.board[x, y]), new Vector2(x, y), Quaternion.identity, this.transform);
                 }
             }
         }
     }
 
-    /// <summary>Spawns the items</summary>
-    private void SpawnFloorOptions()
-    {
-        foreach (Item item in this.styleMap.GetFloors())
-        {
-            GameObject master = new GameObject();
-            master.name = item.GetItem().name;
-            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
-            int numSpawned = 0;
-
-            while (numSpawned < quantity)
-            {
-                for (int x = 0; x < BoardWidth; x++)
-                {
-                    for (int y = 0; y < BoardHeight; y++)
-                    {
-                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
-                        {
-                            if (Random.Range(0, 1000) == 1)
-                            {
-                                this.board[x, y] = 1;
-                                numSpawned++;
-                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
-                                itemSpawned.transform.parent = master.transform;
-                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
-                                {
-                                    behaviour.enabled = false;
-                                }
-
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>Spawns the items</summary>
-    private void SpawnGeneralsItems()
-    {
-        foreach (Item item in this.generalItems)
-        {
-            GameObject master = new GameObject();
-            master.name = item.GetItem().name;
-            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
-            int numSpawned = 0;
-
-            while (numSpawned < quantity)
-            {
-                for (int x = 0; x < BoardWidth; x++)
-                {
-                    for (int y = 0; y < BoardHeight; y++)
-                    {
-                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
-                        {
-                            if (Random.Range(0, 1000) == 1)
-                            {
-                                this.board[x, y] = 255;
-                                numSpawned++;
-                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
-                                itemSpawned.transform.parent = master.transform;
-                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
-                                {
-                                    behaviour.enabled = false;
-                                }
-
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>Spawns the items</summary>
-    private void SpawnSpecialsItems()
-    {
-        foreach (Item item in this.styleMap.GetItems())
-        {
-            GameObject master = new GameObject();
-            master.name = item.GetItem().name;
-            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
-            int numSpawned = 0;
-
-            while (numSpawned < quantity)
-            {
-                for (int x = 0; x < BoardWidth; x++)
-                {
-                    for (int y = 0; y < BoardHeight; y++)
-                    {
-                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
-                        {
-                            if (Random.Range(0, 1000) == 1)
-                            {
-                                this.board[x, y] = 255;
-                                numSpawned++;
-                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
-                                itemSpawned.transform.parent = master.transform;
-                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
-                                {
-                                    behaviour.enabled = false;
-                                }
-
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>Spawns the enemys</summary>
-    private void SpawnSpecialsEnemys()
-    {
-        foreach (Item item in this.styleMap.GetEnemys())
-        {
-            GameObject master = new GameObject();
-            master.name = item.GetItem().name;
-            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
-            int numSpawned = 0;
-
-            while (numSpawned < quantity)
-            {
-                for (int x = 0; x < BoardWidth; x++)
-                {
-                    for (int y = 0; y < BoardHeight; y++)
-                    {
-                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
-                        {
-                            if (Random.Range(0, 1000) == 1)
-                            {
-                                this.board[x, y] = 255;
-                                numSpawned++;
-                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
-                                itemSpawned.transform.parent = master.transform;
-                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
-                                {
-                                    behaviour.enabled = false;
-                                }
-
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>Spawns the specials pets.</summary>
-    private void SpawnSpecialsPets()
-    {
-        foreach (Item item in this.styleMap.GetPets())
-        {
-            GameObject master = new GameObject();
-            master.name = item.GetItem().name;
-            int quantity = Random.Range(item.GetQuantityMin(), item.GetQuantityMax());
-            int numSpawned = 0;
-
-            while (numSpawned < quantity)
-            {
-                for (int x = 0; x < BoardWidth; x++)
-                {
-                    for (int y = 0; y < BoardHeight; y++)
-                    {
-                        if (this.board[x, y] == item.GetPosition() && numSpawned < quantity)
-                        {
-                            if (Random.Range(0, 1000) == 1)
-                            {
-                                this.board[x, y] = 255;
-                                numSpawned++;
-                                var itemSpawned = Instantiate(item.GetItem(), new Vector3(x, y, 0), Quaternion.identity);
-                                itemSpawned.transform.parent = master.transform;
-                                foreach (Behaviour behaviour in itemSpawned.GetComponents<Behaviour>())
-                                {
-                                    behaviour.enabled = false;
-                                }
-
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// <summary>Spawns the final boss.</summary>
+    /// <summary>Spawns the object.</summary>
+    /// <param name="name">The name.</param>
+    /// <param name="quantity">The quantity.</param>
     /// <param name="position">The position.</param>
-    private void SpawnFinalBoss(Vector2 position)
+    /// <param name="item">The item.</param>
+    private void SpawnObject(string name, int quantity, int position, GameObject item) 
     {
-       Instantiate(this.finalBoss, position, Quaternion.identity);
+        GameObject master = new GameObject()
+        {
+            name = name,
+        };
+
+        while (quantity > 0)
+        {
+            for (int x = 0; x < BoardWidth; x++)
+            {
+                for (int y = 0; y < BoardHeight; y++)
+                {
+                    if (this.board[x, y] == position && Random.Range(0, 1000) == 1) 
+                    {
+                        this.board[x, y] = 255;
+                        quantity--;
+
+                        GameObject itemSpawned = MonoBehaviour.Instantiate(item, new Vector2(x, y), Quaternion.identity, master.transform);
+                        itemSpawned.GetComponents<Behaviour>().ToList().ForEach(i => i.enabled = false);
+
+                        break;
+                    }
+                }
+            }
+        }
     }
 
-    /// <summary>Spawn a player in a specific position</summary>
-    /// <param name="position">Position where be spawned the player</param>
-    private void SpawnPlayer(Vector2 position)
-    {
-        GameObject playerSpawned = Instantiate(this.player, position, Quaternion.identity);
-        playerSpawned.GetComponent<Player>().SetPosition();
-        MonoBehaviour.Instantiate(this.playerCamera, position, Quaternion.identity);
-    }
+    /// <summary>Spawns the list of.</summary>
+    /// <param name="items">The items.</param>
+    private void SpawnListOf(List<Item> items) => items.ForEach(item => this.SpawnObject(item.Name, item.Quantity, item.Position, item.Object));
+
+    /// <summary>Spawns the boss.</summary>
+    /// <param name="position">The position.</param>
+    /// <param name="boss">The boss.</param>
+    private void SpawnBoss(Vector2 position, GameObject boss) => MonoBehaviour.Instantiate(boss, position, Quaternion.identity);
+
+    /// <summary>Spawns the player.</summary>
+    /// <param name="position">The position.</param>
+    /// <param name="player">The player.</param>
+    private void SpawnPlayer(Vector2 position, GameObject player) => MonoBehaviour.Instantiate(player, position, Quaternion.identity);
+
+    /// <summary>Destroys the object.</summary>
+    /// <param name="obj">The object.</param>
+    private void DestroyObject(GameObject obj) => MonoBehaviour.Destroy(obj);
 }

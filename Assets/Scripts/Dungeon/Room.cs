@@ -8,110 +8,134 @@ using UnityEngine;
 public class Room
 {
     /// <summary>The x position</summary>
-    private int xPos;
+    private readonly int xPos;
 
     /// <summary>The y position</summary>
-    private int yPos;
+    private readonly int yPos;
 
     /// <summary>The width</summary>
-    private int width;
+    private readonly int width;
 
     /// <summary>The height</summary>
-    private int height;
+    private readonly int height;
 
     /// <summary>The direction</summary>
-    private Direction direction;
+    private readonly Direction direction;
 
-    /// <summary>Setups the first room.</summary>
-    /// <param name="roomWidth">Width of the room.</param>
-    /// <param name="roomHeight">Height of the room.</param>
-    /// <param name="boardWidth">Width of the board.</param>
-    /// <param name="boardHeight">Height of the board.</param>
-    public void SetupFirstRoom(int roomWidth, int roomHeight, int boardWidth, int boardHeight)
+    /// <summary>Initializes a new instance of the <see cref="Room"/> class.</summary>
+    public Room()
     {
-        this.width = roomWidth;
-        this.height = roomHeight;
-
-        this.xPos = Mathf.RoundToInt((boardHeight / 2f) - (this.width / 2f));
-        this.yPos = Mathf.RoundToInt((boardWidth / 2f) - (this.height / 2f));
     }
 
-    /// <summary>Setups the room.</summary>
-    /// <param name="roomWidth">Width of the room.</param>
-    /// <param name="roomHeight">Height of the room.</param>
-    /// <param name="boardWidth">Width of the board.</param>
-    /// <param name="boardHeight">Height of the board.</param>
-    /// <param name="corridor">The corridor.</param>
-    public void SetupRoom(int roomWidth, int roomHeight, int boardWidth, int boardHeight, Corridor corridor)
+    /// <summary>Initializes a new instance of the <see cref="Room"/> class.</summary>
+    /// <param name="xPos">The x position.</param>
+    /// <param name="yPos">The y position.</param>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    public Room(int xPos, int yPos, int width, int height) 
     {
-        this.width = roomWidth;
-        this.height = roomHeight;
-        this.direction = corridor.GetDirection();
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.width = width;
+        this.height = height;
+    }
 
-        switch (corridor.GetDirection())
-        {
-            case Direction.North:
-                this.height = Mathf.Clamp(this.height, 1, boardWidth - corridor.EndPositionY);
-                this.yPos = corridor.EndPositionY;
-                this.xPos = Random.Range(corridor.EndPositionX - this.width + 1, corridor.EndPositionX);
-                this.xPos = Mathf.Clamp(this.xPos, 0, boardHeight - this.width);
-                break;
-
-            case Direction.East:
-                this.width = Mathf.Clamp(this.width, 1, boardHeight - corridor.EndPositionX);
-                this.xPos = corridor.EndPositionX;
-                this.yPos = Random.Range(corridor.EndPositionY - this.height + 1, corridor.EndPositionY);
-                this.yPos = Mathf.Clamp(this.yPos, 0, boardWidth - this.height);
-                break;
-
-            case Direction.South:
-                this.height = Mathf.Clamp(this.height, 1, corridor.EndPositionY);
-                this.yPos = corridor.EndPositionY - this.height + 1;
-                this.xPos = Random.Range(corridor.EndPositionX - this.width + 1, corridor.EndPositionX);
-                this.xPos = Mathf.Clamp(this.xPos, 0, boardHeight - this.width);
-                break;
-
-            case Direction.West:
-                this.width = Mathf.Clamp(this.width, 1, corridor.EndPositionX);
-                this.xPos = corridor.EndPositionX - this.width + 1;
-                this.yPos = Random.Range(corridor.EndPositionY - this.height + 1, corridor.EndPositionY);
-                this.yPos = Mathf.Clamp(this.yPos, 0, boardWidth - this.height);
-                break;
-        }
+    /// <summary>Initializes a new instance of the <see cref="Room"/> class.</summary>
+    /// <param name="xPos">The x position.</param>
+    /// <param name="yPos">The y position.</param>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="direction">The direction.</param>
+    public Room(int xPos, int yPos, int width, int height, Direction direction)
+    {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.width = width;
+        this.height = height;
+        this.direction = direction;
     }
 
     /// <summary>Gets the x position.</summary>
-    /// <returns>The x position</returns>
-    public int GetXPos() 
-    {
-        return this.xPos;
-    }
+    /// <value>The x position.</value>
+    public int XPos => this.xPos;
 
     /// <summary>Gets the y position.</summary>
-    /// <returns>The y position</returns>
-    public int GetYPos()
-    {
-        return this.yPos;
-    }
+    /// <value>The y position.</value>
+    public int YPos => this.yPos;
 
     /// <summary>Gets the width.</summary>
-    /// <returns>The width</returns>
-    public int GetWidth()
-    {
-        return this.width;
-    }
+    /// <value>The width.</value>
+    public int Width => this.width;
 
     /// <summary>Gets the height.</summary>
-    /// <returns>The height</returns>
-    public int GetHeight()
-    {
-        return this.height;
-    }
+    /// <value>The height.</value>
+    public int Height => this.height;
+
+    /// <summary>Gets the position.</summary>
+    /// <value>The position.</value>
+    public Vector2 Position => new Vector2(this.xPos, this.yPos);
 
     /// <summary>Gets the direction.</summary>
-    /// <returns>The direction</returns>
-    public Direction GetDirection()
+    /// <value>The direction.</value>
+    public Direction Direction => this.direction;
+
+    /// <summary>Sets up.</summary>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="boardWidth">Width of the board.</param>
+    /// <param name="boardHeight">Height of the board.</param>
+    /// <returns>Return the first room</returns>
+    public static Room SetUp(int width, int height, int boardWidth, int boardHeight)
     {
-        return this.direction;
+        int xPos = Mathf.RoundToInt((boardHeight / 2f) - (width / 2f));
+        int yPos = Mathf.RoundToInt((boardWidth / 2f) - (height / 2f));
+
+        return new Room(xPos, yPos, width, height);
+    }
+
+    /// <summary>Sets up.</summary>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="boardWidth">Width of the board.</param>
+    /// <param name="boardHeight">Height of the board.</param>
+    /// <param name="corridor">The corridor.</param>
+    /// <returns>Return a room</returns>
+    public static Room SetUp(int width, int height, int boardWidth, int boardHeight, Corridor corridor)
+    {
+        int xPos = 0;
+        int yPos = 0;
+
+        switch (corridor.Direction)
+        {
+            case Direction.North:
+                height = Mathf.Clamp(height, 1, boardWidth - corridor.EndPositionY);
+                yPos = corridor.EndPositionY;
+                xPos = Random.Range(corridor.EndPositionX - width + 1, corridor.EndPositionX);
+                xPos = Mathf.Clamp(xPos, 0, boardHeight - width);
+                break;
+
+            case Direction.East:
+                width = Mathf.Clamp(width, 1, boardHeight - corridor.EndPositionX);
+                xPos = corridor.EndPositionX;
+                yPos = Random.Range(corridor.EndPositionY - height + 1, corridor.EndPositionY);
+                yPos = Mathf.Clamp(yPos, 0, boardWidth - height);
+                break;
+
+            case Direction.South:
+                height = Mathf.Clamp(height, 1, corridor.EndPositionY);
+                yPos = corridor.EndPositionY - height + 1;
+                xPos = Random.Range(corridor.EndPositionX - width + 1, corridor.EndPositionX);
+                xPos = Mathf.Clamp(xPos, 0, boardHeight - width);
+                break;
+
+            case Direction.West:
+                width = Mathf.Clamp(width, 1, corridor.EndPositionX);
+                xPos = corridor.EndPositionX - width + 1;
+                yPos = Random.Range(corridor.EndPositionY - height + 1, corridor.EndPositionY);
+                yPos = Mathf.Clamp(yPos, 0, boardWidth - height);
+                break;
+        }
+
+        return new Room(xPos, yPos, width, height, corridor.Direction);
     }
 }
