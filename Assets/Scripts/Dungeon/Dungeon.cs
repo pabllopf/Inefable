@@ -48,14 +48,14 @@ public class Dungeon : MonoBehaviour
     /// <summary>The maximum corridor height</summary>
     private static readonly int MaxCorridorHeight = 10;
 
-    /// <summary>The board</summary>
-    private int[,] board = new int[BoardWidth, BoardHeight];
-
     /// <summary>The rooms.</summary>
-    private List<Room> rooms = new List<Room>();
+    private readonly List<Room> rooms = new List<Room>();
 
     /// <summary>The corridors</summary>
-    private List<Corridor> corridors = new List<Corridor>();
+    private readonly List<Corridor> corridors = new List<Corridor>();
+
+    /// <summary>The board</summary>
+    private int[,] board = new int[BoardWidth, BoardHeight];
 
     /// <summary>The player</summary>
     [SerializeField]
@@ -82,26 +82,16 @@ public class Dungeon : MonoBehaviour
     /// <summary>The main camera</summary>
     private GameObject mainCamera;
 
-    /// <summary>The pop up message</summary>
-    private GameObject popUpMessage;
-
     /// <summary>The information</summary>
     private Text info;
 
-    /// <summary>Gets the number of rooms.</summary>
-    /// <value>The number of rooms.</value>
-    private int NumOfRooms => Random.Range(MinNumRooms, MaxNumRooms);
-
     /// <summary>Run before all</summary>
-    private void Awake()
-    {
-        Game.LoadSettings();
-        Language.Translate();
-    }
+    private void Awake() => Game.LoadSettings();
 
     /// <summary>Run when start the scene</summary>
     private void Start()
     {
+        Language.Translate();
         this.StartCoroutine(this.Build());
     }
 
@@ -118,7 +108,7 @@ public class Dungeon : MonoBehaviour
             yield return null;
         }
 
-        this.CreateRooms(this.NumOfRooms);
+        this.CreateRooms(Random.Range(MinNumRooms, MaxNumRooms));
         this.CreateCorridors(this.rooms.Count - 1);
         this.SetUpRoomsAndCorridors();
         yield return new WaitForSeconds(0.2f);
@@ -132,7 +122,10 @@ public class Dungeon : MonoBehaviour
 
         this.PrintRoomsInBoard();
         this.PrintCorridorsInBoard();
-        this.PrintWallsAndCornersInBoard();
+        this.PrintWallsInBoard();
+        this.PrintOuterCornersInBoard();
+        this.PrintInnerCornersInBoard();
+
         this.PrintBoardInGame();
         yield return new WaitForSeconds(0.2f);
 
@@ -173,32 +166,17 @@ public class Dungeon : MonoBehaviour
         this.startInterface = GameObject.Find("Start_Interface");
         this.mainCamera = GameObject.Find("Camera");
 
-        this.popUpMessage = GameObject.Find("Start_Interface/PopUpMessage");
-        this.popUpMessage.SetActive(true);
-        this.popUpMessage.transform.Find("PopUp/NameDungeon").GetComponent<Text>().text = this.styleMap.GetName();
-
+        GameObject.Find("Start_Interface/PopUpMessage/PopUp/NameDungeon").GetComponent<Text>().text = this.styleMap.GetName();
         this.info = GameObject.Find("Start_Interface/PopUpMessage/PopUp/Info").GetComponent<Text>();
     }
 
     /// <summary>Creates the rooms.</summary>
     /// <param name="amount">The amount.</param>
-    private void CreateRooms(int amount) 
-    {
-        for (int i = 0; i < amount; i++) 
-        {
-            this.rooms.Add(new Room());
-        }
-    }
+    private void CreateRooms(int amount) => this.rooms.AddRange(new Room[amount]);
 
     /// <summary>Creates the corridors.</summary>
     /// <param name="amount">The amount.</param>
-    private void CreateCorridors(int amount)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            this.corridors.Add(new Corridor());
-        }
-    }
+    private void CreateCorridors(int amount) => this.corridors.AddRange(new Corridor[amount]);
 
     /// <summary>Sets up rooms and corridors.</summary>
     private void SetUpRoomsAndCorridors()
@@ -230,168 +208,88 @@ public class Dungeon : MonoBehaviour
     }
 
     /// <summary>Prints the rooms in board.</summary>
-    private void PrintRoomsInBoard()
+    private void PrintRoomsInBoard() 
     {
-        this.rooms.ToList().ForEach(room => this.PrintInBoard(room.Width, room.Height, room.Position));
+        foreach (Room room in this.rooms) 
+        {
+            for (int x = (int)room.Position.x; x < (int)room.Position.x + room.Width; x++)
+            {
+                for (int y = (int)room.Position.y; y < (int)room.Position.y + room.Height; y++)
+                {
+                    this.board[x, y] = (this.board[x, y] == 0) ? 1 : this.board[x, y];
+                }
+            }
+        }
     }
 
     /// <summary>Prints the corridors in board.</summary>
     private void PrintCorridorsInBoard()
     {
-        this.corridors.ToList().ForEach(corridor => this.PrintInBoard(corridor.Width, corridor.Height, corridor.Position, corridor.Direction));
-    }
-
-    /// <summary>Prints the in board.</summary>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    /// <param name="position">The position.</param>
-    private void PrintInBoard(int width, int height, Vector2 position) 
-    {
-        for (int x = 0; x < width; x++)
+        foreach (Corridor corridor in this.corridors) 
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < corridor.Height; y++)
             {
-                int xCoord = (int)position.x + x;
-                int yCoord = (int)position.y + y;
-
-                if (this.board[xCoord, yCoord] == 0)
+                for (int x = -corridor.Width / 2; x < corridor.Width / 2; x++)
                 {
-                    this.board[xCoord, yCoord] = 1;
+                    int xPos = corridor.GoEast ? (int)corridor.Position.x + y :
+                               corridor.GoWest ? (int)corridor.Position.x - y :
+                               (int)corridor.Position.x;
+
+                    int yPos = corridor.GoNorth ? (int)corridor.Position.y + y :
+                               corridor.GoSouth ? (int)corridor.Position.y - y :
+                               (int)corridor.Position.y;
+
+                    this.board[xPos, yPos + x] = (this.board[xPos, yPos + x] == 0) ? 1 : this.board[xPos, yPos + x];
+                    this.board[xPos + x, yPos] = (this.board[xPos + x, yPos] == 0) ? 1 : this.board[xPos + x, yPos];
                 }
             }
         }
     }
 
-    /// <summary>Prints the in board.</summary>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    /// <param name="position">The position.</param>
-    /// <param name="direction">The direction.</param>
-    private void PrintInBoard(int width, int height, Vector2 position, Direction direction)
+    /// <summary>Prints the walls in board.</summary>
+    private void PrintWallsInBoard() 
     {
-        for (int y = 0; y < height; y++)
+        for (int x = 0; x < BoardWidth; x++)
         {
-            for (int x = -width / 2; x < width / 2; x++)
+            for (int y = 0; y < BoardHeight; y++)
             {
-                int xPos = (int)position.x;
-                int yPos = (int)position.y;
-
-                switch (direction)
-                {
-                    case Direction.North:
-                        yPos += y;
-                        break;
-                    case Direction.East:
-                        xPos += y;
-                        break;
-                    case Direction.South:
-                        yPos -= y;
-                        break;
-                    case Direction.West:
-                        xPos -= y;
-                        break;
-                }
-
-                if (this.board[xPos, yPos + x] == 0)
-                {
-                    this.board[xPos, yPos + x] = 1;
-                }
-
-                if (this.board[xPos + x, yPos] == 0)
-                {
-                    this.board[xPos + x, yPos] = 1;
-                }
+                this.board[x, y] = (this.board[x, y] == 1 && this.board[x, y - 1] == 0) ? 2 :    // Wall Top
+                                   (this.board[x, y] == 1 && this.board[x - 1, y] == 0) ? 3 :    // Wall Left    
+                                   (this.board[x, y] == 1 && this.board[x + 1, y] == 0) ? 4 :    // Wall Right
+                                   (this.board[x, y] == 1 && this.board[x, y + 1] == 0) ? 5 :    // Wall Down
+                                   this.board[x, y];
             }
         }
     }
 
-    /// <summary>Prints the walls and corners in board.</summary>
-    private void PrintWallsAndCornersInBoard()
+    /// <summary>Prints the outer corners in board.</summary>
+    private void PrintOuterCornersInBoard()
     {
         for (int x = 0; x < BoardWidth; x++)
         {
             for (int y = 0; y < BoardHeight; y++)
             {
-                if (this.board[x, y] == 1)
-                {
-                    if (this.board[x, y - 1] == 0) 
-                    { 
-                        this.board[x, y] = 2; 
-                    }
-
-                    if (this.board[x - 1, y] == 0) 
-                    { 
-                        this.board[x, y] = 3; 
-                    }
-
-                    if (this.board[x + 1, y] == 0) 
-                    { 
-                        this.board[x, y] = 4; 
-                    }
-
-                    if (this.board[x, y + 1] == 0) 
-                    { 
-                        this.board[x, y] = 5; 
-                    }
-                }
+                this.board[x, y] = (this.board[x, y] != 0 && this.board[x - 1, y] == 0 && this.board[x, y - 1] == 0) ? 6 :    // Corner Outer Top Left
+                                   (this.board[x, y] != 0 && this.board[x + 1, y] == 0 && this.board[x, y - 1] == 0) ? 7 :    // Corner Outer Top Right   
+                                   (this.board[x, y] != 0 && this.board[x - 1, y] == 0 && this.board[x, y + 1] == 0) ? 8 :    // Corner Outer Down Left
+                                   (this.board[x, y] != 0 && this.board[x + 1, y] == 0 && this.board[x, y + 1] == 0) ? 9 :    // Corner Outer Down Right
+                                   this.board[x, y];
             }
         }
+    }
 
+    /// <summary>Prints the inner corners in board.</summary>
+    private void PrintInnerCornersInBoard()
+    {
         for (int x = 0; x < BoardWidth; x++)
         {
             for (int y = 0; y < BoardHeight; y++)
             {
-                if (this.board[x, y] != 0)
-                {
-                    if (this.board[x - 1, y] == 0 && this.board[x, y - 1] == 0) 
-                    { 
-                        this.board[x, y] = 6; 
-                    }
-
-                    if (this.board[x + 1, y] == 0 && this.board[x, y - 1] == 0) 
-                    { 
-                        this.board[x, y] = 7; 
-                    }
-
-                    if (this.board[x - 1, y] == 0 && this.board[x, y + 1] == 0) 
-                    { 
-                        this.board[x, y] = 8; 
-                    }
-
-                    if (this.board[x + 1, y] == 0 && this.board[x, y + 1] == 0) 
-                    { 
-                        this.board[x, y] = 9; 
-                    }
-                }
-            }
-        }
-
-        for (int x = 0; x < BoardWidth; x++)
-        {
-            for (int y = 0; y < BoardHeight; y++)
-            {
-                if (this.board[x, y] == 1)
-                {
-                    if (this.board[x - 1, y - 1] == 0) 
-                    { 
-                        this.board[x, y] = 10; 
-                    }
-
-                    if (this.board[x + 1, y - 1] == 0) 
-                    { 
-                        this.board[x, y] = 11; 
-                    }
-
-                    if (this.board[x - 1, y + 1] == 0) 
-                    { 
-                        this.board[x, y] = 12; 
-                    }
-
-                    if (this.board[x + 1, y + 1] == 0) 
-                    { 
-                        this.board[x, y] = 13; 
-                    }
-                }
+                this.board[x, y] = (this.board[x, y] == 1 && this.board[x - 1, y - 1] == 0) ? 10 :   // Corner Inner Top Left
+                                   (this.board[x, y] == 1 && this.board[x + 1, y - 1] == 0) ? 11 :   // Corner Inner Top Right
+                                   (this.board[x, y] == 1 && this.board[x - 1, y + 1] == 0) ? 12 :   // Corner Inner Down Left
+                                   (this.board[x, y] == 1 && this.board[x + 1, y + 1] == 0) ? 13 :   // Corner Inner Down Right
+                                   this.board[x, y];
             }
         }
     }
@@ -418,10 +316,7 @@ public class Dungeon : MonoBehaviour
     /// <param name="item">The item.</param>
     private void SpawnObject(string name, int quantity, int position, GameObject item) 
     {
-        GameObject master = new GameObject()
-        {
-            name = name,
-        };
+        GameObject master = new GameObject(name);
 
         while (quantity > 0)
         {

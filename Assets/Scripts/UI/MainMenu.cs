@@ -66,7 +66,6 @@ public class MainMenu : MonoBehaviour
     {
         Game.LoadSettings();
         Game.LoadStats();
-        Language.Translate();
         Cursor.visible = false;
 
         this.startPanel = GameObject.FindGameObjectWithTag("StartPanel").gameObject;
@@ -80,6 +79,7 @@ public class MainMenu : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
+        Language.Translate();
         GameObject.FindGameObjectWithTag("NewButtons").SetActive(false);
         GameObject.FindGameObjectWithTag("NormalButtons").SetActive(false);
         this.popUpPanel.SetActive(false);
@@ -188,6 +188,7 @@ public class MainMenu : MonoBehaviour
         {
             this.DetectLanguage();
             Settings.Current.Language = this.languages[this.indexLanguages];
+            Game.SaveSettings();
             Language.Translate();
             return;
         }
@@ -500,11 +501,16 @@ public class MainMenu : MonoBehaviour
     private void YesNewAdventure()
     {
         this.PlayClip(this.acceptClip);
+
+        string language = Settings.Current.Language;
         Game.ResetSettings();
         Game.ResetStats();
+
         Settings.Current.HasSaveGame = true;
         Settings.Current.LanguageDefault = true;
         Settings.Current.Plattform = this.currentController;
+        Settings.Current.Language = language;
+
         Game.SaveSettings();
         Game.SaveStats();
         SceneManager.LoadScene(this.sceneToLoad);
