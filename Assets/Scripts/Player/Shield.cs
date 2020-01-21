@@ -33,25 +33,36 @@ public class Shield : MonoBehaviour
     public void Start()
     {
         this.scrollbar = this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
-        this.scrollbar.size = (float)Stats.Current.Shield / 100;
+        this.scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
         this.audioSource = this.GetComponent<AudioSource>();
+        if (Stats.Current.Shield <= 0)
+        {
+            this.scrollbar.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>Takes the specified amount.</summary>
     /// <param name="amount">The amount.</param>
     public void Take(int amount)
     {
-        Stats.Current.Shield -= amount;
-        this.scrollbar.size = (float)Stats.Current.Shield / 100;
+        Stats.Current.Shield -= amount * 2;
+        this.scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
         this.PlayClip(this.take);
+        if (Stats.Current.Shield <= 0) 
+        {
+            this.scrollbar.gameObject.SetActive(false);
+        }
+        Game.SaveStats();
     }
 
     /// <summary>Set full</summary>
     public void Full()
     {
-        Stats.Current.Shield = 100;
-        this.scrollbar.size = (float)Stats.Current.Shield / 100;
+        Stats.Current.Shield = 50;
+        this.scrollbar.gameObject.SetActive(true);
+        this.scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
         this.PlayClip(this.take);
+        Game.SaveStats();
     }
 
     /// <summary>Plays the clip.</summary>

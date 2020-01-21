@@ -73,6 +73,7 @@ public class Health : MonoBehaviour
             Stats.Current.Health -= amount;
             this.scrollbar.size = (float)Stats.Current.Health / 100;
             this.StartCoroutine(this.HitEffect(Color.red));
+            Game.SaveStats();
         }
     }
 
@@ -82,6 +83,7 @@ public class Health : MonoBehaviour
         Stats.Current.Health = 100;
         this.scrollbar.size = (float)Stats.Current.Health / 100;
         this.PlayClip(this.takeClip);
+        Game.SaveStats();
     }
 
     /// <summary>Determines whether this instance can add the specified amount.</summary>
