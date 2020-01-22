@@ -20,11 +20,6 @@ public class Sequence
     /// <summary>The sentence</summary>
     private GameObject sentence;
 
-    /// <summary>The audio</summary>
-    [Range(0, 50)]
-    [SerializeField]
-    private int audio = 0;
-
     /// <summary>Active the sequence.</summary>
     public void Active() 
     {
@@ -34,15 +29,5 @@ public class Sequence
     }
 
     /// <summary>Disable the sequence.</summary>
-    public void Disable()
-    {
-        this.sequence.SetActive(false);
-    }
-
-    /// <summary>Gets the audio.</summary>
-    /// <returns>The number audio to play.</returns>
-    public int GetAudio() 
-    {
-        return this.audio;
-    }
+    public void Disable() => this.sequence.SetActive(false);
 }
