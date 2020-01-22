@@ -14,7 +14,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     /// <summary>The open</summary>
-    private const string Open = "Open";
+    private const string OpenOn = "Open";
 
     /// <summary>The hit</summary>
     private const string Hit = "Hit";
@@ -22,52 +22,46 @@ public class Chest : MonoBehaviour
     /// <summary>The delay</summary>
     private const float Delay = 5f;
 
-    /// <summary>The health</summary>
-    private int health = 100;
-
-    /// <summary>The need key</summary>
-    private GameObject needKey = null;
+    /// <summary>The has key</summary>
+    private bool hasKey = false;
 
     /// <summary>The delay active</summary>
     private bool delayActive = false;
-
-    /// <summary>The animator</summary>
-    private Animator animator = null;
-
-    /// <summary>The audio source</summary>
-    private AudioSource audioSource = null;
 
     /// <summary>The hit clip</summary>
     [SerializeField]
     private AudioClip hitClip = null;
 
+    /// <summary>Gets the need key.</summary>
+    /// <value>The need key.</value>
+    private GameObject NeedKey => this.transform.Find("NeedKey").gameObject;
+
+    /// <summary>Gets the audio source.</summary>
+    /// <value>The audio source.</value>
+    private AudioSource AudioSource => this.GetComponent<AudioSource>();
+
+    /// <summary>Gets the animator.</summary>
+    /// <value>The animator.</value>
+    private Animator Animator => this.GetComponent<Animator>();
+
     /// <summary>Starts this instance.</summary>
-    public void Start()
-    {
-        this.needKey = this.transform.Find("NeedKey").gameObject;
-        this.needKey.SetActive(false);
+    public void Start() => this.NeedKey.SetActive(false);
 
-        this.animator = this.GetComponent<Animator>();
-        this.audioSource = this.GetComponent<AudioSource>();
-    }
-
-    /// <summary>Opens up.</summary>
-    /// <param name="damage">The damage.</param>
-    public void OpenUp(int damage)
+    /// <summary>Opens this instance.</summary>
+    public void Open()
     {
-        this.health -= damage;
         if (!this.delayActive) 
         {
             this.StartCoroutine(this.DelayToQuitNeedKey());
         }
 
-        if (this.health <= 0)
+        if (this.hasKey)
         {
-            this.animator.SetTrigger(Open);
+            this.Animator.SetTrigger(OpenOn);
         }
         else 
         {
-            this.animator.SetTrigger(Hit);
+            this.Animator.SetTrigger(Hit);
             this.PlayClip(this.hitClip);
         }
     }
@@ -77,19 +71,19 @@ public class Chest : MonoBehaviour
     private IEnumerator DelayToQuitNeedKey() 
     {
         this.delayActive = true;
-        this.needKey.SetActive(true);
+        this.NeedKey.SetActive(true);
 
         yield return new WaitForSeconds(Delay);
 
         this.delayActive = false;
-        this.needKey.SetActive(false);
+        this.NeedKey.SetActive(false);
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        this.AudioSource.clip = clip;
+        this.AudioSource.Play();
     }
 }

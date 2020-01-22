@@ -262,7 +262,8 @@ public class Player : MonoBehaviour
 
             if (collider.CompareTag("Chest"))
             {
-                collider.GetComponent<Chest>().OpenUp(1);
+                Chest chest = collider.GetComponent<Chest>();
+                chest.Open();
             }
         }
 
@@ -305,14 +306,14 @@ public class Player : MonoBehaviour
 
                     this.pet = obj.GetComponent<Pet>();
                     this.pet.SetOwner(this.gameObject);
-                    Stats.Current.pet = this.pet.GetName();
+                    Stats.Current.pet = this.pet.Name;
                     Game.SaveStats();
                 }
                 else
                 {
                     this.pet = obj.GetComponent<Pet>();
                     this.pet.SetOwner(this.gameObject);
-                    Stats.Current.pet = this.pet.GetName();
+                    Stats.Current.pet = this.pet.Name;
                     Game.SaveStats();
                 }
 
@@ -320,7 +321,7 @@ public class Player : MonoBehaviour
             case "PotionRed":
                 if (this.inventory.HasSpace())
                 {
-                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Get());
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Sprite);
                     MonoBehaviour.Destroy(obj.gameObject);
                 }
 
@@ -328,7 +329,7 @@ public class Player : MonoBehaviour
             case "PotionBlue":
                 if (this.inventory.HasSpace())
                 {
-                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Get());
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Sprite);
                     MonoBehaviour.Destroy(obj.gameObject);
                 }
 
@@ -336,7 +337,7 @@ public class Player : MonoBehaviour
             case "PotionPurple":
                 if (this.inventory.HasSpace())
                 {
-                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Get());
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Sprite);
                     MonoBehaviour.Destroy(obj.gameObject);
                 }
 
@@ -344,7 +345,7 @@ public class Player : MonoBehaviour
             case "PotionYellow":
                 if (this.inventory.HasSpace())
                 {
-                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Get());
+                    this.inventory.AddItem(obj.tag, obj.GetComponent<Icon>().Sprite);
                     MonoBehaviour.Destroy(obj.gameObject);
                 }
 

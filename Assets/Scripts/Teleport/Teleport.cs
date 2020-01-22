@@ -1,12 +1,12 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Portal.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="Teleport.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>Load scene with a collision</summary>
-public class Portal : MonoBehaviour
+/// <summary>Teleport player to a scene with a collision.</summary>
+public class Teleport : MonoBehaviour
 {
     /// <summary>The scene</summary>
     [SerializeField]

@@ -1,13 +1,13 @@
 ﻿//-----------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="StyleMap.cs" company="UnMedioStudio">Open Source</copyright>
+// <copyright file="Style.cs" company="UnMedioStudio">Open Source</copyright>
 //-----------------------------------------------------------------------
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>Define and load a style to the dungeon</summary>
 [System.Serializable]
-public class StyleMap
+public class Style
 {
     /// <summary>The name</summary>
     [SerializeField]
@@ -68,8 +68,8 @@ public class StyleMap
     /// <summary>The corner internal right up</summary>
     private GameObject cornerInternalRightUp;
 
-    /// <summary>Initializes a new instance of the <see cref="StyleMap"/> class</summary>
-    public StyleMap() 
+    /// <summary>Initializes a new instance of the <see cref="Style"/> class</summary>
+    public Style() 
     {
         this.floorCenter = null;
         this.wallDown = null;

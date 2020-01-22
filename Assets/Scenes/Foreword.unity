@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c652e7a1dc9db0488ef9b173ac44d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Town
+  scene: Start
   timeBetweenSequences: 2
   audioClip: {fileID: 8300000, guid: 57d03677ec9e42c4bb2b19993e2a09a9, type: 3}
   sequences:

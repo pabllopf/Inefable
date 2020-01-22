@@ -8,12 +8,6 @@ using UnityEngine.UI;
 /// <summary>The shield of the player</summary>
 public class Shield : MonoBehaviour
 {
-    /// <summary>The shield UI</summary>
-    private Scrollbar scrollbar = null;
-
-    /// <summary>The audio source</summary>
-    private AudioSource audioSource = null;
-
     /// <summary>The take</summary>
     [SerializeField]
     private AudioClip take = null;
@@ -23,53 +17,53 @@ public class Shield : MonoBehaviour
     /// <c>true</c> if this instance has shield; otherwise, <c>false</c>.</value>
     public bool HasShield => (Stats.Current.Shield > 0) ? true : false;
 
+    /// <summary>Gets the scrollbar.</summary>
+    /// <value>The scrollbar.</value>
+    private Scrollbar Scrollbar => this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
+
+    /// <summary>Gets the audio source.</summary>
+    /// <value>The audio source.</value>
+    private AudioSource AudioSource => this.GetComponent<AudioSource>();
+
     /// <summary>Awakes this instance.</summary>
-    public void Awake()
-    {
-        Game.LoadStats();
-    }
+    public void Awake() => Game.LoadStats();
 
     /// <summary>Starts this instance.</summary>
-    public void Start()
-    {
-        this.scrollbar = this.transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
-        this.scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
-        this.audioSource = this.GetComponent<AudioSource>();
-        if (Stats.Current.Shield <= 0)
-        {
-            this.scrollbar.gameObject.SetActive(false);
-        }
-    }
+    public void Start() => this.UpdateShield();
 
     /// <summary>Takes the specified amount.</summary>
     /// <param name="amount">The amount.</param>
     public void Take(int amount)
     {
-        Stats.Current.Shield -= amount * 2;
-        this.scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
-        this.PlayClip(this.take);
-        if (Stats.Current.Shield <= 0) 
-        {
-            this.scrollbar.gameObject.SetActive(false);
-        }
+        Stats.Current.Shield -= amount;
         Game.SaveStats();
+
+        this.UpdateShield();
+        this.PlayClip(this.take);
     }
 
     /// <summary>Set full</summary>
     public void Full()
     {
         Stats.Current.Shield = 50;
-        this.scrollbar.gameObject.SetActive(true);
-        this.scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
-        this.PlayClip(this.take);
         Game.SaveStats();
+
+        this.UpdateShield();
+        this.PlayClip(this.take);
+    }
+
+    /// <summary>Updates the shield.</summary>
+    private void UpdateShield()
+    {
+        this.Scrollbar.size = (float)Stats.Current.Shield * 2 / 100;
+        this.Scrollbar.gameObject.SetActive((Stats.Current.Shield > 0) ? true : false);
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        this.AudioSource.clip = clip;
+        this.AudioSource.Play();
     }
 }

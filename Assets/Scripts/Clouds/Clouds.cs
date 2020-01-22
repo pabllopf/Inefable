@@ -46,7 +46,7 @@ public class Clouds : MonoBehaviour
     private void Start()
     {
         this.CreateClouds();
-        this.Move();
+        this.StartCoroutine(this.MoveControl(this.timeToChange));
     }
 
     /// <summary>Creates the clouds.</summary>
@@ -80,22 +80,16 @@ public class Clouds : MonoBehaviour
     }
 
     /// <summary>Updates this instance.</summary>
-    private void Update()
-    {
-        this.currentGroup.transform.position = Vector3.LerpUnclamped(this.currentGroup.transform.position, this.currentGroupPos, 0.05f * Time.deltaTime);
-    }
+    private void Update() => this.currentGroup.transform.position = Vector3.LerpUnclamped(this.currentGroup.transform.position, this.currentGroupPos, 0.05f * Time.deltaTime);
 
-    /// <summary>Moves this instance.</summary>
-    private void Move()
-    {
-        this.StartCoroutine(this.MoveControl(this.timeToChange));
-    }
-
+    /// <summary>Moves the control.</summary>
+    /// <param name="time">The time.</param>
+    /// <returns>Return none</returns>
     private IEnumerator MoveControl(float time) 
     {
         this.currentGroup = this.groups[Random.Range(0, this.groups.Count)];
         this.currentGroupPos = this.currentGroup.transform.position + new Vector3(Random.Range(-10, 10), 0, 0);
         yield return new WaitForSeconds(time);
-        this.Move();
+        this.StartCoroutine(this.MoveControl(this.timeToChange));
     }
 }

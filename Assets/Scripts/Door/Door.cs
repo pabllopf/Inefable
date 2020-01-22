@@ -15,35 +15,35 @@ public class Door : MonoBehaviour
     [SerializeField]
     private Sprite doorClose = null;
 
-    /// <summary>The order layer close</summary>
-    [SerializeField]
-    private int orderLayerClose = 2;
-
     /// <summary>The door open</summary>
     [SerializeField]
     private Sprite doorOpen = null;
 
+    /// <summary>The order layer close</summary>
+    [Range(1, 10)]
+    [SerializeField]
+    private int orderLayerClose = 2;
+
     /// <summary>The order layer open</summary>
+    [Range(1, 10)]
     [SerializeField]
     private int orderLayerOpen = 5;
-
-    /// <summary>The sprite renderer</summary>
-    private SpriteRenderer spriteRenderer = null;
-
-    /// <summary>The audio source</summary>
-    private AudioSource audioSource = null;
 
     /// <summary>The open door sound</summary>
     [SerializeField]
     private AudioClip openDoor = null;
 
+    /// <summary>The audio source</summary>
+    private AudioSource AudioSource => this.GetComponent<AudioSource>();
+
+    /// <summary>Gets the sprite renderer.</summary>
+    /// <value>The sprite renderer.</value>
+    private SpriteRenderer SpriteRenderer => this.GetComponent<SpriteRenderer>();
+
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        this.audioSource = this.GetComponent<AudioSource>();
-
-        this.spriteRenderer.sprite = this.doorClose;
+        this.SpriteRenderer.sprite = this.doorClose;
         this.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
@@ -53,8 +53,8 @@ public class Door : MonoBehaviour
     {
         if (obj.CompareTag("Player"))
         {
-            this.spriteRenderer.sprite = this.doorOpen;
-            this.spriteRenderer.sortingOrder = this.orderLayerOpen;
+            this.SpriteRenderer.sprite = this.doorOpen;
+            this.SpriteRenderer.sortingOrder = this.orderLayerOpen;
             this.PlayClip(this.openDoor);
         }
     }
@@ -65,8 +65,8 @@ public class Door : MonoBehaviour
     {
         if (obj.CompareTag("Player"))
         {
-            this.spriteRenderer.sprite = this.doorClose;
-            this.spriteRenderer.sortingOrder = this.orderLayerClose;
+            this.SpriteRenderer.sprite = this.doorClose;
+            this.SpriteRenderer.sortingOrder = this.orderLayerClose;
         }
     }
 
@@ -74,7 +74,7 @@ public class Door : MonoBehaviour
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        this.AudioSource.clip = clip;
+        this.AudioSource.Play();
     }
 }

@@ -11,21 +11,17 @@ using UnityEngine;
 public class Perspective : MonoBehaviour
 {
     /// <summary>The order layer front</summary>
+    [Range(1, 10)]
     [SerializeField]
     private int orderLayerFront = 2;
 
     /// <summary>The order layer back</summary>
+    [Range(1, 10)]
     [SerializeField]
     private int orderLayerBack = 5;
 
     /// <summary>The sprite renderer</summary>
-    private SpriteRenderer spriteRenderer;
-
-    /// <summary>Starts this instance.</summary>
-    private void Start()
-    {
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-    }
+    private SpriteRenderer SpriteRenderer => this.GetComponent<SpriteRenderer>();
 
     /// <summary>Called when [trigger stay2 d].</summary>
     /// <param name="obj">The object.</param>
@@ -33,8 +29,8 @@ public class Perspective : MonoBehaviour
     {
         if (obj.CompareTag("Player"))
         {
-            this.spriteRenderer.sortingOrder = this.orderLayerBack;
-            this.spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+            this.SpriteRenderer.sortingOrder = this.orderLayerBack;
+            this.SpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
         }
     }
 
@@ -44,8 +40,8 @@ public class Perspective : MonoBehaviour
     {
         if (obj.CompareTag("Player"))
         {
-            this.spriteRenderer.sortingOrder = this.orderLayerFront;
-            this.spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            this.SpriteRenderer.sortingOrder = this.orderLayerFront;
+            this.SpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
         }
     }
 }

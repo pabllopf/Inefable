@@ -7,23 +7,11 @@ using UnityEngine;
 /// <summary>Default icon of a object.</summary>
 public class Icon : MonoBehaviour
 {
-    /// <summary>The icon</summary>
-    private Sprite iconSprite = null;
-
-    /// <summary>Gets the name of the icon.</summary>
-    /// <returns>Return the icon name.</returns>
+    /// <summary>Gets the name.</summary>
+    /// <value>The name.</value>
     public string Name => this.gameObject.tag;
 
-    /// <summary>Starts this instance.</summary>
-    public void Start()
-    {
-        this.iconSprite = Resources.Load<Sprite>("Icons/" + this.Name);
-    }
-
-    /// <summary>Gets the get.</summary>
-    /// <returns>The get.</returns>
-    public Sprite Get()
-    {
-        return this.iconSprite;
-    }
+    /// <summary>Gets the icon sprite.</summary>
+    /// <value>The icon sprite.</value>
+    public Sprite Sprite => Resources.Load<Sprite>("Icons/" + this.Name);
 }

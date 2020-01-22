@@ -71,10 +71,10 @@ public class Dungeon : MonoBehaviour
 
     /// <summary>The style maps</summary>
     [SerializeField]
-    private List<StyleMap> dungeons = null;
+    private List<Style> dungeons = null;
 
     /// <summary>The style map</summary>
-    private StyleMap styleMap;
+    private Style styleMap;
 
     /// <summary>The start interface</summary>
     private GameObject startInterface;

@@ -17,16 +17,11 @@ public class Sequence
     [SerializeField]
     private Key key = Key.A1;
 
-    /// <summary>The sentence</summary>
-    private GameObject sentence;
+    /// <summary>Sets up.</summary>
+    public void SetUp() => this.sequence.transform.Find("BlackArea/Text").GetComponent<Text>().text = Language.GetSentence(this.key);
 
     /// <summary>Active the sequence.</summary>
-    public void Active() 
-    {
-        this.sequence.SetActive(true);
-        this.sentence = this.sequence.transform.Find("BlackArea/Text").gameObject;
-        this.sentence.GetComponent<Text>().text = Language.GetSentence(this.key);
-    }
+    public void Active() => this.sequence.SetActive(true);
 
     /// <summary>Disable the sequence.</summary>
     public void Disable() => this.sequence.SetActive(false);

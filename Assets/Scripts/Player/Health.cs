@@ -9,18 +9,6 @@ using UnityEngine.UI;
 /// <summary>The health of the player</summary>
 public class Health : MonoBehaviour
 {
-    /// <summary>The shield</summary>
-    private Shield shield = null;
-
-    /// <summary>The scrollbar</summary>
-    private Scrollbar scrollbar = null;
-
-    /// <summary>The sprite renderer</summary>
-    private SpriteRenderer spriteRenderer = null;
-
-    /// <summary>The audio source</summary>
-    private AudioSource audioSource = null;
-
     /// <summary>The take</summary>
     [SerializeField]
     private AudioClip takeClip = null;
@@ -34,28 +22,36 @@ public class Health : MonoBehaviour
     /// <c>true</c> if this instance is alive; otherwise, <c>false</c>.</value>
     public bool IsAlive => (Stats.Current.Health > 0) ? true : false;
 
+    /// <summary>Gets the shield.</summary>
+    /// <value>The shield.</value>
+    private Shield Shield => this.GetComponent<Shield>();
+
+    /// <summary>Gets the scrollbar.</summary>
+    /// <value>The scrollbar.</value>
+    private Scrollbar Scrollbar => this.transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();
+
+    /// <summary>Gets the sprite renderer.</summary>
+    /// <value>The sprite renderer.</value>
+    private SpriteRenderer SpriteRenderer => this.GetComponent<SpriteRenderer>();
+
+    /// <summary>Gets the audio source.</summary>
+    /// <value>The audio source.</value>
+    private AudioSource AudioSource => this.GetComponent<AudioSource>();
+
     /// <summary>Awakes this instance.</summary>
-    public void Awake()
-    {
-        Game.LoadStats();
-    }
+    public void Awake() => Game.LoadStats();
 
     /// <summary>Starts this instance.</summary>
-    public void Start()
-    {
-        this.scrollbar = this.transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();
-        this.scrollbar.size = (float)Stats.Current.Health / 100;
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        this.audioSource = this.GetComponent<AudioSource>();
-        this.shield = this.GetComponent<Shield>();
-    }
+    public void Start() => this.Scrollbar.size = (float)Stats.Current.Health / 100;
 
     /// <summary>Treats the specified amount.</summary>
     /// <param name="amount">The amount.</param>
     public void Treat(int amount)
     {
         Stats.Current.Health += amount;
-        this.scrollbar.size = (float)Stats.Current.Health / 100;
+        Game.SaveStats();
+
+        this.Scrollbar.size = (float)Stats.Current.Health / 100;
         this.PlayClip(this.takeClip);
     }
 
@@ -63,15 +59,15 @@ public class Health : MonoBehaviour
     /// <param name="amount">The amount.</param>
     public void Take(int amount)
     {
-        if (this.shield.HasShield)
+        if (this.Shield.HasShield)
         {
-            this.shield.Take(amount);
+            this.Shield.Take(amount);
             this.StartCoroutine(this.HitEffect(Color.blue));
         }
         else 
         {
             Stats.Current.Health -= amount;
-            this.scrollbar.size = (float)Stats.Current.Health / 100;
+            this.Scrollbar.size = (float)Stats.Current.Health / 100;
             this.StartCoroutine(this.HitEffect(Color.red));
             Game.SaveStats();
         }
@@ -81,9 +77,10 @@ public class Health : MonoBehaviour
     public void Full()
     {
         Stats.Current.Health = 100;
-        this.scrollbar.size = (float)Stats.Current.Health / 100;
-        this.PlayClip(this.takeClip);
         Game.SaveStats();
+
+        this.Scrollbar.size = (float)Stats.Current.Health / 100;
+        this.PlayClip(this.takeClip);
     }
 
     /// <summary>Determines whether this instance can add the specified amount.</summary>
@@ -92,22 +89,25 @@ public class Health : MonoBehaviour
     /// <c>true</c> if this instance can add the specified amount; otherwise, <c>false</c>.</returns>
     public bool CanAdd(int amount) => ((Stats.Current.Health + amount) < 100) ? true : false;
 
-    /// <summary>Hits this instance.</summary>
+    /// <summary>Hits the effect.</summary>
+    /// <param name="color">The color.</param>
     /// <returns>Return none</returns>
     public IEnumerator HitEffect(Color color)
     {
         yield return new WaitForSeconds(0.25f);
-        this.spriteRenderer.color = color;
+
+        this.SpriteRenderer.color = color;
         this.PlayClip(this.hitClip);
+
         yield return new WaitForSeconds(0.1f);
-        this.spriteRenderer.color = Color.white;
+        this.SpriteRenderer.color = Color.white;
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        this.AudioSource.clip = clip;
+        this.AudioSource.Play();
     }
 }

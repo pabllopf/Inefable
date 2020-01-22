@@ -4,22 +4,6 @@
 //-----------------------------------------------------------------------
 using UnityEngine;
 
-/// <summary>Indicate the direction of a corridor</summary>
-public enum Direction
-{
-    /// <summary>The north</summary>
-    North,
-
-    /// <summary>The east</summary>
-    East,
-
-    /// <summary>The south</summary>
-    South,
-
-    /// <summary>The west</summary>
-    West
-}
-
 /// <summary>Class that define a Corridor of a Dungeon</summary>
 public class Corridor
 {
