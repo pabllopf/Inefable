@@ -42,7 +42,7 @@ Camera:
   m_GameObject: {fileID: 1304876317242396044}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -108,5 +108,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd1976781cf488458a4c4f72cea0c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 1
