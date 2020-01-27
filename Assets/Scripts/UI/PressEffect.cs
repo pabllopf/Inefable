@@ -53,6 +53,12 @@ public class PressEffect : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
+        if (Settings.Current.Plattform == "Mobile")
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+
         if (this.active) 
         {
             this.index = (int)(Time.timeSinceLevelLoad * this.frameForSeconds);

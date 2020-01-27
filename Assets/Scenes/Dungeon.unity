@@ -531,7 +531,7 @@ MonoBehaviour:
     quantityMin: 1
     quantityMax: 5
     position: 1
-  - item: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
+  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
     quantityMin: 1
     quantityMax: 3
     position: 1
@@ -539,7 +539,7 @@ MonoBehaviour:
     quantityMin: 1
     quantityMax: 4
     position: 1
-  - item: {fileID: 1325099382827930, guid: 2d8f6e4d6f33b2948ab54c3131f77478, type: 3}
+  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
     quantityMin: 1
     quantityMax: 4
     position: 1
@@ -547,7 +547,7 @@ MonoBehaviour:
     quantityMin: 1
     quantityMax: 4
     position: 1
-  - item: {fileID: 1293505061015648, guid: 908c936f081b0eb49bf276ca1314b1e2, type: 3}
+  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
     quantityMin: 1
     quantityMax: 4
     position: 1

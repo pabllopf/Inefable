@@ -73,6 +73,7 @@ public class MainMenu : MonoBehaviour
         this.mainPanel = GameObject.FindGameObjectWithTag("MainPanel").gameObject;
         this.InitPopUpPanel();
         this.InitButtonsPanel();
+        this.InitButtonsLanguage();
         this.audioSource = this.GetComponent<AudioSource>();
     }
 
@@ -124,6 +125,13 @@ public class MainMenu : MonoBehaviour
         this.popUpExit.SetActive(true);
         this.mainPanel.SetActive(false);
         Language.Translate();
+    }
+
+    private void InitButtonsLanguage()
+    {
+        GameObject.Find("Interface/LanguagePanel/Background/Up").GetComponent<Button>().onClick.AddListener(() => { GoUpLanguage(); });
+        GameObject.Find("Interface/LanguagePanel/Background/Down").GetComponent<Button>().onClick.AddListener(() => { GoDownLanguage(); });
+        GameObject.Find("Interface/LanguagePanel/Background/Confirm").GetComponent<Button>().onClick.AddListener(() => { ConfirmLanguage(); });
     }
 
     /// <summary>Get the buttons panel.</summary>
@@ -233,56 +241,100 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>Detects the language.</summary>
-    private void DetectLanguage() 
+    private void DetectLanguage()
     {
-        Text mainText = this.languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
-
-        if (Input.GetKeyDown(KeyCode.W)) 
+        if (this.currentController == "Computer")
         {
-            if (this.languages.IndexOf(mainText.text) >= 0) 
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                this.indexLanguages++;
-                if (this.indexLanguages >= this.languages.Count) 
-                {
-                    this.indexLanguages = 0;
-                }
+                this.GoUpLanguage();
+            }
 
-                mainText.text = this.languages[this.indexLanguages];
-                this.PlayClip(this.acceptClip);
-                return;
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                this.GoDownLanguage();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                this.ConfirmLanguage();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (this.currentController == "Xbox")
         {
-            if (this.languages.IndexOf(mainText.text) >= 0)
+            if (Input.GetAxis("LeftJoystickY") > 0 && this.neutralStick == true)
             {
-                this.indexLanguages--;
-                if (this.indexLanguages < 0)
-                {
-                    this.indexLanguages = this.languages.Count - 1;
-                }
-
-                mainText.text = this.languages[this.indexLanguages];
-
-                this.PlayClip(this.acceptClip);
-                return;
+                this.neutralStick = false;
+                this.GoUpLanguage();
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Y)) 
-        {
-            Settings.Current.Language = this.languages[this.indexLanguages];
-            Settings.Current.LanguageDefault = true;
-            Game.SaveSettings();
-            this.languagePanel.SetActive(false);
-            this.mainPanel.SetActive(true);
-            this.buttonsPanel.SetActive(true);
-            Language.Translate();
-            this.PlayClip(this.acceptClip);
-            return;
+            if (Input.GetAxis("LeftJoystickY") < 0 && this.neutralStick == true)
+            {
+                this.neutralStick = false;
+                this.GoDownLanguage();
+            }
+
+            if (Input.GetAxis("LeftJoystickY") == 0)
+            {
+                this.neutralStick = true;
+            }
+
+            if (Input.GetButtonDown("ButtonY"))
+            {
+                this.ConfirmLanguage();
+            }
         }
     }
+
+    public void GoUpLanguage() 
+    {
+        Text mainText = this.languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
+        if (this.languages.IndexOf(mainText.text) >= 0)
+        {
+            this.indexLanguages++;
+            if (this.indexLanguages >= this.languages.Count)
+            {
+                this.indexLanguages = 0;
+            }
+
+            mainText.text = this.languages[this.indexLanguages];
+            this.PlayClip(this.acceptClip);
+        }
+        return;
+    }
+
+    public void GoDownLanguage() 
+    {
+        Text mainText = this.languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
+        if (this.languages.IndexOf(mainText.text) >= 0)
+        {
+            this.indexLanguages--;
+            if (this.indexLanguages < 0)
+            {
+                this.indexLanguages = this.languages.Count - 1;
+            }
+
+            mainText.text = this.languages[this.indexLanguages];
+
+            this.PlayClip(this.acceptClip);
+        }
+        return;
+    }
+
+    public void ConfirmLanguage() 
+    {
+        Settings.Current.Language = this.languages[this.indexLanguages];
+        Settings.Current.LanguageDefault = true;
+        Game.SaveSettings();
+        this.languagePanel.SetActive(false);
+        this.mainPanel.SetActive(true);
+        this.buttonsPanel.SetActive(true);
+        Language.Translate();
+        this.PlayClip(this.acceptClip);
+        return;
+    }
+
 
     /// <summary>Selects the controller.</summary>
     /// <param name="controller">The controller.</param>
@@ -304,6 +356,7 @@ public class MainMenu : MonoBehaviour
         {
             this.startPanel.SetActive(false);
             this.languagePanel.SetActive(true);
+            this.UpdateButtons(this.currentController);
         }
 
         this.PlayClip(this.acceptClip);

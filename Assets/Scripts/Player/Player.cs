@@ -257,6 +257,7 @@ public class Player : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
+                this.animator.SetTrigger(Attack);
                 collider.gameObject.GetComponent<IEnemy>().TakeDamage(Random.Range(5,15));
             }
 
@@ -266,8 +267,6 @@ public class Player : MonoBehaviour
                 chest.Open();
             }
         }
-
-        this.animator.SetTrigger(Attack);
 
         this.attacking = true;
         yield return new WaitForSeconds(this.frecuencyToAttack);
