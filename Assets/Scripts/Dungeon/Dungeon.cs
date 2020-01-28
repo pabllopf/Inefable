@@ -19,34 +19,34 @@ public class Dungeon : MonoBehaviour
     private static readonly int BoardHeight = 500;
 
     /// <summary>The minimum number rooms</summary>
-    private static readonly int MinNumRooms = 25;
+    private static readonly int MinNumRooms = 10;
 
     /// <summary>The maximum number rooms</summary>
-    private static readonly int MaxNumRooms = 35;
+    private static readonly int MaxNumRooms = 15;
 
     /// <summary>The minimum room width</summary>
     private static readonly int MinRoomWidth = 10;
 
     /// <summary>The maximum room width</summary>
-    private static readonly int MaxRoomWidth = 20;
+    private static readonly int MaxRoomWidth = 15;
 
     /// <summary>The minimum room height</summary>
     private static readonly int MinRoomHeight = 10;
 
     /// <summary>The maximum room height</summary>
-    private static readonly int MaxRoomHeight = 20;
+    private static readonly int MaxRoomHeight = 15;
 
     /// <summary>The minimum corridor width</summary>
     private static readonly int MinCorridorWidth = 6;
 
     /// <summary>The maximum corridor width</summary>
-    private static readonly int MaxCorridorWidth = 9;
+    private static readonly int MaxCorridorWidth = 8;
 
     /// <summary>The minimum corridor height</summary>
     private static readonly int MinCorridorHeight = 7;
 
     /// <summary>The maximum corridor height</summary>
-    private static readonly int MaxCorridorHeight = 10;
+    private static readonly int MaxCorridorHeight = 8;
 
     /// <summary>The rooms.</summary>
     private readonly List<Room> rooms = new List<Room>();
@@ -137,6 +137,7 @@ public class Dungeon : MonoBehaviour
         }
 
         this.SpawnListOf(this.generalItems);
+        this.SpawnListOf(this.styleMap.GetLights());
         this.SpawnListOf(this.styleMap.GetFloors());
         this.SpawnListOf(this.styleMap.GetItems());
         this.SpawnListOf(this.styleMap.GetEnemys());

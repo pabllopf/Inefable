@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2374301342498181203}
   - component: {fileID: 5683420673114414220}
   - component: {fileID: 631337394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chest-001
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3453091485620569672}
   - component: {fileID: 3818365696768740333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NeedKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}

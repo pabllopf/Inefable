@@ -47,13 +47,19 @@ public class Player : MonoBehaviour
     private int speedMove = 3;
 
     /// <summary>The frecuency to attack</summary>
-    private float frecuencyToAttack = 0.25f;
+    private float frecuencyToAttack = 0.20f;
+
+    /// <summary>The frecuency to roll</summary>
+    private float frecuencyToUseSkill = 0.75f;
 
     /// <summary>The attacking</summary>
     private bool attacking = false;
 
+    /// <summary>The use skill</summary>
+    private bool useSkill = false;
+
     /// <summary>The radius attack</summary>
-    private float radiusAttack = 0.3f;
+    private float radiusAttack = 0.5f;
 
     /// <summary>The time to close bar</summary>
     private float timeToCloseBar = 10f;
@@ -205,7 +211,7 @@ public class Player : MonoBehaviour
             {
                 this.mobileUI.SetActive(true);
                 this.buttonA.GetComponent<Button>().onClick.AddListener(() => { this.AttackAction(); });
-                this.buttonB.GetComponent<Button>().onClick.AddListener(() => { this.RollAction(); });
+                this.buttonB.GetComponent<Button>().onClick.AddListener(() => { this.SkillAction(); });
             }
 
             if (this.joystick.Horizontal > 0 || this.joystick.Horizontal < 0 || this.joystick.Vertical > 0 || this.joystick.Vertical < 0)
@@ -232,10 +238,13 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>Rolls the action.</summary>
-    public void RollAction() 
+    public void SkillAction() 
     {
-        this.animator.SetTrigger(Skill);
-        return;
+        if (!this.useSkill)
+        {
+            this.StartCoroutine(this.SkillNow());
+        }
+
     }
 
     /// <summary>Attacks the action.</summary>
@@ -251,13 +260,12 @@ public class Player : MonoBehaviour
     /// <returns>Return none</returns>
     public IEnumerator AttackNow() 
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackVector, this.radiusAttack, LayerMask.GetMask("Default"));
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackVector, this.radiusAttack, LayerMask.GetMask("Enemy"));
 
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Enemy"))
             {
-                this.animator.SetTrigger(Attack);
                 collider.gameObject.GetComponent<IEnemy>().TakeDamage(Random.Range(5,15));
             }
 
@@ -268,10 +276,27 @@ public class Player : MonoBehaviour
             }
         }
 
+        this.animator.SetTrigger(Attack);
+
         this.attacking = true;
         yield return new WaitForSeconds(this.frecuencyToAttack);
         this.attacking = false;
     }
+
+    private IEnumerator SkillNow() 
+    {
+        this.animator.SetTrigger(Skill);
+        this.gameObject.layer = LayerMask.NameToLayer("IgnoreAttack");
+
+        //this.GetComponent<CapsuleCollider2D>().enabled = false;
+
+        this.useSkill = true;
+        yield return new WaitForSeconds(this.frecuencyToUseSkill);
+        this.useSkill = false;
+        //this.GetComponent<CapsuleCollider2D>().enabled = true;
+        this.gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
 
     /// <summary>Called when [trigger enter2 d].</summary>
     /// <param name="obj">The object.</param>

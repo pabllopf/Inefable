@@ -27,7 +27,11 @@ public class Style
 
     /// <summary>The special floors</summary>
     [SerializeField]
-    private List<Item> specialFloors = null;
+    private List<Item> floors = null;
+
+    /// <summary>The special floors</summary>
+    [SerializeField]
+    private List<Item> lights = null;
 
     /// <summary>The floor center</summary>
     private GameObject floorCenter;
@@ -177,6 +181,13 @@ public class Style
     /// <returns>Return floors</returns>
     public List<Item> GetFloors()
     {
-        return this.specialFloors;
+        return this.floors;
+    }
+
+    /// <summary>Gets the lights.</summary>
+    /// <returns></returns>
+    public List<Item> GetLights()
+    {
+        return this.lights;
     }
 }

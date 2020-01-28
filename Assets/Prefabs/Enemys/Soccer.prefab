@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8163145056658640954}
   - component: {fileID: 7833017715561190264}
   - component: {fileID: 1331123940}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Soccer
   m_TagString: Enemy
   m_Icon: {fileID: 0}

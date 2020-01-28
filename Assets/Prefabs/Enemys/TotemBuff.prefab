@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2118528844602804166}
   - component: {fileID: 2118528844602804155}
   - component: {fileID: 2118528844602804153}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TotemBuff
   m_TagString: Enemy
   m_Icon: {fileID: 0}

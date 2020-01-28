@@ -370,96 +370,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &835771403
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1304876317242396044, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396044, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396040, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396043, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396043, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304876317242396043, guid: 360e4fa594469a64790e28b6a45dc340,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1304876317242396045, guid: 360e4fa594469a64790e28b6a45dc340, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 360e4fa594469a64790e28b6a45dc340, type: 3}
 --- !u!1 &1130379525
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,41 +434,17 @@ MonoBehaviour:
     type: 3}
   generalItems:
   - item: {fileID: 1381999859985268, guid: f305886ffb736f24d8fc956e9815a803, type: 3}
-    quantityMin: 1
+    quantityMin: 2
     quantityMax: 5
     position: 1
   - item: {fileID: 1469236417149128, guid: d5c3fa2342fb8a441a9f9b51436eaec0, type: 3}
-    quantityMin: 1
+    quantityMin: 2
     quantityMax: 5
-    position: 1
-  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
-    quantityMin: 1
-    quantityMax: 3
-    position: 1
-  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
-    quantityMin: 1
-    quantityMax: 4
-    position: 1
-  - item: {fileID: 1661139615138848, guid: de0004bae3b7ff34bb6b094365cb1b92, type: 3}
-    quantityMin: 1
-    quantityMax: 4
-    position: 1
-  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
-    quantityMin: 1
-    quantityMax: 4
-    position: 1
-  - item: {fileID: 1461994297141650, guid: ce6219b5c42bba444a71c395f5d0cc92, type: 3}
-    quantityMin: 1
-    quantityMax: 4
     position: 1
   - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
     quantityMin: 1
     quantityMax: 3
     position: 1
-  - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f, type: 3}
-    quantityMin: 60
-    quantityMax: 90
-    position: 5
   dungeons:
   - name: Atlantys
     items:
@@ -629,16 +515,16 @@ MonoBehaviour:
       quantityMin: 1
       quantityMax: 5
       position: 1
-    - item: {fileID: 4201559106372227265, guid: af5bf4e1386063446a556399548dfbb2,
+    - item: {fileID: 4452909562303655424, guid: e8f12932e32dbb049b11df186cb31fa3,
         type: 3}
       quantityMin: 1
       quantityMax: 5
       position: 1
-    - item: {fileID: 769865837552159989, guid: 470dbfa5fcd02a04d894cfbf52661916, type: 3}
+    - item: {fileID: 966139080431581756, guid: b3b72019876f7c9408b7a472f0530e93, type: 3}
       quantityMin: 1
       quantityMax: 2
       position: 1
-    - item: {fileID: 4201559106372227265, guid: af5bf4e1386063446a556399548dfbb2,
+    - item: {fileID: 8995925948463020581, guid: 0a5c9310f0e28774fb499bfb8d798c0b,
         type: 3}
       quantityMin: 1
       quantityMax: 2
@@ -1007,436 +893,365 @@ MonoBehaviour:
       quantityMin: 45
       quantityMax: 73
       position: 1
-    enemys: []
-    pets: []
-    specialFloors: []
-  - name: Afterlife
-    items:
-    - item: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4827289049806175297, guid: 1ee9ef33ae69752459b9801349ce2e2e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 18
-      position: 5
-    - item: {fileID: 4009324050149035446, guid: 097b2992d16fe304ba214ae78476d1e4,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 14
-      position: 5
-    - item: {fileID: 1435341065194675076, guid: 7b787e2e44daced4bbaa2bbb9aa5fee1,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8369970926437621636, guid: 21501c924c4393548825eef1d4ee29a5,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7951384098566456997, guid: 3aee3febf6da9a44bb01edf0f126d2c2,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5512706929742432406, guid: 62b6a25fc6cfcad43b6935d2f92af203,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 2991040175751709577, guid: 5a03add70fb291b4a9efce5829126c1c,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3643533081097949778, guid: 3dad7d7ca8ba50a499c8a265cb832af5,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7796735294550617886, guid: 8d4873d16ee216f4f8539f8dcfda1cbd,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 20
-      position: 1
-    - item: {fileID: 2176148125430791068, guid: da49422756daf0745b2049cef2cac26a,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 7599661577980238615, guid: 9329285d3a00d3344842931ee9f343ed,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 1057325897486914625, guid: 195110c145de7064783f1fae7f8a6c69,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 4406084393435920664, guid: d30e08094bf46f441a98dad0b7c853b8,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 3792622281800518772, guid: 2a7b91c1cbc1b184ca9513f92bbbd0cd,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 4725922604078684431, guid: c43574c3586c11540905d6c3509221f4,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 2911427291813253719, guid: d21b849710b716c428ae90b0f4736872,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 1277672210103570365, guid: 5c3452a809a6a324ba07f61b8eac35af,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 8821339950526232996, guid: 7fcd5d5007687114b9bedabf1f932548,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 2297464425588850860, guid: fe423d1da5ecb8c4b9f8403466be3367,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 446069016295019933, guid: f6e0b7c4b08ddeb4e8659359ac6351c7, type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 8160723911105247284, guid: 3c74259b337070b41a9fb61d08d23435,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 7015353912084660903, guid: 9f3da4edea1fccd469ef33ab164fb7ff,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 9020283676516489914, guid: af06f95b30f556644a3e5a4e2bdf1744,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 4650062366192433375, guid: 62577de25be0e2f499e94344e7f873d3,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    - item: {fileID: 5489896890251847411, guid: 85be6510636861043a73c7a42ccb49f7,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 6952575790517739196, guid: 0c8c4950f7052ee488411e54c26b3f22,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 801685504570097522, guid: 2365c0d01d051be45a122e6905358196, type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
-    - item: {fileID: 5792570103841670678, guid: 76e473d857fe80844bb32ce37a7e35ad,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 26
-      position: 1
     enemys:
     - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
         type: 3}
-      quantityMin: 30
-      quantityMax: 40
-      position: 1
-    - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8,
-        type: 3}
-      quantityMin: 20
-      quantityMax: 30
-      position: 1
-    pets: []
-    specialFloors:
-    - item: {fileID: 4725922604078684431, guid: c43574c3586c11540905d6c3509221f4,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 24
-      position: 1
-    - item: {fileID: 2911427291813253719, guid: d21b849710b716c428ae90b0f4736872,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 24
-      position: 1
-    - item: {fileID: 1277672210103570365, guid: 5c3452a809a6a324ba07f61b8eac35af,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 24
-      position: 1
-    - item: {fileID: 8821339950526232996, guid: 7fcd5d5007687114b9bedabf1f932548,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 24
-      position: 1
-    - item: {fileID: 2297464425588850860, guid: fe423d1da5ecb8c4b9f8403466be3367,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 24
-      position: 1
-    - item: {fileID: 446069016295019933, guid: f6e0b7c4b08ddeb4e8659359ac6351c7, type: 3}
-      quantityMin: 10
-      quantityMax: 24
-      position: 1
-  - name: Foreshore
-    items:
-    - item: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 2687139449768470786, guid: 62a4cc830057f5241859aff3aa48b1d2,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 8575814057883155670, guid: 5dd17f14b0c48774fbed4a0c446016ba,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 881572400309163323, guid: ecfec7e4fe04f424bac5e4e5e428a77a, type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 1418002004525905514, guid: b84315b6b11730349b561ae464f14209,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6104540607654767890, guid: 2d958fbb6ef4db349a4bdbf37610e8da,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 3857190637066406122, guid: bb974a60b57d550458ca9beaa03f3239,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 7278500161269428664, guid: 12f0a566d7a66c94d908079e2ac594e6,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6488404973736978278, guid: 86079c09fa25db64581471f4d1a917c2,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 2380329398536929212, guid: 533a9f57e52133749ac50378e4a46d8f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 7388090037708400490, guid: c0a3744f600f55642a11698326df8a4c,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6304072383275511242, guid: 376c2885ff9aa654a97f9a3c81874b32,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 3499185458171660795, guid: acd5d01a5703a67418d57e8ce6695998,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 4206125799132570047, guid: 0bf0fd97d74f6bb4788d6f110c8cd64e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6750205659664104692, guid: ace47a989a4bd124da266337e93a0849,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 7673647004082327487, guid: bc40b71cae895ce47ba7b49bd8c3cda9,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 191163819608617499, guid: a536979f892d50243ad7207e4274026c, type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 9091407620710708305, guid: 782e1d293ef4f5c438baa5056b91157f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 7522168127295308746, guid: 1357e79fb94aeab47add3cfc8fee0e5b,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 1777629716911060862, guid: 4113d72d621206a41a79ac7546903681,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6070533712919502622, guid: 45dedc2999ee8d2489d4fbdbaf078588,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 5750803053063285242, guid: 599e34860e1defb49a67d329d80cf959,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6894372803672370666, guid: 046a81186ecb1b347aada7b159f84898,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6149344098148861249, guid: 493d3ee12748b7a499b745f6eba5c90c,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 2912465414705286259, guid: 6d83e0bac0fa4d9438f213fc965a5a8e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 5545560213153553992, guid: 9629f551b47411f4297c1b58b25accb7,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 8463944030122291453, guid: e27731e07d9d7944d96621c44eff6b38,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 5043060324326848799, guid: 52907b1e64038764f81224c8668f3de6,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 3002195591219681751, guid: 7cdc0fe666ccf6d449648de14b553550,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 5630656112227581299, guid: 3ca302750fa1a034782ddfaba9bdd6d6,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 3245254330460108315, guid: ccafda1923eaa7448b1504337d87db40,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 4821216072036999873, guid: fd8ea1d5202962d448bf6dfb8e1162bf,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 4177670097215270262, guid: 13f23734aedd5eb43a7fade5a9472e22,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6089015100723486042, guid: 23336d6c37d75bc409eb3bc9aad1decb,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 1381558771751005304, guid: d8e22aaf04234604ebf4cd81bdd4dc8a,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 4790579457619316253, guid: 9581edba4a0802a46a75707ec31ccb7b,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    enemys: []
-    pets: []
-    specialFloors: []
-  - name: Landlord
-    items:
-    - item: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 6693319548863229260, guid: 028a2e46c7e541a43a99be8c6f70da7f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 4069495582778785942, guid: 215c271fbd384454f82f3036725d5670,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 2870702960043453953, guid: 5e77d90986a74f5429f92ba7d4af501b,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 7436823093116799167, guid: c02b3b0e8222f3f4d8584a8646e6c499,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    - item: {fileID: 1542141599974852040, guid: a85b5dd7bf024e649b8d5f7226ebf55d,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 6
-      position: 1
-    enemys:
-    - item: {fileID: 2118528844602804159, guid: c546ea04a5436a247a356740b25cbcd0,
-        type: 3}
-      quantityMin: 22
-      quantityMax: 32
-      position: 1
-    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
-      quantityMin: 18
-      quantityMax: 27
+      quantityMin: 12
+      quantityMax: 20
       position: 1
     pets:
     - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
       quantityMin: 1
       quantityMax: 1
       position: 1
-    specialFloors: []
+    floors: []
+    lights:
+    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
+        type: 3}
+      quantityMin: 9
+      quantityMax: 17
+      position: 5
+  - name: Afterlife
+    items:
+    - item: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 10
+      position: 5
+    - item: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 10
+      position: 5
+    - item: {fileID: 7796735294550617886, guid: 8d4873d16ee216f4f8539f8dcfda1cbd,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 9
+      position: 1
+    - item: {fileID: 2176148125430791068, guid: da49422756daf0745b2049cef2cac26a,
+        type: 3}
+      quantityMin: 7
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 5489896890251847411, guid: 85be6510636861043a73c7a42ccb49f7,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 6952575790517739196, guid: 0c8c4950f7052ee488411e54c26b3f22,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 11
+      position: 1
+    - item: {fileID: 801685504570097522, guid: 2365c0d01d051be45a122e6905358196, type: 3}
+      quantityMin: 9
+      quantityMax: 13
+      position: 1
+    - item: {fileID: 5792570103841670678, guid: 76e473d857fe80844bb32ce37a7e35ad,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 2991040175751709577, guid: 5a03add70fb291b4a9efce5829126c1c,
+        type: 3}
+      quantityMin: 7
+      quantityMax: 11
+      position: 1
+    - item: {fileID: 5512706929742432406, guid: 62b6a25fc6cfcad43b6935d2f92af203,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 3643533081097949778, guid: 3dad7d7ca8ba50a499c8a265cb832af5,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 1435341065194675076, guid: 7b787e2e44daced4bbaa2bbb9aa5fee1,
+        type: 3}
+      quantityMin: 3
+      quantityMax: 3
+      position: 1
+    - item: {fileID: 8369970926437621636, guid: 21501c924c4393548825eef1d4ee29a5,
+        type: 3}
+      quantityMin: 2
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 7951384098566456997, guid: 3aee3febf6da9a44bb01edf0f126d2c2,
+        type: 3}
+      quantityMin: 2
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
+        type: 3}
+      quantityMin: 2
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 4827289049806175297, guid: 1ee9ef33ae69752459b9801349ce2e2e,
+        type: 3}
+      quantityMin: 2
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 7599661577980238615, guid: 9329285d3a00d3344842931ee9f343ed,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 9
+      position: 1
+    - item: {fileID: 4406084393435920664, guid: d30e08094bf46f441a98dad0b7c853b8,
+        type: 3}
+      quantityMin: 8
+      quantityMax: 10
+      position: 5
+    - item: {fileID: 3792622281800518772, guid: 2a7b91c1cbc1b184ca9513f92bbbd0cd,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 10
+      position: 5
+    - item: {fileID: 6186268067420159905, guid: f5bb82ee993bebd4596f0127f85d9ddb,
+        type: 3}
+      quantityMin: 8
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 5830105956019888815, guid: b1128e98b2e35704bb943ea56e144f02,
+        type: 3}
+      quantityMin: 8
+      quantityMax: 10
+      position: 1
+    enemys:
+    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+        type: 3}
+      quantityMin: 15
+      quantityMax: 20
+      position: 1
+    pets:
+    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    floors:
+    - item: {fileID: 2911427291813253719, guid: d21b849710b716c428ae90b0f4736872,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 14
+      position: 1
+    - item: {fileID: 1277672210103570365, guid: 5c3452a809a6a324ba07f61b8eac35af,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 14
+      position: 1
+    - item: {fileID: 8821339950526232996, guid: 7fcd5d5007687114b9bedabf1f932548,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 14
+      position: 1
+    - item: {fileID: 2297464425588850860, guid: fe423d1da5ecb8c4b9f8403466be3367,
+        type: 3}
+      quantityMin: 6
+      quantityMax: 14
+      position: 1
+    - item: {fileID: 446069016295019933, guid: f6e0b7c4b08ddeb4e8659359ac6351c7, type: 3}
+      quantityMin: 6
+      quantityMax: 14
+      position: 1
+    lights:
+    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 15
+      position: 5
+    - item: {fileID: 8131167399865811844, guid: 5df07369968610a4c98d84c3b739c390,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 15
+      position: 1
+  - name: Foreshore
+    items:
+    - item: {fileID: 881572400309163323, guid: ecfec7e4fe04f424bac5e4e5e428a77a, type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 1418002004525905514, guid: b84315b6b11730349b561ae464f14209,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 6104540607654767890, guid: 2d958fbb6ef4db349a4bdbf37610e8da,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 3857190637066406122, guid: bb974a60b57d550458ca9beaa03f3239,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 7278500161269428664, guid: 12f0a566d7a66c94d908079e2ac594e6,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 6304072383275511242, guid: 376c2885ff9aa654a97f9a3c81874b32,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 3499185458171660795, guid: acd5d01a5703a67418d57e8ce6695998,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 4206125799132570047, guid: 0bf0fd97d74f6bb4788d6f110c8cd64e,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 6750205659664104692, guid: ace47a989a4bd124da266337e93a0849,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 8575814057883155670, guid: 5dd17f14b0c48774fbed4a0c446016ba,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 2687139449768470786, guid: 62a4cc830057f5241859aff3aa48b1d2,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 5545560213153553992, guid: 9629f551b47411f4297c1b58b25accb7,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 4821216072036999873, guid: fd8ea1d5202962d448bf6dfb8e1162bf,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 4177670097215270262, guid: 13f23734aedd5eb43a7fade5a9472e22,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    - item: {fileID: 6089015100723486042, guid: 23336d6c37d75bc409eb3bc9aad1decb,
+        type: 3}
+      quantityMin: 5
+      quantityMax: 8
+      position: 1
+    enemys:
+    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+        type: 3}
+      quantityMin: 12
+      quantityMax: 19
+      position: 1
+    pets:
+    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    floors:
+    - item: {fileID: 5630656112227581299, guid: 3ca302750fa1a034782ddfaba9bdd6d6,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 3245254330460108315, guid: ccafda1923eaa7448b1504337d87db40,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 7522168127295308746, guid: 1357e79fb94aeab47add3cfc8fee0e5b,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 1777629716911060862, guid: 4113d72d621206a41a79ac7546903681,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 6070533712919502622, guid: 45dedc2999ee8d2489d4fbdbaf078588,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 5750803053063285242, guid: 599e34860e1defb49a67d329d80cf959,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 6894372803672370666, guid: 046a81186ecb1b347aada7b159f84898,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 6149344098148861249, guid: 493d3ee12748b7a499b745f6eba5c90c,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    - item: {fileID: 2912465414705286259, guid: 6d83e0bac0fa4d9438f213fc965a5a8e,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 12
+      position: 1
+    lights:
+    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 17
+      position: 5
+  - name: Landlord
+    items:
+    - item: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
+      quantityMin: 4
+      quantityMax: 9
+      position: 1
+    - item: {fileID: 6693319548863229260, guid: 028a2e46c7e541a43a99be8c6f70da7f,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 9
+      position: 1
+    - item: {fileID: 4069495582778785942, guid: 215c271fbd384454f82f3036725d5670,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 9
+      position: 1
+    - item: {fileID: 2870702960043453953, guid: 5e77d90986a74f5429f92ba7d4af501b,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 9
+      position: 1
+    - item: {fileID: 7436823093116799167, guid: c02b3b0e8222f3f4d8584a8646e6c499,
+        type: 3}
+      quantityMin: 4
+      quantityMax: 9
+      position: 1
+    enemys:
+    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+        type: 3}
+      quantityMin: 13
+      quantityMax: 20
+      position: 1
+    pets:
+    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
+      quantityMin: 1
+      quantityMax: 1
+      position: 1
+    floors: []
+    lights:
+    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 19
+      position: 5
 --- !u!4 &1192179502
 Transform:
   m_ObjectHideFlags: 0
@@ -1450,6 +1265,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1588640764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588640767}
+  - component: {fileID: 1588640766}
+  - component: {fileID: 1588640765}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &1588640765
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588640764}
+  m_Enabled: 1
+--- !u!20 &1588640766
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588640764}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1588640767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588640764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782877288
 GameObject:
@@ -1697,7 +1595,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.6
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1754,9 +1652,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096896449}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 255.56197, y: 248.42094, z: -33.654}
+  m_LocalPosition: {x: 250, y: 250, z: -33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}

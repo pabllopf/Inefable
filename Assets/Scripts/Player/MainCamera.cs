@@ -8,7 +8,7 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
     /// <summary>The speed</summary>
-    private const float Speed = 1;
+    private const float Speed = 1.2f;
 
     /// <summary>The target</summary>
     private Transform Target => GameObject.FindWithTag("Player").transform;

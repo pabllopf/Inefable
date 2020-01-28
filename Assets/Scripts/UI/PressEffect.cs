@@ -35,6 +35,8 @@ public class PressEffect : MonoBehaviour
     /// <summary>The index</summary>
     private int index;
 
+    public void Awake() => Game.LoadSettings();
+
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
