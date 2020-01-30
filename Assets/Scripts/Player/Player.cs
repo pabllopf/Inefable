@@ -98,6 +98,9 @@ public class Player : MonoBehaviour
     /// <summary>The pet</summary>
     private Pet pet = null;
 
+    /// <summary>The walk effect</summary>
+    private WalkEffect walkEffect = null;
+
     /// <summary>The animator</summary>
     private Animator animator = null;
 
@@ -107,11 +110,8 @@ public class Player : MonoBehaviour
     /// <summary>The rigid body</summary>
     private Rigidbody2D rigbody2D = null;
 
-    public void Awake()
-    {
-        this.position = this.transform.position;
-        Instantiate(mainCamera, this.transform.position, Quaternion.identity);
-    }
+    /// <summary>Awakes this instance.</summary>
+    public void Awake() => this.position = this.transform.position;
 
     /// <summary>Starts this instance.</summary>
     public void Start()
@@ -120,7 +120,10 @@ public class Player : MonoBehaviour
         Game.LoadStats();
         Language.Translate();
 
+        Instantiate(mainCamera, this.transform.position, Quaternion.identity);
+
         this.animator = this.GetComponent<Animator>();
+        this.walkEffect = this.transform.Find("WalkEffect").GetComponent<WalkEffect>();
         this.uiAnimator = this.transform.Find("Interface/Bar").GetComponent<Animator>();
         this.rigbody2D = this.GetComponent<Rigidbody2D>();
         this.health = this.GetComponent<Health>();
@@ -153,10 +156,12 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
+                this.walkEffect.StartAll();
                 this.attackVector = this.transform.position + (this.direction / 4);
             }
             else
             {
+                this.walkEffect.StopAll();
                 this.animator.SetBool(Run, false);
             }
 
@@ -184,10 +189,12 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
+                this.walkEffect.StartAll();
                 this.attackVector = this.transform.position + (this.direction / 4);
             }
             else
             {
+                this.walkEffect.StopAll();
                 this.animator.SetBool(Run, false);
             }
 
@@ -222,10 +229,12 @@ public class Player : MonoBehaviour
                 this.animator.SetFloat(Horizontal, this.direction.x);
                 this.animator.SetFloat(Vertical, this.direction.y);
                 this.animator.SetBool(Run, true);
+                this.walkEffect.StartAll();
                 this.attackVector = this.transform.position + (this.direction / 4);
             }
             else
             {
+                this.walkEffect.StopAll();
                 this.animator.SetBool(Run, false);
             }
         }
