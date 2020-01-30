@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     /// <summary>The open</summary>
     private const string Open = "Open";
 
+    /// <summary>The Wait</summary>
+    private const string Wait = "Wait";
+
     /// <summary>The run</summary>
     private const string Run = "Run";
 
@@ -412,6 +415,7 @@ public class Player : MonoBehaviour
             {
                 this.timeToCloseBar = this.timeReset;
                 this.uiAnimator.SetBool(Open, false);
+                this.animator.SetTrigger(Wait);
             }
         }
     }

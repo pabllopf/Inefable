@@ -80,7 +80,7 @@ public class WalkEffect : MonoBehaviour
 
         if (tileName.Contains("Cobble")) 
         {
-            return new Color(0.5471698f, 0.4703732f, 0.3329477f, 1f);
+            return new Color(0.3962264f, 0.3440046f, 0.256052f, 1f);
         }
         
         return new Color(1f, 1f, 1f, 0.454902f);

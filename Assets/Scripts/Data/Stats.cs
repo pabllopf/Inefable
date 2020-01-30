@@ -31,6 +31,9 @@ public class Stats
     /// <summary>The pet</summary>
     public string pet;
 
+    /// <summary>The is day</summary>
+    public bool isDay;
+
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
     {
@@ -53,5 +56,6 @@ public class Stats
         };
 
         this.pet = "";
+        this.isDay = true;
     }
 }
