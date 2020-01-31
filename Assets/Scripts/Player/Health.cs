@@ -3,6 +3,7 @@
 // <copyright file="Health.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,10 @@ public class Health : MonoBehaviour
     /// <summary>The hit</summary>
     [SerializeField]
     private AudioClip hitClip = null;
+
+    /// <summary>The red effect</summary>
+    [SerializeField]
+    private GameObject redHit = null;
 
     /// <summary>Gets a value indicating whether this instance is alive.</summary>
     /// <value>
@@ -73,6 +78,9 @@ public class Health : MonoBehaviour
         }
         else 
         {
+            redHit.GetComponent<TextMeshPro>().text = amount.ToString();
+            Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
+
             Stats.Current.Health -= amount;
             this.Scrollbar.size = (float)Stats.Current.Health / 100;
             this.StartCoroutine(this.HitEffect(Color.red));

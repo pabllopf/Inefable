@@ -18,11 +18,19 @@ public class WalkEffect : MonoBehaviour
     [SerializeField]
     private GameObject particle = null;
 
+    /// <summary>The take</summary>
+    [SerializeField]
+    private AudioClip walkClip = null;
+
     /// <summary>The map</summary>
     private Tilemap map = null;
 
     /// <summary>The activated</summary>
     private bool activated = false;
+
+    /// <summary>Gets the audio source.</summary>
+    /// <value>The audio source.</value>
+    private AudioSource AudioSource => this.GetComponent<AudioSource>();
 
     /// <summary>Stops all.</summary>
     public void StopAll()
@@ -61,6 +69,7 @@ public class WalkEffect : MonoBehaviour
     {
         particle.GetComponent<SpriteRenderer>().color = this.ColorOfTile();
 
+        this.PlayClip(this.walkClip);
         MonoBehaviour.Instantiate(particle, this.transform.position, Quaternion.identity);
 
         yield return new WaitForSeconds(frequency);
@@ -84,5 +93,13 @@ public class WalkEffect : MonoBehaviour
         }
         
         return new Color(1f, 1f, 1f, 0.454902f);
+    }
+
+    /// <summary>Plays the clip.</summary>
+    /// <param name="clip">The clip.</param>
+    private void PlayClip(AudioClip clip)
+    {
+        this.AudioSource.clip = clip;
+        this.AudioSource.Play();
     }
 }

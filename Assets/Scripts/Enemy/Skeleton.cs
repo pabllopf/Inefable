@@ -230,7 +230,7 @@ public class Skeleton : MonoBehaviour, IEnemy
         {
             if (collider.CompareTag("Player"))
             {
-                this.target.GetComponent<Health>().Take(4);
+                this.target.GetComponent<Health>().Take(Random.Range(5, 15));
             }
         }
 
