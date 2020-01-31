@@ -1,31 +1,22 @@
 fileFormatVersion: 2
-guid: 944e909e9f0a9f444be7bbc76fcfb5bb
+guid: ae54453180cb4914e9658d77839e7cff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4953213064541771370
-    second: Coin-001_0
+      213: 5300791252318710109
+    second: Coin-003_0
   - first:
-      213: -7371150390458246847
-    second: Coin-001_1
+      213: -4184831218631543719
+    second: Coin-003_1
   - first:
-      213: -431290544836478223
-    second: Coin-001_2
+      213: 6758457451607422478
+    second: Coin-003_2
   - first:
-      213: -5934488232687724135
-    second: Coin-001_3
+      213: 4954119305573495134
+    second: Coin-003_3
   - first:
-      213: -344556774680053217
-    second: Coin-001_4
-  - first:
-      213: -6965803152197943808
-    second: Coin-001_5
-  - first:
-      213: 1207688682159580434
-    second: Coin-001_6
-  - first:
-      213: 6262447386275130447
-    second: Coin-001_7
+      213: -6801489325560386118
+    second: Coin-003_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -69,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -84,7 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -96,7 +87,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -108,7 +99,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 1024
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -120,7 +111,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -134,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coin-001_0
+      name: Coin-003_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 10
-        width: 12
-        height: 20
+        x: 1
+        y: 0
+        width: 13
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4e94eb6e63672848bc9db248824a7fb
-      internalID: -4953213064541771370
+      spriteID: d0aafaf2e00b17342a7137da88b7974e
+      internalID: 5300791252318710109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coin-001_1
+      name: Coin-003_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 10
-        width: 16
-        height: 22
+        x: 18
+        y: 0
+        width: 11
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,125 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 351b92801e1a3e7439ec6946db6dacee
-      internalID: -7371150390458246847
+      spriteID: eaa01695cbf77da419805a0a7bf8827a
+      internalID: -4184831218631543719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Coin-001_2
+      name: Coin-003_2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 12
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 557452efabf82b74a88efb2b0ee65ebc
-      internalID: -431290544836478223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin-001_3
-      rect:
-        serializedVersion: 2
-        x: 102
-        y: 12
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85de171b23007a84587ce2a8919828dc
-      internalID: -5934488232687724135
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin-001_4
-      rect:
-        serializedVersion: 2
-        x: 134
-        y: 12
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8efb12eddad2d7c4e86e041e16811f41
-      internalID: -344556774680053217
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin-001_5
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 12
-        width: 20
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a377510e258bb14f9fbfda9798478d9
-      internalID: -6965803152197943808
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin-001_6
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 10
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ffd3e35a8616f24784694ff0fa3dfe4
-      internalID: 1207688682159580434
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin-001_7
-      rect:
-        serializedVersion: 2
-        x: 236
-        y: 10
+        x: 36
+        y: 0
         width: 8
-        height: 20
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,8 +181,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaafb48e6fb760c458068b2bbcf66dcf
-      internalID: 6262447386275130447
+      spriteID: 2653631f60ce3e547ba36b129a479383
+      internalID: 6758457451607422478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Coin-003_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4686d13611932f64a9ade47c5172ce8f
+      internalID: 4954119305573495134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Coin-003_4
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e12a7131cb186843833f4ea1267693c
+      internalID: -6801489325560386118
       vertices: []
       indices: 
       edges: []

@@ -3,12 +3,9 @@
 // <copyright file="Chest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Occlusion))]
 
 /// <summary>Manage a chest of the game.</summary>
 public class Chest : MonoBehaviour
@@ -22,15 +19,24 @@ public class Chest : MonoBehaviour
     /// <summary>The delay</summary>
     private const float Delay = 5f;
 
-    /// <summary>The has key</summary>
-    private bool hasKey = false;
+    /// <summary>The items</summary>
+    [SerializeField]
+    private List<Item> items = new List<Item>();
 
     /// <summary>The delay active</summary>
     private bool delayActive = false;
 
+    /// <summary>The opened</summary>
+    private bool opened = false;
+
     /// <summary>The hit clip</summary>
     [SerializeField]
     private AudioClip hitClip = null;
+
+    /// <summary>Gets a value indicating whether this instance is open.</summary>
+    /// <value>
+    /// <c>true</c> if this instance is open; otherwise, <c>false</c>.</value>
+    public bool isOpen => (opened) ? true : false;
 
     /// <summary>Gets the need key.</summary>
     /// <value>The need key.</value>
@@ -47,23 +53,76 @@ public class Chest : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start() => this.NeedKey.SetActive(false);
 
+    public void OnCollisionEnter2D(Collision2D obj)
+    {
+        if (obj.gameObject.CompareTag("Player")) 
+        {
+            if (!this.delayActive && !isOpen)
+            {
+                this.StartCoroutine(this.DelayToQuitNeedKey());
+            }
+            obj.gameObject.GetComponent<KeyPack>().ActiveUI();
+        }
+    }
+
+    public void OnCollisionStay2D(Collision2D obj)
+    {
+        if (obj.gameObject.CompareTag("Player"))
+        {
+            if (!this.delayActive && !isOpen)
+            {
+                this.StartCoroutine(this.DelayToQuitNeedKey());
+            }
+            obj.gameObject.GetComponent<KeyPack>().ActiveUI();
+        }
+    }
+
+
     /// <summary>Opens this instance.</summary>
     public void Open()
     {
-        if (!this.delayActive) 
+        this.StopAllCoroutines();
+        this.Animator.SetTrigger(OpenOn);
+        this.opened = true;
+        this.SpawnObjects();
+
+        this.StartCoroutine(this.AutoDestroy());
+    }
+
+    /// <summary>Takes the hit.</summary>
+    public void TakeHit() 
+    {
+        if (!this.delayActive && !isOpen)
         {
             this.StartCoroutine(this.DelayToQuitNeedKey());
         }
-
-        if (this.hasKey)
-        {
-            this.Animator.SetTrigger(OpenOn);
-        }
-        else 
+        if (!isOpen) 
         {
             this.Animator.SetTrigger(Hit);
             this.PlayClip(this.hitClip);
         }
+    }
+
+    
+    /// <summary>Spawns the objects.</summary>
+    private void SpawnObjects() 
+    {
+        int amount = Random.Range(3, 5);
+        List<Vector3> vectors = new List<Vector3>();
+        for (int i = 0; i < amount;i++) 
+        {
+            Vector3 vector = new Vector3(this.transform.position.x + Random.Range(-0.5f, 0.5f), this.transform.position.y + Random.Range(-0.5f, 0.5f), 0);
+            Vector3 size = new Vector3(0.5f, 0.5f, 0);
+
+            while (Physics2D.OverlapBoxAll(vector, size, LayerMask.GetMask("Player")).ToList().Any(j => j.CompareTag("Player")) || vectors.Contains(vector)) 
+            {
+                vector = new Vector3(this.transform.position.x + Random.Range(-0.5f, 0.5f), this.transform.position.y + Random.Range(-0.5f, 0.5f), 0);
+            }
+
+            vectors.Add(vector);
+            Item item = items[Random.Range(0, items.Count)];
+            Instantiate(item.Object, vector, Quaternion.identity);
+        }        
     }
 
     /// <summary>Delays to quit need key.</summary>
@@ -77,6 +136,20 @@ public class Chest : MonoBehaviour
 
         this.delayActive = false;
         this.NeedKey.SetActive(false);
+    }
+
+    private IEnumerator AutoDestroy() 
+    {
+        this.tag = "Untagged";
+        yield return new WaitForSeconds(0.1f);
+
+        MonoBehaviour.Destroy(NeedKey);
+        MonoBehaviour.Destroy(AudioSource);
+        MonoBehaviour.Destroy(Animator);
+
+        yield return new WaitForSeconds(1f);
+
+        MonoBehaviour.Destroy(this.GetComponent<Chest>());
     }
 
     /// <summary>Plays the clip.</summary>

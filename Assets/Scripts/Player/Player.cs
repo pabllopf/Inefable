@@ -95,6 +95,9 @@ public class Player : MonoBehaviour
     /// <summary>The wallet</summary>
     private Wallet wallet = null;
 
+    /// <summary>The key pack</summary>
+    private KeyPack keyPack = null;
+
     /// <summary>The inventory</summary>
     private Inventory inventory = null;
 
@@ -132,6 +135,7 @@ public class Player : MonoBehaviour
         this.health = this.GetComponent<Health>();
         this.shield = this.GetComponent<Shield>();
         this.wallet = this.GetComponent<Wallet>();
+        this.keyPack = this.GetComponent<KeyPack>();
         this.inventory = this.GetComponent<Inventory>();
         this.mobileUI = this.transform.Find("Interface/Mobile").gameObject;
         this.joystick = this.transform.Find("Interface/Mobile/Joystick").GetComponent<Joystick>();
@@ -284,7 +288,15 @@ public class Player : MonoBehaviour
             if (collider.CompareTag("Chest"))
             {
                 Chest chest = collider.GetComponent<Chest>();
-                chest.Open();
+                if (this.keyPack.HasKeys && !chest.isOpen)
+                {
+                    this.keyPack.Spend(1);
+                    chest.Open();
+                }
+                else 
+                {
+                    chest.TakeHit();
+                }
             }
         }
 
@@ -322,7 +334,7 @@ public class Player : MonoBehaviour
                 break;
 
             case "Heart":
-                if (this.health.CanAdd(10)) 
+                if (this.health.CanAdd()) 
                 {
                     this.health.Treat(10);
                     MonoBehaviour.Destroy(obj.gameObject);
@@ -331,6 +343,7 @@ public class Player : MonoBehaviour
                 break;
 
             case "Key":
+                this.keyPack.AddKey();
                 MonoBehaviour.Destroy(obj.gameObject);
                 break;
 

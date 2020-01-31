@@ -48,7 +48,14 @@ public class Health : MonoBehaviour
     /// <param name="amount">The amount.</param>
     public void Treat(int amount)
     {
-        Stats.Current.Health += amount;
+        if (Stats.Current.Health + amount > 100)
+        {
+            Stats.Current.Health = 100;
+        }
+        else 
+        {
+            Stats.Current.Health += amount;
+        }
         Game.SaveStats();
 
         this.Scrollbar.size = (float)Stats.Current.Health / 100;
@@ -87,7 +94,7 @@ public class Health : MonoBehaviour
     /// <param name="amount">The amount.</param>
     /// <returns>
     /// <c>true</c> if this instance can add the specified amount; otherwise, <c>false</c>.</returns>
-    public bool CanAdd(int amount) => ((Stats.Current.Health + amount) < 100) ? true : false;
+    public bool CanAdd() => (Stats.Current.Health < 100) ? true : false;
 
     /// <summary>Hits the effect.</summary>
     /// <param name="color">The color.</param>

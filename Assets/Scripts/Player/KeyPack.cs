@@ -1,13 +1,13 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Wallet.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="KeyPack.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Manage the wallet of the player</summary>
-public class Wallet : MonoBehaviour
+/// <summary>Manage the oack of keys.</summary>
+public class KeyPack : MonoBehaviour
 {
     /// <summary>The open</summary>
     private const string Open = "Open";
@@ -26,19 +26,19 @@ public class Wallet : MonoBehaviour
     [SerializeField]
     private AudioClip spendClip = null;
 
-    /// <summary>Gets a value indicating whether this instance has coins.</summary>
+    /// <summary>Gets a value indicating whether this instance has keys.</summary>
     /// <value>
-    /// <c>true</c> if this instance has coins; otherwise, <c>false</c>.</value>
-    public bool HasCoins => (Stats.Current.Wallet > 0) ? true : false;
+    /// <c>true</c> if this instance has keys; otherwise, <c>false</c>.</value>
+    public bool HasKeys => (Stats.Current.Keys > 0) ? true : false;
 
     /// <summary>The audio source</summary>
     private AudioSource AudioSource => this.GetComponent<AudioSource>();
 
     /// <summary>The wallet UI</summary>
-    private Text CounterCoins => this.transform.Find("Interface/CounterCoins/Text").GetComponent<Text>();
+    private Text CounterKeys => this.transform.Find("Interface/CounterKeys/Text").GetComponent<Text>();
 
     /// <summary>The animator</summary>
-    private Animator Animator => this.transform.Find("Interface/CounterCoins").GetComponent<Animator>();
+    private Animator Animator => this.transform.Find("Interface/CounterKeys").GetComponent<Animator>();
 
     /// <summary>Awakes this instance.</summary>
     public void Awake() => Game.LoadStats();
@@ -53,10 +53,10 @@ public class Wallet : MonoBehaviour
     }
 
     /// <summary>Adds the coin.</summary>
-    public void AddCoin()
+    public void AddKey()
     {
-        Stats.Current.Wallet++;
-        this.CounterCoins.text = "x" + Stats.Current.Wallet;
+        Stats.Current.Keys++;
+        this.CounterKeys.text = "x" + Stats.Current.Keys;
         Game.SaveStats();
 
         this.PlayClip(this.takeClip);
@@ -64,7 +64,7 @@ public class Wallet : MonoBehaviour
         {
             this.StartCoroutine(this.ControlUI(TimeToReset));
         }
-        else 
+        else
         {
             this.StopAllCoroutines();
             this.StartCoroutine(this.ControlUI(TimeToReset));
@@ -75,11 +75,25 @@ public class Wallet : MonoBehaviour
     /// <param name="amount">The amount.</param>
     public void Spend(int amount)
     {
-        Stats.Current.Wallet -= amount;
-        this.CounterCoins.text = "x" + Stats.Current.Wallet;
+        Stats.Current.Keys -= amount;
+        this.CounterKeys.text = "x" + Stats.Current.Keys;
         Game.SaveStats();
 
         this.PlayClip(this.spendClip);
+        if (!active)
+        {
+            this.StartCoroutine(this.ControlUI(TimeToReset));
+        }
+        else
+        {
+            this.StopAllCoroutines();
+            this.StartCoroutine(this.ControlUI(TimeToReset));
+        }
+    }
+
+    /// <summary>Actives the UI.</summary>
+    public void ActiveUI() 
+    {
         if (!active)
         {
             this.StartCoroutine(this.ControlUI(TimeToReset));
@@ -97,11 +111,11 @@ public class Wallet : MonoBehaviour
     private IEnumerator ControlUI(float time)
     {
         this.active = true;
-        this.CounterCoins.text = "x" + Stats.Current.Wallet;
+        this.CounterKeys.text = "x" + Stats.Current.Keys;
         this.Animator.SetBool(Open, true);
-        
+
         yield return new WaitForSeconds(time);
-        
+
         this.Animator.SetBool(Open, false);
         this.active = false;
     }

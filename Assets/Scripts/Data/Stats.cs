@@ -22,6 +22,9 @@ public class Stats
     /// <summary>The wallet</summary>
     public int Wallet;
 
+    /// <summary>The keys</summary>
+    public int Keys;
+
     /// <summary>The sprite item</summary>
     public List<Sprite> SpriteItem;
 
@@ -40,6 +43,7 @@ public class Stats
         this.Health = 100;
         this.Shield = 0;
         this.Wallet = 0;
+        this.Keys = 0;
 
         this.SpriteItem = new List<Sprite>
         {
