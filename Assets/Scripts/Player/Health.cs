@@ -22,6 +22,10 @@ public class Health : MonoBehaviour
     [SerializeField]
     private GameObject redHit = null;
 
+    /// <summary>The blue hit</summary>
+    [SerializeField]
+    private GameObject blueHit = null;
+
     /// <summary>Gets a value indicating whether this instance is alive.</summary>
     /// <value>
     /// <c>true</c> if this instance is alive; otherwise, <c>false</c>.</value>
@@ -73,6 +77,9 @@ public class Health : MonoBehaviour
     {
         if (this.Shield.HasShield)
         {
+            redHit.GetComponent<TextMeshPro>().text = amount.ToString();
+            Instantiate(blueHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
+            
             this.Shield.Take(amount);
             this.StartCoroutine(this.HitEffect(Color.blue));
         }
@@ -81,6 +88,7 @@ public class Health : MonoBehaviour
             redHit.GetComponent<TextMeshPro>().text = amount.ToString();
             Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
 
+            this.PlayClip(this.hitClip);
             Stats.Current.Health -= amount;
             this.Scrollbar.size = (float)Stats.Current.Health / 100;
             this.StartCoroutine(this.HitEffect(Color.red));
@@ -112,7 +120,6 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
 
         this.SpriteRenderer.color = color;
-        this.PlayClip(this.hitClip);
 
         yield return new WaitForSeconds(0.1f);
         this.SpriteRenderer.color = Color.white;

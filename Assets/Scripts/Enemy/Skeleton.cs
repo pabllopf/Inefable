@@ -3,6 +3,7 @@
 // <copyright file="Skeleton.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 /// <summary>Control a Skeleton to attack melee.</summary>
@@ -53,6 +54,10 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>The health</summary>
     private int health = 100;
 
+    /// <summary>The red effect</summary>
+    [SerializeField]
+    private GameObject redHit = null;
+
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
 
@@ -94,6 +99,8 @@ public class Skeleton : MonoBehaviour, IEnemy
             this.StartCoroutine(this.Die());
             return;
         }
+        redHit.GetComponent<TextMeshPro>().text = damage.ToString();
+        Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
 
         this.StartCoroutine(this.Hit());
     }
@@ -162,6 +169,7 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.StartCoroutine(this.HitEffect(this.rigid2D));
         
         yield return new WaitForSeconds(0.1f);
+       
         this.attackPosition = this.transform.position;
         this.spriteRenderer.color = Color.red;
         this.PlayClip(this.hitClip);

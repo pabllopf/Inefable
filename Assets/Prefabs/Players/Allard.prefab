@@ -4708,7 +4708,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   takeClip: {fileID: 8300000, guid: 663c0ab48d7daf74eb9d783ece1478b0, type: 3}
   hitClip: {fileID: 8300000, guid: f096d69ce08b065409658be935f20264, type: 3}
-  redHit: {fileID: 4226575092265264803}
+  redHit: {fileID: 6561785085181019703, guid: 51eece6166e82494d9d0a2180d29abd9, type: 3}
+  blueHit: {fileID: 3353420906929948826, guid: 116305ba3cdd9b94c91edf3f4feb705d, type: 3}
 --- !u!114 &4226575092265264804
 MonoBehaviour:
   m_ObjectHideFlags: 0
