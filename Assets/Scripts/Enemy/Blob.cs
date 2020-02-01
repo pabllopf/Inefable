@@ -3,6 +3,7 @@
 // <copyright file="Blob.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 /// <summary>Control a Blob</summary>
@@ -27,7 +28,7 @@ public class Blob : MonoBehaviour, IEnemy
     private const string Horizontal = "Horizontal";
 
     /// <summary>The speed</summary>
-    private const float SpeedToMove = 1.2f;
+    private const float SpeedToMove = 1.5f;
 
     /// <summary>The vision radio</summary>
     private const float VisionRange = 5f;
@@ -39,19 +40,23 @@ public class Blob : MonoBehaviour, IEnemy
     private const float AttackRadius = 0.5f;
 
     /// <summary>The frequency to attack</summary>
-    private const float FrequencyToAttack = 1.5f;
+    private const float FrequencyToAttack = 1f;
 
     /// <summary>The thrust</summary>
     private const float Thrust = 3f;
 
     /// <summary>The knock time</summary>
-    private const float KnockTime = 0.25f;
+    private const float KnockTime = 0.20f;
 
     /// <summary>The target</summary>
     private Transform target = null;
 
     /// <summary>The health</summary>
-    private int health = 100;
+    private int health = 200;
+
+    /// <summary>The red effect</summary>
+    [SerializeField]
+    private GameObject redHit = null;
 
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
@@ -94,6 +99,10 @@ public class Blob : MonoBehaviour, IEnemy
             this.StartCoroutine(this.Die());
             return;
         }
+
+        redHit.GetComponent<TextMeshPro>().text = damage.ToString();
+        Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
+
 
         this.StartCoroutine(this.Hit());
     }
@@ -209,7 +218,6 @@ public class Blob : MonoBehaviour, IEnemy
         this.animator.SetFloat(Vertical, this.direction.y);
 
         this.animator.SetBool(Walk, true);
-        this.GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
     /// <summary>Attacks to the target.</summary>
@@ -220,7 +228,6 @@ public class Blob : MonoBehaviour, IEnemy
         this.direction = Vector3.zero;
         this.animator.SetBool(Walk, false);
         this.rigid2D.isKinematic = true;
-        this.spriteRenderer.sortingOrder = 5;
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
         this.animator.SetTrigger(Attack);

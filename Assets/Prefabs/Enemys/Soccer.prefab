@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4497756019882336}
   - component: {fileID: 212311589966849244}
-  - component: {fileID: 61721074533812156}
   - component: {fileID: 50710024575992872}
   - component: {fileID: 95159040658973448}
   - component: {fileID: 8163145056658640954}
   - component: {fileID: 7833017715561190264}
   - component: {fileID: 1331123940}
+  - component: {fileID: 715993383}
   m_Layer: 9
   m_Name: Soccer
   m_TagString: Enemy
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1729323977278294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &61721074533812156
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729323977278294}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: da2a35da8106fb84e9777c449e76eea8, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.010856852, y: -0.03381455}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.47103676, y: 0.85433054}
-  m_EdgeRadius: 0
 --- !u!50 &50710024575992872
 Rigidbody2D:
   serializedVersion: 4
@@ -166,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1559484637658900, guid: 1824ed0d3690a97428cea11294553a89, type: 3}
+  redHit: {fileID: 6180098247228425113, guid: 613d2a0d463f76c4099c0edd48874a37, type: 3}
   hitClip: {fileID: 8300000, guid: abedf35d2b852a9449f94af46b07fb3e, type: 3}
 --- !u!114 &7833017715561190264
 MonoBehaviour:
@@ -275,3 +250,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &715993383
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729323977278294}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.027313102, y: -0.042920645}
+  m_Size: {x: 0.49275532, y: 0.84392446}
+  m_Direction: 0

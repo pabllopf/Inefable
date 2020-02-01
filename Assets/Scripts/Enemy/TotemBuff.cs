@@ -3,6 +3,7 @@
 // <copyright file="TotemBuff.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 /// <summary>Control a TotemBuff</summary>
@@ -27,13 +28,13 @@ public class TotemBuff : MonoBehaviour, IEnemy
     private const string Horizontal = "Horizontal";
 
     /// <summary>The vision radio</summary>
-    private const float VisionRange = 5f;
+    private const float VisionRange = 8f;
 
     /// <summary>The attack range</summary>
-    private const float AttackRange = 2f;
+    private const float AttackRange = 4f;
 
     /// <summary>The frequency to attack</summary>
-    private const float FrequencyToAttack = 1.5f;
+    private const float FrequencyToAttack = 0.2f;
 
     /// <summary>The target</summary>
     private Transform target = null;
@@ -43,7 +44,12 @@ public class TotemBuff : MonoBehaviour, IEnemy
     private GameObject bullet = null;
 
     /// <summary>The health</summary>
-    private int health = 100;
+    private int health = 75;
+
+    /// <summary>The red effect</summary>
+    [SerializeField]
+    private GameObject redHit = null;
+
 
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
@@ -71,12 +77,17 @@ public class TotemBuff : MonoBehaviour, IEnemy
     /// <param name="damage">The damage.</param>
     public void TakeDamage(int damage)
     {
+        this.StopAllCoroutines();
         this.health -= damage;
         if (this.health <= 0 && !this.deading)
         {
             this.StartCoroutine(this.Die());
             return;
         }
+
+        redHit.GetComponent<TextMeshPro>().text = damage.ToString();
+        Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
+
 
         this.StartCoroutine(this.Hit());
     }

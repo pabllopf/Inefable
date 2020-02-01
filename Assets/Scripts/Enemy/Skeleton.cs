@@ -28,22 +28,22 @@ public class Skeleton : MonoBehaviour, IEnemy
     private const string Horizontal = "Horizontal";
 
     /// <summary>The speed</summary>
-    private const float SpeedToMove = 1f;
+    private const float SpeedToMove = 2f;
 
     /// <summary>The vision radio</summary>
-    private const float VisionRange = 4f;
+    private const float VisionRange = 8f;
 
     /// <summary>The attack range</summary>
     private const float AttackRange = 1.5f;
 
     /// <summary>The attack circle</summary>
-    private const float AttackRadius = 0.2f;
+    private const float AttackRadius = 0.4f;
 
     /// <summary>The frequency to attack</summary>
-    private const float FrequencyToAttack = 1.5f;
+    private const float FrequencyToAttack = 1f;
 
     /// <summary>The thrust</summary>
-    private const float Thrust = 3f;
+    private const float Thrust = 2f;
 
     /// <summary>The knock time</summary>
     private const float KnockTime = 0.25f;
@@ -52,7 +52,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     private Transform target = null;
 
     /// <summary>The health</summary>
-    private int health = 100;
+    private int health = 125;
 
     /// <summary>The red effect</summary>
     [SerializeField]
@@ -218,7 +218,6 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.animator.SetFloat(Vertical, this.direction.y);
 
         this.animator.SetBool(Walk, true);
-        this.GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
     /// <summary>Attacks to the target.</summary>
@@ -228,7 +227,6 @@ public class Skeleton : MonoBehaviour, IEnemy
         this.attacking = true;
         this.direction = Vector3.zero;
         this.animator.SetBool(Walk, false);
-        this.spriteRenderer.sortingOrder = 5;
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
         this.animator.SetTrigger(Attack);

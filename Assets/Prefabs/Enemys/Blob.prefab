@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7840228195923848888}
   - component: {fileID: 7840228195923848895}
-  - component: {fileID: 7840228195923848894}
   - component: {fileID: 7840228195923848893}
   - component: {fileID: 7840228195923848892}
   - component: {fileID: 7840228195923848883}
   - component: {fileID: 7840228195923848882}
   - component: {fileID: 7840228195923848881}
+  - component: {fileID: 3909845642605792790}
   m_Layer: 9
   m_Name: Blob
   m_TagString: Enemy
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7840228195923848894
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7840228195923848880}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: da2a35da8106fb84e9777c449e76eea8, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.017058998, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5644538, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &7840228195923848893
 Rigidbody2D:
   serializedVersion: 4
@@ -273,4 +247,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e968626856aff4081ac2514d7951b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redHit: {fileID: 6561785085181019703, guid: 51eece6166e82494d9d0a2180d29abd9, type: 3}
   hitClip: {fileID: 8300000, guid: abedf35d2b852a9449f94af46b07fb3e, type: 3}
+--- !u!70 &3909845642605792790
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7840228195923848880}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.01361382, y: -0.021256804}
+  m_Size: {x: 0.78217816, y: 0.9574864}
+  m_Direction: 0

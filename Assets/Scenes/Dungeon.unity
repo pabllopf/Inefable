@@ -991,8 +991,12 @@ MonoBehaviour:
       quantityMax: 73
       position: 1
     enemys:
-    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+    - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668,
         type: 3}
+      quantityMin: 12
+      quantityMax: 20
+      position: 1
+    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
       quantityMin: 12
       quantityMax: 20
       position: 1
@@ -1120,6 +1124,11 @@ MonoBehaviour:
       quantityMin: 15
       quantityMax: 20
       position: 1
+    - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8,
+        type: 3}
+      quantityMin: 15
+      quantityMax: 20
+      position: 1
     pets:
     - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
       quantityMin: 1
@@ -1243,6 +1252,15 @@ MonoBehaviour:
       quantityMax: 8
       position: 1
     enemys:
+    - item: {fileID: 2118528844602804159, guid: c546ea04a5436a247a356740b25cbcd0,
+        type: 3}
+      quantityMin: 12
+      quantityMax: 19
+      position: 1
+    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
+      quantityMin: 12
+      quantityMax: 19
+      position: 1
     - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
         type: 3}
       quantityMin: 12
@@ -1333,6 +1351,15 @@ MonoBehaviour:
       position: 1
     enemys:
     - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+        type: 3}
+      quantityMin: 13
+      quantityMax: 20
+      position: 1
+    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
+      quantityMin: 13
+      quantityMax: 20
+      position: 1
+    - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668,
         type: 3}
       quantityMin: 13
       quantityMax: 20

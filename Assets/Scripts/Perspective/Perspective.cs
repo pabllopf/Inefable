@@ -27,7 +27,7 @@ public class Perspective : MonoBehaviour
     /// <param name="obj">The object.</param>
     private void OnTriggerStay2D(Collider2D obj)
     {
-        if (obj.CompareTag("Player"))
+        if (obj.CompareTag("Player") || obj.CompareTag("Enemy"))
         {
             this.SpriteRenderer.sortingOrder = this.orderLayerBack;
             this.SpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
@@ -38,7 +38,7 @@ public class Perspective : MonoBehaviour
     /// <param name="obj">The object.</param>
     private void OnTriggerExit2D(Collider2D obj)
     {
-        if (obj.CompareTag("Player"))
+        if (obj.CompareTag("Player") || obj.CompareTag("Enemy"))
         {
             this.SpriteRenderer.sortingOrder = this.orderLayerFront;
             this.SpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
