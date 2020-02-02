@@ -15,7 +15,7 @@ public class Item
 
     /// <summary>The quantity minimum</summary>
     [SerializeField]
-    [Range(1, 100)]
+    [Range(0, 100)]
     [Tooltip("Quantity min of items will be spawned.")]
     private int quantityMin;
 

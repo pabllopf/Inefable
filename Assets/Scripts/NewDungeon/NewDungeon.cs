@@ -9,8 +9,8 @@ using UnityEngine;
 /// <summary>Generate a dungeon</summary>
 public class NewDungeon : MonoBehaviour
 {
-    private const int BoardWidth = 750;
-    private const int BoardHeight = 750;
+    private const int BoardWidth = 500;
+    private const int BoardHeight = 500;
 
     private const int NumOfRooms = 15;
 
@@ -38,6 +38,9 @@ public class NewDungeon : MonoBehaviour
 
     [SerializeField]
     private GameObject boss = null;
+
+    [SerializeField]
+    private List<Item> generalItems = null;
 
     private List<Vector2> positionsToSpawnThePlayers = new List<Vector2>();
 
@@ -72,7 +75,12 @@ public class NewDungeon : MonoBehaviour
 
         this.PrintBoardInGame();
 
+        this.SpawnListOf(this.generalItems);
         this.SpawnListOf(this.style.GetLights());
+        this.SpawnListOf(this.style.GetItems());
+        this.SpawnListOf(this.style.GetEnemys());
+        this.SpawnListOf(this.style.GetPets());
+        this.SpawnListOf(this.style.GetFloors());
 
         this.PrintTheBoss();
         
@@ -118,11 +126,26 @@ public class NewDungeon : MonoBehaviour
         this.rooms[i] = NewRoom.SetUp(LastRoomWidth, LastRoomHeight, this.corridors[i - 1]);
 
 
-        while (board[this.rooms[i].XPos, this.rooms[i].YPos] == 1 && board[this.rooms[i].XPos + this.rooms[i].Width, this.rooms[i].YPos + this.rooms[i].Height] == 1) 
+        while (hasRoom(this.rooms[i])) 
         {
             this.corridors[i - 1] = NewCorridor.SetUp(CorridorWidth, CorridorHeight, this.rooms[i - 1]);
             this.rooms[i] = NewRoom.SetUp(LastRoomWidth, LastRoomHeight, this.corridors[i - 1]);
         }
+    }
+
+    private bool hasRoom(NewRoom room)
+    {
+        for (int x = room.XPos; x < room.XPos + room.Width; x++)
+        {
+            for (int y = room.YPos; y < room.YPos + room.Height; y++)
+            {
+                if (this.board[x, y] == 1) 
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void GetPositionsToSpawn()
