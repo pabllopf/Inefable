@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigbody2D = null;
 
     /// <summary>Awakes this instance.</summary>
-    public void Awake() => this.position = this.transform.position;
+    public void Awake() => this.position = new Vector2(255, 255);
 
     /// <summary>Starts this instance.</summary>
     public void Start()
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
         Game.LoadStats();
         Language.Translate();
 
-        Instantiate(mainCamera, this.transform.position, Quaternion.identity);
+        Instantiate(mainCamera, new Vector2(255, 255), Quaternion.identity);
 
         this.animator = this.GetComponent<Animator>();
         this.walkEffect = this.transform.Find("WalkEffect").GetComponent<WalkEffect>();

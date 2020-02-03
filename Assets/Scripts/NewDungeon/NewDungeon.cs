@@ -85,7 +85,7 @@ public class NewDungeon : MonoBehaviour
         this.PrintTheBoss();
         
         this.PrintAltarsInGame();
-        this.PrintPlayersInGame();
+        //this.PrintPlayersInGame();
     }
 
     /// <summary>Set up dungeon style.</summary>
