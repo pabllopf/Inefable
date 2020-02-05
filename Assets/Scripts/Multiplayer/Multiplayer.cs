@@ -125,9 +125,15 @@ public class Multiplayer : MonoBehaviour
 
         this.content = GameObject.Find("Interface/Multiplayer/Scroll/Viewport/Content").transform;
 
-        GameObject.Find("Interface/Multiplayer/Host").GetComponent<Button>().onClick.AddListener(() => { StartServer(); });
-        GameObject.Find("Interface/Multiplayer/Connect").GetComponent<Button>().onClick.AddListener(() => { ConnectToGame(); });
+        GameObject.Find("Interface/Multiplayer/Host").GetComponent<Button>().onClick.AddListener(() => { HostGame(); });
         GameObject.Find("Interface/Multiplayer/FindServers").GetComponent<Button>().onClick.AddListener(() => { FindServers(); });
+
+
+        
+        GameObject obj =  Instantiate(matchButton, content);
+        obj.name = "Connect to the test server 1";
+        obj.transform.Find("Text").GetComponent<Text>().text = "Connect to the test server 1";
+        obj.GetComponent<Button>().onClick.AddListener(() => { ConnectToGame(); });
     }
 
     private void Update()
@@ -138,10 +144,10 @@ public class Multiplayer : MonoBehaviour
         {
             if (!content.transform.Find(info.EndPoint.Address + "(Clone)")) 
             {
-                matchButton.name = info.EndPoint.Address.ToString();
-                matchButton.GetComponent<Button>().onClick.AddListener(() => { Connect(info); });
-                matchButton.transform.Find("Text").GetComponent<Text>().text = info.EndPoint.Address.ToString();
-                Instantiate(matchButton, content);
+                GameObject obj = Instantiate(matchButton, content);
+                obj.name = info.EndPoint.Address.ToString();
+                obj.GetComponent<Button>().onClick.AddListener(() => { Connect(info); });
+                obj.transform.Find("Text").GetComponent<Text>().text = info.EndPoint.Address.ToString();
             }
         }
     }
