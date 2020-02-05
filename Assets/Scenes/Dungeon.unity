@@ -71,22 +71,22 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 1
+    m_MixedBakeMode: 2
     m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
-    m_PVRSampleCount: 500
+    m_PVRSampleCount: 512
     m_PVRBounces: 2
-    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentSampleCount: 256
     m_PVREnvironmentReferencePointCount: 2048
-    m_PVRFilteringMode: 2
-    m_PVRDenoiserTypeDirect: 0
-    m_PVRDenoiserTypeIndirect: 0
-    m_PVRDenoiserTypeAO: 0
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVREnvironmentMIS: 0
+    m_PVREnvironmentMIS: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -120,7 +120,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &317372138
+--- !u!1 &215854709
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,249 +128,409 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 317372139}
-  - component: {fileID: 317372141}
-  - component: {fileID: 317372140}
-  m_Layer: 5
-  m_Name: NameDungeon
+  - component: {fileID: 215854711}
+  - component: {fileID: 215854710}
+  m_Layer: 0
+  m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &317372139
-RectTransform:
+--- !u!108 &215854710
+Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317372138}
+  m_GameObject: {fileID: 215854709}
+  m_Enabled: 1
+  serializedVersion: 9
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &215854711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215854709}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 250, y: 250, z: -33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &473849018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 473849020}
+  - component: {fileID: 473849019}
+  m_Layer: 0
+  m_Name: Dungeon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &473849019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473849018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c7da9ef5a85294983f071f7f7bfcbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4226575092265264803, guid: 9fde1f6b5490ef347b114f1ea9fe9efa, type: 3}
+  altar: {fileID: 7562691986287766605, guid: c16ca461c01eb334e875430e7fb9971c, type: 3}
+  boss: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd, type: 3}
+  generalItems:
+  - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
+    quantityMin: 1
+    quantityMax: 1
+    position: 1
+  - item: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
+    quantityMin: 0
+    quantityMax: 3
+    position: 1
+  - item: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
+    quantityMin: 0
+    quantityMax: 3
+    position: 1
+  - item: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
+    quantityMin: 1
+    quantityMax: 3
+    position: 1
+  dungeons:
+  - name: Atlantys
+    items:
+    - item: {fileID: 254462952908074430, guid: 4a84511f07e9dcb4cb15a96578f900ae, type: 3}
+      quantityMin: 10
+      quantityMax: 20
+      position: 1
+    - item: {fileID: 5187811806753155479, guid: 827789fe1287da4439e9a2238d3107cc,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 1818924166664772752, guid: acb8b7b66508708419e6f072864d9396,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 7205899972191141786, guid: ca1da029750c70c43b57d9aa3dbabfeb,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 8246726132629827227, guid: 6b8bf14c6884f644382336e0f3654a2a,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 1252713605279615939, guid: 61c4a2e9285621b478ee97b2b3823494,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 1488564367360403520, guid: 56a5c51ca2fe3df4e9c1a8f7c8f07903,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 1020147558245290324, guid: 3dcd6318cc624f34784093d4f32a13ae,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 3416577343637631244, guid: 7af4f4f146729474b8087f642058679d,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 1040253913332061332, guid: 1da23f8f417cac84eb2bfbcd2b42f9c4,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 8057724596147449675, guid: a995fc85613a09b49b7d17afd019f3ff,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 6504131875099478468, guid: 021aaaf0a1eb52d44bfaf55c0ed265a0,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 3314926080702811013, guid: f90c7f41c06e7844d97346331a8cc70a,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 4374509507188380055, guid: 0071774d2b40b9847815e8d6f55f12ae,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 2616183063227190300, guid: 46a5e9ccdcd31fb418ab6208398246d9,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 428216641761084044, guid: 632ba404d5679f04393b496640e1affd, type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 4452909562303655424, guid: e8f12932e32dbb049b11df186cb31fa3,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 966139080431581756, guid: b3b72019876f7c9408b7a472f0530e93, type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 8995925948463020581, guid: 0a5c9310f0e28774fb499bfb8d798c0b,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 5778542832800220584, guid: 67bde5956e8dd7d4aa3554bef1da8fa7,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 10
+      position: 1
+    - item: {fileID: 7142240786115863255, guid: f720a59a9c78c324884f95b5bef03af3,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3517079313194545775, guid: c48d82691b1f9b249a114a5e1da86f55,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 5
+      position: 1
+    - item: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 3
+      position: 1
+    - item: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 2
+      position: 1
+    - item: {fileID: 5876885173881764066, guid: c6a5b484f8314194698c22e513aac442,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 7183002340033153816, guid: 0992aa1a940074d4282f855937c0a36d,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 8839678898572949911, guid: 1f72c0839072a544a920af1fef1a120e,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 1419561259924246320, guid: 54ed8e3453d0ead4b9508b9a07ee5cc1,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 4787760869453367346, guid: 23e3a346ef058e6488cc04397e1d4d1b,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 1
+      position: 1
+    - item: {fileID: 8915209391725881048, guid: 456449ce6260b2b478ec4eeedb1a343f,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 3077350085068433165, guid: a1699aed2c525d54792206e68cd36ceb,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 4
+      position: 1
+    - item: {fileID: 872552486468013657, guid: 0fbf90a0c4af6924e825a4bf3adc0964, type: 3}
+      quantityMin: 0
+      quantityMax: 2
+      position: 1
+    enemys:
+    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
+        type: 3}
+      quantityMin: 0
+      quantityMax: 1
+      position: 1
+    pets:
+    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
+      quantityMin: 0
+      quantityMax: 1
+      position: 1
+    floors: []
+    lights:
+    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
+        type: 3}
+      quantityMin: 10
+      quantityMax: 15
+      position: 5
+--- !u!4 &473849020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473849018}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -250, y: -250, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &633654779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633654783}
+  - component: {fileID: 633654782}
+  - component: {fileID: 633654781}
+  - component: {fileID: 633654780}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &633654780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633654779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1511ccae7919cfc46b603b9b337fdc94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &633654781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633654779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &633654782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633654779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 0
+  m_DragThreshold: 10
+--- !u!4 &633654783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633654779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1872163136}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 17.3}
-  m_SizeDelta: {x: 1024, y: 115.3}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &317372140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317372138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 4b850c32e4cb3594da232294788436aa, type: 3}
-    m_FontSize: 70
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 1
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Example
---- !u!222 &317372141
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317372138}
-  m_CullTransparentMesh: 0
---- !u!1 &379597238
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 379597239}
-  - component: {fileID: 379597241}
-  - component: {fileID: 379597240}
-  m_Layer: 5
-  m_Name: PopUpMessage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &379597239
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379597238}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1872163136}
-  m_Father: {fileID: 652328684}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &379597240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379597238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &379597241
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379597238}
-  m_CullTransparentMesh: 0
---- !u!1 &652328680
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 652328684}
-  - component: {fileID: 652328683}
-  - component: {fileID: 652328682}
-  - component: {fileID: 652328681}
-  m_Layer: 5
-  m_Name: Start_Interface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &652328681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652328680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &652328682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652328680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1024, y: 768}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!223 &652328683
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652328680}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 1
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!224 &652328684
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652328680}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 379597239}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!1 &1130379525
+--- !u!1 &1934308960
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,36 +538,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1130379526}
-  - component: {fileID: 1130379527}
+  - component: {fileID: 1934308962}
+  - component: {fileID: 1934308961}
   m_Layer: 0
   m_Name: SoundTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1130379526
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130379525}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 248.2982, y: 388.69025, z: -51.816658}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1130379527
+  m_IsActive: 0
+--- !u!82 &1934308961
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130379525}
+  m_GameObject: {fileID: 1934308960}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -497,1301 +643,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1192179500
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1192179502}
-  - component: {fileID: 1192179501}
-  m_Layer: 11
-  m_Name: Dungeon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1192179501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192179500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6d45910ea47f74ab0968e18c08b3da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 4226575092265264803, guid: 9fde1f6b5490ef347b114f1ea9fe9efa, type: 3}
-  finalBoss: {fileID: 2902630093026835834, guid: e1ece5cc171cccc4882403bcc8e4fedd,
-    type: 3}
-  generalItems:
-  - item: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
-    quantityMin: 2
-    quantityMax: 5
-    position: 1
-  - item: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
-    quantityMin: 2
-    quantityMax: 5
-    position: 1
-  - item: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
-    quantityMin: 1
-    quantityMax: 3
-    position: 1
-  dungeons:
-  - name: Atlantys
-    items:
-    - item: {fileID: 5187811806753155479, guid: 827789fe1287da4439e9a2238d3107cc,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1818924166664772752, guid: acb8b7b66508708419e6f072864d9396,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7205899972191141786, guid: ca1da029750c70c43b57d9aa3dbabfeb,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8246726132629827227, guid: 6b8bf14c6884f644382336e0f3654a2a,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8340145100676196251, guid: f8290e2f24c45a645af2540a4a6edeae,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 799311237642759215, guid: ce04ba15c2c885d438b652f8d81fa3fe, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1835321093359545448, guid: 22258937f520f484a9b1f6383238da99,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 198088492250660942, guid: 6555a7a0e6748fe42999de1f37c796c5, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6232778765182166942, guid: df371944dfc5f9c49a1a3886855d970f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 2616183063227190300, guid: 46a5e9ccdcd31fb418ab6208398246d9,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 428216641761084044, guid: 632ba404d5679f04393b496640e1affd, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4452909562303655424, guid: e8f12932e32dbb049b11df186cb31fa3,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4452909562303655424, guid: e8f12932e32dbb049b11df186cb31fa3,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 966139080431581756, guid: b3b72019876f7c9408b7a472f0530e93, type: 3}
-      quantityMin: 1
-      quantityMax: 2
-      position: 1
-    - item: {fileID: 8995925948463020581, guid: 0a5c9310f0e28774fb499bfb8d798c0b,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 2
-      position: 1
-    - item: {fileID: 8723065342391272239, guid: bccedfdc6cb0b2e449f9416d7726209d,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5528942828672778858, guid: 7cd105977b2ffb84e82c2c1ab0ea295a,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5206911670580647685, guid: 2adacbedb10f0804a81061e46a338c62,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7827267542092052371, guid: 70d332761a7962b429e25887e9efe795,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 2
-      position: 1
-    - item: {fileID: 7311174198740533540, guid: 41628db72582f204abfd954514e92e65,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7859268821494649638, guid: 745ba631c4fd52342b9b3d361f499f35,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 872552486468013657, guid: 0fbf90a0c4af6924e825a4bf3adc0964, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3513439440854823477, guid: 5744e23d6a9451c4ebe71940211373aa,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 511477752633190660, guid: d7766b8b90d3ca148a6f3ac2dc98e3a8, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8596390839108972749, guid: 73f71bccf42ee3444acaffeb036bd233,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6168540267739479158, guid: 8f5899b1ecafe024a995b9ada30c38b8,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4787760869453367346, guid: 23e3a346ef058e6488cc04397e1d4d1b,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4642376894521488634, guid: 8a4e38873e7907a438fbd7aabdb58c99,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1419561259924246320, guid: 54ed8e3453d0ead4b9508b9a07ee5cc1,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8915209391725881048, guid: 456449ce6260b2b478ec4eeedb1a343f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 2
-      position: 1
-    - item: {fileID: 3077350085068433165, guid: a1699aed2c525d54792206e68cd36ceb,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4349248665242750292, guid: 78ece430e5f9e624dba02f0406936bfd,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6971022557279908234, guid: 9bd6706e0728d1a4fa9fdbef51fe5b06,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5340388514211516366, guid: 16b6a46bfe085b94ca4d8d538ff655af,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7867964922535361530, guid: c452776b6f4c2e543b1118533f7ddb65,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7256165295047854280, guid: 51dd45954ede1394d8c35bb163c0b95f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 9071158946076515816, guid: 15ec2b78d766e02429e9872dcfcd9d0a,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 307097912304888758, guid: 147cc7091c3a045469c8d40c5e7130e4, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5876885173881764066, guid: c6a5b484f8314194698c22e513aac442,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7183002340033153816, guid: 0992aa1a940074d4282f855937c0a36d,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8839678898572949911, guid: 1f72c0839072a544a920af1fef1a120e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3517079313194545775, guid: c48d82691b1f9b249a114a5e1da86f55,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7142240786115863255, guid: f720a59a9c78c324884f95b5bef03af3,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8219787026375470282, guid: f74dc28357efeda489c41409e803df5e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4374509507188380055, guid: 0071774d2b40b9847815e8d6f55f12ae,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8057724596147449675, guid: a995fc85613a09b49b7d17afd019f3ff,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1020147558245290324, guid: 3dcd6318cc624f34784093d4f32a13ae,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3314926080702811013, guid: f90c7f41c06e7844d97346331a8cc70a,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6504131875099478468, guid: 021aaaf0a1eb52d44bfaf55c0ed265a0,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1040253913332061332, guid: 1da23f8f417cac84eb2bfbcd2b42f9c4,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3416577343637631244, guid: 7af4f4f146729474b8087f642058679d,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1488564367360403520, guid: 56a5c51ca2fe3df4e9c1a8f7c8f07903,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1252713605279615939, guid: 61c4a2e9285621b478ee97b2b3823494,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3194898154752745205, guid: b2a6861643768b143bef11a5604ed3e3,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8092428558188789548, guid: 84b44770feae8994ca83d5796f08330f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3902300471057115671, guid: 21706014bfe602d4e99c8009beb07738,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5552164234416382014, guid: f0bb25a6144cee440bd76998ca31e499,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6121584952629557514, guid: 2ea743bf9903fc74b8cf2f85aed8b990,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 2727470550585363770, guid: d277917b712607e4aad520486e00bf46,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1070606593077784672, guid: 5eaba2fe0d01b69429edaff6d5a4c951,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4965778866482508353, guid: bb4f3a5988c5c7d49b751849465922ef,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 385947430599184647, guid: 837f56ebdc0d7a14e91584e7eb735fac, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7493780267772708967, guid: 403153de12c962043b476780e6938171,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 254463575317668144, guid: d3e72b4d038911b449b9c0a040cf88c5, type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4453144672153147295, guid: f3bd69c72a119f041ae2d408c49d39cc,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3814590596849640910, guid: a22738ba5ae31514483d5ca48f6c4c96,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 1031575511239455525, guid: 70d9db143b2fd5145a49d0db6307718e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6236989339758025968, guid: c2eee9c160daf5643b5f14fa13982a19,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3723038038372648011, guid: 84eae88c7d0cc8e498dd3e4025a96043,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 9173406476249335183, guid: 6740e34b7078df7459007a8ff75df23c,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4192294334860960498, guid: 2b1caa43722e9e5459f5b9c07b03792d,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7094349470080536012, guid: 42d5c6795bf0f1347bfe58080ff5d0f2,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3077350085068433165, guid: a1699aed2c525d54792206e68cd36ceb,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7256165295047854280, guid: 51dd45954ede1394d8c35bb163c0b95f,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5340388514211516366, guid: 16b6a46bfe085b94ca4d8d538ff655af,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6971022557279908234, guid: 9bd6706e0728d1a4fa9fdbef51fe5b06,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 7142240786115863255, guid: f720a59a9c78c324884f95b5bef03af3,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3517079313194545775, guid: c48d82691b1f9b249a114a5e1da86f55,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5876885173881764066, guid: c6a5b484f8314194698c22e513aac442,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 5778542832800220584, guid: 67bde5956e8dd7d4aa3554bef1da8fa7,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8995925948463020581, guid: 0a5c9310f0e28774fb499bfb8d798c0b,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 8219787026375470282, guid: f74dc28357efeda489c41409e803df5e,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 4374509507188380055, guid: 0071774d2b40b9847815e8d6f55f12ae,
-        type: 3}
-      quantityMin: 1
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 2727470550585363770, guid: d277917b712607e4aad520486e00bf46,
-        type: 3}
-      quantityMin: 2
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 254462952908074430, guid: 4a84511f07e9dcb4cb15a96578f900ae, type: 3}
-      quantityMin: 45
-      quantityMax: 73
-      position: 1
-    enemys:
-    - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668,
-        type: 3}
-      quantityMin: 12
-      quantityMax: 20
-      position: 1
-    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
-      quantityMin: 12
-      quantityMax: 20
-      position: 1
-    pets:
-    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    floors: []
-    lights:
-    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
-        type: 3}
-      quantityMin: 9
-      quantityMax: 17
-      position: 5
-  - name: Afterlife
-    items:
-    - item: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 10
-      position: 5
-    - item: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 10
-      position: 5
-    - item: {fileID: 7796735294550617886, guid: 8d4873d16ee216f4f8539f8dcfda1cbd,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 9
-      position: 1
-    - item: {fileID: 2176148125430791068, guid: da49422756daf0745b2049cef2cac26a,
-        type: 3}
-      quantityMin: 7
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 5489896890251847411, guid: 85be6510636861043a73c7a42ccb49f7,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 6952575790517739196, guid: 0c8c4950f7052ee488411e54c26b3f22,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 11
-      position: 1
-    - item: {fileID: 801685504570097522, guid: 2365c0d01d051be45a122e6905358196, type: 3}
-      quantityMin: 9
-      quantityMax: 13
-      position: 1
-    - item: {fileID: 5792570103841670678, guid: 76e473d857fe80844bb32ce37a7e35ad,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 5
-      position: 1
-    - item: {fileID: 2991040175751709577, guid: 5a03add70fb291b4a9efce5829126c1c,
-        type: 3}
-      quantityMin: 7
-      quantityMax: 11
-      position: 1
-    - item: {fileID: 5512706929742432406, guid: 62b6a25fc6cfcad43b6935d2f92af203,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 3643533081097949778, guid: 3dad7d7ca8ba50a499c8a265cb832af5,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 10
-      position: 1
-    - item: {fileID: 1435341065194675076, guid: 7b787e2e44daced4bbaa2bbb9aa5fee1,
-        type: 3}
-      quantityMin: 3
-      quantityMax: 3
-      position: 1
-    - item: {fileID: 8369970926437621636, guid: 21501c924c4393548825eef1d4ee29a5,
-        type: 3}
-      quantityMin: 2
-      quantityMax: 4
-      position: 1
-    - item: {fileID: 7951384098566456997, guid: 3aee3febf6da9a44bb01edf0f126d2c2,
-        type: 3}
-      quantityMin: 2
-      quantityMax: 4
-      position: 1
-    - item: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
-        type: 3}
-      quantityMin: 2
-      quantityMax: 4
-      position: 1
-    - item: {fileID: 4827289049806175297, guid: 1ee9ef33ae69752459b9801349ce2e2e,
-        type: 3}
-      quantityMin: 2
-      quantityMax: 4
-      position: 1
-    - item: {fileID: 7599661577980238615, guid: 9329285d3a00d3344842931ee9f343ed,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 9
-      position: 1
-    - item: {fileID: 4406084393435920664, guid: d30e08094bf46f441a98dad0b7c853b8,
-        type: 3}
-      quantityMin: 8
-      quantityMax: 10
-      position: 5
-    - item: {fileID: 3792622281800518772, guid: 2a7b91c1cbc1b184ca9513f92bbbd0cd,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 10
-      position: 5
-    - item: {fileID: 6186268067420159905, guid: f5bb82ee993bebd4596f0127f85d9ddb,
-        type: 3}
-      quantityMin: 8
-      quantityMax: 10
-      position: 1
-    - item: {fileID: 5830105956019888815, guid: b1128e98b2e35704bb943ea56e144f02,
-        type: 3}
-      quantityMin: 8
-      quantityMax: 10
-      position: 1
-    enemys:
-    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
-        type: 3}
-      quantityMin: 15
-      quantityMax: 20
-      position: 1
-    - item: {fileID: 3643134008953860187, guid: a9fe9daa754ecd84ca7db413df274cd8,
-        type: 3}
-      quantityMin: 15
-      quantityMax: 20
-      position: 1
-    pets:
-    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    floors:
-    - item: {fileID: 2911427291813253719, guid: d21b849710b716c428ae90b0f4736872,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 14
-      position: 1
-    - item: {fileID: 1277672210103570365, guid: 5c3452a809a6a324ba07f61b8eac35af,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 14
-      position: 1
-    - item: {fileID: 8821339950526232996, guid: 7fcd5d5007687114b9bedabf1f932548,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 14
-      position: 1
-    - item: {fileID: 2297464425588850860, guid: fe423d1da5ecb8c4b9f8403466be3367,
-        type: 3}
-      quantityMin: 6
-      quantityMax: 14
-      position: 1
-    - item: {fileID: 446069016295019933, guid: f6e0b7c4b08ddeb4e8659359ac6351c7, type: 3}
-      quantityMin: 6
-      quantityMax: 14
-      position: 1
-    lights:
-    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 15
-      position: 5
-    - item: {fileID: 8131167399865811844, guid: 5df07369968610a4c98d84c3b739c390,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 15
-      position: 1
-  - name: Foreshore
-    items:
-    - item: {fileID: 881572400309163323, guid: ecfec7e4fe04f424bac5e4e5e428a77a, type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 1418002004525905514, guid: b84315b6b11730349b561ae464f14209,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 6104540607654767890, guid: 2d958fbb6ef4db349a4bdbf37610e8da,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 3857190637066406122, guid: bb974a60b57d550458ca9beaa03f3239,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 7278500161269428664, guid: 12f0a566d7a66c94d908079e2ac594e6,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 6304072383275511242, guid: 376c2885ff9aa654a97f9a3c81874b32,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 3499185458171660795, guid: acd5d01a5703a67418d57e8ce6695998,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 4206125799132570047, guid: 0bf0fd97d74f6bb4788d6f110c8cd64e,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 6750205659664104692, guid: ace47a989a4bd124da266337e93a0849,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 8575814057883155670, guid: 5dd17f14b0c48774fbed4a0c446016ba,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 2687139449768470786, guid: 62a4cc830057f5241859aff3aa48b1d2,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 5545560213153553992, guid: 9629f551b47411f4297c1b58b25accb7,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 4821216072036999873, guid: fd8ea1d5202962d448bf6dfb8e1162bf,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 4177670097215270262, guid: 13f23734aedd5eb43a7fade5a9472e22,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    - item: {fileID: 6089015100723486042, guid: 23336d6c37d75bc409eb3bc9aad1decb,
-        type: 3}
-      quantityMin: 5
-      quantityMax: 8
-      position: 1
-    enemys:
-    - item: {fileID: 2118528844602804159, guid: c546ea04a5436a247a356740b25cbcd0,
-        type: 3}
-      quantityMin: 12
-      quantityMax: 19
-      position: 1
-    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
-      quantityMin: 12
-      quantityMax: 19
-      position: 1
-    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
-        type: 3}
-      quantityMin: 12
-      quantityMax: 19
-      position: 1
-    pets:
-    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    floors:
-    - item: {fileID: 5630656112227581299, guid: 3ca302750fa1a034782ddfaba9bdd6d6,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 3245254330460108315, guid: ccafda1923eaa7448b1504337d87db40,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 7522168127295308746, guid: 1357e79fb94aeab47add3cfc8fee0e5b,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 1777629716911060862, guid: 4113d72d621206a41a79ac7546903681,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 6070533712919502622, guid: 45dedc2999ee8d2489d4fbdbaf078588,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 5750803053063285242, guid: 599e34860e1defb49a67d329d80cf959,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 6894372803672370666, guid: 046a81186ecb1b347aada7b159f84898,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 6149344098148861249, guid: 493d3ee12748b7a499b745f6eba5c90c,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    - item: {fileID: 2912465414705286259, guid: 6d83e0bac0fa4d9438f213fc965a5a8e,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 12
-      position: 1
-    lights:
-    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 17
-      position: 5
-  - name: Landlord
-    items:
-    - item: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
-      quantityMin: 4
-      quantityMax: 9
-      position: 1
-    - item: {fileID: 6693319548863229260, guid: 028a2e46c7e541a43a99be8c6f70da7f,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 9
-      position: 1
-    - item: {fileID: 4069495582778785942, guid: 215c271fbd384454f82f3036725d5670,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 9
-      position: 1
-    - item: {fileID: 2870702960043453953, guid: 5e77d90986a74f5429f92ba7d4af501b,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 9
-      position: 1
-    - item: {fileID: 7436823093116799167, guid: c02b3b0e8222f3f4d8584a8646e6c499,
-        type: 3}
-      quantityMin: 4
-      quantityMax: 9
-      position: 1
-    enemys:
-    - item: {fileID: 3669213713651488227, guid: 3940e1acf7e99dd4c9afd00dbf5e2e0d,
-        type: 3}
-      quantityMin: 13
-      quantityMax: 20
-      position: 1
-    - item: {fileID: 1729323977278294, guid: 667204a5f0c802b4fa00e8d671f24d6a, type: 3}
-      quantityMin: 13
-      quantityMax: 20
-      position: 1
-    - item: {fileID: 7840228195923848880, guid: 723db075acdf7b24392b6459b20ab668,
-        type: 3}
-      quantityMin: 13
-      quantityMax: 20
-      position: 1
-    pets:
-    - item: {fileID: 1484694815107966, guid: 9a3752c23bcf7b246b5ff91538d33b8e, type: 3}
-      quantityMin: 1
-      quantityMax: 1
-      position: 1
-    floors: []
-    lights:
-    - item: {fileID: 1269650030846384322, guid: e3f5ae8f025544643bddc7251b6e066f,
-        type: 3}
-      quantityMin: 10
-      quantityMax: 19
-      position: 5
---- !u!4 &1192179502
+--- !u!4 &1934308962
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1192179500}
+  m_GameObject: {fileID: 1934308960}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 248.2982, y: 388.69025, z: -51.816658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1588640764
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1588640767}
-  - component: {fileID: 1588640766}
-  - component: {fileID: 1588640765}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1588640765
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588640764}
-  m_Enabled: 1
---- !u!20 &1588640766
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588640764}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1588640767
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588640764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1782877288
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1782877291}
-  - component: {fileID: 1782877290}
-  - component: {fileID: 1782877289}
-  - component: {fileID: 1782877292}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1782877289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782877288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1782877290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782877288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 0
-  m_DragThreshold: 10
---- !u!4 &1782877291
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782877288}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1782877292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782877288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1511ccae7919cfc46b603b9b337fdc94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1872163135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1872163136}
-  - component: {fileID: 1872163138}
-  - component: {fileID: 1872163137}
-  m_Layer: 5
-  m_Name: PopUp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1872163136
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872163135}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 317372139}
-  - {fileID: 2069657519}
-  m_Father: {fileID: 379597239}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1872163137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872163135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1872163138
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872163135}
-  m_CullTransparentMesh: 0
---- !u!1 &2069657518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2069657519}
-  - component: {fileID: 2069657521}
-  - component: {fileID: 2069657520}
-  m_Layer: 5
-  m_Name: Info
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2069657519
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069657518}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1872163136}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -57.675}
-  m_SizeDelta: {x: 1024, y: 34.65}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2069657520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069657518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 4b850c32e4cb3594da232294788436aa, type: 3}
-    m_FontSize: 70
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 1
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Example
---- !u!222 &2069657521
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069657518}
-  m_CullTransparentMesh: 0
---- !u!1 &2096896449
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2096896451}
-  - component: {fileID: 2096896450}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &2096896450
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096896449}
-  m_Enabled: 1
-  serializedVersion: 9
-  m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.6
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 1
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &2096896451
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096896449}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 250, y: 250, z: -33}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}

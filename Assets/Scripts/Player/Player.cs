@@ -5,6 +5,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
 /// <summary>Manage the player of the game.</summary>
 [RequireComponent(typeof(SpriteRenderer))]
@@ -14,7 +15,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Wallet))]
 [RequireComponent(typeof(Health))]
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     /// <summary>The open</summary>
     private const string Open = "Open";
@@ -116,17 +117,49 @@ public class Player : MonoBehaviour
     /// <summary>The rigid body</summary>
     private Rigidbody2D rigbody2D = null;
 
-    /// <summary>Awakes this instance.</summary>
-    public void Awake() => this.position = new Vector2(255, 255);
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        this.transform.position = new Vector2(255, 255);
+        this.position = new Vector2(255, 255);
+        this.animator = this.GetComponent<Animator>();
+        this.walkEffect = this.transform.Find("WalkEffect").GetComponent<WalkEffect>();
+        this.uiAnimator = this.transform.Find("Interface/Bar").GetComponent<Animator>();
+        this.rigbody2D = this.GetComponent<Rigidbody2D>();
+        this.health = this.GetComponent<Health>();
+        this.shield = this.GetComponent<Shield>();
+        this.wallet = this.GetComponent<Wallet>();
+        this.keyPack = this.GetComponent<KeyPack>();
+        this.inventory = this.GetComponent<Inventory>();
+        this.mobileUI = this.transform.Find("Interface/Mobile").gameObject;
+        this.joystick = this.transform.Find("Interface/Mobile/Joystick").GetComponent<Joystick>();
+
+        this.buttonA = this.mobileUI.transform.Find("Buttons/ButtonA").gameObject;
+        this.buttonB = this.mobileUI.transform.Find("Buttons/ButtonB").gameObject;
+
+        this.mobileUI.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        if (isLocalPlayer)
+        {
+        }
+    }
+
 
     /// <summary>Starts this instance.</summary>
-    public void Start()
+    /*public void Start()
     {
-        Game.LoadSettings();
-        Game.LoadStats();
-        Language.Translate();
-
-        Instantiate(mainCamera, new Vector2(255, 255), Quaternion.identity);
+        if (!isLocalPlayer) { return; }
+        //Game.LoadSettings();
+        //Game.LoadStats();
+        //Language.Translate();
+        //this.transform.position = new Vector2(255, 255);
+        //this.position = new Vector2(255, 255);
+        //Instantiate(mainCamera, new Vector2(255, 255), Quaternion.identity);
 
         this.animator = this.GetComponent<Animator>();
         this.walkEffect = this.transform.Find("WalkEffect").GetComponent<WalkEffect>();
@@ -146,11 +179,13 @@ public class Player : MonoBehaviour
         this.mobileUI.SetActive(false);
 
         this.HasPet();
-    }
+    }*/
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
+        if (!isLocalPlayer) { return; }
+
         this.ControlBar();
 
         if (Settings.Current.Plattform == "Computer")
@@ -250,6 +285,7 @@ public class Player : MonoBehaviour
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
+        if (!isLocalPlayer) { return; }
         this.rigbody2D.MovePosition(this.position + (this.direction * (this.speedMove * Time.deltaTime)));
     }
 

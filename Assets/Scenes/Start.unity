@@ -6491,7 +6491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70398ee6cc342b40bd1c6838f3f2d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: House
+  sceneToLoad: Town
   acceptClip: {fileID: 8300000, guid: 713c874160562da418037958b7cfffc7, type: 3}
   cancelClip: {fileID: 8300000, guid: 9d255dbf95218104a87ea1459a9c60aa, type: 3}
 --- !u!4 &1738012226

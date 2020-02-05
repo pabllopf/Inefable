@@ -6,24 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/NewTown.unity
+    guid: 9b838959236049946bad22dacf35777b
+  - enabled: 0
     path: Assets/Scenes/Foreword.unity
     guid: bf327fd60cea14a43b99362fbef9bb02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Start.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/House.unity
     guid: 13a14ce0a8cbcb543bcca7c3d346a9fb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Shop.unity
     guid: 12a892db3631a5b44990042508449167
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Town.unity
     guid: 97c9c5368a7ed1e42b8552c444151593
   - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: 1a99c247be8ffef4299f45c7a42a3e1b
+  - enabled: 0
     path: Assets/Scenes/Epilogue.unity
     guid: cf664522955cfc943a78b13c493e80bc
-  - enabled: 1
-    path: Assets/Scenes/NewDungeon.unity
-    guid: 1a99c247be8ffef4299f45c7a42a3e1b
+  - enabled: 0
+    path: Assets/Mirror/Examples/Discovery/Scenes/Scenee.unity
+    guid: 90fddc74fa21c423599167eb28b09dd1
   m_configObjects: {}

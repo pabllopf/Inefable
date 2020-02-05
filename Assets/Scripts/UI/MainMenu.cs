@@ -1,6 +1,6 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="MainMenuOld.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="MainMenu.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>Main menu of the game.</summary>
-public class MainMenuOld : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     /// <summary>The name scene to load</summary>
     [SerializeField]
