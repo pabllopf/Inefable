@@ -2,9 +2,13 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Multiplayer.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 using Mirror;
 using Mirror.Discovery;
 using UnityEngine;
@@ -40,7 +44,7 @@ public class Multiplayer : MonoBehaviour
 
     void Connect(ServerResponse info)
     {
-        NetworkManager.singleton.StartClient(info.uri);
+        this.networkManager.StartClient(info.uri);
     }
 
     /// <summary>Show my IP.</summary>
@@ -52,12 +56,6 @@ public class Multiplayer : MonoBehaviour
         }
     }
 
-    public void StartServer()
-    {
-        NetworkManager.singleton.networkAddress = "83.34.56.241";
-        NetworkManager.singleton.StartServer();
-    }
-
     /// <summary>Hosts the game.</summary>
     public void HostGame() 
     {
@@ -67,19 +65,32 @@ public class Multiplayer : MonoBehaviour
     }
 
     /// <summary>Connects to game.</summary>
-    public void ConnectToGame()
+    public void ConnectToServerGame(string port)
     {
-        //NetworkManager.singleton.networkAddress = GameObject.Find("Interface/Multiplayer/InputIP").GetComponent<InputField>().text;
-        NetworkManager.singleton.networkAddress = "83.34.56.241";
-        NetworkManager.singleton.StartClient();
+        foreach (ushort portt in this.networkManager.ports) 
+        {
+            if (portt.ToString() == port) 
+            {
+                this.GetComponent<TelepathyTransport>().port = portt;
+            }
+        }
+        this.networkManager.networkAddress = "83.34.56.241";
+        this.networkManager.StartClient();
     }
 
-    public void FindServers() 
+    public void FindLocalMacth() 
     {
         discoveredServers.Clear();
         networkDiscovery.StartDiscovery();
-        this.needUpdate = true;
+        this.StartCoroutine(this.CheckHostMatchs());
     }
+
+    public void FindServers()
+    {
+        this.StopAllCoroutines();
+        this.StartCoroutine(this.CheckServersMatchs());
+    }
+
 
     public void OnDiscoveredServer(ServerResponse info)
     {
@@ -115,10 +126,6 @@ public class Multiplayer : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        this.myIP = GetIPAddress();
-        this.myIPText = GameObject.Find("Interface/Multiplayer/MyIP/Text").GetComponent<Text>();
-        this.ShowMyIp();
-
         this.numOfServers = GameObject.Find("Interface/Multiplayer/NumOfServers/Text").GetComponent<Text>();
 
         //this.networkDiscovery.OnServerFound.AddListener((info) => { OnDiscoveredServer(info); });
@@ -127,22 +134,24 @@ public class Multiplayer : MonoBehaviour
 
         GameObject.Find("Interface/Multiplayer/Host").GetComponent<Button>().onClick.AddListener(() => { HostGame(); });
         GameObject.Find("Interface/Multiplayer/FindServers").GetComponent<Button>().onClick.AddListener(() => { FindServers(); });
+        GameObject.Find("Interface/Multiplayer/FindLocalMatch").GetComponent<Button>().onClick.AddListener(() => { FindLocalMacth(); });
 
 
         
-        GameObject obj =  Instantiate(matchButton, content);
-        obj.name = "Connect to the test server 1";
-        obj.transform.Find("Text").GetComponent<Text>().text = "Connect to the test server 1";
-        obj.GetComponent<Button>().onClick.AddListener(() => { ConnectToGame(); });
     }
 
     private void Update()
     {
-        this.numOfServers.text = discoveredServers.Count.ToString();
 
+        this.numOfServers.text = discoveredServers.Count.ToString();
+    }
+
+    private IEnumerator CheckHostMatchs() 
+    {
+        yield return new WaitForSeconds(1f);
         foreach (ServerResponse info in discoveredServers.Values)
         {
-            if (!content.transform.Find(info.EndPoint.Address + "(Clone)")) 
+            if (!content.transform.Find(info.EndPoint.Address.ToString()))
             {
                 GameObject obj = Instantiate(matchButton, content);
                 obj.name = info.EndPoint.Address.ToString();
@@ -151,4 +160,64 @@ public class Multiplayer : MonoBehaviour
             }
         }
     }
+
+    private List<GameObject> portsButtons = new List<GameObject>();
+    private int counter = 0;
+    private float sixe = 0f;
+
+    private IEnumerator CheckServersMatchs()
+    {
+        if (portsButtons.Count > 0) 
+        { 
+            portsButtons.ForEach(i => Destroy(i)); 
+        }
+
+        yield return null;
+        GameObject.Find("Interface/Multiplayer/Scrollbar").GetComponent<Scrollbar>().size = 0;
+        counter = 0;
+        sixe = 0;
+
+        for (int i = 0; i < this.networkManager.ports.Count; i++)
+        {
+            if (!content.transform.Find(this.networkManager.ports[i].ToString()))
+            {
+                GameObject obj = Instantiate(matchButton, content);
+                obj.name = this.networkManager.ports[i].ToString();
+                obj.transform.Find("Text").GetComponent<Text>().text = "Room Server " + i;
+                obj.GetComponent<Button>().onClick.AddListener(() => { ConnectToServerGame(obj.name); });
+                obj.transform.Find("State").GetComponent<Image>().color = Color.red;
+
+                //this.StartCoroutine(this.checkStatus(obj, this.networkManager.ports[i]));
+
+
+                TcpClient client = new TcpClient();
+                client.Connect("83.34.56.241", this.networkManager.ports[i]);
+
+                if (client.Connected)
+                {
+                    obj.transform.Find("State").GetComponent<Image>().color = Color.green;
+                    counter++;
+                    client.Close();
+                }
+                sixe += 1f / this.networkManager.ports.Count;
+                GameObject.Find("Interface/Multiplayer/Scrollbar").GetComponent<Scrollbar>().size = sixe;
+                portsButtons.Add(obj);
+                yield return new WaitForSeconds(0.5f);
+
+            }
+            yield return null;
+        }
+
+       
+        yield return new WaitForSeconds(0f);
+        GameObject.Find("Interface/Multiplayer/NumOfTestServers/Text").GetComponent<Text>().text = counter.ToString();
+    }
+
+    IEnumerator checkStatus(GameObject obj, int port)
+    {
+        yield return null;
+
+        
+    }
+
 }

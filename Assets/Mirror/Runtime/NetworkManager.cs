@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+
 
 namespace Mirror
 {
@@ -91,13 +93,23 @@ namespace Mirror
         /// <para>This effects the memory usage of the network layer.</para>
         /// </summary>
         [FormerlySerializedAs("m_MaxConnections")]
-        public int maxConnections = 4;
+        public int maxConnections = 100;
+
+        [SerializeField]
+        public List<NetworkConnection> connections = new List<NetworkConnection>(); 
 
         /// <summary>
         /// Number of active player objects across all connections on the server.
         /// <para>This is only valid on the host / server.</para>
         /// </summary>
         public int numPlayers => NetworkServer.connections.Count(kv => kv.Value.identity != null);
+
+        public GameObject ClientUI = null;
+        private GameObject clientui = null;
+
+        public GameObject clientObj = null;
+        public GameObject ServerUI = null;
+        private GameObject ui = null;
 
         [Header("Authentication")]
         public NetworkAuthenticator authenticator;
@@ -227,8 +239,6 @@ namespace Mirror
         /// </summary>
         public virtual void Awake()
         {
-            Debug.Log("Thank you for using Mirror! https://mirror-networking.com");
-
             // Set the networkSceneName to prevent a scene reload
             // if client connection to server fails.
             networkSceneName = offlineScene;
@@ -238,6 +248,12 @@ namespace Mirror
             // setup OnSceneLoaded callback
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
+        public List<ushort> ports = new List<ushort>() { 
+            7777, 
+            7778,
+            7779,
+        };
 
         /// <summary>
         /// virtual so that inheriting classes' Start() can call base.Start() too
@@ -251,8 +267,28 @@ namespace Mirror
             // (tick rate is applied in StartServer!)
             if (isHeadless && startOnHeadless)
             {
+                foreach (ushort port in ports) 
+                {
+                    if (port.ToString() == GetArg("-port")) 
+                    {
+                        this.GetComponent<TelepathyTransport>().port = port;
+                    }
+                }
                 StartServer();
             }
+        }
+
+        private static string GetArg(string name)
+        {
+            var args = Environment.GetCommandLineArgs();
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == name && args.Length > i + 1)
+                {
+                    return args[i + 1];
+                }
+            }
+            return null;
         }
 
         // NetworkIdentity.UNetStaticUpdate is called from UnityEngine while LLAPI network is active.
@@ -281,6 +317,7 @@ namespace Mirror
             string loadedSceneName = SceneManager.GetActiveScene().name;
             return !string.IsNullOrEmpty(onlineScene) && onlineScene != loadedSceneName && onlineScene != offlineScene;
         }
+
 
         // full server setup code, without spawning objects yet
         void SetupServer()
@@ -1255,8 +1292,11 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public virtual void OnServerDisconnect(NetworkConnection conn)
         {
+            connections.Remove(conn);
             NetworkServer.DestroyPlayerForConnection(conn);
             if (LogFilter.Debug) Debug.Log("OnServerDisconnect: Client disconnected.");
+            ui.transform.Find("Multiplayer/NumOfPlayers/Text").GetComponent<Text>().text = numPlayers.ToString();
+            Destroy(ui.transform.Find("Multiplayer/Scroll/Viewport/Content").Find("Player::" + conn.connectionId.ToString()).gameObject);
         }
 
         /// <summary>
@@ -1293,12 +1333,26 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public virtual void OnServerAddPlayer(NetworkConnection conn)
         {
+            connections.Add(conn); 
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
                 : Instantiate(playerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, player);
+            ui.transform.Find("Multiplayer/NumOfPlayers/Text").GetComponent<Text>().text = numPlayers.ToString();
+        
+            GameObject obj = Instantiate(clientObj, ui.transform.Find("Multiplayer/Scroll/Viewport/Content").transform);
+            obj.name = "Player::"  + conn.connectionId.ToString();
+            obj.transform.Find("Text").GetComponent<Text>().text = "Player::" + conn.connectionId.ToString();
+            obj.GetComponent<Button>().onClick.AddListener(() => { Disconect(conn); });
+        }
+
+
+        public void Disconect(NetworkConnection conn) 
+        {
+            conn.Disconnect();
+            //ui.transform.Find("Multiplayer/NumOfPlayers/Text").GetComponent<Text>().text = numPlayers.ToString();
         }
 
         /// <summary>
@@ -1383,6 +1437,9 @@ namespace Mirror
                     ClientScene.AddPlayer();
                 }
             }
+            clientui = Instantiate(ClientUI,  this.transform);
+            clientui.transform.Find("Multiplayer/ID/Text").GetComponent<Text>().text = "conected";
+            clientui.transform.Find("Multiplayer/Disconect").GetComponent<Button>().onClick.AddListener(() => { Disconect(conn); });
         }
 
         /// <summary>
@@ -1392,6 +1449,7 @@ namespace Mirror
         /// <param name="conn">Connection to the server.</param>
         public virtual void OnClientDisconnect(NetworkConnection conn)
         {
+            Destroy(clientui);
             StopClient();
         }
 
@@ -1400,7 +1458,10 @@ namespace Mirror
         /// </summary>
         /// <param name="conn">Connection to a server.</param>
         /// <param name="errorCode">Error code.</param>
-        public virtual void OnClientError(NetworkConnection conn, int errorCode) { }
+        public virtual void OnClientError(NetworkConnection conn, int errorCode) 
+        {
+          
+        }
 
         /// <summary>
         /// Called on clients when a servers tells the client it is no longer ready.
@@ -1472,7 +1533,12 @@ namespace Mirror
         /// This is invoked when a server is started - including when a host is started.
         /// <para>StartServer has multiple signatures, but they all cause this hook to be called.</para>
         /// </summary>
-        public virtual void OnStartServer() { }
+        public virtual void OnStartServer() 
+        {
+            ui = Instantiate(ServerUI, this.transform);
+            ui.transform.Find("Multiplayer/MyIP/Text").GetComponent<Text>().text = networkAddress.ToString();
+            ui.transform.Find("Multiplayer/MyPort/Text").GetComponent<Text>().text = this.GetComponent<TelepathyTransport>().port.ToString();
+        }
 
         /// <summary>
         /// Obsolete: Use <see cref="OnStartClient()"/> instead of OnStartClient(NetworkClient client).
