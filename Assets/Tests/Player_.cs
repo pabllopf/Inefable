@@ -3,9 +3,6 @@
 // <copyright file="Player_.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 /// <summary>Test the player class</summary>

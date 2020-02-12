@@ -20,6 +20,8 @@
 // THE SOFTWARE.
 // ---------------------------------------------------------------------
 
+using Ninja.WebSockets.Exceptions;
+using Ninja.WebSockets.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,8 +30,6 @@ using System.Net.WebSockets;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Ninja.WebSockets.Exceptions;
-using Ninja.WebSockets.Internal;
 
 namespace Ninja.WebSockets
 {
@@ -38,8 +38,8 @@ namespace Ninja.WebSockets
     /// </summary>
     public class WebSocketServerFactory : IWebSocketServerFactory
     {
-        readonly Func<MemoryStream> _bufferFactory;
-        readonly IBufferPool _bufferPool;
+        private readonly Func<MemoryStream> _bufferFactory;
+        private readonly IBufferPool _bufferPool;
 
         /// <summary>
         /// Initialises a new instance of the WebSocketServerFactory class without caring about internal buffers
@@ -107,7 +107,7 @@ namespace Ninja.WebSockets
             };
         }
 
-        static void CheckWebSocketVersion(string httpHeader)
+        private static void CheckWebSocketVersion(string httpHeader)
         {
             Regex webSocketVersionRegex = new Regex("Sec-WebSocket-Version: (.*)", RegexOptions.IgnoreCase);
 
@@ -128,7 +128,7 @@ namespace Ninja.WebSockets
             }
         }
 
-        static async Task PerformHandshakeAsync(Guid guid, String httpHeader, string subProtocol, Stream stream, CancellationToken token)
+        private static async Task PerformHandshakeAsync(Guid guid, string httpHeader, string subProtocol, Stream stream, CancellationToken token)
         {
             try
             {

@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class Language : MonoBehaviour
 {
     /// <summary>The language</summary>
-    private static Dictionary<string, string> language = new Dictionary<string, string>();
+    private static readonly Dictionary<string, string> language = new Dictionary<string, string>();
 
     /// <summary>Translate the UI</summary>
     public static void Translate()
@@ -57,7 +57,7 @@ public class Language : MonoBehaviour
     /// <summary>Gets the sentence.</summary>
     /// <param name="key">The key.</param>
     /// <returns>The sentence.</returns>
-    public static string GetSentence(Key key)
+    public static string GetSentence(Clef key)
     {
         if (language.ContainsKey(key.ToString()))
         {

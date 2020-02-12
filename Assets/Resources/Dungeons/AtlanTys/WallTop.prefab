@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2635435680473295176}
   - component: {fileID: 7189401696253222943}
-  - component: {fileID: 6173491410833515456}
-  - component: {fileID: 4477283632433663147}
+  - component: {fileID: -8248162017238842986}
+  - component: {fileID: -3940152896799884064}
   m_Layer: 0
   m_Name: WallTop
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6173491410833515456
+--- !u!61 &-8248162017238842986
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4477283632433663147
+--- !u!114 &-3940152896799884064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,6 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3806535468035757936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

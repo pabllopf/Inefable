@@ -39,7 +39,7 @@ namespace Mirror
         /// <summary>
         /// The registered network message handlers.
         /// </summary>
-        static readonly Dictionary<int, NetworkMessageDelegate> handlers = new Dictionary<int, NetworkMessageDelegate>();
+        private static readonly Dictionary<int, NetworkMessageDelegate> handlers = new Dictionary<int, NetworkMessageDelegate>();
 
         /// <summary>
         /// The NetworkConnection object this client is using.
@@ -76,7 +76,10 @@ namespace Mirror
         /// <param name="address"></param>
         public static void Connect(string address)
         {
-            if (LogFilter.Debug) Debug.Log("Client Connect: " + address);
+            if (LogFilter.Debug)
+            {
+                Debug.Log("Client Connect: " + address);
+            }
 
             RegisterSystemHandlers(false);
             Transport.activeTransport.enabled = true;
@@ -96,7 +99,10 @@ namespace Mirror
         /// <param name="uri">Address of the server to connect to</param>
         public static void Connect(Uri uri)
         {
-            if (LogFilter.Debug) Debug.Log("Client Connect: " + uri);
+            if (LogFilter.Debug)
+            {
+                Debug.Log("Client Connect: " + uri);
+            }
 
             RegisterSystemHandlers(false);
             Transport.activeTransport.enabled = true;
@@ -112,7 +118,10 @@ namespace Mirror
 
         internal static void ConnectHost()
         {
-            if (LogFilter.Debug) Debug.Log("Client Connect Host to Server");
+            if (LogFilter.Debug)
+            {
+                Debug.Log("Client Connect Host to Server");
+            }
 
             RegisterSystemHandlers(true);
 
@@ -139,7 +148,7 @@ namespace Mirror
             NetworkServer.localConnection.Send(new ConnectMessage());
         }
 
-        static void InitializeTransportHandlers()
+        private static void InitializeTransportHandlers()
         {
             Transport.activeTransport.OnClientConnected.AddListener(OnConnected);
             Transport.activeTransport.OnClientDataReceived.AddListener(OnDataReceived);
@@ -147,12 +156,12 @@ namespace Mirror
             Transport.activeTransport.OnClientError.AddListener(OnError);
         }
 
-        static void OnError(Exception exception)
+        private static void OnError(Exception exception)
         {
             Debug.LogException(exception);
         }
 
-        static void OnDisconnected()
+        private static void OnDisconnected()
         {
             connectState = ConnectState.Disconnected;
 
@@ -167,10 +176,13 @@ namespace Mirror
             {
                 connection.TransportReceive(data, channelId);
             }
-            else Debug.LogError("Skipped Data message handling because connection is null.");
+            else
+            {
+                Debug.LogError("Skipped Data message handling because connection is null.");
+            }
         }
 
-        static void OnConnected()
+        private static void OnConnected()
         {
             if (connection != null)
             {
@@ -183,7 +195,10 @@ namespace Mirror
                 NetworkTime.UpdateClient();
                 connection.InvokeHandler(new ConnectMessage(), -1);
             }
-            else Debug.LogError("Skipped Connect message handling because connection is null.");
+            else
+            {
+                Debug.LogError("Skipped Connect message handling because connection is null.");
+            }
         }
 
         /// <summary>
@@ -216,7 +231,7 @@ namespace Mirror
             }
         }
 
-        static void RemoveTransportHandlers()
+        private static void RemoveTransportHandlers()
         {
             // so that we don't register them more than once
             Transport.activeTransport.OnClientConnected.RemoveListener(OnConnected);
@@ -378,7 +393,10 @@ namespace Mirror
         {
             if (handlers.ContainsKey(msgType))
             {
-                if (LogFilter.Debug) Debug.Log("NetworkClient.RegisterHandler replacing " + handler + " - " + msgType);
+                if (LogFilter.Debug)
+                {
+                    Debug.Log("NetworkClient.RegisterHandler replacing " + handler + " - " + msgType);
+                }
             }
             handlers[msgType] = handler;
         }
@@ -404,7 +422,10 @@ namespace Mirror
             int msgType = MessagePacker.GetId<T>();
             if (handlers.ContainsKey(msgType))
             {
-                if (LogFilter.Debug) Debug.Log("NetworkClient.RegisterHandler replacing " + handler + " - " + msgType);
+                if (LogFilter.Debug)
+                {
+                    Debug.Log("NetworkClient.RegisterHandler replacing " + handler + " - " + msgType);
+                }
             }
             handlers[msgType] = MessagePacker.MessageHandler<T>(handler, requireAuthentication);
         }
@@ -456,7 +477,11 @@ namespace Mirror
         /// </summary>
         public static void Shutdown()
         {
-            if (LogFilter.Debug) Debug.Log("Shutting down client.");
+            if (LogFilter.Debug)
+            {
+                Debug.Log("Shutting down client.");
+            }
+
             ClientScene.Shutdown();
             connectState = ConnectState.None;
             handlers.Clear();

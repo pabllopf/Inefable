@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 152444129231202897}
   - component: {fileID: 6604017965583888926}
-  - component: {fileID: 5698388594192378035}
-  - component: {fileID: 3456097310457023312}
+  - component: {fileID: 1770725773446290364}
+  - component: {fileID: -1015481810562791481}
   m_Layer: 0
   m_Name: CornerIRD
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5698388594192378035
+--- !u!61 &1770725773446290364
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3456097310457023312
+--- !u!114 &-1015481810562791481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,6 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 584665492846794692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

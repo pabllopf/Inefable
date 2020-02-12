@@ -56,7 +56,7 @@ public class Witch : MonoBehaviour, IEnemy
 
     /// <summary>The bullet</summary>
     [SerializeField]
-    private GameObject suicide = null;
+    private readonly GameObject suicide = null;
 
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
@@ -75,7 +75,7 @@ public class Witch : MonoBehaviour, IEnemy
 
     /// <summary>The hit clip</summary>
     [SerializeField]
-    private AudioClip hitClip = null;
+    private readonly AudioClip hitClip = null;
 
     /// <summary>The attacking</summary>
     private bool attacking = false;
@@ -90,49 +90,49 @@ public class Witch : MonoBehaviour, IEnemy
     /// <param name="damage">The damage.</param>
     public void TakeDamage(int damage)
     {
-        this.health -= damage;
-        this.StopAll();
-        if (this.health <= 0 && !this.deading)
+        health -= damage;
+        StopAll();
+        if (health <= 0 && !deading)
         {
-            this.StartCoroutine(this.Die());
+            StartCoroutine(Die());
             return;
         }
 
-        this.StartCoroutine(this.Hit());
+        StartCoroutine(Hit());
     }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        this.animator = this.GetComponent<Animator>();
-        this.rigid2D = this.GetComponent<Rigidbody2D>();
-        this.audioSource = this.GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        rigid2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
 
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (this.health > 0)
+        if (health > 0)
         {
-            if (this.DistanceToTarget() <= VisionRange)
+            if (DistanceToTarget() <= VisionRange)
             {
-                if (!this.attacking)
+                if (!attacking)
                 {
-                    this.FollowTarget();
+                    FollowTarget();
                 }
 
-                if (this.DistanceToTarget() <= AttackRange && !this.attacking)
+                if (DistanceToTarget() <= AttackRange && !attacking)
                 {
-                    this.StartCoroutine(this.AttackToTheTarget());
+                    StartCoroutine(AttackToTheTarget());
                 }
             }
             else
             {
-                this.direction = Vector3.zero;
-                this.animator.SetBool(Walk, false);
+                direction = Vector3.zero;
+                animator.SetBool(Walk, false);
             }
         }
     }
@@ -140,9 +140,9 @@ public class Witch : MonoBehaviour, IEnemy
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
-        if (!this.hitting)
+        if (!hitting)
         {
-            this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
+            rigid2D.MovePosition(transform.position + (direction * SpeedToMove * Time.deltaTime));
         }
     }
 
@@ -150,84 +150,84 @@ public class Witch : MonoBehaviour, IEnemy
     /// <returns>Return none</returns>
     public IEnumerator Hit()
     {
-        this.rigid2D.isKinematic = false;
-        this.hitting = true;
-        this.rigid2D.AddForce((this.transform.position - this.target.position).normalized * Thrust, ForceMode2D.Impulse);
-        this.StartCoroutine(this.HitEffect(this.rigid2D));
+        rigid2D.isKinematic = false;
+        hitting = true;
+        rigid2D.AddForce((transform.position - target.position).normalized * Thrust, ForceMode2D.Impulse);
+        StartCoroutine(HitEffect(rigid2D));
 
         yield return new WaitForSeconds(0.1f);
-        this.spriteRenderer.color = Color.red;
-        this.PlayClip(this.hitClip);
+        spriteRenderer.color = Color.red;
+        PlayClip(hitClip);
         yield return new WaitForSeconds(0.1f);
-        this.spriteRenderer.color = Color.white;
-        this.hitting = false;
+        spriteRenderer.color = Color.white;
+        hitting = false;
     }
 
     /// <summary>Dies this instance.</summary>
     /// <returns>Return none</returns>
     public IEnumerator Die()
     {
-        this.hitting = true;
-        this.animator.SetBool(Exit, true);
-        this.animator.SetTrigger(Dead);
-        this.spriteRenderer.sortingOrder = 2;
-        this.deading = true;
-        this.spriteRenderer.color = Color.white;
+        hitting = true;
+        animator.SetBool(Exit, true);
+        animator.SetTrigger(Dead);
+        spriteRenderer.sortingOrder = 2;
+        deading = true;
+        spriteRenderer.color = Color.white;
 
-        MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
-        MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
-        MonoBehaviour.Destroy(this.GetComponent<AudioSource>());
-        MonoBehaviour.Destroy(this.GetComponent<Rigidbody2D>());
+        MonoBehaviour.Destroy(GetComponent<Occlusion>());
+        MonoBehaviour.Destroy(GetComponent<BoxCollider2D>());
+        MonoBehaviour.Destroy(GetComponent<AudioSource>());
+        MonoBehaviour.Destroy(GetComponent<Rigidbody2D>());
 
         yield return new WaitForSeconds(3f);
 
-        MonoBehaviour.Destroy(this.GetComponent<Animator>());
-        MonoBehaviour.Destroy(this.GetComponent<Soccer>());
+        MonoBehaviour.Destroy(GetComponent<Animator>());
+        MonoBehaviour.Destroy(GetComponent<Soccer>());
     }
 
     /// <summary>Distances to target.</summary>
     /// <returns>Return the distance</returns>
     public float DistanceToTarget()
     {
-        return Vector2.Distance(this.transform.position, this.target.position);
+        return Vector2.Distance(transform.position, target.position);
     }
 
     /// <summary>Follows the target.</summary>
     private void FollowTarget()
     {
-        this.rigid2D.isKinematic = false;
+        rigid2D.isKinematic = false;
 
-        this.direction = this.target.position - this.transform.position;
-        this.direction.Normalize();
+        direction = target.position - transform.position;
+        direction.Normalize();
 
-        this.animator.SetFloat(Horizontal, this.direction.x);
-        this.animator.SetFloat(Vertical, this.direction.y);
+        animator.SetFloat(Horizontal, direction.x);
+        animator.SetFloat(Vertical, direction.y);
 
-        this.animator.SetBool(Walk, true);
-        this.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        animator.SetBool(Walk, true);
+        GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
     /// <summary>Attacks to the target.</summary>
     /// <returns>Return none</returns>
     private IEnumerator AttackToTheTarget()
     {
-        this.attacking = true;
-        this.direction = Vector3.zero;
-        this.animator.SetBool(Walk, false);
-        this.rigid2D.isKinematic = true;
-        this.spriteRenderer.sortingOrder = 5;
+        attacking = true;
+        direction = Vector3.zero;
+        animator.SetBool(Walk, false);
+        rigid2D.isKinematic = true;
+        spriteRenderer.sortingOrder = 5;
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
-        this.animator.SetTrigger(Attack);
+        animator.SetTrigger(Attack);
 
         for (int i = 0; i < Random.Range(1, NumMaxSuicides); i++)
         {
-           MonoBehaviour.Instantiate(this.suicide, this.transform.position + new Vector3(Random.Range(-0.6f, 0.6f), Random.Range(-0.6f, 0.6f), 0), Quaternion.identity);
+            MonoBehaviour.Instantiate(suicide, transform.position + new Vector3(Random.Range(-0.6f, 0.6f), Random.Range(-0.6f, 0.6f), 0), Quaternion.identity);
         }
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
 
-        this.attacking = false;
+        attacking = false;
     }
 
     /// <summary>Hits the effect.</summary>
@@ -238,32 +238,32 @@ public class Witch : MonoBehaviour, IEnemy
         yield return new WaitForSeconds(KnockTime);
         enemy.velocity = Vector2.zero;
         enemy.isKinematic = true;
-        this.hitting = false;
+        hitting = false;
     }
 
     /// <summary>Stops all.</summary>
     private void StopAll()
     {
-        this.StopAllCoroutines();
-        this.attacking = false;
-        this.hitting = false;
+        StopAllCoroutines();
+        attacking = false;
+        hitting = false;
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     /// <summary>Called when [draw gizmos selected].</summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, VisionRange);
+        Gizmos.DrawWireSphere(transform.position, VisionRange);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, AttackRange);
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 }

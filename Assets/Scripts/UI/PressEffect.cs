@@ -14,11 +14,11 @@ public class PressEffect : MonoBehaviour
 
     /// <summary>The computer</summary>
     [SerializeField]
-    private Sprite[] computer = new Sprite[2];
+    private readonly Sprite[] computer = new Sprite[2];
 
     /// <summary>The xbox</summary>
     [SerializeField]
-    private Sprite[] xbox = new Sprite[2];
+    private readonly Sprite[] xbox = new Sprite[2];
 
     /// <summary>The type</summary>
     private bool active = true;
@@ -35,20 +35,23 @@ public class PressEffect : MonoBehaviour
     /// <summary>The index</summary>
     private int index;
 
-    public void Awake() => Game.LoadSettings();
+    public void Awake()
+    {
+        Game.LoadSettings();
+    }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
         if (Settings.Current.Plattform == "Mobile")
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             return;
         }
-        else 
+        else
         {
-            this.currentImage = this.GetComponent<Image>();
-            this.LoadSprites(this.type);
+            currentImage = GetComponent<Image>();
+            LoadSprites(type);
         }
     }
 
@@ -57,15 +60,15 @@ public class PressEffect : MonoBehaviour
     {
         if (Settings.Current.Plattform == "Mobile")
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             return;
         }
 
-        if (this.active) 
+        if (active)
         {
-            this.index = (int)(Time.timeSinceLevelLoad * this.frameForSeconds);
-            this.index %= this.sprites.Length;
-            this.currentImage.sprite = this.sprites[this.index];
+            index = (int)(Time.timeSinceLevelLoad * frameForSeconds);
+            index %= sprites.Length;
+            currentImage.sprite = sprites[index];
         }
     }
 
@@ -73,31 +76,31 @@ public class PressEffect : MonoBehaviour
     /// <param name="controller">The controller.</param>
     public void LoadSprites(string controller)
     {
-        this.type = controller;
-        if (this.computer.Length >= 2 && this.xbox.Length >= 2)
+        type = controller;
+        if (computer.Length >= 2 && xbox.Length >= 2)
         {
-            switch (this.type)
+            switch (type)
             {
                 case "Computer":
-                    this.sprites = this.computer;
+                    sprites = computer;
                     break;
                 case "Xbox":
-                    this.sprites = this.xbox;
+                    sprites = xbox;
                     break;
             }
         }
         else
         {
-            Debug.Log("Falta animaciones en " + this.gameObject.name);
+            Debug.Log("Falta animaciones en " + gameObject.name);
         }
     }
 
     /// <summary>Starts the effect.</summary>
-    public void StartEffect() 
+    public void StartEffect()
     {
         if (Settings.Current.Plattform != "Mobile")
         {
-            this.active = true;
+            active = true;
         }
     }
 
@@ -106,10 +109,10 @@ public class PressEffect : MonoBehaviour
     {
         if (Settings.Current.Plattform != "Mobile")
         {
-            if (this.currentImage != null && this.sprites != null) 
+            if (currentImage != null && sprites != null)
             {
-                this.currentImage.sprite = this.sprites[1];
-                this.active = false;
+                currentImage.sprite = sprites[1];
+                active = false;
             }
         }
     }

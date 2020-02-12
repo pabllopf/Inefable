@@ -10,7 +10,7 @@ namespace Mirror.Examples.Pong
     {
         public Transform leftRacketSpawn;
         public Transform rightRacketSpawn;
-        GameObject ball;
+        private GameObject ball;
 
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
@@ -31,7 +31,9 @@ namespace Mirror.Examples.Pong
         {
             // destroy ball
             if (ball != null)
+            {
                 NetworkServer.Destroy(ball);
+            }
 
             // call base functionality (actually destroys the player)
             base.OnServerDisconnect(conn);

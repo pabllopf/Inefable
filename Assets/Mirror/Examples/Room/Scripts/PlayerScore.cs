@@ -9,10 +9,9 @@ namespace Mirror.Examples.NetworkRoom
 
         [SyncVar]
         public uint score;
+        private GameObject controllerColliderHitObject;
 
-        GameObject controllerColliderHitObject;
-
-        void OnControllerColliderHit(ControllerColliderHit hit)
+        private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             // If player and prize objects are on their own layer(s) with correct
             // collision matrix, we wouldn't have to validate the hit.gameobject.
@@ -22,7 +21,10 @@ namespace Mirror.Examples.NetworkRoom
 
             if (isLocalPlayer && controllerColliderHitObject.name.StartsWith("Prize"))
             {
-                if (LogFilter.Debug) Debug.LogFormat("OnControllerColliderHit {0}[{1}] with {2}[{3}]", name, netId, controllerColliderHitObject.name, controllerColliderHitObject.GetComponent<NetworkIdentity>().netId);
+                if (LogFilter.Debug)
+                {
+                    Debug.LogFormat("OnControllerColliderHit {0}[{1}] with {2}[{3}]", name, netId, controllerColliderHitObject.name, controllerColliderHitObject.GetComponent<NetworkIdentity>().netId);
+                }
 
                 // Disable the prize gameobject so it doesn't impede player movement
                 // It's going to be destroyed in a few frames and we don't want to spam CmdClaimPrize.
@@ -34,7 +36,7 @@ namespace Mirror.Examples.NetworkRoom
         }
 
         [Command]
-        void CmdClaimPrize(GameObject hitObject)
+        private void CmdClaimPrize(GameObject hitObject)
         {
             // Null check is required, otherwise close timing of multiple claims could throw a null ref.
             if (hitObject != null)
@@ -43,7 +45,7 @@ namespace Mirror.Examples.NetworkRoom
             }
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             GUI.Box(new Rect(10f + (index * 110), 10f, 100f, 25f), score.ToString().PadLeft(10));
         }

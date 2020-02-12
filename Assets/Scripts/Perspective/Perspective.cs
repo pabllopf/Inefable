@@ -13,15 +13,15 @@ public class Perspective : MonoBehaviour
     /// <summary>The order layer front</summary>
     [Range(1, 10)]
     [SerializeField]
-    private int orderLayerFront = 2;
+    private readonly int orderLayerFront = 2;
 
     /// <summary>The order layer back</summary>
     [Range(1, 10)]
     [SerializeField]
-    private int orderLayerBack = 5;
+    private readonly int orderLayerBack = 5;
 
     /// <summary>The sprite renderer</summary>
-    private SpriteRenderer SpriteRenderer => this.GetComponent<SpriteRenderer>();
+    private SpriteRenderer SpriteRenderer => GetComponent<SpriteRenderer>();
 
     /// <summary>Called when [trigger stay2 d].</summary>
     /// <param name="obj">The object.</param>
@@ -29,8 +29,8 @@ public class Perspective : MonoBehaviour
     {
         if (obj.CompareTag("Player") || obj.CompareTag("Enemy"))
         {
-            this.SpriteRenderer.sortingOrder = this.orderLayerBack;
-            this.SpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+            SpriteRenderer.sortingOrder = orderLayerBack;
+            SpriteRenderer.color = new Color(1f, 1f, 1f, 0.5f);
         }
     }
 
@@ -40,8 +40,8 @@ public class Perspective : MonoBehaviour
     {
         if (obj.CompareTag("Player") || obj.CompareTag("Enemy"))
         {
-            this.SpriteRenderer.sortingOrder = this.orderLayerFront;
-            this.SpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            SpriteRenderer.sortingOrder = orderLayerFront;
+            SpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
         }
     }
 }

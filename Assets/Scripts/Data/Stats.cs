@@ -5,10 +5,9 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 /// <summary>Save the current stats of the player.</summary>
 [System.Serializable]
-public class Stats 
+public class Stats
 {
     /// <summary>The current</summary>
     public static Stats Current;
@@ -40,26 +39,26 @@ public class Stats
     /// <summary>Initializes a new instance of the <see cref="Stats"/> class.</summary>
     public Stats()
     {
-        this.Health = 100;
-        this.Shield = 0;
-        this.Wallet = 0;
-        this.Keys = 0;
+        Health = 100;
+        Shield = 0;
+        Wallet = 0;
+        Keys = 0;
 
-        this.SpriteItem = new List<Sprite>
+        SpriteItem = new List<Sprite>
         {
             null,
             null,
             null
         };
 
-        this.TagItem = new List<string>
+        TagItem = new List<string>
         {
             "",
             "",
             ""
         };
 
-        this.pet = "";
-        this.isDay = true;
+        pet = "";
+        isDay = true;
     }
 }

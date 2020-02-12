@@ -55,21 +55,22 @@ namespace Mirror
         /// </summary>
         [Tooltip("Select only the Player's layer to avoid unnecessary SphereCasts against the Terrain, etc.")]
         public LayerMask castLayers = ~0;
-
-        float lastUpdateTime;
+        private float lastUpdateTime;
 
         // OverlapSphereNonAlloc array to avoid allocations.
         // -> static so we don't create one per component
         // -> this is worth it because proximity checking happens for just about
         //    every entity on the server!
         // -> should be big enough to work in just about all cases
-        static Collider[] hitsBuffer3D = new Collider[10000];
-        static Collider2D[] hitsBuffer2D = new Collider2D[10000];
+        private static readonly Collider[] hitsBuffer3D = new Collider[10000];
+        private static readonly Collider2D[] hitsBuffer2D = new Collider2D[10000];
 
-        void Update()
+        private void Update()
         {
             if (!NetworkServer.active)
+            {
                 return;
+            }
 
             if (Time.time - lastUpdateTime > visUpdateInterval)
             {
@@ -86,7 +87,9 @@ namespace Mirror
         public override bool OnCheckObserver(NetworkConnection newObserver)
         {
             if (forceHidden)
+            {
                 return false;
+            }
 
             return Vector3.Distance(newObserver.identity.transform.position, transform.position) < visRange;
         }
@@ -101,9 +104,11 @@ namespace Mirror
         {
             // if force hidden then return without adding any observers.
             if (forceHidden)
+            {
                 // always return true when overwriting OnRebuildObservers so that
                 // Mirror knows not to use the built in rebuild method.
                 return true;
+            }
 
             // find players within range
             switch (checkMethod)
@@ -112,7 +117,10 @@ namespace Mirror
                     {
                         // cast without allocating GC for maximum performance
                         int hitCount = Physics.OverlapSphereNonAlloc(transform.position, visRange, hitsBuffer3D, castLayers);
-                        if (hitCount == hitsBuffer3D.Length) Debug.LogWarning("NetworkProximityChecker's OverlapSphere test for " + name + " has filled the whole buffer(" + hitsBuffer3D.Length + "). Some results might have been omitted. Consider increasing buffer size.");
+                        if (hitCount == hitsBuffer3D.Length)
+                        {
+                            Debug.LogWarning("NetworkProximityChecker's OverlapSphere test for " + name + " has filled the whole buffer(" + hitsBuffer3D.Length + "). Some results might have been omitted. Consider increasing buffer size.");
+                        }
 
                         for (int i = 0; i < hitCount; i++)
                         {
@@ -133,7 +141,10 @@ namespace Mirror
                     {
                         // cast without allocating GC for maximum performance
                         int hitCount = Physics2D.OverlapCircleNonAlloc(transform.position, visRange, hitsBuffer2D, castLayers);
-                        if (hitCount == hitsBuffer2D.Length) Debug.LogWarning("NetworkProximityChecker's OverlapCircle test for " + name + " has filled the whole buffer(" + hitsBuffer2D.Length + "). Some results might have been omitted. Consider increasing buffer size.");
+                        if (hitCount == hitsBuffer2D.Length)
+                        {
+                            Debug.LogWarning("NetworkProximityChecker's OverlapCircle test for " + name + " has filled the whole buffer(" + hitsBuffer2D.Length + "). Some results might have been omitted. Consider increasing buffer size.");
+                        }
 
                         for (int i = 0; i < hitCount; i++)
                         {

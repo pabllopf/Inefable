@@ -1,6 +1,6 @@
-using UnityEngine;
-using System.Net;
 using System;
+using System.Net;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Mirror.Discovery
@@ -30,7 +30,9 @@ namespace Mirror.Discovery
             // so make sure we set it here in Start()  (after awakes)
             // Or just let the user assign it in the inspector
             if (transport == null)
+            {
                 transport = Transport.activeTransport;
+            }
         }
 
         /// <summary>
@@ -78,7 +80,10 @@ namespace Mirror.Discovery
         /// Override if you wish to include additional data in the discovery message
         /// such as desired game mode, language, difficulty, etc... </remarks>
         /// <returns>An instance of ServerRequest with data to be broadcasted</returns>
-        protected override ServerRequest GetRequest() => new ServerRequest();
+        protected override ServerRequest GetRequest()
+        {
+            return new ServerRequest();
+        }
 
         /// <summary>
         /// Process the answer from a server

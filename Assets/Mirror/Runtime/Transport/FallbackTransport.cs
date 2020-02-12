@@ -13,7 +13,7 @@ namespace Mirror
         public Transport[] transports;
 
         // the first transport that is available on this platform
-        Transport available;
+        private Transport available;
 
         public void Awake()
         {
@@ -28,7 +28,7 @@ namespace Mirror
         }
 
         // The client just uses the first transport available
-        Transport GetAvailableTransport()
+        private Transport GetAvailableTransport()
         {
             foreach (Transport transport in transports)
             {
@@ -46,7 +46,7 @@ namespace Mirror
         }
 
         // clients always pick the first transport
-        void InitClient()
+        private void InitClient()
         {
             // wire all the base transports to our events
             foreach (Transport transport in transports)
@@ -98,7 +98,7 @@ namespace Mirror
             return available.ClientSend(channelId, segment);
         }
 
-        void InitServer()
+        private void InitServer()
         {
             // wire all the base transports to our events
             foreach (Transport transport in transports)
@@ -112,7 +112,10 @@ namespace Mirror
 
         // right now this just returns the first available uri,
         // should we return the list of all available uri?
-        public override Uri ServerUri() => available.ServerUri();
+        public override Uri ServerUri()
+        {
+            return available.ServerUri();
+        }
 
         public override bool ServerActive()
         {

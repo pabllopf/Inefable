@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Mirror.Examples.Chat
 {
@@ -16,7 +13,9 @@ namespace Mirror.Examples.Chat
         public void CmdSend(string message)
         {
             if (message.Trim() != "")
+            {
                 RpcReceive(message.Trim());
+            }
         }
 
         [ClientRpc]

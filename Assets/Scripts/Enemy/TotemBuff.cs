@@ -41,14 +41,14 @@ public class TotemBuff : MonoBehaviour, IEnemy
 
     /// <summary>The bullet</summary>
     [SerializeField]
-    private GameObject bullet = null;
+    private readonly GameObject bullet = null;
 
     /// <summary>The health</summary>
     private int health = 75;
 
     /// <summary>The red effect</summary>
     [SerializeField]
-    private GameObject redHit = null;
+    private readonly GameObject redHit = null;
 
 
     /// <summary>The direction</summary>
@@ -65,7 +65,7 @@ public class TotemBuff : MonoBehaviour, IEnemy
 
     /// <summary>The hit clip</summary>
     [SerializeField]
-    private AudioClip hitClip = null;
+    private readonly AudioClip hitClip = null;
 
     /// <summary>The attacking</summary>
     private bool attacking = false;
@@ -77,52 +77,52 @@ public class TotemBuff : MonoBehaviour, IEnemy
     /// <param name="damage">The damage.</param>
     public void TakeDamage(int damage)
     {
-        this.StopAllCoroutines();
-        this.health -= damage;
-        if (this.health <= 0 && !this.deading)
+        StopAllCoroutines();
+        health -= damage;
+        if (health <= 0 && !deading)
         {
-            this.StartCoroutine(this.Die());
+            StartCoroutine(Die());
             return;
         }
 
         redHit.GetComponent<TextMeshPro>().text = damage.ToString();
-        Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
+        Instantiate(redHit, transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, transform);
 
 
-        this.StartCoroutine(this.Hit());
+        StartCoroutine(Hit());
     }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        this.animator = this.GetComponent<Animator>();
-        this.audioSource = this.GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     /// <summary>Called when [enable].</summary>
     public void OnEnable()
     {
-        this.GetComponent<Animator>().SetTrigger(Restart);
+        GetComponent<Animator>().SetTrigger(Restart);
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (this.health > 0)
+        if (health > 0)
         {
-            if (this.DistanceToTarget() <= VisionRange)
+            if (DistanceToTarget() <= VisionRange)
             {
-                if (!this.attacking)
+                if (!attacking)
                 {
-                    this.FollowTarget();
+                    FollowTarget();
                 }
 
-                if (this.DistanceToTarget() <= AttackRange && !this.attacking)
+                if (DistanceToTarget() <= AttackRange && !attacking)
                 {
-                    this.StartCoroutine(this.AttackToTheTarget());
+                    StartCoroutine(AttackToTheTarget());
                 }
             }
         }
@@ -133,81 +133,81 @@ public class TotemBuff : MonoBehaviour, IEnemy
     public IEnumerator Hit()
     {
         yield return new WaitForSeconds(0.1f);
-        this.spriteRenderer.color = Color.red;
-        this.PlayClip(this.hitClip);
+        spriteRenderer.color = Color.red;
+        PlayClip(hitClip);
         yield return new WaitForSeconds(0.1f);
-        this.spriteRenderer.color = Color.white;
+        spriteRenderer.color = Color.white;
     }
 
     /// <summary>Dies this instance.</summary>
     /// <returns>Return none</returns>
     public IEnumerator Die()
     {
-        this.animator.SetBool(Exit, true);
-        this.animator.SetTrigger(Dead);
-        this.deading = true;
-        this.spriteRenderer.color = Color.white;
+        animator.SetBool(Exit, true);
+        animator.SetTrigger(Dead);
+        deading = true;
+        spriteRenderer.color = Color.white;
 
-        MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
-        MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
-        MonoBehaviour.Destroy(this.GetComponent<AudioSource>());
+        MonoBehaviour.Destroy(GetComponent<Occlusion>());
+        MonoBehaviour.Destroy(GetComponent<BoxCollider2D>());
+        MonoBehaviour.Destroy(GetComponent<AudioSource>());
 
         yield return new WaitForSeconds(3f);
 
-        MonoBehaviour.Destroy(this.GetComponent<Animator>());
-        MonoBehaviour.Destroy(this.GetComponent<TotemBuff>());
+        MonoBehaviour.Destroy(GetComponent<Animator>());
+        MonoBehaviour.Destroy(GetComponent<TotemBuff>());
     }
 
     /// <summary>Distances to target.</summary>
     /// <returns>Return the distance</returns>
     public float DistanceToTarget()
     {
-        return Vector2.Distance(this.transform.position, this.target.position);
+        return Vector2.Distance(transform.position, target.position);
     }
 
     /// <summary>Follows the target.</summary>
     private void FollowTarget()
     {
-        this.direction = this.target.position - this.transform.position;
-        this.direction.Normalize();
+        direction = target.position - transform.position;
+        direction.Normalize();
 
-        this.animator.SetFloat(Horizontal, this.direction.x);
-        this.animator.SetFloat(Vertical, this.direction.y);
+        animator.SetFloat(Horizontal, direction.x);
+        animator.SetFloat(Vertical, direction.y);
     }
 
     /// <summary>Attacks to the target.</summary>
     /// <returns>Return none</returns>
     private IEnumerator AttackToTheTarget()
     {
-        this.attacking = true;
-        this.direction = Vector3.zero;
+        attacking = true;
+        direction = Vector3.zero;
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
-        this.animator.SetTrigger(Attack);
+        animator.SetTrigger(Attack);
 
-        var bulletSpawned = Instantiate(this.bullet, this.transform.position, Quaternion.identity);
-        bulletSpawned.GetComponent<Bullet>().SetTarget(this.target.position);
+        GameObject bulletSpawned = Instantiate(bullet, transform.position, Quaternion.identity);
+        bulletSpawned.GetComponent<Bullet>().SetTarget(target.position);
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
 
-        this.attacking = false;
+        attacking = false;
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     /// <summary>Called when [draw gizmos selected].</summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, VisionRange);
+        Gizmos.DrawWireSphere(transform.position, VisionRange);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, AttackRange);
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 }

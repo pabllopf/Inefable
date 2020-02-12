@@ -20,22 +20,22 @@
 // THE SOFTWARE.
 // ---------------------------------------------------------------------
 
+using Ninja.WebSockets.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Ninja.WebSockets.Exceptions;
-using System.Linq;
 
 namespace Ninja.WebSockets
 {
     public class HttpHelper
     {
-        const string HTTP_GET_HEADER_REGEX = @"^GET(.*)HTTP\/1\.1";
+        private const string HTTP_GET_HEADER_REGEX = @"^GET(.*)HTTP\/1\.1";
 
         /// <summary>
         /// Calculates a random WebSocket key that can be used to initiate a WebSocket handshake
@@ -108,7 +108,7 @@ namespace Ninja.WebSockets
         /// </summary>
         /// <param name="header">The HTTP header</param>
         /// <returns>True if this is an http WebSocket upgrade response</returns>
-        public static bool IsWebSocketUpgradeRequest(String header)
+        public static bool IsWebSocketUpgradeRequest(string header)
         {
             Regex getRegex = new Regex(HTTP_GET_HEADER_REGEX, RegexOptions.IgnoreCase);
             Match getRegexMatch = getRegex.Match(header);
@@ -194,7 +194,7 @@ namespace Ninja.WebSockets
         public static async Task WriteHttpHeaderAsync(string response, Stream stream, CancellationToken token)
         {
             response = response.Trim() + "\r\n\r\n";
-            Byte[] bytes = Encoding.UTF8.GetBytes(response);
+            byte[] bytes = Encoding.UTF8.GetBytes(response);
             await stream.WriteAsync(bytes, 0, bytes.Length, token);
         }
     }

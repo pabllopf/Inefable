@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Mirror.Examples.Additive
@@ -38,15 +38,19 @@ namespace Mirror.Examples.Additive
             UnloadScenes();
         }
 
-        void UnloadScenes()
+        private void UnloadScenes()
         {
             Debug.Log("Unloading Scenes");
             foreach (string sceneName in subScenes)
+            {
                 if (SceneManager.GetSceneByName(sceneName).IsValid())
+                {
                     StartCoroutine(UnloadScene(sceneName));
+                }
+            }
         }
 
-        IEnumerator UnloadScene(string sceneName)
+        private IEnumerator UnloadScene(string sceneName)
         {
             yield return SceneManager.UnloadSceneAsync(sceneName);
             yield return Resources.UnloadUnusedAssets();

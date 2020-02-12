@@ -6,30 +6,30 @@ using UnityEngine;
 
 /// <summary>Define a item of a dungeon</summary>
 [System.Serializable]
-public class Item 
+public class Item
 {
     /// <summary>The item</summary>
     [SerializeField]
     [Tooltip("Item to will be spawned.")]
-    private GameObject item;
+    private  GameObject item;
 
     /// <summary>The quantity minimum</summary>
     [SerializeField]
     [Range(0, 100)]
     [Tooltip("Quantity min of items will be spawned.")]
-    private int quantityMin;
+    private  int quantityMin;
 
     /// <summary>The quantity maximum</summary>
     [SerializeField]
     [Range(1, 100)]
     [Tooltip("Quantity max of items will be spawned.")]
-    private int quantityMax;
+    private  int quantityMax;
 
     /// <summary>The position</summary>
     [SerializeField]
     [Range(1, 15)]
     [Tooltip("Select the sprite position to spawn the item.")]
-    private int position;
+    private  int position;
 
     /// <summary>Initializes a new instance of the <see cref="Item"/> class.</summary>
     /// <param name="item">The item.</param>
@@ -49,35 +49,35 @@ public class Item
     /// <returns>The item</returns>
     public GameObject GetItem()
     {
-        return this.item;
+        return item;
     }
 
-    public string Name => this.item.name;
+    public string Name => item.name;
 
-    public int Quantity => Random.Range(this.quantityMin, this.quantityMax);
+    public int Quantity => Random.Range(quantityMin, quantityMax);
 
-    public int Position => this.position;
+    public int Position => position;
 
-    public GameObject Object => this.item;
+    public GameObject Object => item;
 
     /// <summary>Gets the quantity minimum.</summary>
     /// <returns>The quantityMin</returns>
-    public int GetQuantityMin() 
+    public int GetQuantityMin()
     {
-        return this.quantityMin;
+        return quantityMin;
     }
 
     /// <summary>Gets the quantity maximum.</summary>
     /// <returns>The quantityMax</returns>
     public int GetQuantityMax()
     {
-        return this.quantityMax;
+        return quantityMax;
     }
 
     /// <summary>Gets the position.</summary>
     /// <returns>The position</returns>
     public int GetPosition()
     {
-        return this.position;
+        return position;
     }
 }

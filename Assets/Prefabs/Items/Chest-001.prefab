@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 5751534672309092066}
   - component: {fileID: 1109543493583677294}
   - component: {fileID: -3025611403537388304}
-  - component: {fileID: 2374301342498181203}
-  - component: {fileID: 5683420673114414220}
+  - component: {fileID: -1546272930186354853}
   - component: {fileID: 631337394}
+  - component: {fileID: 2476140603519109532}
+  - component: {fileID: 7752800436078461312}
+  - component: {fileID: 5683420673114414220}
   m_Layer: 9
   m_Name: Chest-001
   m_TagString: Chest
@@ -133,36 +135,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2374301342498181203
-MonoBehaviour:
+--- !u!58 &-1546272930186354853
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4857658067076840499}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5683420673114414220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4857658067076840499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2af0df86acdbf64999ea250f59ef95d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - item: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
-    quantityMin: 1
-    quantityMax: 9
-    position: 1
-  hitClip: {fileID: 8300000, guid: d8266be597226974dba8552a7978ddc3, type: 3}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.234375
 --- !u!82 &631337394
 AudioSource:
   m_ObjectHideFlags: 0
@@ -259,6 +247,59 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2476140603519109532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857658067076840499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &7752800436078461312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857658067076840499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: -3025611403537388304}
+--- !u!114 &5683420673114414220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857658067076840499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2af0df86acdbf64999ea250f59ef95d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - item: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
+    quantityMin: 0
+    quantityMax: 1
+    position: 2
+  - item: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
+    quantityMin: 0
+    quantityMax: 1
+    position: 2
+  openClip: {fileID: 8300000, guid: 713c874160562da418037958b7cfffc7, type: 3}
 --- !u!1 &6071477915926514664
 GameObject:
   m_ObjectHideFlags: 0

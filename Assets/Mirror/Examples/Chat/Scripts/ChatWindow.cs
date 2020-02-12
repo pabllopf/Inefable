@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +29,10 @@ namespace Mirror.Examples.Chat
 
         public void OnSend()
         {
-            if (chatMessage.text.Trim() == "") return;
+            if (chatMessage.text.Trim() == "")
+            {
+                return;
+            }
 
             // get our player
             Player player = NetworkClient.connection.identity.GetComponent<Player>();
@@ -47,7 +48,7 @@ namespace Mirror.Examples.Chat
             StartCoroutine(AppendAndScroll(message));
         }
 
-        IEnumerator AppendAndScroll(string message)
+        private IEnumerator AppendAndScroll(string message)
         {
             chatHistory.text += message + "\n";
 

@@ -1,12 +1,8 @@
-﻿//-----------------------------------------------------------------------
-// <author>Pablo Perdomo Falcón</author>
-// <copyright file="IEnemy.cs" company="UnMedioStudio">Open Source</copyright>
-//-----------------------------------------------------------------------
+﻿
 using System.Collections;
-using UnityEngine;
 
 /// <summary>Interface to define a enemy.</summary>
-public interface IEnemy 
+public interface IEnemy
 {
     /// <summary>Starts this instance.</summary>
     void Start();

@@ -9,9 +9,9 @@ public class Icon : MonoBehaviour
 {
     /// <summary>Gets the name.</summary>
     /// <value>The name.</value>
-    public string Name => this.gameObject.tag;
+    public string Name => gameObject.tag;
 
     /// <summary>Gets the icon sprite.</summary>
     /// <value>The icon sprite.</value>
-    public Sprite Sprite => Resources.Load<Sprite>("Icons/" + this.Name);
+    public Sprite Sprite => Resources.Load<Sprite>("Icons/" + Name);
 }

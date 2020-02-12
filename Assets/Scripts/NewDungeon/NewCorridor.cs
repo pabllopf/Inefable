@@ -15,11 +15,11 @@ public class NewCorridor
 
     private NewCorridor(int xPos, int yPos, int width, int height, Direction direction)
     {
-        this.XPos = xPos;
-        this.YPos = yPos;
-        this.Width = width;
-        this.Height = height;
-        this.Direction = direction;
+        XPos = xPos;
+        YPos = yPos;
+        Width = width;
+        Height = height;
+        Direction = direction;
     }
 
     public static NewCorridor SetUpFirstCorridor(int width, int height, NewRoom room)
@@ -32,7 +32,7 @@ public class NewCorridor
         int xWidth = 0;
         int yHeight = 0;
 
-        switch (direction) 
+        switch (direction)
         {
             case Direction.North:
                 xPos = (room.XPos + Mathf.RoundToInt(room.Width / 2)) - Mathf.RoundToInt(width / 2);
@@ -63,11 +63,11 @@ public class NewCorridor
                 yHeight = width;
                 break;
         }
-        
+
         return new NewCorridor(xPos, yPos, xWidth, yHeight, direction);
     }
 
-    public static NewCorridor SetUp(int width, int height, NewRoom room) 
+    public static NewCorridor SetUp(int width, int height, NewRoom room)
     {
         Direction direction = (Direction)Random.Range(0, 4);
         Direction oppositeDirection = (Direction)(((int)room.Direction + 2) % 4);

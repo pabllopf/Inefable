@@ -8,10 +8,12 @@ namespace Mirror.Examples.Additive
     {
         public CharacterController characterController;
 
-        void OnValidate()
+        private void OnValidate()
         {
             if (characterController == null)
+            {
                 characterController = GetComponent<CharacterController>();
+            }
         }
 
         public override void OnStartLocalPlayer()
@@ -24,7 +26,7 @@ namespace Mirror.Examples.Additive
             Camera.main.transform.localEulerAngles = new Vector3(10f, 0f, 0f);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (isLocalPlayer)
             {
@@ -49,28 +51,46 @@ namespace Mirror.Examples.Additive
         public bool isFalling = false;
         public Vector3 velocity;
 
-        void Update()
+        private void Update()
         {
-            if (!isLocalPlayer) return;
+            if (!isLocalPlayer)
+            {
+                return;
+            }
 
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
 
             // Q and E cancel each other out, reducing the turn to zero
             if (Input.GetKey(KeyCode.Q))
+            {
                 turn = Mathf.MoveTowards(turn, -maxTurnSpeed, turnSensitivity);
+            }
+
             if (Input.GetKey(KeyCode.E))
+            {
                 turn = Mathf.MoveTowards(turn, maxTurnSpeed, turnSensitivity);
+            }
+
             if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.E))
+            {
                 turn = Mathf.MoveTowards(turn, 0, turnSensitivity);
+            }
+
             if (!Input.GetKey(KeyCode.Q) && !Input.GetKey(KeyCode.E))
+            {
                 turn = Mathf.MoveTowards(turn, 0, turnSensitivity);
+            }
 
             if (isGrounded)
+            {
                 isFalling = false;
+            }
 
             if ((isGrounded || !isFalling) && jumpSpeed < 1f && Input.GetKey(KeyCode.Space))
+            {
                 jumpSpeed = Mathf.Lerp(jumpSpeed, 1f, 0.5f);
+            }
             else if (!isGrounded)
             {
                 isFalling = true;
@@ -78,9 +98,12 @@ namespace Mirror.Examples.Additive
             }
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
-            if (!isLocalPlayer || characterController == null) return;
+            if (!isLocalPlayer || characterController == null)
+            {
+                return;
+            }
 
             transform.Rotate(0f, turn * Time.fixedDeltaTime, 0f);
 
@@ -90,9 +113,13 @@ namespace Mirror.Examples.Additive
             direction *= moveSpeed;
 
             if (jumpSpeed > 0)
+            {
                 characterController.Move(direction * Time.fixedDeltaTime);
+            }
             else
+            {
                 characterController.SimpleMove(direction);
+            }
 
             isGrounded = characterController.isGrounded;
             velocity = characterController.velocity;

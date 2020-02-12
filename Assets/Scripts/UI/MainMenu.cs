@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 {
     /// <summary>The name scene to load</summary>
     [SerializeField]
-    private string sceneToLoad = "House";
+    private readonly string sceneToLoad = "House";
 
     /// <summary>The current controller</summary>
     private string currentController = string.Empty;
@@ -55,11 +55,11 @@ public class MainMenu : MonoBehaviour
 
     /// <summary>The accept clip</summary>
     [SerializeField]
-    private AudioClip acceptClip = null;
+    private readonly AudioClip acceptClip = null;
 
     /// <summary>The cancel clip</summary>
     [SerializeField]
-    private AudioClip cancelClip = null;
+    private readonly AudioClip cancelClip = null;
 
     /// <summary>Awakes this instance.</summary>
     public void Awake()
@@ -68,13 +68,13 @@ public class MainMenu : MonoBehaviour
         Game.LoadStats();
         Cursor.visible = false;
 
-        this.startPanel = GameObject.FindGameObjectWithTag("StartPanel").gameObject;
-        this.languagePanel = GameObject.FindGameObjectWithTag("LanguagePanel").gameObject;
-        this.mainPanel = GameObject.FindGameObjectWithTag("MainPanel").gameObject;
-        this.InitPopUpPanel();
-        this.InitButtonsPanel();
-        this.InitButtonsLanguage();
-        this.audioSource = this.GetComponent<AudioSource>();
+        startPanel = GameObject.FindGameObjectWithTag("StartPanel").gameObject;
+        languagePanel = GameObject.FindGameObjectWithTag("LanguagePanel").gameObject;
+        mainPanel = GameObject.FindGameObjectWithTag("MainPanel").gameObject;
+        InitPopUpPanel();
+        InitButtonsPanel();
+        InitButtonsLanguage();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>Starts this instance.</summary>
@@ -83,47 +83,49 @@ public class MainMenu : MonoBehaviour
         Language.Translate();
         GameObject.FindGameObjectWithTag("NewButtons").SetActive(false);
         GameObject.FindGameObjectWithTag("NormalButtons").SetActive(false);
-        this.popUpPanel.SetActive(false);
-        this.mainPanel.SetActive(false);
-        this.languagePanel.SetActive(false);
+        popUpPanel.SetActive(false);
+        mainPanel.SetActive(false);
+        languagePanel.SetActive(false);
 
-        this.languages = new List<string>();
-        this.languages.Add("English");
-        this.languages.Add("Español");
-        this.languages.Add("French");
+        languages = new List<string>
+        {
+            "English",
+            "Español",
+            "French"
+        };
     }
 
     /// <summary>Creates new adventure.</summary>
     public void NewAdventure()
     {
-        this.PlayClip(this.acceptClip);
-        this.mainPanel.SetActive(false);
-        this.popUpPanel.SetActive(true);
-        this.popUpNewAdventure.SetActive(true);
+        PlayClip(acceptClip);
+        mainPanel.SetActive(false);
+        popUpPanel.SetActive(true);
+        popUpNewAdventure.SetActive(true);
         Language.Translate();
     }
 
     /// <summary>Continues the adventure.</summary>
     public void ContinueAdventure()
     {
-        this.PlayClip(this.acceptClip);
+        PlayClip(acceptClip);
         Game.LoadSettings();
-        SceneManager.LoadScene(this.sceneToLoad);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     /// <summary>Communities this instance.</summary>
     public void Community()
     {
-        this.PlayClip(this.acceptClip);
+        PlayClip(acceptClip);
     }
 
     /// <summary>Exits the game.</summary>
     public void ExitGame()
     {
-        this.PlayClip(this.acceptClip);
-        this.popUpPanel.SetActive(true);
-        this.popUpExit.SetActive(true);
-        this.mainPanel.SetActive(false);
+        PlayClip(acceptClip);
+        popUpPanel.SetActive(true);
+        popUpExit.SetActive(true);
+        mainPanel.SetActive(false);
         Language.Translate();
     }
 
@@ -139,100 +141,104 @@ public class MainMenu : MonoBehaviour
     {
         if (Settings.Current.HasSaveGame)
         {
-            this.buttonsPanel = GameObject.FindGameObjectWithTag("NormalButtons").gameObject;
+            buttonsPanel = GameObject.FindGameObjectWithTag("NormalButtons").gameObject;
 
-            this.selectors = new List<GameObject>(4);
-            this.selectors.Add(this.buttonsPanel.transform.Find("NewAdventure/Selector").gameObject);
-            this.selectors.Add(this.buttonsPanel.transform.Find("Continue/Selector").gameObject);
-            this.selectors.Add(this.buttonsPanel.transform.Find("Community/Selector").gameObject);
-            this.selectors.Add(this.buttonsPanel.transform.Find("Exit/Selector").gameObject);
+            selectors = new List<GameObject>(4)
+            {
+                buttonsPanel.transform.Find("NewAdventure/Selector").gameObject,
+                buttonsPanel.transform.Find("Continue/Selector").gameObject,
+                buttonsPanel.transform.Find("Community/Selector").gameObject,
+                buttonsPanel.transform.Find("Exit/Selector").gameObject
+            };
 
-            this.buttonsPanel.transform.Find("NewAdventure").GetComponent<Button>().onClick.AddListener(() => { NewAdventure(); });
-            this.buttonsPanel.transform.Find("Continue").GetComponent<Button>().onClick.AddListener(() => { ContinueAdventure(); });
-            this.buttonsPanel.transform.Find("Community").GetComponent<Button>().onClick.AddListener(() => { Community(); });
-            this.buttonsPanel.transform.Find("Exit").GetComponent<Button>().onClick.AddListener(() => { ExitGame(); });
+            buttonsPanel.transform.Find("NewAdventure").GetComponent<Button>().onClick.AddListener(() => { NewAdventure(); });
+            buttonsPanel.transform.Find("Continue").GetComponent<Button>().onClick.AddListener(() => { ContinueAdventure(); });
+            buttonsPanel.transform.Find("Community").GetComponent<Button>().onClick.AddListener(() => { Community(); });
+            buttonsPanel.transform.Find("Exit").GetComponent<Button>().onClick.AddListener(() => { ExitGame(); });
         }
         else
         {
-            this.buttonsPanel = GameObject.FindGameObjectWithTag("NewButtons").gameObject;
+            buttonsPanel = GameObject.FindGameObjectWithTag("NewButtons").gameObject;
 
-            this.selectors = new List<GameObject>(3);
-            this.selectors.Add(this.buttonsPanel.transform.Find("NewAdventure/Selector").gameObject);
-            this.selectors.Add(this.buttonsPanel.transform.Find("Community/Selector").gameObject);
-            this.selectors.Add(this.buttonsPanel.transform.Find("Exit/Selector").gameObject);
+            selectors = new List<GameObject>(3)
+            {
+                buttonsPanel.transform.Find("NewAdventure/Selector").gameObject,
+                buttonsPanel.transform.Find("Community/Selector").gameObject,
+                buttonsPanel.transform.Find("Exit/Selector").gameObject
+            };
 
-            this.buttonsPanel.transform.Find("NewAdventure").GetComponent<Button>().onClick.AddListener(() => { NewAdventure(); });
-            this.buttonsPanel.transform.Find("Community").GetComponent<Button>().onClick.AddListener(() => { Community(); });
-            this.buttonsPanel.transform.Find("Exit").GetComponent<Button>().onClick.AddListener(() => { ExitGame(); });
+            buttonsPanel.transform.Find("NewAdventure").GetComponent<Button>().onClick.AddListener(() => { NewAdventure(); });
+            buttonsPanel.transform.Find("Community").GetComponent<Button>().onClick.AddListener(() => { Community(); });
+            buttonsPanel.transform.Find("Exit").GetComponent<Button>().onClick.AddListener(() => { ExitGame(); });
         }
     }
 
     /// <summary>Initializes the pop up panel.</summary>
-    private void InitPopUpPanel() 
+    private void InitPopUpPanel()
     {
-        this.popUpPanel = GameObject.FindGameObjectWithTag("PopUpPanel").gameObject;
+        popUpPanel = GameObject.FindGameObjectWithTag("PopUpPanel").gameObject;
 
-        this.popUpExit = this.popUpPanel.transform.Find("ExitGame").gameObject;
-        this.popUpExit.transform.Find("BackGround/Yes").GetComponent<Button>().onClick.AddListener(() => { YesExitGame(); });
-        this.popUpExit.transform.Find("BackGround/No").GetComponent<Button>().onClick.AddListener(() => { NoExitGame(); });
-        this.popUpExit.SetActive(false);
+        popUpExit = popUpPanel.transform.Find("ExitGame").gameObject;
+        popUpExit.transform.Find("BackGround/Yes").GetComponent<Button>().onClick.AddListener(() => { YesExitGame(); });
+        popUpExit.transform.Find("BackGround/No").GetComponent<Button>().onClick.AddListener(() => { NoExitGame(); });
+        popUpExit.SetActive(false);
 
-        this.popUpNewAdventure = this.popUpPanel.transform.Find("NewAdventure").gameObject;
-        this.popUpNewAdventure.transform.Find("BackGround/Yes").GetComponent<Button>().onClick.AddListener(() => { YesNewAdventure(); });
-        this.popUpNewAdventure.transform.Find("BackGround/No").GetComponent<Button>().onClick.AddListener(() => { NoNewAdventure(); });
-        this.popUpNewAdventure.SetActive(false);
+        popUpNewAdventure = popUpPanel.transform.Find("NewAdventure").gameObject;
+        popUpNewAdventure.transform.Find("BackGround/Yes").GetComponent<Button>().onClick.AddListener(() => { YesNewAdventure(); });
+        popUpNewAdventure.transform.Find("BackGround/No").GetComponent<Button>().onClick.AddListener(() => { NoNewAdventure(); });
+        popUpNewAdventure.SetActive(false);
     }
 
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (this.startPanel.activeSelf)
+        if (startPanel.activeSelf)
         {
-            this.DetectController();
+            DetectController();
             return;
         }
 
-        if (this.languagePanel.activeSelf)
+        if (languagePanel.activeSelf)
         {
-            this.DetectLanguage();
-            Settings.Current.Language = this.languages[this.indexLanguages];
+            DetectLanguage();
+            Settings.Current.Language = languages[indexLanguages];
             Game.SaveSettings();
             Language.Translate();
             return;
         }
 
-        if (this.mainPanel.activeSelf && !this.popUpPanel.activeSelf)
+        if (mainPanel.activeSelf && !popUpPanel.activeSelf)
         {
-            this.ShiftInMenu();
+            ShiftInMenu();
             return;
         }
 
-        if (this.popUpPanel.activeSelf) 
+        if (popUpPanel.activeSelf)
         {
-            this.DialoguePopUp();
+            DialoguePopUp();
         }
     }
 
     /// <summary>Detects the controller.</summary>
     private void DetectController()
     {
-        if (this.startPanel.activeSelf)
+        if (startPanel.activeSelf)
         {
             if (Input.touchCount > 0)
             {
-                this.SelectController("Mobile");
+                SelectController("Mobile");
                 return;
             }
 
             if (Input.GetJoystickNames().Length > 0 && Input.anyKey)
             {
-                this.SelectController("Xbox");
+                SelectController("Xbox");
                 return;
             }
 
             if (Input.anyKey)
             {
-                this.SelectController("Computer");
+                SelectController("Computer");
                 return;
             }
         }
@@ -243,95 +249,95 @@ public class MainMenu : MonoBehaviour
     /// <summary>Detects the language.</summary>
     private void DetectLanguage()
     {
-        if (this.currentController == "Computer")
+        if (currentController == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                this.GoUpLanguage();
+                GoUpLanguage();
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                this.GoDownLanguage();
+                GoDownLanguage();
             }
 
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                this.ConfirmLanguage();
+                ConfirmLanguage();
             }
         }
 
-        if (this.currentController == "Xbox")
+        if (currentController == "Xbox")
         {
-            if (Input.GetAxis("LeftJoystickY") > 0 && this.neutralStick == true)
+            if (Input.GetAxis("LeftJoystickY") > 0 && neutralStick == true)
             {
-                this.neutralStick = false;
-                this.GoUpLanguage();
+                neutralStick = false;
+                GoUpLanguage();
             }
 
-            if (Input.GetAxis("LeftJoystickY") < 0 && this.neutralStick == true)
+            if (Input.GetAxis("LeftJoystickY") < 0 && neutralStick == true)
             {
-                this.neutralStick = false;
-                this.GoDownLanguage();
+                neutralStick = false;
+                GoDownLanguage();
             }
 
             if (Input.GetAxis("LeftJoystickY") == 0)
             {
-                this.neutralStick = true;
+                neutralStick = true;
             }
 
             if (Input.GetButtonDown("ButtonY"))
             {
-                this.ConfirmLanguage();
+                ConfirmLanguage();
             }
         }
     }
 
-    public void GoUpLanguage() 
+    public void GoUpLanguage()
     {
-        Text mainText = this.languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
-        if (this.languages.IndexOf(mainText.text) >= 0)
+        Text mainText = languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
+        if (languages.IndexOf(mainText.text) >= 0)
         {
-            this.indexLanguages++;
-            if (this.indexLanguages >= this.languages.Count)
+            indexLanguages++;
+            if (indexLanguages >= languages.Count)
             {
-                this.indexLanguages = 0;
+                indexLanguages = 0;
             }
 
-            mainText.text = this.languages[this.indexLanguages];
-            this.PlayClip(this.acceptClip);
+            mainText.text = languages[indexLanguages];
+            PlayClip(acceptClip);
         }
         return;
     }
 
-    public void GoDownLanguage() 
+    public void GoDownLanguage()
     {
-        Text mainText = this.languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
-        if (this.languages.IndexOf(mainText.text) >= 0)
+        Text mainText = languagePanel.transform.Find("Background/Back/MainText").GetComponent<Text>();
+        if (languages.IndexOf(mainText.text) >= 0)
         {
-            this.indexLanguages--;
-            if (this.indexLanguages < 0)
+            indexLanguages--;
+            if (indexLanguages < 0)
             {
-                this.indexLanguages = this.languages.Count - 1;
+                indexLanguages = languages.Count - 1;
             }
 
-            mainText.text = this.languages[this.indexLanguages];
+            mainText.text = languages[indexLanguages];
 
-            this.PlayClip(this.acceptClip);
+            PlayClip(acceptClip);
         }
         return;
     }
 
-    public void ConfirmLanguage() 
+    public void ConfirmLanguage()
     {
-        Settings.Current.Language = this.languages[this.indexLanguages];
+        Settings.Current.Language = languages[indexLanguages];
         Settings.Current.LanguageDefault = true;
         Game.SaveSettings();
-        this.languagePanel.SetActive(false);
-        this.mainPanel.SetActive(true);
-        this.buttonsPanel.SetActive(true);
+        languagePanel.SetActive(false);
+        mainPanel.SetActive(true);
+        buttonsPanel.SetActive(true);
         Language.Translate();
-        this.PlayClip(this.acceptClip);
+        PlayClip(acceptClip);
         return;
     }
 
@@ -340,7 +346,7 @@ public class MainMenu : MonoBehaviour
     /// <param name="controller">The controller.</param>
     private void SelectController(string controller)
     {
-        this.currentController = controller;
+        currentController = controller;
 
         Settings.Current.Plattform = controller;
         Game.SaveSettings();
@@ -348,28 +354,28 @@ public class MainMenu : MonoBehaviour
 
         if (Settings.Current.LanguageDefault)
         {
-            this.startPanel.SetActive(false);
-            this.mainPanel.SetActive(true);
-            this.buttonsPanel.SetActive(true);
+            startPanel.SetActive(false);
+            mainPanel.SetActive(true);
+            buttonsPanel.SetActive(true);
         }
-        else 
+        else
         {
-            this.startPanel.SetActive(false);
-            this.languagePanel.SetActive(true);
-            this.UpdateButtons(this.currentController);
+            startPanel.SetActive(false);
+            languagePanel.SetActive(true);
+            UpdateButtons(currentController);
         }
 
-        this.PlayClip(this.acceptClip);
+        PlayClip(acceptClip);
     }
 
     /// <summary>Updates the buttons.</summary>
     /// <param name="controller">The controller.</param>
-    private void UpdateButtons(string controller) 
+    private void UpdateButtons(string controller)
     {
         Image[] objs = GameObject.FindObjectsOfType<Image>();
-        foreach (Image img in objs) 
+        foreach (Image img in objs)
         {
-            if (img.gameObject.GetComponent<PressEffect>()) 
+            if (img.gameObject.GetComponent<PressEffect>())
             {
                 img.gameObject.GetComponent<PressEffect>().LoadSprites(controller);
             }
@@ -379,53 +385,53 @@ public class MainMenu : MonoBehaviour
     /// <summary>Shifts the in menu.</summary>
     private void ShiftInMenu()
     {
-        this.UpdateButtons(this.currentController);
-        if (this.currentController == "Computer")
+        UpdateButtons(currentController);
+        if (currentController == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                this.GoUp();
+                GoUp();
             }
 
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                this.GoDown();
+                GoDown();
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                this.ActionSelector();
+                ActionSelector();
             }
         }
 
-        if (this.currentController == "Xbox")
+        if (currentController == "Xbox")
         {
-            if (Input.GetAxis("LeftJoystickY") > 0 && this.neutralStick == true)
+            if (Input.GetAxis("LeftJoystickY") > 0 && neutralStick == true)
             {
-                this.neutralStick = false;
-                this.GoUp();
+                neutralStick = false;
+                GoUp();
             }
 
-            if (Input.GetAxis("LeftJoystickY") < 0 && this.neutralStick == true)
+            if (Input.GetAxis("LeftJoystickY") < 0 && neutralStick == true)
             {
-                this.neutralStick = false;
-                this.GoDown();
+                neutralStick = false;
+                GoDown();
             }
 
             if (Input.GetAxis("LeftJoystickY") == 0)
             {
-                this.neutralStick = true;
+                neutralStick = true;
             }
 
             if (Input.GetButtonDown("ButtonA"))
             {
-                this.ActionSelector();
+                ActionSelector();
             }
         }
 
-        if (this.currentController == "Mobile")
+        if (currentController == "Mobile")
         {
-            foreach (GameObject selector in this.selectors)
+            foreach (GameObject selector in selectors)
             {
                 selector.SetActive(false);
             }
@@ -435,15 +441,15 @@ public class MainMenu : MonoBehaviour
     /// <summary>Goes up in menu.</summary>
     private void GoUp()
     {
-        for (int i = 0; i < this.selectors.Count; i++)
+        for (int i = 0; i < selectors.Count; i++)
         {
-            if (this.selectors[i].activeSelf)
+            if (selectors[i].activeSelf)
             {
-                if (this.selectors[i] != this.selectors[0])
+                if (selectors[i] != selectors[0])
                 {
-                    this.selectors[i].SetActive(false);
-                    this.selectors[i - 1].SetActive(true);
-                    this.PlayClip(this.acceptClip);
+                    selectors[i].SetActive(false);
+                    selectors[i - 1].SetActive(true);
+                    PlayClip(acceptClip);
                     return;
                 }
             }
@@ -453,15 +459,15 @@ public class MainMenu : MonoBehaviour
     /// <summary>Goes down in menu.</summary>
     private void GoDown()
     {
-        for (int i = 0; i < this.selectors.Count; i++)
+        for (int i = 0; i < selectors.Count; i++)
         {
-            if (this.selectors[i].activeSelf)
+            if (selectors[i].activeSelf)
             {
-                if (this.selectors[i] != this.selectors[this.selectors.Count - 1])
+                if (selectors[i] != selectors[selectors.Count - 1])
                 {
-                    this.selectors[i].SetActive(false);
-                    this.selectors[i + 1].SetActive(true);
-                    this.PlayClip(this.acceptClip);
+                    selectors[i].SetActive(false);
+                    selectors[i + 1].SetActive(true);
+                    PlayClip(acceptClip);
                     return;
                 }
             }
@@ -469,12 +475,12 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>Action the selector.</summary>
-    private void ActionSelector() 
+    private void ActionSelector()
     {
-        this.PlayClip(this.acceptClip);
-        foreach (GameObject selector in this.selectors) 
+        PlayClip(acceptClip);
+        foreach (GameObject selector in selectors)
         {
-            if (selector.activeSelf) 
+            if (selector.activeSelf)
             {
                 selector.transform.parent.GetComponent<Button>().onClick.Invoke();
             }
@@ -482,69 +488,69 @@ public class MainMenu : MonoBehaviour
     }
 
     /// <summary>Dialogues the pop up.</summary>
-    private void DialoguePopUp() 
+    private void DialoguePopUp()
     {
-        this.UpdateButtons(this.currentController);
-        if (this.currentController == "Computer")
+        UpdateButtons(currentController);
+        if (currentController == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                this.PlayClip(this.acceptClip);
-                if (this.popUpNewAdventure.activeSelf)
+                PlayClip(acceptClip);
+                if (popUpNewAdventure.activeSelf)
                 {
-                    this.YesNewAdventure();
+                    YesNewAdventure();
                 }
 
-                if (this.popUpExit.activeSelf) 
+                if (popUpExit.activeSelf)
                 {
-                    this.YesExitGame();
+                    YesExitGame();
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                this.PlayClip(this.cancelClip);
-                if (this.popUpNewAdventure.activeSelf)
+                PlayClip(cancelClip);
+                if (popUpNewAdventure.activeSelf)
                 {
-                    this.NoNewAdventure();
+                    NoNewAdventure();
                 }
 
-                if (this.popUpExit.activeSelf)
+                if (popUpExit.activeSelf)
                 {
-                    this.NoExitGame();
+                    NoExitGame();
                 }
             }
         }
 
-        if (this.currentController == "Xbox")
+        if (currentController == "Xbox")
         {
             if (Input.GetButtonDown("ButtonY"))
             {
-                this.PlayClip(this.acceptClip);
-                
-                if (this.popUpNewAdventure.activeSelf)
+                PlayClip(acceptClip);
+
+                if (popUpNewAdventure.activeSelf)
                 {
-                    this.YesNewAdventure();
+                    YesNewAdventure();
                 }
 
-                if (this.popUpExit.activeSelf)
+                if (popUpExit.activeSelf)
                 {
-                    this.YesExitGame();
+                    YesExitGame();
                 }
             }
 
             if (Input.GetButtonDown("ButtonB"))
             {
-                this.PlayClip(this.cancelClip);
-                
-                if (this.popUpNewAdventure.activeSelf)
+                PlayClip(cancelClip);
+
+                if (popUpNewAdventure.activeSelf)
                 {
-                    this.NoNewAdventure();
+                    NoNewAdventure();
                 }
 
-                if (this.popUpExit.activeSelf)
+                if (popUpExit.activeSelf)
                 {
-                    this.NoExitGame();
+                    NoExitGame();
                 }
             }
         }
@@ -553,7 +559,7 @@ public class MainMenu : MonoBehaviour
     /// <summary>Yeses the new adventure.</summary>
     private void YesNewAdventure()
     {
-        this.PlayClip(this.acceptClip);
+        PlayClip(acceptClip);
 
         string language = Settings.Current.Language;
         Game.ResetSettings();
@@ -561,38 +567,38 @@ public class MainMenu : MonoBehaviour
 
         Settings.Current.HasSaveGame = true;
         Settings.Current.LanguageDefault = true;
-        Settings.Current.Plattform = this.currentController;
+        Settings.Current.Plattform = currentController;
         Settings.Current.Language = language;
 
         Game.SaveSettings();
         Game.SaveStats();
-        SceneManager.LoadScene(this.sceneToLoad);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     /// <summary>Noes the new adventure.</summary>
     private void NoNewAdventure()
     {
-        this.PlayClip(this.acceptClip);
-        this.mainPanel.SetActive(true);
-        this.popUpPanel.SetActive(false);
-        this.popUpNewAdventure.SetActive(false);
+        PlayClip(acceptClip);
+        mainPanel.SetActive(true);
+        popUpPanel.SetActive(false);
+        popUpNewAdventure.SetActive(false);
         Language.Translate();
     }
 
     /// <summary>Yeses the exit game.</summary>
     private void YesExitGame()
     {
-        this.PlayClip(this.acceptClip);
+        PlayClip(acceptClip);
         Application.Quit();
     }
 
     /// <summary>Noes the exit game.</summary>
     private void NoExitGame()
     {
-        this.PlayClip(this.acceptClip);
-        this.mainPanel.SetActive(true);
-        this.popUpPanel.SetActive(false);
-        this.popUpExit.SetActive(false);
+        PlayClip(acceptClip);
+        mainPanel.SetActive(true);
+        popUpPanel.SetActive(false);
+        popUpExit.SetActive(false);
         Language.Translate();
     }
 
@@ -600,7 +606,7 @@ public class MainMenu : MonoBehaviour
     /// <param name="audioClip">The audio clip.</param>
     private void PlayClip(AudioClip audioClip)
     {
-        this.audioSource.clip = audioClip;
-        this.audioSource.Play();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 }

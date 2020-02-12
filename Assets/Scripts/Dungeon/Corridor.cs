@@ -10,11 +10,11 @@ public class Corridor
     /// <summary>Initializes a new instance of the <see cref="Corridor"/> class.</summary>
     public Corridor()
     {
-        this.XPos = 0;
-        this.YPos = 0;
-        this.Width = 0;
-        this.Height = 0;
-        this.Direction = Direction.North;
+        XPos = 0;
+        YPos = 0;
+        Width = 0;
+        Height = 0;
+        Direction = Direction.North;
     }
 
     /// <summary>Initializes a new instance of the <see cref="Corridor"/> class.</summary>
@@ -25,11 +25,11 @@ public class Corridor
     /// <param name="direction">The direction.</param>
     public Corridor(int xPos, int yPos, int width, int height, Direction direction)
     {
-        this.XPos = xPos;
-        this.YPos = yPos;
-        this.Width = width;
-        this.Height = height;
-        this.Direction = direction;
+        XPos = xPos;
+        YPos = yPos;
+        Width = width;
+        Height = height;
+        Direction = direction;
     }
 
     /// <summary>Gets the x position.</summary>
@@ -50,7 +50,7 @@ public class Corridor
 
     /// <summary>Gets the position.</summary>
     /// <value>The position.</value>
-    public Vector2 Position => new Vector2(this.XPos, this.YPos);
+    public Vector2 Position => new Vector2(XPos, YPos);
 
     /// <summary>Gets the direction.</summary>
     /// <value>The direction.</value>
@@ -59,36 +59,36 @@ public class Corridor
     /// <summary>Gets a value indicating whether [go north].</summary>
     /// <value>
     /// <c>true</c> if [go north]; otherwise, <c>false</c>.</value>
-    public bool GoNorth => (this.Direction == Direction.North) ? true : false;
+    public bool GoNorth => (Direction == Direction.North) ? true : false;
 
     /// <summary>Gets a value indicating whether [go east].</summary>
     /// <value>
     /// <c>true</c> if [go east]; otherwise, <c>false</c>.</value>
-    public bool GoEast => (this.Direction == Direction.East) ? true : false;
+    public bool GoEast => (Direction == Direction.East) ? true : false;
 
     /// <summary>Gets a value indicating whether [go south].</summary>
     /// <value>
     /// <c>true</c> if [go south]; otherwise, <c>false</c>.</value>
-    public bool GoSouth => (this.Direction == Direction.South) ? true : false;
+    public bool GoSouth => (Direction == Direction.South) ? true : false;
 
     /// <summary>Gets a value indicating whether [go west].</summary>
     /// <value>
     /// <c>true</c> if [go west]; otherwise, <c>false</c>.</value>
-    public bool GoWest => (this.Direction == Direction.West) ? true : false;
+    public bool GoWest => (Direction == Direction.West) ? true : false;
 
     /// <summary>Gets the end position x.</summary>
     /// <value>The end position x.</value>
     public int EndPositionX =>
-        (this.GoNorth || this.GoSouth) ? this.XPos :
-        this.GoEast ? this.XPos + this.Height - 1 :
-        this.XPos - this.Height + 1;
+        (GoNorth || GoSouth) ? XPos :
+        GoEast ? XPos + Height - 1 :
+        XPos - Height + 1;
 
     /// <summary>Gets the end position y.</summary>
     /// <value>The end position y.</value>
     public int EndPositionY =>
-        (this.GoEast || this.GoWest) ? this.YPos :
-        this.GoNorth ? this.YPos + this.Height - 1 :
-        this.YPos - this.Height + 1;
+        (GoEast || GoWest) ? YPos :
+        GoNorth ? YPos + Height - 1 :
+        YPos - Height + 1;
 
     /// <summary>Sets up.</summary>
     /// <param name="room">The room.</param>
@@ -109,7 +109,7 @@ public class Corridor
 
         int xPos = (direction == Direction.North) ? Random.Range(room.XPos, room.XPos + room.Width - 1) :
             (direction == Direction.South) ? Random.Range(room.XPos, room.XPos + room.Width) :
-            (direction == Direction.East) ? room.XPos + room.Width : 
+            (direction == Direction.East) ? room.XPos + room.Width :
             room.XPos;
 
         int yPos = (direction == Direction.East) ? Random.Range(room.YPos, room.YPos + room.Height - 1) :
@@ -119,7 +119,7 @@ public class Corridor
 
         int maxLength = (direction == Direction.North) ? rows - yPos - roomHeight :
             (direction == Direction.East) ? columns - xPos - roomWidth :
-            (direction == Direction.South) ? yPos - roomHeight : 
+            (direction == Direction.South) ? yPos - roomHeight :
             xPos - roomWidth;
 
         height = Mathf.Clamp(height, 1, maxLength);

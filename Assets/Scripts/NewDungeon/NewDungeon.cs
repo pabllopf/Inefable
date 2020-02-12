@@ -2,12 +2,13 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="NewDungeon.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /// <summary>Generate a dungeon</summary>
-public class NewDungeon : MonoBehaviour
+public class NewDungeon : NetworkBehaviour
 {
     private const int BoardWidth = 500;
     private const int BoardHeight = 500;
@@ -26,110 +27,123 @@ public class NewDungeon : MonoBehaviour
     private const int CorridorWidth = 4;
     private const int CorridorHeight = 4;
 
-    private int[,] board = new int[BoardWidth, BoardHeight];
-    private List<NewRoom> rooms = new List<NewRoom>();
-    private List<NewCorridor> corridors = new List<NewCorridor>();
+    private readonly int[,] board = new int[BoardWidth, BoardHeight];
+    private readonly List<NewRoom> rooms = new List<NewRoom>();
+    private readonly List<NewCorridor> corridors = new List<NewCorridor>();
 
     [SerializeField]
-    private GameObject player = null;
+    private readonly GameObject player = null;
 
     [SerializeField]
-    private GameObject altar = null;
+    private readonly GameObject altar = null;
 
     [SerializeField]
-    private GameObject boss = null;
+    private readonly GameObject boss = null;
 
     [SerializeField]
-    private List<Item> generalItems = null;
+    private readonly List<Item> generalItems = null;
 
-    private List<Vector2> positionsToSpawnThePlayers = new List<Vector2>();
+    private readonly List<Vector2> positionsToSpawnThePlayers = new List<Vector2>();
 
     [SerializeField]
-    private List<Style> dungeons = null;
+    private readonly List<Style> dungeons = null;
     private Style style = null;
 
     private void Start()
     {
-        this.SetUpDungeonStyle();
+        if (!isServer)
+        {
+            return;
+        }
 
-        this.CreateRooms();
-        this.CreateCorridors();
+        SetUpDungeonStyle();
 
-        this.SetUpFirstRoom();
-        this.SetUpRoomsAndCorridors();
-        
+        CreateRooms();
+        CreateCorridors();
 
-        this.GetPositionsToSpawn();
+        SetUpFirstRoom();
+        SetUpRoomsAndCorridors();
 
-        this.PrintRoomsInBoard();
-        this.PrintCorridorsInBoard();
 
-        this.SetUpTheLastRoom();
+        GetPositionsToSpawn();
 
-        this.PrintRoomsInBoard();
-        this.PrintCorridorsInBoard();
+        PrintRoomsInBoard();
+        PrintCorridorsInBoard();
 
-        this.PrintWallsInBoard();
-        this.PrintOuterCornersInBoard();
-        this.PrintInnerCornersInBoard();
+        SetUpTheLastRoom();
 
-        this.PrintBoardInGame();
+        PrintRoomsInBoard();
+        PrintCorridorsInBoard();
 
-        this.SpawnListOf(this.generalItems);
-        this.SpawnListOf(this.style.GetLights());
-        this.SpawnListOf(this.style.GetItems());
-        this.SpawnListOf(this.style.GetEnemys());
-        this.SpawnListOf(this.style.GetPets());
-        this.SpawnListOf(this.style.GetFloors());
+        PrintWallsInBoard();
+        PrintOuterCornersInBoard();
+        PrintInnerCornersInBoard();
 
-        this.PrintTheBoss();
-        
-        this.PrintAltarsInGame();
+        PrintBoardInGame();
+
+        SpawnListOf(generalItems);
+        SpawnListOf(style.GetLights());
+        SpawnListOf(style.GetItems());
+        SpawnListOf(style.GetEnemys());
+        SpawnListOf(style.GetPets());
+        SpawnListOf(style.GetFloors());
+
+        PrintTheBoss();
+
+        PrintAltarsInGame();
         //this.PrintPlayersInGame();
+
+        transform.position = new Vector2(-255, -255);
     }
 
     /// <summary>Set up dungeon style.</summary>
     private void SetUpDungeonStyle()
     {
-        this.style = this.dungeons[Random.Range(0, this.dungeons.Count)];
-        this.style.LoadSprites();
+        style = dungeons[Random.Range(0, dungeons.Count)];
+        style.LoadSprites();
     }
 
     /// <summary>Creates the rooms.</summary>
-    private void CreateRooms() => this.rooms.AddRange(new NewRoom[NumOfRooms]);
-
-    /// <summary>Creates the corridors.</summary>
-    private void CreateCorridors() => this.corridors.AddRange(new NewCorridor[rooms.Count - 1]);
-
-    private void SetUpFirstRoom() 
+    private void CreateRooms()
     {
-        this.rooms[0] = NewRoom.SetUpFirstRoom(BoardWidth / 2, BoardHeight / 2, FirstRoomWidth, FirstRoomHeight);
-        this.corridors[0] = NewCorridor.SetUpFirstCorridor(CorridorWidth, CorridorHeight, this.rooms[0]);
+        rooms.AddRange(new NewRoom[NumOfRooms]);
     }
 
-    private void SetUpRoomsAndCorridors() 
+    /// <summary>Creates the corridors.</summary>
+    private void CreateCorridors()
     {
-        for (int i = 1; i < this.rooms.Count; i++)
-        {
-            this.rooms[i] = NewRoom.SetUp(RoomWidth, RoomHeight, this.corridors[i - 1]);
+        corridors.AddRange(new NewCorridor[rooms.Count - 1]);
+    }
 
-            if (i < this.corridors.Count)
+    private void SetUpFirstRoom()
+    {
+        rooms[0] = NewRoom.SetUpFirstRoom(BoardWidth / 2, BoardHeight / 2, FirstRoomWidth, FirstRoomHeight);
+        corridors[0] = NewCorridor.SetUpFirstCorridor(CorridorWidth, CorridorHeight, rooms[0]);
+    }
+
+    private void SetUpRoomsAndCorridors()
+    {
+        for (int i = 1; i < rooms.Count; i++)
+        {
+            rooms[i] = NewRoom.SetUp(RoomWidth, RoomHeight, corridors[i - 1]);
+
+            if (i < corridors.Count)
             {
-                this.corridors[i] = NewCorridor.SetUp(CorridorWidth, CorridorHeight, this.rooms[i]);
+                corridors[i] = NewCorridor.SetUp(CorridorWidth, CorridorHeight, rooms[i]);
             }
         }
     }
 
-    private void SetUpTheLastRoom() 
+    private void SetUpTheLastRoom()
     {
         int i = NumOfRooms - 1;
-        this.rooms[i] = NewRoom.SetUp(LastRoomWidth, LastRoomHeight, this.corridors[i - 1]);
+        rooms[i] = NewRoom.SetUp(LastRoomWidth, LastRoomHeight, corridors[i - 1]);
 
 
-        while (hasRoom(this.rooms[i])) 
+        while (hasRoom(rooms[i]))
         {
-            this.corridors[i - 1] = NewCorridor.SetUp(CorridorWidth, CorridorHeight, this.rooms[i - 1]);
-            this.rooms[i] = NewRoom.SetUp(LastRoomWidth, LastRoomHeight, this.corridors[i - 1]);
+            corridors[i - 1] = NewCorridor.SetUp(CorridorWidth, CorridorHeight, rooms[i - 1]);
+            rooms[i] = NewRoom.SetUp(LastRoomWidth, LastRoomHeight, corridors[i - 1]);
         }
     }
 
@@ -139,7 +153,7 @@ public class NewDungeon : MonoBehaviour
         {
             for (int y = room.YPos; y < room.YPos + room.Height; y++)
             {
-                if (this.board[x, y] == 1) 
+                if (board[x, y] == 1)
                 {
                     return true;
                 }
@@ -157,15 +171,15 @@ public class NewDungeon : MonoBehaviour
         positionsToSpawnThePlayers.Add(center + new Vector2(1.5f, -1.5f));
     }
 
-    private void PrintRoomsInBoard() 
+    private void PrintRoomsInBoard()
     {
-        foreach (NewRoom room in this.rooms)
+        foreach (NewRoom room in rooms)
         {
             for (int x = room.XPos; x < room.XPos + room.Width; x++)
             {
                 for (int y = room.YPos; y < room.YPos + room.Height; y++)
                 {
-                    this.board[x, y] = (this.board[x, y] == 0) ? 1 : this.board[x, y];
+                    board[x, y] = (board[x, y] == 0) ? 1 : board[x, y];
                 }
             }
         }
@@ -173,13 +187,13 @@ public class NewDungeon : MonoBehaviour
 
     private void PrintCorridorsInBoard()
     {
-        foreach (NewCorridor corridor in this.corridors)
+        foreach (NewCorridor corridor in corridors)
         {
             for (int x = corridor.XPos; x < corridor.XPos + corridor.Width; x++)
             {
                 for (int y = corridor.YPos; y < corridor.YPos + corridor.Height; y++)
                 {
-                    this.board[x, y] = (this.board[x, y] == 0) ? 1 : this.board[x, y];
+                    board[x, y] = (board[x, y] == 0) ? 1 : board[x, y];
                 }
             }
         }
@@ -191,11 +205,11 @@ public class NewDungeon : MonoBehaviour
         {
             for (int y = 0; y < BoardHeight; y++)
             {
-                this.board[x, y] = (this.board[x, y] == 1 && this.board[x, y - 1] == 0) ? 2 :    // Wall Top
-                                   (this.board[x, y] == 1 && this.board[x - 1, y] == 0) ? 3 :    // Wall Left    
-                                   (this.board[x, y] == 1 && this.board[x + 1, y] == 0) ? 4 :    // Wall Right
-                                   (this.board[x, y] == 1 && this.board[x, y + 1] == 0) ? 5 :    // Wall Down
-                                   this.board[x, y];
+                board[x, y] = (board[x, y] == 1 && board[x, y - 1] == 0) ? 2 :    // Wall Top
+                                   (board[x, y] == 1 && board[x - 1, y] == 0) ? 3 :    // Wall Left    
+                                   (board[x, y] == 1 && board[x + 1, y] == 0) ? 4 :    // Wall Right
+                                   (board[x, y] == 1 && board[x, y + 1] == 0) ? 5 :    // Wall Down
+                                   board[x, y];
             }
         }
     }
@@ -206,11 +220,11 @@ public class NewDungeon : MonoBehaviour
         {
             for (int y = 0; y < BoardHeight; y++)
             {
-                this.board[x, y] = (this.board[x, y] != 0 && this.board[x - 1, y] == 0 && this.board[x, y - 1] == 0) ? 6 :    // Corner Outer Top Left
-                                   (this.board[x, y] != 0 && this.board[x + 1, y] == 0 && this.board[x, y - 1] == 0) ? 7 :    // Corner Outer Top Right   
-                                   (this.board[x, y] != 0 && this.board[x - 1, y] == 0 && this.board[x, y + 1] == 0) ? 8 :    // Corner Outer Down Left
-                                   (this.board[x, y] != 0 && this.board[x + 1, y] == 0 && this.board[x, y + 1] == 0) ? 9 :    // Corner Outer Down Right
-                                   this.board[x, y];
+                board[x, y] = (board[x, y] != 0 && board[x - 1, y] == 0 && board[x, y - 1] == 0) ? 6 :    // Corner Outer Top Left
+                                   (board[x, y] != 0 && board[x + 1, y] == 0 && board[x, y - 1] == 0) ? 7 :    // Corner Outer Top Right   
+                                   (board[x, y] != 0 && board[x - 1, y] == 0 && board[x, y + 1] == 0) ? 8 :    // Corner Outer Down Left
+                                   (board[x, y] != 0 && board[x + 1, y] == 0 && board[x, y + 1] == 0) ? 9 :    // Corner Outer Down Right
+                                   board[x, y];
             }
         }
     }
@@ -221,11 +235,11 @@ public class NewDungeon : MonoBehaviour
         {
             for (int y = 0; y < BoardHeight; y++)
             {
-                this.board[x, y] = (this.board[x, y] == 1 && this.board[x - 1, y - 1] == 0) ? 10 :   // Corner Inner Top Left
-                                   (this.board[x, y] == 1 && this.board[x + 1, y - 1] == 0) ? 11 :   // Corner Inner Top Right
-                                   (this.board[x, y] == 1 && this.board[x - 1, y + 1] == 0) ? 12 :   // Corner Inner Down Left
-                                   (this.board[x, y] == 1 && this.board[x + 1, y + 1] == 0) ? 13 :   // Corner Inner Down Right
-                                   this.board[x, y];
+                board[x, y] = (board[x, y] == 1 && board[x - 1, y - 1] == 0) ? 10 :   // Corner Inner Top Left
+                                   (board[x, y] == 1 && board[x + 1, y - 1] == 0) ? 11 :   // Corner Inner Top Right
+                                   (board[x, y] == 1 && board[x - 1, y + 1] == 0) ? 12 :   // Corner Inner Down Left
+                                   (board[x, y] == 1 && board[x + 1, y + 1] == 0) ? 13 :   // Corner Inner Down Right
+                                   board[x, y];
             }
         }
     }
@@ -236,9 +250,9 @@ public class NewDungeon : MonoBehaviour
         {
             for (int y = 0; y < BoardHeight; y++)
             {
-                if (this.board[x, y] != 0)
+                if (board[x, y] != 0)
                 {
-                    MonoBehaviour.Instantiate(this.style.SelectSprite(this.board[x, y]), new Vector2(x, y), Quaternion.identity, this.transform);
+                    MonoBehaviour.Instantiate(style.SelectSprite(board[x, y]), new Vector2(x, y), Quaternion.identity, transform);
                 }
             }
         }
@@ -259,9 +273,9 @@ public class NewDungeon : MonoBehaviour
             {
                 for (int y = 0; y < BoardHeight; y++)
                 {
-                    if (this.board[x, y] == position && Random.Range(0, 1000) == 1)
+                    if (board[x, y] == position && Random.Range(0, 1000) == 1)
                     {
-                        this.board[x, y] = 255;
+                        board[x, y] = 255;
                         quantity--;
 
                         GameObject itemSpawned = MonoBehaviour.Instantiate(item, new Vector2(x, y), Quaternion.identity, master.transform);
@@ -276,31 +290,39 @@ public class NewDungeon : MonoBehaviour
 
     /// <summary>Spawns the list of.</summary>
     /// <param name="items">The items.</param>
-    private void SpawnListOf(List<Item> items) => items.ForEach(item => this.SpawnObject(item.Name, item.Quantity, item.Position, item.Object));
-
+    private void SpawnListOf(List<Item> items)
+    {
+        items.ForEach(item => SpawnObject(item.Name, item.Quantity, item.Position, item.Object));
+    }
 
     private void PrintTheBoss()
     {
-        int x = this.rooms[NumOfRooms - 1].XPos + this.rooms[NumOfRooms - 1].Width / 2;
-        int y = this.rooms[NumOfRooms - 1].YPos + this.rooms[NumOfRooms - 1].Height / 2;
+        int x = rooms[NumOfRooms - 1].XPos + rooms[NumOfRooms - 1].Width / 2;
+        int y = rooms[NumOfRooms - 1].YPos + rooms[NumOfRooms - 1].Height / 2;
         Vector2 pos = new Vector2(x + 0.5f, y + 0.5f);
-        GameObject master = new GameObject();
-        master.name = "Boss";
-        Instantiate(this.boss, pos, Quaternion.identity, master.transform);
+        GameObject master = new GameObject
+        {
+            name = "Boss"
+        };
+        Instantiate(boss, pos, Quaternion.identity, master.transform);
     }
 
-    private void PrintAltarsInGame() 
+    private void PrintAltarsInGame()
     {
-        GameObject master = new GameObject();
-        master.name = "Altars";
+        GameObject master = new GameObject
+        {
+            name = "Altars"
+        };
         positionsToSpawnThePlayers.ForEach(pos => Instantiate(altar, pos, Quaternion.identity, master.transform));
     }
 
-    private void PrintPlayersInGame() 
+    private void PrintPlayersInGame()
     {
-        Vector2 pos = this.positionsToSpawnThePlayers[Random.Range(0, this.positionsToSpawnThePlayers.Count)];
-        GameObject master = new GameObject();
-        master.name = "Players";
+        Vector2 pos = positionsToSpawnThePlayers[Random.Range(0, positionsToSpawnThePlayers.Count)];
+        GameObject master = new GameObject
+        {
+            name = "Players"
+        };
         Instantiate(player, pos + new Vector2(0, 0.25f), Quaternion.identity, master.transform);
     }
 }

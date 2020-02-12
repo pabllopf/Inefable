@@ -47,62 +47,62 @@ public class Suicide : MonoBehaviour, IEnemy
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.animator = this.GetComponent<Animator>();
-        this.rigid2D = this.GetComponent<Rigidbody2D>();
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        rigid2D = GetComponent<Rigidbody2D>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (this.DistanceToTarget() > VisionRadio)
+        if (DistanceToTarget() > VisionRadio)
         {
-            this.direction = Vector3.zero;
-            return; 
+            direction = Vector3.zero;
+            return;
         }
 
-        if (this.DistanceToTarget() <= AttackRadio)
-        { 
-            this.StartCoroutine(this.AttackToTarget()); 
-            return; 
+        if (DistanceToTarget() <= AttackRadio)
+        {
+            StartCoroutine(AttackToTarget());
+            return;
         }
 
-        this.FollowTarget();
+        FollowTarget();
     }
 
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
-        this.rigid2D.MovePosition(this.transform.position + (this.direction * Speed * Time.deltaTime));
+        rigid2D.MovePosition(transform.position + (direction * Speed * Time.deltaTime));
     }
 
     /// <summary>Distances to target.</summary>
     /// <returns>Return the distance to the target</returns>
     public float DistanceToTarget()
     {
-        return Vector2.Distance(this.transform.position, this.target.position);
+        return Vector2.Distance(transform.position, target.position);
     }
 
     /// <summary>Follows the target.</summary>
     public void FollowTarget()
     {
-        this.direction = this.target.position - this.transform.position;
-        this.direction.Normalize();
+        direction = target.position - transform.position;
+        direction.Normalize();
 
-        this.animator.SetFloat(Horizontal, this.direction.x);
-        this.animator.SetFloat(Vertical, this.direction.y);
+        animator.SetFloat(Horizontal, direction.x);
+        animator.SetFloat(Vertical, direction.y);
     }
 
     /// <summary>Takes the damage.</summary>
     /// <param name="amount">Amount to take health</param>
     public void TakeDamage(int amount)
     {
-        MonoBehaviour.Destroy(this.gameObject);
+        MonoBehaviour.Destroy(gameObject);
     }
 
     /// <summary>Dies this instance.</summary>
     /// <returns>Return none</returns>
-    public IEnumerator Die() 
+    public IEnumerator Die()
     {
         return null;
     }
@@ -111,16 +111,16 @@ public class Suicide : MonoBehaviour, IEnemy
     /// <returns>Return none</returns>
     private IEnumerator AttackToTarget()
     {
-        this.animator.SetBool(Attack, true);
-        this.direction = Vector3.zero;
-        
+        animator.SetBool(Attack, true);
+        direction = Vector3.zero;
+
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        
-        if (this.DistanceToTarget() <= AttackRadio) 
-        { 
-            this.target.GetComponent<Health>().Take(1); 
+
+        if (DistanceToTarget() <= AttackRadio)
+        {
+            target.GetComponent<Health>().Take(1);
         }
 
-        MonoBehaviour.Destroy(this.gameObject);
+        MonoBehaviour.Destroy(gameObject);
     }
 }

@@ -93,7 +93,9 @@ GameObject:
   - component: {fileID: 2743327116594969948}
   - component: {fileID: 2743327116594969949}
   - component: {fileID: 2743327116594969950}
-  - component: {fileID: 2743327116594969951}
+  - component: {fileID: 7571224491297239933}
+  - component: {fileID: 4327708656893921663}
+  - component: {fileID: 6577933388576140867}
   m_Layer: 0
   m_Name: Coin-003
   m_TagString: Coin
@@ -201,7 +203,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.9
---- !u!114 &2743327116594969951
+--- !u!114 &7571224491297239933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,6 +212,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 2743327116594969936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &4327708656893921663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743327116594969936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 2743327116594969949}
+--- !u!114 &6577933388576140867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743327116594969936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99725cacf5781d04a91fa5c2ffc128f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

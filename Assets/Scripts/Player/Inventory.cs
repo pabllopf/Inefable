@@ -39,11 +39,11 @@ public class Inventory : MonoBehaviour
 
     /// <summary>The take item</summary>
     [SerializeField]
-    private AudioClip takeItem = null;
+    private readonly AudioClip takeItem = null;
 
     /// <summary>The use item</summary>
     [SerializeField]
-    private AudioClip useItem = null;
+    private readonly AudioClip useItem = null;
 
     /// <summary>Awakes this instance.</summary>
     public void Awake()
@@ -54,41 +54,41 @@ public class Inventory : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.audioSource = this.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
-        this.uiAnimator = this.transform.Find("Interface/Inventory").GetComponent<Animator>();
+        uiAnimator = transform.Find("Interface/Inventory").GetComponent<Animator>();
 
 
-        this.mainButton = this.transform.Find("Interface/CircleInventory").gameObject;
-        this.slot1Button = this.transform.Find("Interface/Inventory/Slot1").gameObject;
-        this.slot2Button = this.transform.Find("Interface/Inventory/Slot2").gameObject;
-        this.slot3Button = this.transform.Find("Interface/Inventory/Slot3").gameObject;
+        mainButton = transform.Find("Interface/CircleInventory").gameObject;
+        slot1Button = transform.Find("Interface/Inventory/Slot1").gameObject;
+        slot2Button = transform.Find("Interface/Inventory/Slot2").gameObject;
+        slot3Button = transform.Find("Interface/Inventory/Slot3").gameObject;
 
-        this.mainButton.GetComponent<Button>().onClick.AddListener(() => { ControlInventory(); });
-        this.slot1Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(0); });
-        this.slot2Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(1); });
-        this.slot3Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(2); });
+        mainButton.GetComponent<Button>().onClick.AddListener(() => { ControlInventory(); });
+        slot1Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(0); });
+        slot2Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(1); });
+        slot3Button.GetComponent<Button>().onClick.AddListener(() => { UseItem(2); });
 
-        this.pressEffects = new List<PressEffect>
+        pressEffects = new List<PressEffect>
         {
-            this.transform.Find("Interface/Inventory/Slot1/Image").GetComponent<PressEffect>(),
-            this.transform.Find("Interface/Inventory/Slot2/Image").GetComponent<PressEffect>(),
-            this.transform.Find("Interface/Inventory/Slot3/Image").GetComponent<PressEffect>()
+            transform.Find("Interface/Inventory/Slot1/Image").GetComponent<PressEffect>(),
+            transform.Find("Interface/Inventory/Slot2/Image").GetComponent<PressEffect>(),
+            transform.Find("Interface/Inventory/Slot3/Image").GetComponent<PressEffect>()
         };
 
-        this.inventory = new List<Image>
+        inventory = new List<Image>
         {
-            this.transform.Find("Interface/Inventory/Slot1/Item").GetComponent<Image>(),
-            this.transform.Find("Interface/Inventory/Slot2/Item").GetComponent<Image>(),
-            this.transform.Find("Interface/Inventory/Slot3/Item").GetComponent<Image>()
+            transform.Find("Interface/Inventory/Slot1/Item").GetComponent<Image>(),
+            transform.Find("Interface/Inventory/Slot2/Item").GetComponent<Image>(),
+            transform.Find("Interface/Inventory/Slot3/Item").GetComponent<Image>()
         };
 
-        this.inventory[0].gameObject.SetActive(false);
-        this.inventory[1].gameObject.SetActive(false);
-        this.inventory[2].gameObject.SetActive(false);
+        inventory[0].gameObject.SetActive(false);
+        inventory[1].gameObject.SetActive(false);
+        inventory[2].gameObject.SetActive(false);
 
-        this.LoadInventory();
-        this.CheckSlots();
+        LoadInventory();
+        CheckSlots();
     }
 
     /// <summary>Updates this instance.</summary>
@@ -98,34 +98,34 @@ public class Inventory : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                if (this.uiAnimator.GetBool(Open))
+                if (uiAnimator.GetBool(Open))
                 {
-                    this.uiAnimator.SetBool(Open, false);
-                    this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StartEffect();
+                    uiAnimator.SetBool(Open, false);
+                    transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StartEffect();
                     return;
                 }
                 else
                 {
-                    this.uiAnimator.SetBool(Open, true);
-                    this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StopEffect();
-                    this.CheckSlots();
+                    uiAnimator.SetBool(Open, true);
+                    transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StopEffect();
+                    CheckSlots();
                     return;
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                this.UseItem(0);
+                UseItem(0);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                this.UseItem(1);
+                UseItem(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                this.UseItem(2);
+                UseItem(2);
             }
         }
 
@@ -133,36 +133,36 @@ public class Inventory : MonoBehaviour
         {
             if (Input.GetButtonDown("ButtonX"))
             {
-                if (this.uiAnimator.GetBool(Open))
+                if (uiAnimator.GetBool(Open))
                 {
-                    this.uiAnimator.SetBool(Open, false);
-                    this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StartEffect();
+                    uiAnimator.SetBool(Open, false);
+                    transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StartEffect();
                     return;
                 }
                 else
                 {
-                    this.uiAnimator.SetBool(Open, true);
-                    this.transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StopEffect();
-                    this.CheckSlots();
+                    uiAnimator.SetBool(Open, true);
+                    transform.Find("Interface/InventoryButton").GetComponent<PressEffect>().StopEffect();
+                    CheckSlots();
                     return;
                 }
             }
 
             if (Input.GetAxisRaw("PadY") > 0)
             {
-                this.UseItem(0);
+                UseItem(0);
                 return;
             }
 
             if (Input.GetAxisRaw("PadX") < 0)
             {
-                this.UseItem(1);
+                UseItem(1);
                 return;
             }
 
             if (Input.GetAxisRaw("PadX") > 0)
             {
-                this.UseItem(2);
+                UseItem(2);
                 return;
             }
         }
@@ -173,7 +173,7 @@ public class Inventory : MonoBehaviour
     /// <param name="item">The item.</param>
     public void AddItem(string tag, Sprite item)
     {
-        foreach (Image slot in this.inventory)
+        foreach (Image slot in inventory)
         {
             if (slot.sprite == null)
             {
@@ -181,9 +181,9 @@ public class Inventory : MonoBehaviour
                 slot.sprite = item;
                 slot.tag = tag;
 
-                this.CheckSlots();
-                this.PlayClip(this.takeItem);
-                this.SaveInventory();
+                CheckSlots();
+                Sound.Play(takeItem, audioSource);
+                SaveInventory();
                 break;
             }
         }
@@ -192,21 +192,24 @@ public class Inventory : MonoBehaviour
     /// <summary>Determines whether this instance has space.</summary>
     /// <returns>
     /// <c>true</c> if this instance has space; otherwise, <c>false</c>.</returns>
-    public bool HasSpace() => this.inventory.Where(i => i.sprite == null).Any() ? true : false;
+    public bool HasSpace()
+    {
+        return inventory.Where(i => i.sprite == null).Any() ? true : false;
+    }
 
     /// <summary>Controls the inventory.</summary>
-    public void ControlInventory() 
+    public void ControlInventory()
     {
         if (Settings.Current.Plattform == "Mobile")
         {
-            if (this.uiAnimator.GetBool(Open))
+            if (uiAnimator.GetBool(Open))
             {
-                this.uiAnimator.SetBool(Open, false);
+                uiAnimator.SetBool(Open, false);
                 return;
             }
             else
             {
-                this.uiAnimator.SetBool(Open, true);
+                uiAnimator.SetBool(Open, true);
                 return;
             }
         }
@@ -216,16 +219,16 @@ public class Inventory : MonoBehaviour
     /// <param name="position">The position.</param>
     public void UseItem(int position)
     {
-        if (this.inventory[position].sprite != null)
+        if (inventory[position].sprite != null)
         {
-            switch (this.inventory[position].tag)
+            switch (inventory[position].tag)
             {
                 case "PotionRed":
-                    this.GetComponent<Health>().Full();
+                    GetComponent<Health>().TreatFull();
                     break;
 
                 case "PotionBlue":
-                    this.GetComponent<Shield>().Full();
+                    GetComponent<Shield>().SetFull();
                     break;
 
                 case "PotionPurple":
@@ -235,13 +238,13 @@ public class Inventory : MonoBehaviour
                     break;
             }
 
-            this.inventory[position].sprite = null;
-            this.inventory[position].tag = "Untagged";
-            this.inventory[position].gameObject.SetActive(false);
+            inventory[position].sprite = null;
+            inventory[position].tag = "Untagged";
+            inventory[position].gameObject.SetActive(false);
 
-            this.CheckSlots();
-            this.PlayClip(this.useItem);
-            this.SaveInventory();
+            CheckSlots();
+            Sound.Play(useItem, audioSource);
+            SaveInventory();
         }
     }
 
@@ -252,49 +255,41 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                if (this.inventory[i].sprite == null)
+                if (inventory[i].sprite == null)
                 {
-                    this.pressEffects[i].StopEffect();
+                    pressEffects[i].StopEffect();
                 }
                 else
                 {
-                    this.pressEffects[i].StartEffect();
+                    pressEffects[i].StartEffect();
                 }
             }
         }
     }
 
     /// <summary>Loads the inventory.</summary>
-    private void LoadInventory() 
+    private void LoadInventory()
     {
-        for (int i = 0; i < this.inventory.Count; i++) 
+        for (int i = 0; i < inventory.Count; i++)
         {
-            if (Stats.Current.SpriteItem[i] != null) 
+            if (Stats.Current.SpriteItem[i] != null)
             {
-                this.inventory[i].gameObject.SetActive(true);
-                this.inventory[i].sprite = Stats.Current.SpriteItem[i];
-                this.inventory[i].tag = Stats.Current.TagItem[i];
+                inventory[i].gameObject.SetActive(true);
+                inventory[i].sprite = Stats.Current.SpriteItem[i];
+                inventory[i].tag = Stats.Current.TagItem[i];
             }
         }
     }
 
     /// <summary>Saves the inventory.</summary>
-    private void SaveInventory() 
+    private void SaveInventory()
     {
-        for (int i = 0; i < this.inventory.Count; i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
-            Stats.Current.SpriteItem[i] = this.inventory[i].sprite;
-            Stats.Current.TagItem[i] = this.inventory[i].tag;
+            Stats.Current.SpriteItem[i] = inventory[i].sprite;
+            Stats.Current.TagItem[i] = inventory[i].tag;
         }
 
         Game.SaveStats();
-    }
-
-    /// <summary>Plays the clip.</summary>
-    /// <param name="clip">The clip.</param>
-    private void PlayClip(AudioClip clip)
-    {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
     }
 }

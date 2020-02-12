@@ -42,9 +42,8 @@ namespace Mirror.Examples.ListServer
         public ushort gameServerToListenPort = 8887;
         public ushort clientToListenPort = 8888;
         public string gameServerTitle = "Deathmatch";
-
-        Telepathy.Client gameServerToListenConnection = new Telepathy.Client();
-        Telepathy.Client clientToListenConnection = new Telepathy.Client();
+        private readonly Telepathy.Client gameServerToListenConnection = new Telepathy.Client();
+        private readonly Telepathy.Client clientToListenConnection = new Telepathy.Client();
 
         [Header("UI")]
         public GameObject mainPanel;
@@ -56,14 +55,14 @@ namespace Mirror.Examples.ListServer
         public GameObject connectingPanel;
         public Text connectingText;
         public Button connectingCancelButton;
-        int connectingDots = 0;
+        private int connectingDots = 0;
 
         // all the servers, stored as dict with unique ip key so we can
         // update them more easily
         // (use "ip:port" if port is needed)
-        Dictionary<string, ServerStatus> list = new Dictionary<string, ServerStatus>();
+        private readonly Dictionary<string, ServerStatus> list = new Dictionary<string, ServerStatus>();
 
-        void Start()
+        private void Start()
         {
             // examples
             //list["127.0.0.1"] = new ServerStatus("127.0.0.1", "Deathmatch", 3, 10);
@@ -78,29 +77,36 @@ namespace Mirror.Examples.ListServer
             InvokeRepeating(nameof(Tick), 0, 1);
         }
 
-        bool IsConnecting() => NetworkClient.active && !ClientScene.ready;
-        bool FullyConnected() => NetworkClient.active && ClientScene.ready;
+        private bool IsConnecting()
+        {
+            return NetworkClient.active && !ClientScene.ready;
+        }
+
+        private bool FullyConnected()
+        {
+            return NetworkClient.active && ClientScene.ready;
+        }
 
         // should we use the client to listen connection?
-        bool UseClientToListen()
+        private bool UseClientToListen()
         {
             return !NetworkManager.isHeadless && !NetworkServer.active && !FullyConnected();
         }
 
         // should we use the game server to listen connection?
-        bool UseGameServerToListen()
+        private bool UseGameServerToListen()
         {
             return NetworkServer.active;
         }
 
-        void Tick()
+        private void Tick()
         {
             TickGameServer();
             TickClient();
         }
 
         // send server status to list server
-        void SendStatus()
+        private void SendStatus()
         {
             BinaryWriter writer = new BinaryWriter(new MemoryStream());
 
@@ -118,10 +124,13 @@ namespace Mirror.Examples.ListServer
                 // send it
                 gameServerToListenConnection.Send(((MemoryStream)writer.BaseStream).ToArray());
             }
-            else Debug.LogError("[List Server] List Server will reject messages longer than 128 bytes. Please use a shorter title.");
+            else
+            {
+                Debug.LogError("[List Server] List Server will reject messages longer than 128 bytes. Please use a shorter title.");
+            }
         }
 
-        void TickGameServer()
+        private void TickGameServer()
         {
             // send server data to listen
             if (UseGameServerToListen())
@@ -146,7 +155,7 @@ namespace Mirror.Examples.ListServer
             }
         }
 
-        void ParseMessage(byte[] bytes)
+        private void ParseMessage(byte[] bytes)
         {
             // note: we don't use ReadString here because the list server
             //       doesn't know C#'s '7-bit-length + utf8' encoding for strings
@@ -182,7 +191,7 @@ namespace Mirror.Examples.ListServer
             list[key] = server;
         }
 
-        void TickClient()
+        private void TickClient()
         {
             // receive client data from listen
             if (UseClientToListen())
@@ -195,13 +204,19 @@ namespace Mirror.Examples.ListServer
                     {
                         // connected?
                         if (message.eventType == Telepathy.EventType.Connected)
+                        {
                             Debug.Log("[List Server] Client connected!");
+                        }
                         // data message?
                         else if (message.eventType == Telepathy.EventType.Data)
+                        {
                             ParseMessage(message.data);
+                        }
                         // disconnected?
                         else if (message.eventType == Telepathy.EventType.Disconnected)
+                        {
                             Debug.Log("[List Server] Client disconnected.");
+                        }
                     }
 
 #if !UNITY_WEBGL // Ping isn't known in WebGL builds
@@ -247,10 +262,12 @@ namespace Mirror.Examples.ListServer
             // delete everything that's too much
             // (backwards loop because Destroy changes childCount)
             for (int i = parent.childCount - 1; i >= amount; --i)
+            {
                 Destroy(parent.GetChild(i).gameObject);
+            }
         }
 
-        void OnUI()
+        private void OnUI()
         {
             // only show while client not connected and server not started
             if (!NetworkManager.singleton.isNetworkActive || IsConnecting())
@@ -311,7 +328,10 @@ namespace Mirror.Examples.ListServer
                     NetworkManager.singleton.StartServer();
                 });
             }
-            else mainPanel.SetActive(false);
+            else
+            {
+                mainPanel.SetActive(false);
+            }
 
             // show connecting panel while connecting
             if (IsConnecting())
@@ -326,16 +346,24 @@ namespace Mirror.Examples.ListServer
                 connectingCancelButton.onClick.RemoveAllListeners();
                 connectingCancelButton.onClick.AddListener(NetworkManager.singleton.StopClient);
             }
-            else connectingPanel.SetActive(false);
+            else
+            {
+                connectingPanel.SetActive(false);
+            }
         }
 
         // disconnect everything when pressing Stop in the Editor
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             if (gameServerToListenConnection.Connected)
+            {
                 gameServerToListenConnection.Disconnect();
+            }
+
             if (clientToListenConnection.Connected)
+            {
                 clientToListenConnection.Disconnect();
+            }
         }
     }
 }

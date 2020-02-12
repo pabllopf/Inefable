@@ -22,7 +22,7 @@ public class Bird : MonoBehaviour
 
     /// <summary>The speed</summary>
     [SerializeField]
-    private float speed = 2;
+    private readonly float speed = 2;
 
     /// <summary>The reset time</summary>
     private float resetTime;
@@ -36,40 +36,40 @@ public class Bird : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        this.animator = this.GetComponent<Animator>();
-        this.resetTime = this.timeToChangeDirection;
-        this.direction = Random.Range(0, 2);
-        this.lastDirection = this.direction;
+        animator = GetComponent<Animator>();
+        resetTime = timeToChangeDirection;
+        direction = Random.Range(0, 2);
+        lastDirection = direction;
     }
 
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (this.timeToChangeDirection > 0) 
+        if (timeToChangeDirection > 0)
         {
-            this.timeToChangeDirection -= Time.deltaTime;
+            timeToChangeDirection -= Time.deltaTime;
         }
 
-        this.direction = Random.Range(0, 2);
+        direction = Random.Range(0, 2);
 
-        if (this.timeToChangeDirection <= 0 && this.lastDirection != this.direction) 
+        if (timeToChangeDirection <= 0 && lastDirection != direction)
         {
-            this.lastDirection = this.direction;
-            this.timeToChangeDirection = this.resetTime;
+            lastDirection = direction;
+            timeToChangeDirection = resetTime;
         }
 
-        if (this.lastDirection == 0)
+        if (lastDirection == 0)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + new Vector3(0, 0.2f, 0), this.speed * Time.deltaTime);
-            this.animator.SetFloat(Horizontal, 0);
-            this.animator.SetFloat(Vertical, 1);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, 0.2f, 0), speed * Time.deltaTime);
+            animator.SetFloat(Horizontal, 0);
+            animator.SetFloat(Vertical, 1);
         }
 
-        if (this.lastDirection == 1)
+        if (lastDirection == 1)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + new Vector3(0, -0.2f, 0), this.speed * Time.deltaTime);
-            this.animator.SetFloat(Horizontal, 0);
-            this.animator.SetFloat(Vertical, -1);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, -0.2f, 0), speed * Time.deltaTime);
+            animator.SetFloat(Horizontal, 0);
+            animator.SetFloat(Vertical, -1);
         }
     }
 }

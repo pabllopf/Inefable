@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6358319342554565994}
   - component: {fileID: 524425485655086443}
-  - component: {fileID: 9131410293634463179}
-  - component: {fileID: 5845405373314140850}
+  - component: {fileID: -9033433078679090140}
+  - component: {fileID: -7150087481239197406}
   m_Layer: 0
   m_Name: WallRigth
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &9131410293634463179
+--- !u!61 &-9033433078679090140
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5845405373314140850
+--- !u!114 &-7150087481239197406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,6 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6541792069657844282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

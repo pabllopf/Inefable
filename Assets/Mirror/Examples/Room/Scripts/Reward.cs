@@ -7,14 +7,16 @@ namespace Mirror.Examples.NetworkRoom
     {
         public bool available = true;
         public Spawner spawner;
-        uint points;
+        private uint points;
 
         public RandomColor randomColor;
 
-        void OnValidate()
+        private void OnValidate()
         {
             if (randomColor == null)
+            {
                 randomColor = GetComponent<RandomColor>();
+            }
         }
 
         // This is called from PlayerController.CmdClaimPrize which is invoked by PlayerController.OnControllerColliderHit
@@ -32,7 +34,10 @@ namespace Mirror.Examples.NetworkRoom
                 // calculate the points from the color ... lighter scores higher as the average approaches 255
                 // UnityEngine.Color RGB values are float fractions of 255
                 points = (uint)(((prizeColor.r * 255) + (prizeColor.g * 255) + (prizeColor.b * 255)) / 3);
-                if (LogFilter.Debug) Debug.LogFormat("Scored {0} points R:{1} G:{2} B:{3}", points, prizeColor.r, prizeColor.g, prizeColor.b);
+                if (LogFilter.Debug)
+                {
+                    Debug.LogFormat("Scored {0} points R:{1} G:{2} B:{3}", points, prizeColor.r, prizeColor.g, prizeColor.b);
+                }
 
                 // award the points via SyncVar on the PlayerController
                 player.GetComponent<PlayerScore>().score += points;

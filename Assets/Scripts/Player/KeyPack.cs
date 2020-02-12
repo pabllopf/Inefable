@@ -20,11 +20,11 @@ public class KeyPack : MonoBehaviour
 
     /// <summary>The take coin sound</summary>
     [SerializeField]
-    private AudioClip takeClip = null;
+    private readonly AudioClip takeClip = null;
 
     /// <summary>The spend coin</summary>
     [SerializeField]
-    private AudioClip spendClip = null;
+    private readonly AudioClip spendClip = null;
 
     /// <summary>Gets a value indicating whether this instance has keys.</summary>
     /// <value>
@@ -32,23 +32,26 @@ public class KeyPack : MonoBehaviour
     public bool HasKeys => (Stats.Current.Keys > 0) ? true : false;
 
     /// <summary>The audio source</summary>
-    private AudioSource AudioSource => this.GetComponent<AudioSource>();
+    private AudioSource AudioSource => GetComponent<AudioSource>();
 
     /// <summary>The wallet UI</summary>
-    private Text CounterKeys => this.transform.Find("Interface/CounterKeys/Text").GetComponent<Text>();
+    private Text CounterKeys => transform.Find("Interface/CounterKeys/Text").GetComponent<Text>();
 
     /// <summary>The animator</summary>
-    private Animator Animator => this.transform.Find("Interface/CounterKeys").GetComponent<Animator>();
+    private Animator Animator => transform.Find("Interface/CounterKeys").GetComponent<Animator>();
 
     /// <summary>Awakes this instance.</summary>
-    public void Awake() => Game.LoadStats();
+    public void Awake()
+    {
+        Game.LoadStats();
+    }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
         if (!active)
         {
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StartCoroutine(ControlUI(TimeToReset));
         }
     }
 
@@ -56,18 +59,18 @@ public class KeyPack : MonoBehaviour
     public void AddKey()
     {
         Stats.Current.Keys++;
-        this.CounterKeys.text = "x" + Stats.Current.Keys;
+        CounterKeys.text = "x" + Stats.Current.Keys;
         Game.SaveStats();
 
-        this.PlayClip(this.takeClip);
+        PlayClip(takeClip);
         if (!active)
         {
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StartCoroutine(ControlUI(TimeToReset));
         }
         else
         {
-            this.StopAllCoroutines();
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StopAllCoroutines();
+            StartCoroutine(ControlUI(TimeToReset));
         }
     }
 
@@ -76,32 +79,32 @@ public class KeyPack : MonoBehaviour
     public void Spend(int amount)
     {
         Stats.Current.Keys -= amount;
-        this.CounterKeys.text = "x" + Stats.Current.Keys;
+        CounterKeys.text = "x" + Stats.Current.Keys;
         Game.SaveStats();
 
-        this.PlayClip(this.spendClip);
+        PlayClip(spendClip);
         if (!active)
         {
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StartCoroutine(ControlUI(TimeToReset));
         }
         else
         {
-            this.StopAllCoroutines();
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StopAllCoroutines();
+            StartCoroutine(ControlUI(TimeToReset));
         }
     }
 
     /// <summary>Actives the UI.</summary>
-    public void ActiveUI() 
+    public void ActiveUI()
     {
         if (!active)
         {
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StartCoroutine(ControlUI(TimeToReset));
         }
         else
         {
-            this.StopAllCoroutines();
-            this.StartCoroutine(this.ControlUI(TimeToReset));
+            StopAllCoroutines();
+            StartCoroutine(ControlUI(TimeToReset));
         }
     }
 
@@ -110,21 +113,21 @@ public class KeyPack : MonoBehaviour
     /// <returns>Return none</returns>
     private IEnumerator ControlUI(float time)
     {
-        this.active = true;
-        this.CounterKeys.text = "x" + Stats.Current.Keys;
-        this.Animator.SetBool(Open, true);
+        active = true;
+        CounterKeys.text = "x" + Stats.Current.Keys;
+        Animator.SetBool(Open, true);
 
         yield return new WaitForSeconds(time);
 
-        this.Animator.SetBool(Open, false);
-        this.active = false;
+        Animator.SetBool(Open, false);
+        active = false;
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.AudioSource.clip = clip;
-        this.AudioSource.Play();
+        AudioSource.clip = clip;
+        AudioSource.Play();
     }
 }

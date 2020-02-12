@@ -34,19 +34,23 @@ namespace Mirror.Weaver
             MethodReference readItemFunc = GenerateDeserialization(deserializeMethod, td, itemType);
 
             if (readItemFunc == null || writeItemFunc == null)
+            {
                 return;
+            }
 
             Weaver.DLog(td, "SyncObjectProcessor Done");
         }
 
         // serialization of individual element
-        static MethodReference GenerateSerialization(string methodName, TypeDefinition td, TypeReference itemType)
+        private static MethodReference GenerateSerialization(string methodName, TypeDefinition td, TypeReference itemType)
         {
             Weaver.DLog(td, "  GenerateSerialization");
             foreach (MethodDefinition m in td.Methods)
             {
                 if (m.Name == methodName)
+                {
                     return m;
+                }
             }
 
             MethodDefinition serializeFunc = new MethodDefinition(methodName, MethodAttributes.Public |
@@ -83,13 +87,15 @@ namespace Mirror.Weaver
             return serializeFunc;
         }
 
-        static MethodReference GenerateDeserialization(string methodName, TypeDefinition td, TypeReference itemType)
+        private static MethodReference GenerateDeserialization(string methodName, TypeDefinition td, TypeReference itemType)
         {
             Weaver.DLog(td, "  GenerateDeserialization");
             foreach (MethodDefinition m in td.Methods)
             {
                 if (m.Name == methodName)
+                {
                     return m;
+                }
             }
 
             MethodDefinition deserializeFunction = new MethodDefinition(methodName, MethodAttributes.Public |

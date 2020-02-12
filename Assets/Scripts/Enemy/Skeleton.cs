@@ -56,7 +56,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     /// <summary>The red effect</summary>
     [SerializeField]
-    private GameObject redHit = null;
+    private readonly GameObject redHit = null;
 
     /// <summary>The direction</summary>
     private Vector3 direction = Vector3.zero;
@@ -78,7 +78,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     /// <summary>The hit clip</summary>
     [SerializeField]
-    private AudioClip hitClip = null;
+    private readonly AudioClip hitClip = null;
 
     /// <summary>The attacking</summary>
     private bool attacking = false;
@@ -93,59 +93,59 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <param name="damage">The damage.</param>
     public void TakeDamage(int damage)
     {
-        this.health -= damage;
-        if (this.health <= 0 && !this.deading)
+        health -= damage;
+        if (health <= 0 && !deading)
         {
-            this.StartCoroutine(this.Die());
+            StartCoroutine(Die());
             return;
         }
         redHit.GetComponent<TextMeshPro>().text = damage.ToString();
-        Instantiate(redHit, this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, this.transform);
+        Instantiate(redHit, transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0), Quaternion.identity, transform);
 
-        this.StartCoroutine(this.Hit());
+        StartCoroutine(Hit());
     }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        this.animator = this.GetComponent<Animator>();
-        this.rigid2D = this.GetComponent<Rigidbody2D>();
-        this.audioSource = this.GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        rigid2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
 
-        this.target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (this.health > 0) 
+        if (health > 0)
         {
-            if (this.DistanceToTarget() <= VisionRange) 
+            if (DistanceToTarget() <= VisionRange)
             {
-                if (!this.attacking)
+                if (!attacking)
                 {
-                    this.FollowTarget();
+                    FollowTarget();
                 }
 
-                if (this.DistanceToTarget() <= AttackRange && !this.attacking)
+                if (DistanceToTarget() <= AttackRange && !attacking)
                 {
-                    Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position + (this.direction / 3), AttackRadius, LayerMask.GetMask("Player"));
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + (direction / 3), AttackRadius, LayerMask.GetMask("Player"));
                     foreach (Collider2D collider in colliders)
                     {
                         if (collider.CompareTag("Player"))
                         {
-                            this.attackPosition = this.transform.position + (this.direction / 3);
-                            this.StartCoroutine(this.AttackToTheTarget());
+                            attackPosition = transform.position + (direction / 3);
+                            StartCoroutine(AttackToTheTarget());
                             return;
                         }
                     }
-                } 
+                }
             }
             else
             {
-                this.direction = Vector3.zero;
-                this.animator.SetBool(Walk, false);
+                direction = Vector3.zero;
+                animator.SetBool(Walk, false);
             }
         }
     }
@@ -153,9 +153,9 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <summary>Update every frame.</summary>
     public void FixedUpdate()
     {
-        if (!this.hitting) 
+        if (!hitting)
         {
-            this.rigid2D.MovePosition(this.transform.position + (this.direction * SpeedToMove * Time.deltaTime));
+            rigid2D.MovePosition(transform.position + (direction * SpeedToMove * Time.deltaTime));
         }
     }
 
@@ -163,86 +163,86 @@ public class Skeleton : MonoBehaviour, IEnemy
     /// <returns>Return none</returns>
     public IEnumerator Hit()
     {
-        this.rigid2D.isKinematic = false;
-        this.hitting = true;
-        this.rigid2D.AddForce((this.transform.position - this.target.position).normalized * Thrust, ForceMode2D.Impulse);
-        this.StartCoroutine(this.HitEffect(this.rigid2D));
-        
+        rigid2D.isKinematic = false;
+        hitting = true;
+        rigid2D.AddForce((transform.position - target.position).normalized * Thrust, ForceMode2D.Impulse);
+        StartCoroutine(HitEffect(rigid2D));
+
         yield return new WaitForSeconds(0.1f);
-       
-        this.attackPosition = this.transform.position;
-        this.spriteRenderer.color = Color.red;
-        this.PlayClip(this.hitClip);
+
+        attackPosition = transform.position;
+        spriteRenderer.color = Color.red;
+        PlayClip(hitClip);
         yield return new WaitForSeconds(0.1f);
-        this.spriteRenderer.color = Color.white;
-        this.rigid2D.isKinematic = true;
+        spriteRenderer.color = Color.white;
+        rigid2D.isKinematic = true;
     }
 
     /// <summary>Dies this instance.</summary>
     /// <returns>Return none</returns>
     public IEnumerator Die()
     {
-        this.StopAllCoroutines();
-        this.animator.SetBool(Exit, true);
-        this.animator.SetTrigger(Dead);
-        this.spriteRenderer.sortingOrder = 2;
-        this.hitting = true;
-        this.deading = true;
-        this.spriteRenderer.color = Color.white;
+        StopAllCoroutines();
+        animator.SetBool(Exit, true);
+        animator.SetTrigger(Dead);
+        spriteRenderer.sortingOrder = 2;
+        hitting = true;
+        deading = true;
+        spriteRenderer.color = Color.white;
 
-        MonoBehaviour.Destroy(this.GetComponent<Occlusion>());
-        MonoBehaviour.Destroy(this.GetComponent<BoxCollider2D>());
-        MonoBehaviour.Destroy(this.GetComponent<AudioSource>());
-        MonoBehaviour.Destroy(this.GetComponent<Rigidbody2D>());
+        MonoBehaviour.Destroy(GetComponent<Occlusion>());
+        MonoBehaviour.Destroy(GetComponent<BoxCollider2D>());
+        MonoBehaviour.Destroy(GetComponent<AudioSource>());
+        MonoBehaviour.Destroy(GetComponent<Rigidbody2D>());
 
         yield return new WaitForSeconds(3f);
 
-        MonoBehaviour.Destroy(this.GetComponent<Animator>());
-        MonoBehaviour.Destroy(this.GetComponent<Skeleton>());
+        MonoBehaviour.Destroy(GetComponent<Animator>());
+        MonoBehaviour.Destroy(GetComponent<Skeleton>());
     }
 
     /// <summary>Distances to target.</summary>
     /// <returns>Return the distance</returns>
     public float DistanceToTarget()
     {
-        return Vector2.Distance(this.transform.position, this.target.position);
+        return Vector2.Distance(transform.position, target.position);
     }
 
     /// <summary>Follows the target.</summary>
     private void FollowTarget()
     {
-        this.direction = this.target.position - this.transform.position;
-        this.direction.Normalize();
+        direction = target.position - transform.position;
+        direction.Normalize();
 
-        this.animator.SetFloat(Horizontal, this.direction.x);
-        this.animator.SetFloat(Vertical, this.direction.y);
+        animator.SetFloat(Horizontal, direction.x);
+        animator.SetFloat(Vertical, direction.y);
 
-        this.animator.SetBool(Walk, true);
+        animator.SetBool(Walk, true);
     }
 
     /// <summary>Attacks to the target.</summary>
     /// <returns>Return none</returns>
     private IEnumerator AttackToTheTarget()
     {
-        this.attacking = true;
-        this.direction = Vector3.zero;
-        this.animator.SetBool(Walk, false);
+        attacking = true;
+        direction = Vector3.zero;
+        animator.SetBool(Walk, false);
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
-        this.animator.SetTrigger(Attack);
+        animator.SetTrigger(Attack);
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.attackPosition, AttackRadius, LayerMask.GetMask("Player"));
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, AttackRadius, LayerMask.GetMask("Player"));
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                this.target.GetComponent<Health>().Take(Random.Range(5, 15));
+                target.GetComponent<Health>().Take(Random.Range(5, 15));
             }
         }
 
         yield return new WaitForSeconds(FrequencyToAttack / 2);
 
-        this.attacking = false;
+        attacking = false;
     }
 
     /// <summary>Hits the effect.</summary>
@@ -253,30 +253,30 @@ public class Skeleton : MonoBehaviour, IEnemy
         yield return new WaitForSeconds(KnockTime);
         enemy.velocity = Vector2.zero;
         enemy.isKinematic = true;
-        this.hitting = false;
+        hitting = false;
     }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="clip">The clip.</param>
     private void PlayClip(AudioClip clip)
     {
-        this.audioSource.clip = clip;
-        this.audioSource.Play();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     /// <summary>Called when [draw gizmos selected].</summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(this.transform.position, VisionRange);
+        Gizmos.DrawWireSphere(transform.position, VisionRange);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, AttackRange);
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position + (this.direction / 3), AttackRadius);
+        Gizmos.DrawWireSphere(transform.position + (direction / 3), AttackRadius);
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(this.attackPosition, AttackRadius);
+        Gizmos.DrawWireSphere(attackPosition, AttackRadius);
     }
 }

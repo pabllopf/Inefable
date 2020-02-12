@@ -11,27 +11,27 @@ public class Style
 {
     /// <summary>The name</summary>
     [SerializeField]
-    private string name = string.Empty;
+    private readonly string name = string.Empty;
 
     /// <summary>The items</summary>
     [SerializeField]
-    private List<Item> items = null;
+    private readonly List<Item> items = null;
 
     /// <summary>The enemys</summary>
     [SerializeField]
-    private List<Item> enemys = null;
+    private readonly List<Item> enemys = null;
 
     /// <summary>The pets</summary>
     [SerializeField]
-    private List<Item> pets = null;
+    private readonly List<Item> pets = null;
 
     /// <summary>The special floors</summary>
     [SerializeField]
-    private List<Item> floors = null;
+    private readonly List<Item> floors = null;
 
     /// <summary>The special floors</summary>
     [SerializeField]
-    private List<Item> lights = null;
+    private readonly List<Item> lights = null;
 
     /// <summary>The floor center</summary>
     private GameObject floorCenter;
@@ -73,121 +73,121 @@ public class Style
     private GameObject cornerInternalRightUp;
 
     /// <summary>Initializes a new instance of the <see cref="Style"/> class</summary>
-    public Style() 
+    public Style()
     {
-        this.floorCenter = null;
-        this.wallDown = null;
-        this.wallLeft = null;
-        this.wallRight = null;
-        this.wallTop = null;
-        this.cornerLeftDown = null;
-        this.cornerRightDown = null;
-        this.cornerRightUp = null;
-        this.cornerLeftUp = null;
-        this.cornerInternalLeftDown = null;
-        this.cornerInternalLeftUp = null;
-        this.cornerInternalRightDown = null;
-        this.cornerInternalRightUp = null;
+        floorCenter = null;
+        wallDown = null;
+        wallLeft = null;
+        wallRight = null;
+        wallTop = null;
+        cornerLeftDown = null;
+        cornerRightDown = null;
+        cornerRightUp = null;
+        cornerLeftUp = null;
+        cornerInternalLeftDown = null;
+        cornerInternalLeftUp = null;
+        cornerInternalRightDown = null;
+        cornerInternalRightUp = null;
     }
 
     /// <summary>Selects the sprite</summary>
     /// <param name="sprite">The sprite</param>
     /// <returns>The sprite selected</returns>
-    public GameObject SelectSprite(int sprite) 
+    public GameObject SelectSprite(int sprite)
     {
-        switch (sprite) 
+        switch (sprite)
         {
             case 1:
-                return this.floorCenter;
+                return floorCenter;
             case 2:
-                return this.wallDown;
+                return wallDown;
             case 3:
-                return this.wallLeft;
+                return wallLeft;
             case 4:
-                return this.wallRight;
+                return wallRight;
             case 5:
-                return this.wallTop;
+                return wallTop;
             case 6:
-                return this.cornerLeftDown;
+                return cornerLeftDown;
             case 7:
-                return this.cornerRightDown;
+                return cornerRightDown;
             case 8:
-                return this.cornerLeftUp;
+                return cornerLeftUp;
             case 9:
-                return this.cornerRightUp;
+                return cornerRightUp;
             case 10:
-                return this.cornerInternalLeftDown;
+                return cornerInternalLeftDown;
             case 11:
-                return this.cornerInternalRightDown;
+                return cornerInternalRightDown;
             case 12:
-                return this.cornerInternalRightUp;
+                return cornerInternalRightUp;
             case 13:
-                return this.cornerInternalLeftUp;
+                return cornerInternalLeftUp;
             default:
                 return null;
         }
     }
 
     /// <summary>Loads the sprites</summary>
-    public void LoadSprites() 
+    public void LoadSprites()
     {
-        this.floorCenter = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "Floor");
+        floorCenter = (GameObject)Resources.Load("Dungeons/" + name + "/" + "Floor");
 
-        this.wallDown = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "WallDown");
-        this.wallLeft = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "WallLeft");
-        this.wallRight = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "WallRigth");
-        this.wallTop = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "WallTop");
+        wallDown = (GameObject)Resources.Load("Dungeons/" + name + "/" + "WallDown");
+        wallLeft = (GameObject)Resources.Load("Dungeons/" + name + "/" + "WallLeft");
+        wallRight = (GameObject)Resources.Load("Dungeons/" + name + "/" + "WallRigth");
+        wallTop = (GameObject)Resources.Load("Dungeons/" + name + "/" + "WallTop");
 
-        this.cornerLeftDown = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerLD");
-        this.cornerLeftUp = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerLU");
-        this.cornerRightDown = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerRD");
-        this.cornerRightUp = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerRU");
+        cornerLeftDown = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerLD");
+        cornerLeftUp = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerLU");
+        cornerRightDown = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerRD");
+        cornerRightUp = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerRU");
 
-        this.cornerInternalLeftDown = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerILD");
-        this.cornerInternalLeftUp = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerILU");
-        this.cornerInternalRightDown = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerIRD");
-        this.cornerInternalRightUp = (GameObject)Resources.Load("Dungeons/" + this.name + "/" + "CornerIRU");
+        cornerInternalLeftDown = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerILD");
+        cornerInternalLeftUp = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerILU");
+        cornerInternalRightDown = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerIRD");
+        cornerInternalRightUp = (GameObject)Resources.Load("Dungeons/" + name + "/" + "CornerIRU");
     }
 
     /// <summary>Gets the name</summary>
     /// <returns>Return a string with the name of the style dungeon</returns>
-    public string GetName() 
+    public string GetName()
     {
-        return this.name;
+        return name;
     }
 
     /// <summary>Gets the items.</summary>
     /// <returns>Return the items</returns>
-    public List<Item> GetItems() 
+    public List<Item> GetItems()
     {
-        return this.items;
+        return items;
     }
 
     /// <summary>Gets the enemys.</summary>
     /// <returns>Return the enemys</returns>
     public List<Item> GetEnemys()
     {
-        return this.enemys;
+        return enemys;
     }
 
     /// <summary>Gets the pets.</summary>
     /// <returns>Return the pets</returns>
     public List<Item> GetPets()
     {
-        return this.pets;
+        return pets;
     }
 
     /// <summary>Gets the floors.</summary>
     /// <returns>Return floors</returns>
     public List<Item> GetFloors()
     {
-        return this.floors;
+        return floors;
     }
 
     /// <summary>Gets the lights.</summary>
     /// <returns></returns>
     public List<Item> GetLights()
     {
-        return this.lights;
+        return lights;
     }
 }

@@ -1549,6 +1549,7 @@ GameObject:
   - component: {fileID: 1035938995}
   - component: {fileID: 1035938998}
   - component: {fileID: 1035938994}
+  - component: {fileID: 1035938999}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1568,9 +1569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903ff4bede003434993dd3ff9d820a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkDiscovery: {fileID: 0}
+  networkDiscovery: {fileID: 1035938998}
   content: {fileID: 0}
-  matchButton: {fileID: 4834623650374611909, guid: ddff26f6cea01804ebdf09d633fa47de,
+  matchButton: {fileID: 80837767302443961, guid: a74b97447e4c7be40a4dd885ff3af794,
     type: 3}
 --- !u!114 &1035938995
 MonoBehaviour:
@@ -1633,19 +1634,16 @@ MonoBehaviour:
   onlineScene: Online
   transport: {fileID: 1035938995}
   networkAddress: 83.34.56.241
-  maxConnections: 100
-  ClientUI: {fileID: 3800072353798496369, guid: dff1d1a4e8a26c449bd3fab9f995bac1,
-    type: 3}
-  clientObj: {fileID: 5435870536422764160, guid: 0e0e9d733dcbd324a8e8c7432189014d,
-    type: 3}
-  ServerUI: {fileID: 8703711008087276046, guid: a831b721f9ee88141b6bd840bd97e1c7,
-    type: 3}
+  maxConnections: 4
+  players: []
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 2112861785234466085, guid: 0fa5cf19cb0f27e47997cdce616f1d55,
+  playerPrefab: {fileID: 1107992142917191518, guid: 5eb43081f5fed9449a4a75e862e2d1a3,
     type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs: []
+  playerSpawnMethod: 1
+  spawnPrefabs:
+  - {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
+  - {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
   ports: 611e621e
 --- !u!4 &1035938997
 Transform:
@@ -1675,8 +1673,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secretHandshake: 2846149654862838473
-  serverBroadcastListenPort: 47777
-  ActiveDiscoveryInterval: 3
   transport: {fileID: 1035938995}
   OnServerFound:
     m_PersistentCalls:
@@ -1692,6 +1688,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!81 &1035938999
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035938993}
+  m_Enabled: 1
 --- !u!1 &1178509707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,8 +2420,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1883902963}
   - component: {fileID: 1883902962}
-  - component: {fileID: 1883902961}
-  - component: {fileID: 1883902964}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -2425,14 +2427,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1883902961
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883902960}
-  m_Enabled: 1
 --- !u!20 &1883902962
 Camera:
   m_ObjectHideFlags: 0
@@ -2490,26 +2484,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1883902964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883902960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetsPPU: 64
-  m_RefResolutionX: 1024
-  m_RefResolutionY: 768
-  m_UpscaleRT: 1
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
 --- !u!1 &1900266945
 GameObject:
   m_ObjectHideFlags: 0

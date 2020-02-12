@@ -14,7 +14,7 @@ namespace Mirror.Examples.Additive
         public string subScene;
 
         [Server]
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             Debug.LogFormat("Loading {0}", subScene);
 
@@ -23,7 +23,7 @@ namespace Mirror.Examples.Additive
         }
 
         [Server]
-        void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             Debug.LogFormat("Unloading {0}", subScene);
 

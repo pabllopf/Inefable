@@ -1,8 +1,8 @@
-using UnityEngine;
+using System;
 using System.Net;
 using System.Net.Sockets;
-using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 // Based on https://github.com/EnlightenedOne/MirrorNetworkDiscovery
 // forked from https://github.com/in0finite/MirrorNetworkDiscovery
@@ -21,7 +21,7 @@ namespace Mirror.Discovery
         where Request : IMessageBase, new()
         where Response : IMessageBase, new()
     {
-        public static bool SupportedOnThisPlatform { get { return Application.platform != RuntimePlatform.WebGLPlayer; } }
+        public static bool SupportedOnThisPlatform => Application.platform != RuntimePlatform.WebGLPlayer;
 
         // each game should have a random unique handshake,  this way you can tell if this is the same game or not
         [HideInInspector]
@@ -29,18 +29,18 @@ namespace Mirror.Discovery
 
         [SerializeField]
         [Tooltip("The UDP port the server will listen for multi-cast messages")]
-        int serverBroadcastListenPort = 47777;
+        private readonly int serverBroadcastListenPort = 47777;
 
         [SerializeField]
         [Tooltip("Time in seconds between multi-cast messages")]
         [Range(1, 60)]
-        float ActiveDiscoveryInterval = 3;
+        private readonly float ActiveDiscoveryInterval = 3;
 
         protected UdpClient serverUdpClient = null;
         protected UdpClient clientUdpClient = null;
 
 #if UNITY_EDITOR
-        void OnValidate()
+        private void OnValidate()
         {
             if (secretHandshake == 0)
             {
@@ -58,12 +58,12 @@ namespace Mirror.Discovery
         }
 
         // Ensure the ports are cleared no matter when Game/Unity UI exits
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             Shutdown();
         }
 
-        void Shutdown()
+        private void Shutdown()
         {
             if (serverUdpClient != null)
             {
@@ -105,7 +105,9 @@ namespace Mirror.Discovery
         public void AdvertiseServer()
         {
             if (!SupportedOnThisPlatform)
+            {
                 throw new PlatformNotSupportedException("Network discovery not supported in this platform");
+            }
 
             StopDiscovery();
 
@@ -140,7 +142,7 @@ namespace Mirror.Discovery
             }
         }
 
-        async Task ReceiveRequestAsync(UdpClient udpClient)
+        private async Task ReceiveRequestAsync(UdpClient udpClient)
         {
             // only proceed if there is available data in network buffer, or otherwise Receive() will block
             // average time for UdpClient.Available : 10 us
@@ -179,7 +181,9 @@ namespace Mirror.Discovery
             Response info = ProcessRequest(request, endpoint);
 
             if (info == null)
+            {
                 return;
+            }
 
             NetworkWriter writer = NetworkWriterPool.GetWriter();
 
@@ -226,7 +230,9 @@ namespace Mirror.Discovery
         public void StartDiscovery()
         {
             if (!SupportedOnThisPlatform)
+            {
                 throw new PlatformNotSupportedException("Network discovery not supported in this platform");
+            }
 
             StopDiscovery();
 
@@ -289,7 +295,9 @@ namespace Mirror.Discovery
         public void BroadcastDiscoveryRequest()
         {
             if (clientUdpClient == null)
+            {
                 return;
+            }
 
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, serverBroadcastListenPort);
 
@@ -324,9 +332,12 @@ namespace Mirror.Discovery
         /// Override if you wish to include additional data in the discovery message
         /// such as desired game mode, language, difficulty, etc... </remarks>
         /// <returns>An instance of ServerRequest with data to be broadcasted</returns>
-        protected virtual Request GetRequest() => new Request();
+        protected virtual Request GetRequest()
+        {
+            return new Request();
+        }
 
-        async Task ReceiveGameBroadcastAsync(UdpClient udpClient)
+        private async Task ReceiveGameBroadcastAsync(UdpClient udpClient)
         {
             // only proceed if there is available data in network buffer, or otherwise Receive() will block
             // average time for UdpClient.Available : 10 us

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 212915089049859190}
   - component: {fileID: 95853418275661496}
   - component: {fileID: -1196791188504771167}
-  - component: {fileID: 114319148900667988}
-  - component: {fileID: -6725577253382083343}
+  - component: {fileID: 5228489471223362969}
+  - component: {fileID: 1565755956885029430}
+  - component: {fileID: 987135214990598573}
   m_Layer: 0
   m_Name: Potion-001
   m_TagString: PotionBlue
@@ -121,7 +122,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1875
---- !u!114 &114319148900667988
+--- !u!114 &5228489471223362969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +131,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1661139615138848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6725577253382083343
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &1565755956885029430
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,9 +146,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1661139615138848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 95853418275661496}
+--- !u!114 &987135214990598573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661139615138848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a804a01f324ced43aae0636d4ea4395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 8249043904041728345, guid: d731e245c11ab0e46b8d66a572c84cbd, type: 3}
 --- !u!1 &3438850355255742990
 GameObject:
   m_ObjectHideFlags: 0

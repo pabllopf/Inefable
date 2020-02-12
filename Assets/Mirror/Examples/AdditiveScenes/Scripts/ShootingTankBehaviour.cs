@@ -9,11 +9,10 @@ namespace Mirror.Examples.Additive
     {
         [SyncVar]
         public Quaternion rotation;
-
-        NetworkAnimator networkAnimator;
+        private NetworkAnimator networkAnimator;
 
         [ServerCallback]
-        void Start()
+        private void Start()
         {
             networkAnimator = GetComponent<NetworkAnimator>();
         }
@@ -21,17 +20,21 @@ namespace Mirror.Examples.Additive
         [Range(0, 1)]
         public float turnSpeed = 0.1f;
 
-        void Update()
+        private void Update()
         {
             if (isServer && netIdentity.observers.Count > 0)
+            {
                 ShootNearestPlayer();
+            }
 
             if (isClient)
+            {
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed);
+            }
         }
 
         [Server]
-        void ShootNearestPlayer()
+        private void ShootNearestPlayer()
         {
             GameObject target = null;
             float distance = 100f;

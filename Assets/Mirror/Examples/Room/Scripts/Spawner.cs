@@ -9,7 +9,9 @@ namespace Mirror.Examples.NetworkRoom
         public override void OnStartServer()
         {
             for (int i = 0; i < 10; i++)
+            {
                 SpawnPrize();
+            }
         }
 
         public void SpawnPrize()

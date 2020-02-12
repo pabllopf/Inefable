@@ -16,19 +16,19 @@ public class NewRoom
 
     private NewRoom(int xPos, int yPos, int width, int height)
     {
-        this.XPos = xPos;
-        this.YPos = yPos;
-        this.Width = width;
-        this.Height = height;
+        XPos = xPos;
+        YPos = yPos;
+        Width = width;
+        Height = height;
     }
 
     private NewRoom(int xPos, int yPos, int width, int height, Direction direction)
     {
-        this.XPos = xPos;
-        this.YPos = yPos;
-        this.Width = width;
-        this.Height = height;
-        this.Direction = direction;
+        XPos = xPos;
+        YPos = yPos;
+        Width = width;
+        Height = height;
+        Direction = direction;
     }
 
     public static NewRoom SetUpFirstRoom(int xPos, int yPos, int width, int height)

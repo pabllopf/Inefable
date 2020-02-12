@@ -17,10 +17,13 @@ namespace Mirror.Examples.Tanks
         public GameObject projectilePrefab;
         public Transform projectileMount;
 
-        void Update()
+        private void Update()
         {
             // movement for local player
-            if (!isLocalPlayer) return;
+            if (!isLocalPlayer)
+            {
+                return;
+            }
 
             // rotate
             float horizontal = Input.GetAxis("Horizontal");
@@ -41,7 +44,7 @@ namespace Mirror.Examples.Tanks
 
         // this is called on the server
         [Command]
-        void CmdFire()
+        private void CmdFire()
         {
             GameObject projectile = Instantiate(projectilePrefab, projectileMount.position, transform.rotation);
             NetworkServer.Spawn(projectile);
@@ -50,7 +53,7 @@ namespace Mirror.Examples.Tanks
 
         // this is called on the tank that fired for all observers
         [ClientRpc]
-        void RpcOnFire()
+        private void RpcOnFire()
         {
             animator.SetTrigger("Shoot");
         }

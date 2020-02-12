@@ -8,18 +8,21 @@ using UnityEngine;
 public class Shader : MonoBehaviour
 {
     /// <summary>Awakes this instance.</summary>
-    private void Awake() => Game.LoadStats();
+    private void Awake()
+    {
+        Game.LoadStats();
+    }
 
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
         if (Stats.Current.isDay)
         {
-            this.GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<SpriteRenderer>().enabled = true;
         }
-        else 
+        else
         {
-            this.GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

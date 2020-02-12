@@ -10,21 +10,21 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         if (collider2D.CompareTag("Enemy")) { return; }
-        
+
         if (collider2D.CompareTag("Player")) { collider2D.GetComponent<Health>().Take(5); }
 
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
-    private void Update ()
+    private void Update()
     {
-        transform.position = Vector2.MoveTowards(this.transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        if (Vector2.Distance(this.transform.position,target) <= 0)
+        if (Vector2.Distance(transform.position, target) <= 0)
         {
             Destroy(gameObject);
         }
-	}
+    }
 
     public void SetTarget(Vector3 target)
     {

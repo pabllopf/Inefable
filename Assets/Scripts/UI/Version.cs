@@ -11,5 +11,8 @@ using UnityEngine.UI;
 public class Version : MonoBehaviour
 {
     /// <summary>Starts this instance.</summary>
-    public void Start() => GetComponent<Text>().text = Application.version;
+    public void Start()
+    {
+        GetComponent<Text>().text = Application.version;
+    }
 }

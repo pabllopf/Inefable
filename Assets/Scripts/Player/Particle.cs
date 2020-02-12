@@ -8,30 +8,28 @@ using UnityEngine;
 /// <summary>Destroy in a time.</summary>
 public class Particle : MonoBehaviour
 {
-    /// <summary>The time</summary>
-    [SerializeField]
-    [Range(0, 10)]
-    private float time = 0.2f;
-
     /// <summary>Starts this instance.</summary>
-    private void Start() => this.StartCoroutine(this.DestroyInTime(this.time));
+    private void Start()
+    {
+        StartCoroutine(DestroyInTime());
+    }
 
     /// <summary>Destroys the in time.</summary>
     /// <param name="time">The time.</param>
     /// <returns>Return none</returns>
-    private IEnumerator DestroyInTime(float time) 
+    private IEnumerator DestroyInTime()
     {
-        Color color = this.GetComponent<SpriteRenderer>().color;
-       
-        while (color.a > 0f) 
+        Color color = GetComponent<SpriteRenderer>().color;
+
+        while (color.a > 0f)
         {
             color.a -= 0.15f;
-            this.GetComponent<SpriteRenderer>().color = color;
+            GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(0.1f);
 
-        MonoBehaviour.Destroy(this.gameObject);
+        MonoBehaviour.Destroy(gameObject);
     }
 }

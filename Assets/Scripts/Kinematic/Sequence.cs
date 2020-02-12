@@ -11,18 +11,27 @@ public class Sequence
 {
     /// <summary>The sequence</summary>
     [SerializeField]
-    private GameObject sequence = null;
+    private readonly GameObject sequence = null;
 
     /// <summary>The key</summary>
     [SerializeField]
-    private Key key = Key.A1;
+    private readonly Clef key = Clef.A1;
 
     /// <summary>Sets up.</summary>
-    public void SetUp() => this.sequence.transform.Find("BlackArea/Text").GetComponent<Text>().text = Language.GetSentence(this.key);
+    public void SetUp()
+    {
+        sequence.transform.Find("BlackArea/Text").GetComponent<Text>().text = Language.GetSentence(key);
+    }
 
     /// <summary>Active the sequence.</summary>
-    public void Active() => this.sequence.SetActive(true);
+    public void Active()
+    {
+        sequence.SetActive(true);
+    }
 
     /// <summary>Disable the sequence.</summary>
-    public void Disable() => this.sequence.SetActive(false);
+    public void Disable()
+    {
+        sequence.SetActive(false);
+    }
 }

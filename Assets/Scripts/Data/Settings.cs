@@ -25,9 +25,9 @@ public class Settings
     /// <summary>Initializes a new instance of the <see cref="Settings"/> class.</summary>
     public Settings()
     {
-        this.HasSaveGame = false;
-        this.Language = "English";
-        this.LanguageDefault = false;
-        this.Plattform = "Computer";
+        HasSaveGame = false;
+        Language = "English";
+        LanguageDefault = false;
+        Plattform = "Computer";
     }
 }

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 212896503288910466}
   - component: {fileID: 95621767060649184}
   - component: {fileID: 58083796125557804}
-  - component: {fileID: 114084298551262116}
-  - component: {fileID: -7066732298956942842}
+  - component: {fileID: 236937131444470338}
+  - component: {fileID: 3573641591607597413}
+  - component: {fileID: 4285496079797710277}
   m_Layer: 0
   m_Name: Potion-002
   m_TagString: PotionPurple
@@ -121,7 +122,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1875
---- !u!114 &114084298551262116
+--- !u!114 &236937131444470338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +131,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1325099382827930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7066732298956942842
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &3573641591607597413
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,9 +146,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1325099382827930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 95621767060649184}
+--- !u!114 &4285496079797710277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325099382827930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e947fe91bca15184e8a90ed362a2b586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 4002815236019709899, guid: d22368a84ef2ad942b38c394ef436018, type: 3}
 --- !u!1 &8934881344398454665
 GameObject:
   m_ObjectHideFlags: 0

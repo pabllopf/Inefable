@@ -10,15 +10,15 @@ public class Teleport : MonoBehaviour
 {
     /// <summary>The scene</summary>
     [SerializeField]
-    private string scene = string.Empty;
+    private readonly string scene = string.Empty;
 
     /// <summary>Called when [collision enter].</summary>
     /// <param name="collision2D">The collision</param>
     public void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if (collision2D.collider.CompareTag("Player")) 
+        if (collision2D.collider.CompareTag("Player"))
         {
-            SceneManager.LoadScene(this.scene, LoadSceneMode.Single);
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
     }
 }

@@ -12,23 +12,23 @@ public class Kinematic : MonoBehaviour
 {
     /// <summary>The scene</summary>
     [SerializeField]
-    private string scene;
+    private readonly string scene = string.Empty;
 
     /// <summary>The frequency to change of sequence</summary>
     [Range(2, 20)]
     [SerializeField]
-    private float timeBetweenSequences = 2f;
+    private readonly float timeBetweenSequences = 2f;
 
     /// <summary>The audio clip</summary>
     [SerializeField]
-    private AudioClip audioClip = null;
+    private readonly AudioClip audioClip = null;
 
     /// <summary>The sequences</summary>
     [SerializeField]
-    private List<Sequence> sequences = null;
+    private readonly List<Sequence> sequences = null;
 
     /// <summary>The sound track</summary>
-    private AudioSource SoundTrack => this.GetComponent<AudioSource>();
+    private AudioSource SoundTrack => GetComponent<AudioSource>();
 
     /// <summary>Awakes this instance.</summary>
     private void Awake()
@@ -42,10 +42,10 @@ public class Kinematic : MonoBehaviour
     {
         Language.Translate();
 
-        this.SoundTrack.clip = this.audioClip;
-        this.SoundTrack.Play();
+        SoundTrack.clip = audioClip;
+        SoundTrack.Play();
 
-        this.StartCoroutine(this.PlayKinematic(this.scene, this.sequences, this.timeBetweenSequences));
+        StartCoroutine(PlayKinematic(scene, sequences, timeBetweenSequences));
     }
 
     /// <summary>Updates this instance.</summary>
@@ -53,14 +53,17 @@ public class Kinematic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("ButtonStart") || Input.touchCount > 0)
         {
-            this.LoadScene(scene);
+            LoadScene(scene);
             return;
         }
     }
 
     /// <summary>Loads the scene.</summary>
     /// <param name="scene">The scene.</param>
-    private void LoadScene(string scene) => SceneManager.LoadScene(scene);
+    private void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 
     /// <summary>Plays the sequences.</summary>
     /// <param name="scene">The scene.</param>
@@ -79,6 +82,6 @@ public class Kinematic : MonoBehaviour
             sequence.Disable();
         }
 
-        this.LoadScene(scene);
+        LoadScene(scene);
     }
 }

@@ -3,7 +3,7 @@ using Mono.CecilX;
 
 namespace Mirror.Weaver
 {
-    static class SyncDictionaryProcessor
+    internal static class SyncDictionaryProcessor
     {
         /// <summary>
         /// Generates serialization methods for synclists

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 212948381872242896}
   - component: {fileID: 95849178524704562}
   - component: {fileID: 58261312472496226}
-  - component: {fileID: 114744351334569106}
-  - component: {fileID: -711368473370447267}
+  - component: {fileID: 4842421094613782426}
+  - component: {fileID: 1248058545432474420}
+  - component: {fileID: 3272832769856280312}
   m_Layer: 0
   m_Name: Potion-003
   m_TagString: PotionRed
@@ -121,7 +122,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1875
---- !u!114 &114744351334569106
+--- !u!114 &4842421094613782426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +131,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461994297141650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 71b0c86f37a05c04aadac13f82ff29a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-711368473370447267
+  icon: {fileID: -6772615580128998071, guid: e3af0daf6bf60294b92ab1980a4a494a, type: 3}
+--- !u!114 &1248058545432474420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,9 +144,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461994297141650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd11388532385ca4d92f95585cbe2b13, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &3272832769856280312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461994297141650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 95849178524704562}
 --- !u!1 &8241482157416593760
 GameObject:
   m_ObjectHideFlags: 0

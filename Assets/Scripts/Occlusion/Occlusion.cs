@@ -9,8 +9,14 @@ using UnityEngine;
 public class Occlusion : MonoBehaviour
 {
     /// <summary>Called when [became visible].</summary>
-    public void OnBecameVisible() => GetComponents<Behaviour>().ToList().ForEach(i => i.enabled = true);
+    public void OnBecameVisible()
+    {
+        GetComponents<Behaviour>().ToList().ForEach(i => i.enabled = true);
+    }
 
     /// <summary>Called when [became invisible].</summary>
-    public void OnBecameInvisible() => GetComponents<Behaviour>().ToList().ForEach(i => i.enabled = false);
+    public void OnBecameInvisible()
+    {
+        GetComponents<Behaviour>().ToList().ForEach(i => i.enabled = false);
+    }
 }

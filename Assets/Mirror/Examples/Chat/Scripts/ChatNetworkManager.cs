@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
-using System;
 
 namespace Mirror.Examples.Chat
 {
@@ -12,7 +8,7 @@ namespace Mirror.Examples.Chat
 
         public void SetHostname(string hostname)
         {
-            this.networkAddress = hostname;
+            networkAddress = hostname;
         }
 
         public ChatWindow chatWindow;

@@ -13,21 +13,19 @@ public class MainCamera : MonoBehaviour
     /// <summary>The target</summary>
     private Transform target = null;
 
-    /// <summary>Starts this instance.</summary>
-    private void Start()
+    /// <summary>Sets the target.</summary>
+    /// <param name="target">The target.</param>
+    public void SetTarget(Transform target)
     {
-        if (GameObject.FindWithTag("Player").gameObject != null) 
-        {
-            this.target = GameObject.FindWithTag("Player").transform;
-        }
+        this.target = target;
     }
 
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (Vector2.Distance(this.transform.position, this.target.position) >= 0.5f) 
+        if (Vector2.Distance(transform.position, target.position) >= 0.5f)
         {
-            this.transform.position = Vector3.LerpUnclamped(this.transform.position, new Vector2(this.target.position.x, this.target.position.y), Speed * Time.deltaTime);
+            transform.position = Vector3.LerpUnclamped(transform.position, new Vector2(target.position.x, target.position.y), Speed * Time.deltaTime);
         }
     }
 }

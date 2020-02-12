@@ -11,10 +11,13 @@ public class TextEffect : MonoBehaviour
     /// <summary>The time</summary>
     [SerializeField]
     [Range(0, 10)]
-    private float time = 1f;
+    private readonly float time = 1f;
 
     /// <summary>Starts this instance.</summary>
-    private void Start() => this.StartCoroutine(this.DestroyInTime(this.time));
+    private void Start()
+    {
+        StartCoroutine(DestroyInTime(time));
+    }
 
     /// <summary>Destroys the in time.</summary>
     /// <param name="time">The time.</param>
@@ -23,6 +26,6 @@ public class TextEffect : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        MonoBehaviour.Destroy(this.gameObject);
+        MonoBehaviour.Destroy(gameObject);
     }
 }

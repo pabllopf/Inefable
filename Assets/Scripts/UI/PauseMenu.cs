@@ -3,8 +3,8 @@
 // <copyright file="PauseMenu.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    private string sceneToLoad = "Start";
+    private readonly string sceneToLoad = "Start";
 
     private bool neutralStick = true;
 
@@ -20,26 +20,26 @@ public class PauseMenu : MonoBehaviour
 
 
     [SerializeField]
-    private AudioClip pressButton = null;
+    private readonly AudioClip pressButton = null;
 
-    private GameObject PauseMenuPanel => this.transform.Find("Interface/PauseMenu").gameObject;
-    
-    private GameObject PauseMenuButton => this.transform.Find("Interface/Mobile/PauseButton").gameObject;
-    private GameObject ContinueButton => this.transform.Find("Interface/PauseMenu/Continue").gameObject;
-    private GameObject ExitButton => this.transform.Find("Interface/PauseMenu/Exit").gameObject;
+    private GameObject PauseMenuPanel => transform.Find("Interface/PauseMenu").gameObject;
 
-    private AudioSource AudioSource => this.transform.GetComponent<AudioSource>();
+    private GameObject PauseMenuButton => transform.Find("Interface/Mobile/PauseButton").gameObject;
+    private GameObject ContinueButton => transform.Find("Interface/PauseMenu/Continue").gameObject;
+    private GameObject ExitButton => transform.Find("Interface/PauseMenu/Exit").gameObject;
+
+    private AudioSource AudioSource => transform.GetComponent<AudioSource>();
 
 
-    public void Pause() 
+    public void Pause()
     {
-        this.PlayClip(this.pressButton);
+        PlayClip(pressButton);
 
         if (PauseMenuPanel.activeSelf)
         {
             PauseMenuPanel.SetActive(false);
         }
-        else 
+        else
         {
             PauseMenuPanel.SetActive(true);
         }
@@ -47,48 +47,51 @@ public class PauseMenu : MonoBehaviour
         return;
     }
 
-    public void Continue() 
+    public void Continue()
     {
-        this.PlayClip(this.pressButton);
+        PlayClip(pressButton);
 
         if (PauseMenuPanel.activeSelf)
         {
             PauseMenuPanel.SetActive(false);
         }
-        
+
         return;
     }
 
     public void Exit()
     {
-        this.PlayClip(this.pressButton);
+        PlayClip(pressButton);
 
         if (PauseMenuPanel.activeSelf)
         {
             Game.SaveSettings();
             Game.SaveStats();
-            SceneManager.LoadScene(this.sceneToLoad);
+            SceneManager.LoadScene(sceneToLoad);
         }
-        
+
         return;
     }
 
     /// <summary>Awakes this instance.</summary>
-    private void Awake() => Game.LoadSettings();
+    private void Awake()
+    {
+        Game.LoadSettings();
+    }
 
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
         Language.Translate();
-        this.UpdateButtons(Settings.Current.Plattform);
+        UpdateButtons(Settings.Current.Plattform);
 
-        this.AddActionsToButtons();
-        this.AddTheSelectors();
+        AddActionsToButtons();
+        AddTheSelectors();
 
         PauseMenuPanel.SetActive(false);
     }
 
-    private void AddActionsToButtons() 
+    private void AddActionsToButtons()
     {
         PauseMenuButton.GetComponent<Button>().onClick.AddListener(() => { Pause(); });
         ContinueButton.GetComponent<Button>().onClick.AddListener(() => { Continue(); });
@@ -97,45 +100,45 @@ public class PauseMenu : MonoBehaviour
 
     private void AddTheSelectors()
     {
-        this.selectors = new List<GameObject>(2)
+        selectors = new List<GameObject>(2)
         {
             ContinueButton.transform.Find("Selector").gameObject,
             ExitButton.transform.Find("Selector").gameObject
         };
 
-        if (Settings.Current.Plattform == "Mobile") 
+        if (Settings.Current.Plattform == "Mobile")
         {
-            this.DisableSelectors(this.selectors);
+            DisableSelectors(selectors);
         }
     }
 
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (Settings.Current.Plattform == "Computer") 
+        if (Settings.Current.Plattform == "Computer")
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) 
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                this.Pause();
+                Pause();
             }
 
-            if (PauseMenuPanel.activeSelf) 
+            if (PauseMenuPanel.activeSelf)
             {
-                this.UpdateButtons(Settings.Current.Plattform);
+                UpdateButtons(Settings.Current.Plattform);
 
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    this.GoUp(selectors);
+                    GoUp(selectors);
                 }
 
                 if (Input.GetKeyDown(KeyCode.S))
                 {
-                    this.GoDown(selectors);
+                    GoDown(selectors);
                 }
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    this.Action(selectors);
+                    Action(selectors);
                 }
             }
         }
@@ -144,33 +147,33 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetButtonDown("ButtonStart"))
             {
-                this.Pause();
+                Pause();
             }
 
             if (PauseMenuPanel.activeSelf)
             {
-                this.UpdateButtons(Settings.Current.Plattform);
+                UpdateButtons(Settings.Current.Plattform);
 
-                if (Input.GetAxis("LeftJoystickY") > 0 && this.neutralStick == true)
+                if (Input.GetAxis("LeftJoystickY") > 0 && neutralStick == true)
                 {
-                    this.neutralStick = false;
-                    this.GoUp(selectors);
+                    neutralStick = false;
+                    GoUp(selectors);
                 }
 
-                if (Input.GetAxis("LeftJoystickY") < 0 && this.neutralStick == true)
+                if (Input.GetAxis("LeftJoystickY") < 0 && neutralStick == true)
                 {
-                    this.neutralStick = false;
-                    this.GoDown(selectors);
+                    neutralStick = false;
+                    GoDown(selectors);
                 }
 
                 if (Input.GetAxis("LeftJoystickY") == 0)
                 {
-                    this.neutralStick = true;
+                    neutralStick = true;
                 }
 
                 if (Input.GetButtonDown("ButtonA"))
                 {
-                    this.Action(selectors);
+                    Action(selectors);
                 }
             }
         }
@@ -215,14 +218,23 @@ public class PauseMenu : MonoBehaviour
 
     /// <summary>Actions the specified selectors.</summary>
     /// <param name="selectors">The selectors.</param>
-    private void Action(List<GameObject> selectors) => selectors.Find(i => i.activeSelf).transform.parent.GetComponent<Button>().onClick.Invoke();
+    private void Action(List<GameObject> selectors)
+    {
+        selectors.Find(i => i.activeSelf).transform.parent.GetComponent<Button>().onClick.Invoke();
+    }
 
     /// <summary>Disables the selectors.</summary>
-    private void DisableSelectors(List<GameObject> selectors) => selectors.ForEach(i => i.SetActive(false));
+    private void DisableSelectors(List<GameObject> selectors)
+    {
+        selectors.ForEach(i => i.SetActive(false));
+    }
 
     /// <summary>Updates the buttons.</summary>
     /// <param name="controller">The controller.</param>
-    private void UpdateButtons(string controller) => FindObjectsOfType<PressEffect>().ToList().ForEach(i => i.GetComponent<PressEffect>().LoadSprites(controller));
+    private void UpdateButtons(string controller)
+    {
+        FindObjectsOfType<PressEffect>().ToList().ForEach(i => i.GetComponent<PressEffect>().LoadSprites(controller));
+    }
 
     /// <summary>Plays the clip.</summary>
     /// <param name="audioClip">The audio clip.</param>

@@ -10,7 +10,10 @@ namespace Mirror
             {
                 int hash = 23;
                 foreach (char c in text)
+                {
                     hash = hash * 31 + c;
+                }
+
                 return hash;
             }
         }
