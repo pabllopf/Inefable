@@ -18,15 +18,15 @@ public class Multiplayer : MonoBehaviour
     /// <summary>The network manager</summary>
     private NetworkManager networkManager;
 
-    public  Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
+    public Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
 
     public NetworkDiscovery networkDiscovery;
 
     /// <summary>My IP</summary>
-    private  string myIP = null;
+    private readonly string myIP = null;
 
     /// <summary>My IP text</summary>
-    private  Text myIPText = null;
+    private readonly Text myIPText = null;
 
     /// <summary>The number of servers</summary>
     private Text numOfServers = null;
@@ -36,7 +36,7 @@ public class Multiplayer : MonoBehaviour
     private Transform content = null;
 
     [SerializeField]
-    private GameObject matchButton = null;
+    private readonly GameObject matchButton = null;
 
     private void Connect(ServerResponse info)
     {

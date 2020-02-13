@@ -7,6 +7,14 @@ using UnityEngine;
 /// <summary>Interface to define a item.</summary>
 public interface IItem
 {
+    /// <summary>Gets the name.</summary>
+    /// <returns></returns>
+    string GetName();
+
+    /// <summary>Gets the icon.</summary>
+    /// <returns></returns>
+    Sprite GetIcon();
+
     /// <summary>Called when [trigger enter2 d].</summary>
     /// <param name="obj">The object.</param>
     void OnTriggerEnter2D(Collider2D obj);

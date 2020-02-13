@@ -84,11 +84,6 @@ public class Dungeon : MonoBehaviour
     /// <summary>The information</summary>
     private Text info;
 
-    /// <summary>Run before all</summary>
-    private void Awake()
-    {
-        Game.LoadSettings();
-    }
 
     /// <summary>Run when start the scene</summary>
     private void Start()

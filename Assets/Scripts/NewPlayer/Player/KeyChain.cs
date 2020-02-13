@@ -18,14 +18,6 @@ public class KeyChain : MonoBehaviour
     /// <summary>The number of keys</summary>
     private int numOfKeys = 0;
 
-    /// <summary>The add key</summary>
-    [SerializeField]
-    private AudioClip addKey = null;
-
-    /// <summary>The spend key</summary>
-    [SerializeField]
-    private AudioClip spendKey = null;
-
     /// <summary>The counter keys</summary>
     private Text counterKeys = null;
 
@@ -38,12 +30,15 @@ public class KeyChain : MonoBehaviour
     /// <summary>Determines whether this instance [can spend a key].</summary>
     /// <returns>
     /// <c>true</c> if this instance [can spend a key]; otherwise, <c>false</c>.</returns>
-    public bool CanSpendAKey() => (numOfKeys > 0) ? true : false;
+    public bool CanSpendAKey()
+    {
+        return (numOfKeys > 0) ? true : false;
+    }
 
     /// <summary>Add a key.</summary>
     public void AddKey()
     {
-        numOfKeys ++;
+        numOfKeys++;
         counterKeys.text = numOfKeys.ToString();
 
         if (animator.GetBool(ShowUI))
@@ -56,14 +51,14 @@ public class KeyChain : MonoBehaviour
             StartCoroutine(ShowUINow(TimeToHideUI));
         }
 
-        Sound.Play(addKey, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(numOfKeys).InFolder("Player").WithName("NumOfKeys");
     }
 
     /// <summary>Spend a key.</summary>
     public void SpendAKey()
     {
-        numOfKeys --;
+        numOfKeys--;
         counterKeys.text = numOfKeys.ToString();
 
         if (animator.GetBool(ShowUI))
@@ -76,12 +71,12 @@ public class KeyChain : MonoBehaviour
             StartCoroutine(ShowUINow(TimeToHideUI));
         }
 
-        Sound.Play(spendKey, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(numOfKeys).InFolder("Player").WithName("NumOfKeys");
     }
 
     /// <summary>Actives the UI.</summary>
-    public void ActiveUI() 
+    public void ActiveUI()
     {
         StopAllCoroutines();
         StartCoroutine(ShowUINow(TimeToHideUI));

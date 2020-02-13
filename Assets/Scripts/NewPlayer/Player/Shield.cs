@@ -27,14 +27,6 @@ public class Shield : MonoBehaviour
     /// <summary>The health bar</summary>
     private Scrollbar bar = null;
 
-    /// <summary>The set shield clip</summary>
-    [SerializeField]
-    private AudioClip setShieldClip = null;
-
-    /// <summary>The take clip</summary>
-    [SerializeField]
-    private AudioClip takeClip = null;
-
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
@@ -46,7 +38,7 @@ public class Shield : MonoBehaviour
         marker.text = shield.ToString();
         shieldObj.SetActive((shield > 0) ? true : false);
 
-        Sound.Play(setShieldClip, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(shield).InFolder("Player").WithName("Shield");
     }
 
@@ -61,7 +53,7 @@ public class Shield : MonoBehaviour
 
         StartCoroutine(TakeAHitEffect(TimeOfEffect));
 
-        Sound.Play(takeClip, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(shield).InFolder("Player").WithName("Shield");
     }
 

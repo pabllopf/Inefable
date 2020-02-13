@@ -33,7 +33,6 @@ public class Kinematic : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        Game.LoadSettings();
         Cursor.visible = false;
     }
 

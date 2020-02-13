@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2476140603519109532}
   - component: {fileID: 7752800436078461312}
   - component: {fileID: 5683420673114414220}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Chest-001
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -291,15 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - item: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
-    quantityMin: 0
-    quantityMax: 1
-    position: 2
-  - item: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
-    quantityMin: 0
-    quantityMax: 1
-    position: 2
-  openClip: {fileID: 8300000, guid: 713c874160562da418037958b7cfffc7, type: 3}
+  - {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
 --- !u!1 &6071477915926514664
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3453091485620569672}
   - component: {fileID: 3818365696768740333}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: NeedKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}

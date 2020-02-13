@@ -43,7 +43,7 @@ public class KeyPack : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     public void Awake()
     {
-        Game.LoadStats();
+
     }
 
     /// <summary>Starts this instance.</summary>
@@ -60,7 +60,7 @@ public class KeyPack : MonoBehaviour
     {
         Stats.Current.Keys++;
         CounterKeys.text = "x" + Stats.Current.Keys;
-        Game.SaveStats();
+
 
         PlayClip(takeClip);
         if (!active)
@@ -79,8 +79,6 @@ public class KeyPack : MonoBehaviour
     public void Spend(int amount)
     {
         Stats.Current.Keys -= amount;
-        CounterKeys.text = "x" + Stats.Current.Keys;
-        Game.SaveStats();
 
         PlayClip(spendClip);
         if (!active)

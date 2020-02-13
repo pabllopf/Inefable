@@ -64,8 +64,8 @@ public class MainMenu : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     public void Awake()
     {
-        Game.LoadSettings();
-        Game.LoadStats();
+        //Game.LoadSettings();
+        //Game.LoadStats();
         Cursor.visible = false;
 
         startPanel = GameObject.FindGameObjectWithTag("StartPanel").gameObject;
@@ -109,7 +109,7 @@ public class MainMenu : MonoBehaviour
     public void ContinueAdventure()
     {
         PlayClip(acceptClip);
-        Game.LoadSettings();
+        //Game.LoadSettings();
         SceneManager.LoadScene(sceneToLoad);
     }
 
@@ -139,7 +139,8 @@ public class MainMenu : MonoBehaviour
     /// <summary>Get the buttons panel.</summary>
     private void InitButtonsPanel()
     {
-        if (Settings.Current.HasSaveGame)
+        //if (Settings.Current.HasSaveGame)
+        if (true)
         {
             buttonsPanel = GameObject.FindGameObjectWithTag("NormalButtons").gameObject;
 
@@ -201,8 +202,8 @@ public class MainMenu : MonoBehaviour
         if (languagePanel.activeSelf)
         {
             DetectLanguage();
-            Settings.Current.Language = languages[indexLanguages];
-            Game.SaveSettings();
+            //Settings.Current.Language = languages[indexLanguages];
+            //Game.SaveSettings();
             Language.Translate();
             return;
         }
@@ -331,8 +332,8 @@ public class MainMenu : MonoBehaviour
     public void ConfirmLanguage()
     {
         Settings.Current.Language = languages[indexLanguages];
-        Settings.Current.LanguageDefault = true;
-        Game.SaveSettings();
+        //Settings.Current.LanguageDefault = true;
+        //Game.SaveSettings();
         languagePanel.SetActive(false);
         mainPanel.SetActive(true);
         buttonsPanel.SetActive(true);
@@ -348,11 +349,12 @@ public class MainMenu : MonoBehaviour
     {
         currentController = controller;
 
-        Settings.Current.Plattform = controller;
-        Game.SaveSettings();
+        Game.SaveVar(controller).InFolder("Settings").WithName("Platform");
+        //Game.SaveSettings();
         Language.Translate();
 
-        if (Settings.Current.LanguageDefault)
+        //if (Settings.Current.LanguageDefault)
+        if(true)
         {
             startPanel.SetActive(false);
             mainPanel.SetActive(true);
@@ -562,16 +564,16 @@ public class MainMenu : MonoBehaviour
         PlayClip(acceptClip);
 
         string language = Settings.Current.Language;
-        Game.ResetSettings();
-        Game.ResetStats();
+        //Game.ResetSettings();
+        //Game.ResetStats();
 
-        Settings.Current.HasSaveGame = true;
-        Settings.Current.LanguageDefault = true;
-        Settings.Current.Plattform = currentController;
+        //Settings.Current.HasSaveGame = true;
+        //Settings.Current.LanguageDefault = true;
+        Settings.Current.Platform = currentController;
         Settings.Current.Language = language;
 
-        Game.SaveSettings();
-        Game.SaveStats();
+        //Game.SaveSettings();
+        //Game.SaveStats();
         SceneManager.LoadScene(sceneToLoad);
     }
 

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>Manage the inventory of the player.</summary>
-public class Inventory : MonoBehaviour
+public class OldInventory : MonoBehaviour
 {
     /// <summary>The open</summary>
     private const string Open = "Open";
@@ -36,20 +36,6 @@ public class Inventory : MonoBehaviour
 
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
-
-    /// <summary>The take item</summary>
-    [SerializeField]
-    private readonly AudioClip takeItem = null;
-
-    /// <summary>The use item</summary>
-    [SerializeField]
-    private readonly AudioClip useItem = null;
-
-    /// <summary>Awakes this instance.</summary>
-    public void Awake()
-    {
-        Game.LoadStats();
-    }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
@@ -94,7 +80,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Settings.Current.Plattform == "Computer")
+        if (Settings.Current.Platform == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -129,7 +115,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (Settings.Current.Plattform == "Xbox")
+        if (Settings.Current.Platform == "Xbox")
         {
             if (Input.GetButtonDown("ButtonX"))
             {
@@ -182,7 +168,7 @@ public class Inventory : MonoBehaviour
                 slot.tag = tag;
 
                 CheckSlots();
-                Sound.Play(takeItem, audioSource);
+                Audio.Play(Sound.TakeItem, audioSource);
                 SaveInventory();
                 break;
             }
@@ -200,7 +186,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Controls the inventory.</summary>
     public void ControlInventory()
     {
-        if (Settings.Current.Plattform == "Mobile")
+        if (Settings.Current.Platform == "Mobile")
         {
             if (uiAnimator.GetBool(Open))
             {
@@ -243,7 +229,7 @@ public class Inventory : MonoBehaviour
             inventory[position].gameObject.SetActive(false);
 
             CheckSlots();
-            Sound.Play(useItem, audioSource);
+            Audio.Play(Sound.TakeItem, audioSource);
             SaveInventory();
         }
     }
@@ -251,7 +237,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Checks the slots.</summary>
     private void CheckSlots()
     {
-        if (Settings.Current.Plattform == "Xbox" || Settings.Current.Plattform == "Computer")
+        if (Settings.Current.Platform == "Xbox" || Settings.Current.Platform == "Computer")
         {
             for (int i = 0; i < 3; i++)
             {
@@ -290,6 +276,6 @@ public class Inventory : MonoBehaviour
             Stats.Current.TagItem[i] = inventory[i].tag;
         }
 
-        Game.SaveStats();
+        //Game.SaveStats();
     }
 }

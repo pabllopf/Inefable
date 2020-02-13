@@ -8,26 +8,44 @@
 public class Settings
 {
     /// <summary>The current</summary>
-    public static Settings Current;
+    private static Settings current;
 
-    /// <summary>The has save game</summary>
-    public bool HasSaveGame;
+    /// <summary>The platform</summary>
+    private string platform;
 
     /// <summary>The language</summary>
-    public string Language;
-
-    /// <summary>The language default</summary>
-    public bool LanguageDefault;
-
-    /// <summary>The plattform</summary>
-    public string Plattform;
+    private string language;
 
     /// <summary>Initializes a new instance of the <see cref="Settings"/> class.</summary>
-    public Settings()
+    /// <param name="platform">The platform.</param>
+    /// <param name="language">The language.</param>
+    public Settings(string platform, string language)
     {
-        HasSaveGame = false;
-        Language = "English";
-        LanguageDefault = false;
-        Plattform = "Computer";
+        this.platform = platform.Equals("0") ? "Computer" : platform;
+        this.language = language.Equals("0") ? "English" : language;
+    }
+
+    /// <summary>Gets or sets the current.</summary>
+    /// <value>The current.</value>
+    public static Settings Current
+    {
+        get => current;
+        set => current = value;
+    }
+
+    /// <summary>Gets or sets the platform.</summary>
+    /// <value>The platform.</value>
+    public string Platform
+    {
+        get => platform;
+        set => platform = value;
+    }
+
+    /// <summary>Gets or sets the language.</summary>
+    /// <value>The language.</value>
+    public string Language
+    {
+        get => language;
+        set => language = value;
     }
 }

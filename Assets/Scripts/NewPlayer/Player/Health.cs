@@ -24,14 +24,6 @@ public class Health : MonoBehaviour
     /// <summary>The health bar</summary>
     private Scrollbar bar = null;
 
-    /// <summary>The treat clip</summary>
-    [SerializeField]
-    private AudioClip treatClip = null;
-
-    /// <summary>The take clip</summary>
-    [SerializeField]
-    private AudioClip takeClip = null;
-
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
@@ -48,7 +40,7 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        Sound.Play(treatClip, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(health).InFolder("Player").WithName("Health");
     }
 
@@ -59,7 +51,7 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        Sound.Play(treatClip, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(health).InFolder("Player").WithName("Health");
     }
 
@@ -73,7 +65,7 @@ public class Health : MonoBehaviour
 
         StartCoroutine(TakeAHitEffect(TimeOfEffect));
 
-        Sound.Play(takeClip, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(health).InFolder("Player").WithName("Health");
     }
 

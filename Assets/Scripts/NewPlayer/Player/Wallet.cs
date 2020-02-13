@@ -18,14 +18,6 @@ public class Wallet : MonoBehaviour
     /// <summary>The money</summary>
     private int money = 0;
 
-    /// <summary>The add money</summary>
-    [SerializeField]
-    private AudioClip addMoney = null;
-
-    /// <summary>The spend money</summary>
-    [SerializeField]
-    private AudioClip spendMoney = null;
-
     /// <summary>The counter coins</summary>
     private Text counterCoins = null;
 
@@ -39,7 +31,10 @@ public class Wallet : MonoBehaviour
     /// <param name="amount">The amount.</param>
     /// <returns>
     /// <c>true</c> if this instance can spend the specified amount; otherwise, <c>false</c>.</returns>
-    public bool CanSpend(int amount) => ((money -= amount) >= 0) ? true : false;
+    public bool CanSpend(int amount)
+    {
+        return ((money -= amount) >= 0) ? true : false;
+    }
 
     /// <summary>Add a coin.</summary>
     public void AddCoin()
@@ -50,14 +45,11 @@ public class Wallet : MonoBehaviour
         if (animator.GetBool(ShowUI))
         {
             StopAllCoroutines();
-            StartCoroutine(ShowUINow(TimeToHideUI));
-        }
-        else
-        {
-            StartCoroutine(ShowUINow(TimeToHideUI));
         }
 
-        Sound.Play(addMoney, audioSource);
+        StartCoroutine(ShowUINow(TimeToHideUI));
+
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(money).InFolder("Player").WithName("Money");
     }
 
@@ -71,14 +63,11 @@ public class Wallet : MonoBehaviour
         if (animator.GetBool(ShowUI))
         {
             StopAllCoroutines();
-            StartCoroutine(ShowUINow(TimeToHideUI));
-        }
-        else 
-        {
-            StartCoroutine(ShowUINow(TimeToHideUI));
         }
 
-        Sound.Play(spendMoney, audioSource);
+        StartCoroutine(ShowUINow(TimeToHideUI));
+
+        Audio.Play(Sound.TakeItem, audioSource);
         Game.SaveVar(money).InFolder("Player").WithName("Money");
     }
 

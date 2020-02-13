@@ -10,7 +10,7 @@ public class Shader : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        Game.LoadStats();
+        //Game.LoadStats();
     }
 
     /// <summary>Updates this instance.</summary>

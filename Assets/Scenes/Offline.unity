@@ -1571,8 +1571,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   networkDiscovery: {fileID: 1035938998}
   content: {fileID: 0}
-  matchButton: {fileID: 80837767302443961, guid: a74b97447e4c7be40a4dd885ff3af794,
-    type: 3}
 --- !u!114 &1035938995
 MonoBehaviour:
   m_ObjectHideFlags: 0

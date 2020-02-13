@@ -4,7 +4,6 @@
 //------------------------------------------------------------------------------------------
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>Manage the wallet of the player</summary>
 public class OldWallet : MonoBehaviour
@@ -41,10 +40,7 @@ public class OldWallet : MonoBehaviour
     //private Animator Animator => transform.Find("Interface/CounterCoins").GetComponent<Animator>();
 
     /// <summary>Awakes this instance.</summary>
-    public void Awake()
-    {
-        Game.LoadStats();
-    }
+
 
     /// <summary>Starts this instance.</summary>
     public void Start()
@@ -60,7 +56,6 @@ public class OldWallet : MonoBehaviour
     {
         Stats.Current.Wallet++;
         //CounterCoins.text = "x" + Stats.Current.Wallet;
-        Game.SaveStats();
 
         PlayClip(takeClip);
         if (!active)
@@ -72,7 +67,7 @@ public class OldWallet : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(ControlUI(TimeToReset));
         }
-        
+
     }
 
     /// <summary>Spends the specified amount.</summary>
@@ -81,7 +76,6 @@ public class OldWallet : MonoBehaviour
     {
         Stats.Current.Wallet -= amount;
         //CounterCoins.text = "x" + Stats.Current.Wallet;
-        Game.SaveStats();
 
         PlayClip(spendClip);
         if (!active)

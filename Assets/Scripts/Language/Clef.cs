@@ -3,7 +3,7 @@
 // <copyright file="Clef.cs" company="UnMedioStudio">Open Source</copyright>
 //-----------------------------------------------------------------------
 
-/// <summary>The Key dialogue.</summary>
+/// <summary>The Clef dialogue.</summary>
 public enum Clef
 {
     /// <summary>The a1</summary>

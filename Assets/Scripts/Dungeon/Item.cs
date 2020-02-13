@@ -11,25 +11,25 @@ public class Item
     /// <summary>The item</summary>
     [SerializeField]
     [Tooltip("Item to will be spawned.")]
-    private  GameObject item;
+    private readonly GameObject item;
 
     /// <summary>The quantity minimum</summary>
     [SerializeField]
     [Range(0, 100)]
     [Tooltip("Quantity min of items will be spawned.")]
-    private  int quantityMin;
+    private readonly int quantityMin;
 
     /// <summary>The quantity maximum</summary>
     [SerializeField]
     [Range(1, 100)]
     [Tooltip("Quantity max of items will be spawned.")]
-    private  int quantityMax;
+    private readonly int quantityMax;
 
     /// <summary>The position</summary>
     [SerializeField]
     [Range(1, 15)]
     [Tooltip("Select the sprite position to spawn the item.")]
-    private  int position;
+    private readonly int position;
 
     /// <summary>Initializes a new instance of the <see cref="Item"/> class.</summary>
     /// <param name="item">The item.</param>

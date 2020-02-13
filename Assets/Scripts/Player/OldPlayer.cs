@@ -181,7 +181,7 @@ public class OldPlayer : NetworkBehaviour
 
         ControlBar();
 
-        if (Settings.Current.Plattform == "Computer")
+        if (Settings.Current.Platform == "Computer")
         {
             if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
             {
@@ -212,7 +212,7 @@ public class OldPlayer : NetworkBehaviour
             }
         }
 
-        if (Settings.Current.Plattform == "Xbox")
+        if (Settings.Current.Platform == "Xbox")
         {
             if (Input.GetAxisRaw("LeftJoystickX") > 0 || Input.GetAxisRaw("LeftJoystickX") < 0 || Input.GetAxisRaw("LeftJoystickY") > 0 || Input.GetAxisRaw("LeftJoystickY") < 0)
             {
@@ -243,7 +243,7 @@ public class OldPlayer : NetworkBehaviour
             }
         }
 
-        if (Settings.Current.Plattform == "Mobile")
+        if (Settings.Current.Platform == "Mobile")
         {
             if (!mobileUI.activeSelf)
             {
@@ -332,7 +332,7 @@ public class OldPlayer : NetworkBehaviour
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
-
+    /*
     /// <summary>Called when [trigger enter2 d].</summary>
     /// <param name="obj">The object.</param>
     public void OnTriggerEnter2D(Collider2D obj)
@@ -345,9 +345,9 @@ public class OldPlayer : NetworkBehaviour
                 break;
 
             case "Heart":
-                    health.Treat(10);
-                    MonoBehaviour.Destroy(obj.gameObject);
-                
+                health.Treat(10);
+                MonoBehaviour.Destroy(obj.gameObject);
+
                 break;
 
             case "Key":
@@ -364,14 +364,12 @@ public class OldPlayer : NetworkBehaviour
                     pet = obj.GetComponent<Pet>();
                     pet.SetOwner(gameObject);
                     Stats.Current.pet = pet.Name;
-                    Game.SaveStats();
                 }
                 else
                 {
                     pet = obj.GetComponent<Pet>();
                     pet.SetOwner(gameObject);
                     Stats.Current.pet = pet.Name;
-                    Game.SaveStats();
                 }
 
                 break;
@@ -408,7 +406,7 @@ public class OldPlayer : NetworkBehaviour
 
                 break;
         }
-    }
+    }*/
 
     /// <summary>Determines whether this instance has pet.</summary>
     private void HasPet()

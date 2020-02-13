@@ -89,6 +89,7 @@ TagManager:
   - LanguagePanel
   - DataPrefabs
   - TileMap
+  - 0
   layers:
   - Default
   - TransparentFX

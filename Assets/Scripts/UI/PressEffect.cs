@@ -37,13 +37,13 @@ public class PressEffect : MonoBehaviour
 
     public void Awake()
     {
-        Game.LoadSettings();
+        //Game.LoadSettings();
     }
 
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        if (Settings.Current.Plattform == "Mobile")
+        if (Settings.Current.Platform == "Mobile")
         {
             gameObject.SetActive(false);
             return;
@@ -58,7 +58,7 @@ public class PressEffect : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     public void Update()
     {
-        if (Settings.Current.Plattform == "Mobile")
+        if (Settings.Current.Platform == "Mobile")
         {
             gameObject.SetActive(false);
             return;
@@ -98,7 +98,7 @@ public class PressEffect : MonoBehaviour
     /// <summary>Starts the effect.</summary>
     public void StartEffect()
     {
-        if (Settings.Current.Plattform != "Mobile")
+        if (Settings.Current.Platform != "Mobile")
         {
             active = true;
         }
@@ -107,7 +107,7 @@ public class PressEffect : MonoBehaviour
     /// <summary>Stops the effect.</summary>
     public void StopEffect()
     {
-        if (Settings.Current.Plattform != "Mobile")
+        if (Settings.Current.Platform != "Mobile")
         {
             if (currentImage != null && sprites != null)
             {

@@ -2,6 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Chest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,17 +27,13 @@ public class Chest : MonoBehaviour
 
     /// <summary>The items</summary>
     [SerializeField]
-    private List<Item> items = new List<Item>();
+    private List<GameObject> items = new List<GameObject>();
 
     /// <summary>The need key</summary>
     private GameObject needKey = null;
 
     /// <summary>The circle collider</summary>
     private CircleCollider2D circle2D = null;
-
-    /// <summary>The open clip</summary>
-    [SerializeField]
-    private AudioClip openClip = null;
 
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
@@ -55,12 +52,12 @@ public class Chest : MonoBehaviour
                 needKey.SetActive(true);
 
                 keyChain = obj.GetComponent<KeyChain>();
+                keyChain.ActiveUI();
                 if (keyChain.CanSpendAKey())
                 {
-                    keyChain.ActiveUI();
                     canOpen = true;
                 }
-                else 
+                else
                 {
                     canOpen = false;
                 }
@@ -107,13 +104,13 @@ public class Chest : MonoBehaviour
     }
 
     /// <summary>Opens the this chest.</summary>
-    private void OpenThisChest() 
+    private void OpenThisChest()
     {
         keyChain.SpendAKey();
         needKey.SetActive(false);
         animator.SetTrigger(Open);
         isOpened = true;
-        Sound.Play(openClip, audioSource);
+        Audio.Play(Sound.TakeItem, audioSource);
         SpawnObjects();
         return;
     }
@@ -134,8 +131,9 @@ public class Chest : MonoBehaviour
             }
 
             vectors.Add(vector);
-            Item item = items[Random.Range(0, items.Count)];
-            Command.CmdInstantiate(item.Object, vector);
+            GameObject obj = items[Random.Range(0, items.Count)];
+            GameObject objSpawned = Instantiate(obj, vector, Quaternion.identity);
+            NetworkServer.Spawn(objSpawned);
         }
     }
 }

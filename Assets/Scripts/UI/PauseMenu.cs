@@ -65,25 +65,20 @@ public class PauseMenu : MonoBehaviour
 
         if (PauseMenuPanel.activeSelf)
         {
-            Game.SaveSettings();
-            Game.SaveStats();
+            //Game.SaveSettings();
+            //Game.SaveStats();
             SceneManager.LoadScene(sceneToLoad);
         }
 
         return;
     }
 
-    /// <summary>Awakes this instance.</summary>
-    private void Awake()
-    {
-        Game.LoadSettings();
-    }
 
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
         Language.Translate();
-        UpdateButtons(Settings.Current.Plattform);
+        UpdateButtons(Settings.Current.Platform);
 
         AddActionsToButtons();
         AddTheSelectors();
@@ -106,7 +101,7 @@ public class PauseMenu : MonoBehaviour
             ExitButton.transform.Find("Selector").gameObject
         };
 
-        if (Settings.Current.Plattform == "Mobile")
+        if (Settings.Current.Platform == "Mobile")
         {
             DisableSelectors(selectors);
         }
@@ -115,7 +110,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (Settings.Current.Plattform == "Computer")
+        if (Settings.Current.Platform == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -124,7 +119,7 @@ public class PauseMenu : MonoBehaviour
 
             if (PauseMenuPanel.activeSelf)
             {
-                UpdateButtons(Settings.Current.Plattform);
+                UpdateButtons(Settings.Current.Platform);
 
                 if (Input.GetKeyDown(KeyCode.W))
                 {
@@ -143,7 +138,7 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        if (Settings.Current.Plattform == "Xbox")
+        if (Settings.Current.Platform == "Xbox")
         {
             if (Input.GetButtonDown("ButtonStart"))
             {
@@ -152,7 +147,7 @@ public class PauseMenu : MonoBehaviour
 
             if (PauseMenuPanel.activeSelf)
             {
-                UpdateButtons(Settings.Current.Plattform);
+                UpdateButtons(Settings.Current.Platform);
 
                 if (Input.GetAxis("LeftJoystickY") > 0 && neutralStick == true)
                 {

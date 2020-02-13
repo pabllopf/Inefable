@@ -50,7 +50,7 @@ public class Talk : MonoBehaviour
                 dialogueName = dialoguePanel.transform.Find("Name/Sentence").GetComponent<Text>();
                 dialogueText = dialoguePanel.transform.Find("BackGround/Sentence").GetComponent<Text>();
                 dialoguePanel.transform.Find("BackGround/Continue").GetComponent<Button>().onClick.AddListener(() => { ManageDialogue(); });
-                dialoguePanel.transform.Find("BackGround/Continue/Image").GetComponent<PressEffect>().LoadSprites(Settings.Current.Plattform);
+                dialoguePanel.transform.Find("BackGround/Continue/Image").GetComponent<PressEffect>().LoadSprites(Settings.Current.Platform);
             }
         }
     }
@@ -75,12 +75,6 @@ public class Talk : MonoBehaviour
         }
     }
 
-    /// <summary>Awakes this instance.</summary>
-    private void Awake()
-    {
-        Game.LoadSettings();
-    }
-
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
@@ -92,7 +86,7 @@ public class Talk : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (Settings.Current.Plattform == "Computer")
+        if (Settings.Current.Platform == "Computer")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -100,7 +94,7 @@ public class Talk : MonoBehaviour
             }
         }
 
-        if (Settings.Current.Plattform == "Xbox")
+        if (Settings.Current.Platform == "Xbox")
         {
             if (Input.GetButtonDown("ButtonA"))
             {

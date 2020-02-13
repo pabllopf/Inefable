@@ -2,9 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
@@ -49,11 +47,28 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject mainCamera = null;
 
+    /// <summary>The mobile UI</summary>
+    private GameObject mobileUI = null;
+
+    /// <summary>The joystick</summary>
+    private Joystick joystick = null;
+
     /// <summary>The Rigid body 2D</summary>
     private Rigidbody2D rigbody2D = null;
 
     /// <summary>The animator</summary>
     private Animator animator = null;
+
+    /// <summary>Gets the axis x.</summary>
+    /// <value>The axis x.</value>
+    private float AxisX => Input.GetAxisRaw("Horizontal") + Input.GetAxisRaw("LeftJoystickX");
+
+    /// <summary>Gets the axis y.</summary>
+    /// <value>The axis y.</value>
+    private float AxisY => Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("LeftJoystickY");
+
+    /// <summary>Awakes this instance.</summary>
+    private void Awake() => Game.LoadSettings();
 
     /// <summary>Starts this instance.</summary>
     private void Start()
@@ -62,6 +77,11 @@ public class Player : NetworkBehaviour
         {
             rigbody2D = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+
+            joystick = transform.Find("Interface/Mobile/Joystick").GetComponent<Joystick>();
+
+            mobileUI = transform.Find("Interface/Mobile").gameObject;
+            mobileUI.SetActive(Settings.Current.Platform.Equals("Mobile") ? true : false);
 
             GameObject obj = Instantiate(mainCamera, transform.position, Quaternion.identity);
             obj.GetComponent<MainCamera>().SetTarget(transform);
@@ -73,26 +93,48 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            if (Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Horizontal") < 0 || Input.GetAxisRaw("Vertical") > 0 || Input.GetAxisRaw("Vertical") < 0)
+            if (Settings.Current.Platform.Equals("Computer") || Settings.Current.Platform.Equals("Xbox"))
             {
-                position = rigbody2D.position;
+                Move(AxisX, AxisY);
 
-                direction.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-                direction.Normalize();
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("ButtonA"))
+                {
+                    if (!isAttacking)
+                    {
+                        StartCoroutine(AttackNow());
+                    }
+                }
 
-                animator.SetFloat(Horizontal, direction.x);
-                animator.SetFloat(Vertical, direction.y);
-                animator.SetBool(Run, true);
+                return;
             }
-            else
+
+            if (Settings.Current.Platform.Equals("Mobile"))
             {
-                animator.SetBool(Run, false);
+                Move(joystick.Horizontal, joystick.Vertical);
+                return;
             }
+        }
+    }
 
-            if (Input.GetKeyDown(KeyCode.E) && !isAttacking)
-            {
-                StartCoroutine(AttackNow());
-            }
+    /// <summary>Moves the specified horizontal.</summary>
+    /// <param name="horizontal">The horizontal.</param>
+    /// <param name="vertical">The vertical.</param>
+    private void Move(float horizontal, float vertical)
+    {
+        direction.Set(horizontal, vertical, 0);
+        direction.Normalize();
+
+        if (direction != Vector3.zero)
+        {
+            position = rigbody2D.position;
+
+            animator.SetFloat(Horizontal, direction.x);
+            animator.SetFloat(Vertical, direction.y);
+            animator.SetBool(Run, true);
+        }
+        else
+        {
+            animator.SetBool(Run, false);
         }
     }
 
@@ -107,7 +149,7 @@ public class Player : NetworkBehaviour
 
     /// <summary>Attacks the now.</summary>
     /// <returns>Return none</returns>
-    private IEnumerator AttackNow() 
+    private IEnumerator AttackNow()
     {
         animator.SetBool(Attack, true);
         isAttacking = true;

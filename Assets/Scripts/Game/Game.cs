@@ -11,52 +11,74 @@ using UnityEngine;
 /// <summary>Manage the game.</summary>
 public class Game
 {
-    private object var;
-    private string folder = "";
-    
-    private Game(object var) 
-    {
-        this.var = var;
-    }
+    /// <summary>The key</summary>
+    private static readonly string key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435";
 
+    /// <summary>The variable</summary>
+    private readonly object var = null;
+
+    /// <summary>The folder</summary>
+    private readonly string folder = string.Empty;
+
+    /// <summary>Gets the int.</summary>
+    /// <value>The int.</value>
+    public int Int => int.Parse(var.ToString());
+
+    /// <summary>Gets the string.</summary>
+    /// <value>The string.</value>
+    public string String => var.ToString();
+
+    /// <summary>Initializes a new instance of the <see cref="Game"/> class.</summary>
+    /// <param name="var">The variable.</param>
+    private Game(object var) => this.var = var;
+
+    /// <summary>Initializes a new instance of the <see cref="Game"/> class.</summary>
+    /// <param name="var">The variable.</param>
+    /// <param name="folder">The folder.</param>
     private Game(object var, string folder)
     {
         this.var = var;
         this.folder = folder;
     }
 
-    public static Game SaveVar(object var) 
-    {
-        return new Game(var);
-    }
+    /// <summary>Saves the variable.</summary>
+    /// <param name="var">The variable.</param>
+    /// <returns>A game instance</returns>
+    public static Game SaveVar(object var) => new Game(var);
 
-    public Game InFolder(string folder) 
-    {
-        return new Game(var, folder);
-    }
+    /// <summary>Ins the folder.</summary>
+    /// <param name="folder">The folder.</param>
+    /// <returns>A game instance</returns>
+    public Game InFolder(string folder) => new Game(var, folder);
 
-    public void WithName(string name) 
+    /// <summary>Withes the name.</summary>
+    /// <param name="name">The name.</param>
+    public void WithName(string name)
     {
         string path = Application.persistentDataPath + "/Data/" + folder;
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
         }
-        File.WriteAllText(path + "/" + name + ".json", var.ToString());
+
+        Encrypt(var.ToString(), key, path + "/" + name + ".json");
     }
 
-    public static Game LoadVar(string var) 
-    {
-        return new Game(var);
-    }
+    /// <summary>Loads the variable.</summary>
+    /// <param name="var">The variable.</param>
+    /// <returns>A game instance</returns>
+    public static Game LoadVar(string var) => new Game(var);
 
-    public Game OfFolder(string folder) 
+    /// <summary>Ofs the folder.</summary>
+    /// <param name="folder">The folder.</param>
+    /// <returns>A game instance</returns>
+    public Game OfFolder(string folder)
     {
         string file = Application.persistentDataPath + "/Data/" + folder + "/" + var + ".json";
 
         if (File.Exists(file))
         {
-            return new Game(File.ReadAllText(file));
+            return new Game(Decrypt(key, file));
         }
         else
         {
@@ -67,89 +89,34 @@ public class Game
                 Directory.CreateDirectory(path);
             }
 
-            File.WriteAllText(file, "0");
-            return new Game(File.ReadAllText(file));
+            Encrypt("0", key, file);
+            return new Game(Decrypt(key, file));
         }
     }
 
-    public int Int => int.Parse(var.ToString());
-
-
-
-    private static readonly string key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435";
-
-    public static void ResetSettings()
+    /// <summary>Loads the settings.</summary>
+    public static void LoadSettings() 
     {
-        Settings.Current = new Settings();
-        Game.SaveSettings();
+        string platform = LoadVar("Plattform").OfFolder("Settings").String;
+        string language = LoadVar("Language").OfFolder("Settings").String;
+        
+        Settings.Current = new Settings(platform, language);
     }
 
-    public static void SaveSettings()
+    /// <summary>Saves the settings.</summary>
+    public static void SaveSettings() 
     {
-        Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Settings.json");
+        SaveVar(Settings.Current.Platform).InFolder("Settings").WithName("Plattform");
+        SaveVar(Settings.Current.Language).InFolder("Settings").WithName("Language");
     }
 
-    public static void LoadSettings()
-    {
-        Settings.Current = new Settings();
-        if (File.Exists(Application.persistentDataPath + "/Settings.json"))
-        {
-            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Settings.json"));
-        }
-        else
-        {
-            Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/Settings.json");
-            Settings.Current = JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/Settings.json"));
-        }
-    }
-
-    public static void ResetStats()
-    {
-        Stats.Current = new Stats();
-        Game.SaveStats();
-    }
-
-    public static void SaveStats()
-    {
-        Encrypt(JsonUtility.ToJson(Stats.Current), key, Application.persistentDataPath + "/Stats.json");
-    }
-
-    public static object LoadData(string nameFile) 
-    {
-        if (File.Exists(Application.persistentDataPath + "/" + nameFile + ".json"))
-        {
-            return JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/" + nameFile + ".json"));
-        }
-        else
-        {
-            Encrypt(JsonUtility.ToJson(Settings.Current), key, Application.persistentDataPath + "/" + nameFile + ".json");
-            return JsonUtility.FromJson<Settings>(Decrypt(key, Application.persistentDataPath + "/" + nameFile + ".json"));
-        }
-    }
-
-    public static void SaveData(object obj,  string nameFile)
-    {
-        Encrypt(JsonUtility.ToJson(obj), key, Application.persistentDataPath + "/"+ nameFile +".json");
-    }
-
-    public static void LoadStats()
-    {
-        Stats.Current = new Stats();
-        if (File.Exists(Application.persistentDataPath + "/Stats.json"))
-        {
-            Stats.Current = JsonUtility.FromJson<Stats>(Decrypt(key, Application.persistentDataPath + "/Stats.json"));
-        }
-        else
-        {
-            Encrypt(JsonUtility.ToJson(Stats.Current), key, Application.persistentDataPath + "/Stats.json");
-            Stats.Current = JsonUtility.FromJson<Stats>(Decrypt(key, Application.persistentDataPath + "/Stats.json"));
-        }
-    }
-
+    /// <summary>Encrypts the specified data.</summary>
+    /// <param name="data">The data.</param>
+    /// <param name="key">The key.</param>
+    /// <param name="pathFile">The path file.</param>
     private static void Encrypt(string data, string key, string pathFile)
     {
         byte[] stringToEncrypt = UTF8Encoding.UTF8.GetBytes(data);
-
 
         TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
         MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
@@ -167,13 +134,16 @@ public class Game
         tdes.Clear();
     }
 
+    /// <summary>Decrypts the specified key.</summary>
+    /// <param name="key">The key.</param>
+    /// <param name="pathFile">The path file.</param>
+    /// <returns>The string decrypted</returns>
     private static string Decrypt(string key, string pathFile)
     {
-        string result = "";
+        string result = string.Empty;
         string stringEncrypt = File.ReadAllText(pathFile);
 
         byte[] arrayEncrypt = Convert.FromBase64String(stringEncrypt);
-
 
         MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
         byte[] keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));

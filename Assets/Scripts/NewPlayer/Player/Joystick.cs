@@ -37,7 +37,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     [SerializeField] private bool snapY = false;
 
     [SerializeField] protected RectTransform background = null;
-    [SerializeField] private readonly RectTransform handle = null;
+    [SerializeField] private RectTransform handle = null;
     private RectTransform baseRect = null;
 
     private Canvas canvas;
@@ -47,6 +47,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     protected virtual void Start()
     {
+        handle = this.transform.Find("Background/Handle").GetComponent<RectTransform>();
+        background = this.transform.Find("Background").GetComponent<RectTransform>();
+
         HandleRange = handleRange;
         DeadZone = deadZone;
         baseRect = GetComponent<RectTransform>();
