@@ -1,224 +1,183 @@
-﻿//-----------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Dungeon.cs" company="UnMedioStudio">Open Source</copyright>
-//-----------------------------------------------------------------------
-using System.Collections;
+// <copyright file="Dungeon.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
+using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>Generate a dungeon</summary>
-public class Dungeon : MonoBehaviour
+public class Dungeon : NetworkBehaviour
 {
-    /// <summary>The board width</summary>
-    private static readonly int BoardWidth = 500;
+    private const int BoardWidth = 500;
+    private const int BoardHeight = 500;
 
-    /// <summary>The board height</summary>
-    private static readonly int BoardHeight = 500;
+    private const int NumOfRooms = 15;
 
-    /// <summary>The minimum number rooms</summary>
-    private static readonly int MinNumRooms = 10;
+    private const int FirstRoomWidth = 10;
+    private const int FirstRoomHeight = 10;
 
-    /// <summary>The maximum number rooms</summary>
-    private static readonly int MaxNumRooms = 15;
+    private const int RoomWidth = 8;
+    private const int RoomHeight = 8;
 
-    /// <summary>The minimum room width</summary>
-    private static readonly int MinRoomWidth = 10;
+    private const int LastRoomWidth = 10;
+    private const int LastRoomHeight = 10;
 
-    /// <summary>The maximum room width</summary>
-    private static readonly int MaxRoomWidth = 15;
+    private const int CorridorWidth = 4;
+    private const int CorridorHeight = 4;
 
-    /// <summary>The minimum room height</summary>
-    private static readonly int MinRoomHeight = 10;
-
-    /// <summary>The maximum room height</summary>
-    private static readonly int MaxRoomHeight = 15;
-
-    /// <summary>The minimum corridor width</summary>
-    private static readonly int MinCorridorWidth = 6;
-
-    /// <summary>The maximum corridor width</summary>
-    private static readonly int MaxCorridorWidth = 8;
-
-    /// <summary>The minimum corridor height</summary>
-    private static readonly int MinCorridorHeight = 7;
-
-    /// <summary>The maximum corridor height</summary>
-    private static readonly int MaxCorridorHeight = 8;
-
-    /// <summary>The rooms.</summary>
+    private readonly int[,] board = new int[BoardWidth, BoardHeight];
     private readonly List<Room> rooms = new List<Room>();
-
-    /// <summary>The corridors</summary>
     private readonly List<Corridor> corridors = new List<Corridor>();
 
-    /// <summary>The board</summary>
-    private readonly int[,] board = new int[BoardWidth, BoardHeight];
-
-    /// <summary>The player</summary>
     [SerializeField]
     private readonly GameObject player = null;
 
-    /// <summary>The final boss</summary>
     [SerializeField]
-    private readonly GameObject finalBoss = null;
+    private readonly GameObject altar = null;
 
-    /// <summary>The items</summary>
+    [SerializeField]
+    private readonly GameObject boss = null;
+
     [SerializeField]
     private readonly List<Item> generalItems = null;
 
-    /// <summary>The style maps</summary>
+    private readonly List<Vector2> positionsToSpawnThePlayers = new List<Vector2>();
+
     [SerializeField]
     private readonly List<Style> dungeons = null;
+    private Style style = null;
 
-    /// <summary>The style map</summary>
-    private Style styleMap;
-
-    /// <summary>The start interface</summary>
-    private GameObject startInterface;
-
-    /// <summary>The main camera</summary>
-    private GameObject mainCamera;
-
-    /// <summary>The information</summary>
-    private Text info;
-
-
-    /// <summary>Run when start the scene</summary>
     private void Start()
     {
-        Language.Translate();
-        StartCoroutine(Build());
-    }
-
-    /// <summary>Builds this instance.</summary>
-    /// <returns>Return none</returns>
-    private IEnumerator Build()
-    {
-        SearchObjects();
-
-        info.text = string.Empty;
-        foreach (char letter in Language.GetSentence(Clef.A26).ToCharArray())
+        if (!isServer)
         {
-            info.text += letter;
-            yield return null;
+            return;
         }
 
-        CreateRooms(Random.Range(MinNumRooms, MaxNumRooms));
-        CreateCorridors(rooms.Count - 1);
+        SetUpDungeonStyle();
+
+        CreateRooms();
+        CreateCorridors();
+
+        SetUpFirstRoom();
         SetUpRoomsAndCorridors();
-        yield return new WaitForSeconds(0.2f);
 
-        info.text = string.Empty;
-        foreach (char letter in Language.GetSentence(Clef.A26).ToCharArray())
-        {
-            info.text += letter;
-            yield return null;
-        }
+
+        GetPositionsToSpawn();
 
         PrintRoomsInBoard();
         PrintCorridorsInBoard();
+
+        SetUpTheLastRoom();
+
+        PrintRoomsInBoard();
+        PrintCorridorsInBoard();
+
         PrintWallsInBoard();
         PrintOuterCornersInBoard();
         PrintInnerCornersInBoard();
 
         PrintBoardInGame();
-        yield return new WaitForSeconds(0.2f);
-
-        info.text = string.Empty;
-        foreach (char letter in Language.GetSentence(Clef.A26).ToCharArray())
-        {
-            info.text += letter;
-            yield return null;
-        }
 
         SpawnListOf(generalItems);
-        SpawnListOf(styleMap.GetLights());
-        SpawnListOf(styleMap.GetFloors());
-        SpawnListOf(styleMap.GetItems());
-        SpawnListOf(styleMap.GetEnemys());
-        SpawnListOf(styleMap.GetPets());
-        yield return new WaitForSeconds(0.2f);
+        SpawnListOf(style.GetLights());
+        SpawnListOf(style.GetItems());
+        SpawnListOf(style.GetEnemys());
+        SpawnListOf(style.GetPets());
+        SpawnListOf(style.GetFloors());
 
-        info.text = string.Empty;
-        foreach (char letter in Language.GetSentence(Clef.A26).ToCharArray())
-        {
-            info.text += letter;
-            yield return null;
-        }
+        PrintTheBoss();
 
-        DestroyObject(startInterface);
-        DestroyObject(mainCamera);
-        SpawnBoss(new Vector2(rooms[rooms.Count - 1].XPos + (rooms[rooms.Count - 1].Width / 2), rooms[rooms.Count - 1].YPos + (rooms[rooms.Count - 1].Height / 2)), finalBoss);
-        SpawnPlayer(new Vector2(250, 250), player);
-        yield return new WaitForSeconds(0.2f);
+        PrintAltarsInGame();
+        //this.PrintPlayersInGame();
+
+        transform.position = new Vector2(-255, -255);
     }
 
-    /// <summary>Searches the objects.</summary>
-    private void SearchObjects()
+    /// <summary>Set up dungeon style.</summary>
+    private void SetUpDungeonStyle()
     {
-        styleMap = dungeons[Random.Range(0, dungeons.Count)];
-        styleMap.LoadSprites();
-
-        startInterface = GameObject.Find("Start_Interface");
-        mainCamera = GameObject.Find("Camera");
-
-        GameObject.Find("Start_Interface/PopUpMessage/PopUp/NameDungeon").GetComponent<Text>().text = styleMap.GetName();
-        info = GameObject.Find("Start_Interface/PopUpMessage/PopUp/Info").GetComponent<Text>();
+        style = dungeons[Random.Range(0, dungeons.Count)];
+        style.LoadSprites();
     }
 
     /// <summary>Creates the rooms.</summary>
-    /// <param name="amount">The amount.</param>
-    private void CreateRooms(int amount)
+    private void CreateRooms()
     {
-        rooms.AddRange(new Room[amount]);
+        rooms.AddRange(new Room[NumOfRooms]);
     }
 
     /// <summary>Creates the corridors.</summary>
-    /// <param name="amount">The amount.</param>
-    private void CreateCorridors(int amount)
+    private void CreateCorridors()
     {
-        corridors.AddRange(new Corridor[amount]);
+        corridors.AddRange(new Corridor[rooms.Count - 1]);
     }
 
-    /// <summary>Sets up rooms and corridors.</summary>
+    private void SetUpFirstRoom()
+    {
+        rooms[0] = Room.SetUpFirstRoom(BoardWidth / 2, BoardHeight / 2, FirstRoomWidth, FirstRoomHeight);
+        corridors[0] = Corridor.SetUpFirstCorridor(CorridorWidth, CorridorHeight, rooms[0]);
+    }
+
     private void SetUpRoomsAndCorridors()
     {
-        int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth);
-        int roomHeight = Random.Range(MinRoomHeight, MaxRoomHeight);
-
-        int corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
-        int corridorLength = Random.Range(MinCorridorHeight, MaxCorridorHeight);
-
-        rooms[0] = Room.SetUp(roomWidth, roomHeight, BoardWidth, BoardHeight);
-        corridors[0] = Corridor.SetUp(rooms[0], corridorWidth, corridorLength, roomWidth, roomHeight, BoardWidth, BoardHeight, true);
-
         for (int i = 1; i < rooms.Count; i++)
         {
-            roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth);
-            roomHeight = Random.Range(MinRoomHeight, MaxRoomHeight);
-
-            rooms[i] = Room.SetUp(roomWidth, roomHeight, BoardWidth, BoardHeight, corridors[i - 1]);
+            rooms[i] = Room.SetUp(RoomWidth, RoomHeight, corridors[i - 1]);
 
             if (i < corridors.Count)
             {
-                corridorWidth = Random.Range(MinCorridorWidth, MaxCorridorWidth);
-                corridorLength = Random.Range(MinCorridorHeight, MaxCorridorHeight);
-
-                corridors[i] = Corridor.SetUp(rooms[i], corridorWidth, corridorLength, roomWidth, roomHeight, BoardWidth, BoardHeight, false);
+                corridors[i] = Corridor.SetUp(CorridorWidth, CorridorHeight, rooms[i]);
             }
         }
     }
 
-    /// <summary>Prints the rooms in board.</summary>
+    private void SetUpTheLastRoom()
+    {
+        int i = NumOfRooms - 1;
+        rooms[i] = Room.SetUp(LastRoomWidth, LastRoomHeight, corridors[i - 1]);
+
+
+        while (hasRoom(rooms[i]))
+        {
+            corridors[i - 1] = Corridor.SetUp(CorridorWidth, CorridorHeight, rooms[i - 1]);
+            rooms[i] = Room.SetUp(LastRoomWidth, LastRoomHeight, corridors[i - 1]);
+        }
+    }
+
+    private bool hasRoom(Room room)
+    {
+        for (int x = room.XPos; x < room.XPos + room.Width; x++)
+        {
+            for (int y = room.YPos; y < room.YPos + room.Height; y++)
+            {
+                if (board[x, y] == 1)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void GetPositionsToSpawn()
+    {
+        Vector2 center = new Vector2((BoardWidth / 2) + (FirstRoomWidth / 2), (BoardHeight / 2) + (FirstRoomHeight / 2));
+        positionsToSpawnThePlayers.Add(center + new Vector2(1.5f, 1.5f));
+        positionsToSpawnThePlayers.Add(center + new Vector2(-1.5f, -1.5f));
+        positionsToSpawnThePlayers.Add(center + new Vector2(-1.5f, 1.5f));
+        positionsToSpawnThePlayers.Add(center + new Vector2(1.5f, -1.5f));
+    }
+
     private void PrintRoomsInBoard()
     {
         foreach (Room room in rooms)
         {
-            for (int x = (int)room.Position.x; x < (int)room.Position.x + room.Width; x++)
+            for (int x = room.XPos; x < room.XPos + room.Width; x++)
             {
-                for (int y = (int)room.Position.y; y < (int)room.Position.y + room.Height; y++)
+                for (int y = room.YPos; y < room.YPos + room.Height; y++)
                 {
                     board[x, y] = (board[x, y] == 0) ? 1 : board[x, y];
                 }
@@ -226,31 +185,20 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    /// <summary>Prints the corridors in board.</summary>
     private void PrintCorridorsInBoard()
     {
         foreach (Corridor corridor in corridors)
         {
-            for (int y = 0; y < corridor.Height; y++)
+            for (int x = corridor.XPos; x < corridor.XPos + corridor.Width; x++)
             {
-                for (int x = -corridor.Width / 2; x < corridor.Width / 2; x++)
+                for (int y = corridor.YPos; y < corridor.YPos + corridor.Height; y++)
                 {
-                    int xPos = corridor.GoEast ? (int)corridor.Position.x + y :
-                               corridor.GoWest ? (int)corridor.Position.x - y :
-                               (int)corridor.Position.x;
-
-                    int yPos = corridor.GoNorth ? (int)corridor.Position.y + y :
-                               corridor.GoSouth ? (int)corridor.Position.y - y :
-                               (int)corridor.Position.y;
-
-                    board[xPos, yPos + x] = (board[xPos, yPos + x] == 0) ? 1 : board[xPos, yPos + x];
-                    board[xPos + x, yPos] = (board[xPos + x, yPos] == 0) ? 1 : board[xPos + x, yPos];
+                    board[x, y] = (board[x, y] == 0) ? 1 : board[x, y];
                 }
             }
         }
     }
 
-    /// <summary>Prints the walls in board.</summary>
     private void PrintWallsInBoard()
     {
         for (int x = 0; x < BoardWidth; x++)
@@ -266,7 +214,6 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    /// <summary>Prints the outer corners in board.</summary>
     private void PrintOuterCornersInBoard()
     {
         for (int x = 0; x < BoardWidth; x++)
@@ -282,7 +229,6 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    /// <summary>Prints the inner corners in board.</summary>
     private void PrintInnerCornersInBoard()
     {
         for (int x = 0; x < BoardWidth; x++)
@@ -298,7 +244,6 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    /// <summary>Prints the board in game.</summary>
     private void PrintBoardInGame()
     {
         for (int x = 0; x < BoardWidth; x++)
@@ -307,7 +252,7 @@ public class Dungeon : MonoBehaviour
             {
                 if (board[x, y] != 0)
                 {
-                    MonoBehaviour.Instantiate(styleMap.SelectSprite(board[x, y]), new Vector2(x, y), Quaternion.identity, transform);
+                    MonoBehaviour.Instantiate(style.SelectSprite(board[x, y]), new Vector2(x, y), Quaternion.identity, transform);
                 }
             }
         }
@@ -350,26 +295,34 @@ public class Dungeon : MonoBehaviour
         items.ForEach(item => SpawnObject(item.Name, item.Quantity, item.Position, item.Object));
     }
 
-    /// <summary>Spawns the boss.</summary>
-    /// <param name="position">The position.</param>
-    /// <param name="boss">The boss.</param>
-    private void SpawnBoss(Vector2 position, GameObject boss)
+    private void PrintTheBoss()
     {
-        MonoBehaviour.Instantiate(boss, position, Quaternion.identity);
+        int x = rooms[NumOfRooms - 1].XPos + rooms[NumOfRooms - 1].Width / 2;
+        int y = rooms[NumOfRooms - 1].YPos + rooms[NumOfRooms - 1].Height / 2;
+        Vector2 pos = new Vector2(x + 0.5f, y + 0.5f);
+        GameObject master = new GameObject
+        {
+            name = "Boss"
+        };
+        Instantiate(boss, pos, Quaternion.identity, master.transform);
     }
 
-    /// <summary>Spawns the player.</summary>
-    /// <param name="position">The position.</param>
-    /// <param name="player">The player.</param>
-    private void SpawnPlayer(Vector2 position, GameObject player)
+    private void PrintAltarsInGame()
     {
-        MonoBehaviour.Instantiate(player, position, Quaternion.identity);
+        GameObject master = new GameObject
+        {
+            name = "Altars"
+        };
+        positionsToSpawnThePlayers.ForEach(pos => Instantiate(altar, pos, Quaternion.identity, master.transform));
     }
 
-    /// <summary>Destroys the object.</summary>
-    /// <param name="obj">The object.</param>
-    private void DestroyObject(GameObject obj)
+    private void PrintPlayersInGame()
     {
-        MonoBehaviour.Destroy(obj);
+        Vector2 pos = positionsToSpawnThePlayers[Random.Range(0, positionsToSpawnThePlayers.Count)];
+        GameObject master = new GameObject
+        {
+            name = "Players"
+        };
+        Instantiate(player, pos + new Vector2(0, 0.25f), Quaternion.identity, master.transform);
     }
 }

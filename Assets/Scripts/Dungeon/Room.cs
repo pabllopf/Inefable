@@ -1,28 +1,20 @@
-﻿//-----------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="Room.cs" company="UnMedioStudio">Open Source</copyright>
-//-----------------------------------------------------------------------
+// <copyright file="Room.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+//------------------------------------------------------------------------------------------
 using UnityEngine;
 
-/// <summary>Class that define a Room of a Dungeon</summary>
+/// <summary>Generate a room of the dungeon.</summary>
 public class Room
 {
-    /// <summary>Initializes a new instance of the <see cref="Room"/> class.</summary>
-    public Room()
-    {
-        XPos = 0;
-        YPos = 0;
-        Width = 0;
-        Height = 0;
-        Direction = Direction.North;
-    }
+    public int XPos { get; }
+    public int YPos { get; }
+    public int Width { get; }
+    public int Height { get; }
 
-    /// <summary>Initializes a new instance of the <see cref="Room"/> class.</summary>
-    /// <param name="xPos">The x position.</param>
-    /// <param name="yPos">The y position.</param>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    public Room(int xPos, int yPos, int width, int height)
+    public Direction Direction { get; }
+
+    private Room(int xPos, int yPos, int width, int height)
     {
         XPos = xPos;
         YPos = yPos;
@@ -30,13 +22,7 @@ public class Room
         Height = height;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="Room"/> class.</summary>
-    /// <param name="xPos">The x position.</param>
-    /// <param name="yPos">The y position.</param>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    /// <param name="direction">The direction.</param>
-    public Room(int xPos, int yPos, int width, int height, Direction direction)
+    private Room(int xPos, int yPos, int width, int height, Direction direction)
     {
         XPos = xPos;
         YPos = yPos;
@@ -45,88 +31,59 @@ public class Room
         Direction = direction;
     }
 
-    /// <summary>Gets the x position.</summary>
-    /// <value>The x position.</value>
-    public int XPos { get; }
-
-    /// <summary>Gets the y position.</summary>
-    /// <value>The y position.</value>
-    public int YPos { get; }
-
-    /// <summary>Gets the width.</summary>
-    /// <value>The width.</value>
-    public int Width { get; }
-
-    /// <summary>Gets the height.</summary>
-    /// <value>The height.</value>
-    public int Height { get; }
-
-    /// <summary>Gets the position.</summary>
-    /// <value>The position.</value>
-    public Vector2 Position => new Vector2(XPos, YPos);
-
-    /// <summary>Gets the direction.</summary>
-    /// <value>The direction.</value>
-    public Direction Direction { get; }
-
-    /// <summary>Gets a value indicating whether [go north].</summary>
-    /// <value>
-    /// <c>true</c> if [go north]; otherwise, <c>false</c>.</value>
-    public bool GoNorth => (Direction == Direction.North) ? true : false;
-
-    /// <summary>Gets a value indicating whether [go east].</summary>
-    /// <value>
-    /// <c>true</c> if [go east]; otherwise, <c>false</c>.</value>
-    public bool GoEast => (Direction == Direction.East) ? true : false;
-
-    /// <summary>Gets a value indicating whether [go south].</summary>
-    /// <value>
-    /// <c>true</c> if [go south]; otherwise, <c>false</c>.</value>
-    public bool GoSouth => (Direction == Direction.South) ? true : false;
-
-    /// <summary>Gets a value indicating whether [go west].</summary>
-    /// <value>
-    /// <c>true</c> if [go west]; otherwise, <c>false</c>.</value>
-    public bool GoWest => (Direction == Direction.West) ? true : false;
-
-    /// <summary>Sets up.</summary>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    /// <param name="boardWidth">Width of the board.</param>
-    /// <param name="boardHeight">Height of the board.</param>
-    /// <returns>Return the first room</returns>
-    public static Room SetUp(int width, int height, int boardWidth, int boardHeight)
+    public static Room SetUpFirstRoom(int xPos, int yPos, int width, int height)
     {
-        int xPos = Mathf.RoundToInt((boardHeight / 2f) - (width / 2f));
-        int yPos = Mathf.RoundToInt((boardWidth / 2f) - (height / 2f));
         return new Room(xPos, yPos, width, height);
     }
 
-    /// <summary>Sets up.</summary>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    /// <param name="boardWidth">Width of the board.</param>
-    /// <param name="boardHeight">Height of the board.</param>
-    /// <param name="corridor">The corridor.</param>
-    /// <returns>Return a room</returns>
-    public static Room SetUp(int width, int height, int boardWidth, int boardHeight, Corridor corridor)
+    public static Room SetUp(int width, int height, Corridor corridor)
     {
-        int xPos = (corridor.GoNorth || corridor.GoSouth) ? Mathf.Clamp(Random.Range(corridor.EndPositionX - width + 1, corridor.EndPositionX), 0, boardHeight - width) :
-                corridor.GoWest ? corridor.EndPositionX - width + 1 :
-                corridor.EndPositionX;
+        Direction direction = corridor.Direction;
 
-        int yPos = (corridor.GoEast || corridor.GoWest) ? Mathf.Clamp(Random.Range(corridor.EndPositionY - height + 1, corridor.EndPositionY), 0, boardWidth - height) :
-                corridor.GoSouth ? corridor.EndPositionY - height + 1 :
-                corridor.EndPositionY;
+        int xPos = 0;
+        int yPos = 0;
 
-        width = (corridor.GoNorth || corridor.GoSouth) ? width :
-                corridor.GoEast ? Mathf.Clamp(width, 1, boardHeight - corridor.EndPositionX) :
-                Mathf.Clamp(width, 1, corridor.EndPositionX);
+        int xWidth = 0;
+        int yHeight = 0;
 
-        height = (corridor.GoEast || corridor.GoWest) ? height :
-               corridor.GoNorth ? Mathf.Clamp(height, 1, boardWidth - corridor.EndPositionY) :
-               Mathf.Clamp(height, 1, corridor.EndPositionY);
+        switch (direction)
+        {
+            case Direction.North:
+                xPos = (corridor.XPos + Mathf.RoundToInt(corridor.Width / 2)) - Mathf.RoundToInt(width / 2);
+                yPos = corridor.YPos + corridor.Height;
 
-        return new Room(xPos, yPos, width, height);
+                xWidth = width;
+                yHeight = height;
+
+                break;
+
+            case Direction.South:
+                xPos = (corridor.XPos + Mathf.RoundToInt(corridor.Width / 2)) - Mathf.RoundToInt(width / 2);
+                yPos = corridor.YPos - height;
+
+                xWidth = width;
+                yHeight = height;
+
+                break;
+
+            case Direction.East:
+                xPos = corridor.XPos - height;
+                yPos = (corridor.YPos + Mathf.RoundToInt(corridor.Height / 2)) - Mathf.RoundToInt(height / 2);
+
+                xWidth = height;
+                yHeight = width;
+
+                break;
+
+            case Direction.West:
+                xPos = corridor.XPos + corridor.Width;
+                yPos = (corridor.YPos + Mathf.RoundToInt(corridor.Height / 2)) - Mathf.RoundToInt(height / 2);
+
+                xWidth = height;
+                yHeight = width;
+                break;
+        }
+
+        return new Room(xPos, yPos, xWidth, yHeight, direction);
     }
 }

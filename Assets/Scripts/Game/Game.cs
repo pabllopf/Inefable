@@ -30,7 +30,10 @@ public class Game
 
     /// <summary>Initializes a new instance of the <see cref="Game"/> class.</summary>
     /// <param name="var">The variable.</param>
-    private Game(object var) => this.var = var;
+    private Game(object var)
+    {
+        this.var = var;
+    }
 
     /// <summary>Initializes a new instance of the <see cref="Game"/> class.</summary>
     /// <param name="var">The variable.</param>
@@ -44,12 +47,18 @@ public class Game
     /// <summary>Saves the variable.</summary>
     /// <param name="var">The variable.</param>
     /// <returns>A game instance</returns>
-    public static Game SaveVar(object var) => new Game(var);
+    public static Game Save(object var)
+    {
+        return new Game(var);
+    }
 
     /// <summary>Ins the folder.</summary>
     /// <param name="folder">The folder.</param>
     /// <returns>A game instance</returns>
-    public Game InFolder(string folder) => new Game(var, folder);
+    public Game InFolder(string folder)
+    {
+        return new Game(var, folder);
+    }
 
     /// <summary>Withes the name.</summary>
     /// <param name="name">The name.</param>
@@ -67,7 +76,10 @@ public class Game
     /// <summary>Loads the variable.</summary>
     /// <param name="var">The variable.</param>
     /// <returns>A game instance</returns>
-    public static Game LoadVar(string var) => new Game(var);
+    public static Game Load(string var)
+    {
+        return new Game(var);
+    }
 
     /// <summary>Ofs the folder.</summary>
     /// <param name="folder">The folder.</param>
@@ -95,19 +107,19 @@ public class Game
     }
 
     /// <summary>Loads the settings.</summary>
-    public static void LoadSettings() 
+    public static void LoadSettings()
     {
-        string platform = LoadVar("Plattform").OfFolder("Settings").String;
-        string language = LoadVar("Language").OfFolder("Settings").String;
-        
+        string platform = Load("Plattform").OfFolder("Settings").String;
+        string language = Load("Language").OfFolder("Settings").String;
+
         Settings.Current = new Settings(platform, language);
     }
 
     /// <summary>Saves the settings.</summary>
-    public static void SaveSettings() 
+    public static void SaveSettings()
     {
-        SaveVar(Settings.Current.Platform).InFolder("Settings").WithName("Plattform");
-        SaveVar(Settings.Current.Language).InFolder("Settings").WithName("Language");
+        Save(Settings.Current.Platform).InFolder("Settings").WithName("Plattform");
+        Save(Settings.Current.Language).InFolder("Settings").WithName("Language");
     }
 
     /// <summary>Encrypts the specified data.</summary>
