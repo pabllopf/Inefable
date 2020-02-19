@@ -9,7 +9,7 @@ using UnityEngine;
 public class Data
 {
     /// <summary>The variable</summary>
-    private readonly object variable = null;
+    private readonly object valueVar = null;
 
     /// <summary>The name variable</summary>
     private readonly string nameVar = null;
@@ -18,7 +18,7 @@ public class Data
     /// <param name="variable">The variable.</param>
     private Data(object variable)
     {
-        this.variable = variable;
+        this.valueVar = variable;
     }
 
     /// <summary>Initializes a new instance of the <see cref="Data"/> class.</summary>
@@ -26,25 +26,25 @@ public class Data
     /// <param name="nameVar">The name variable.</param>
     private Data(object variable, string nameVar)
     {
-        this.variable = variable;
+        this.valueVar = variable;
         this.nameVar = nameVar;
     }
 
     /// <summary>Gets the double.</summary>
     /// <value>The double.</value>
-    public double Double => double.Parse(variable.ToString());
+    public double Double => double.Parse(valueVar.ToString());
 
     /// <summary>Gets the float.</summary>
     /// <value>The float.</value>
-    public float Float => float.Parse(variable.ToString());
+    public float Float => float.Parse(valueVar.ToString());
 
     /// <summary>Get the integer.</summary>
     /// <value>The integer</value>
-    public int Int => int.Parse(variable.ToString());
+    public int Int => int.Parse(valueVar.ToString());
 
     /// <summary>Gets the string.</summary>
     /// <value>The string.</value>
-    public string String => variable.ToString();
+    public string String => valueVar.ToString();
 
     /// <summary>Saves the variable.</summary>
     /// <param name="obj">The object.</param>
@@ -62,28 +62,12 @@ public class Data
         return new Data(variable);
     }
 
-    /// <summary>Saves the settings.</summary>
-    public static void SaveSettings()
-    {
-        SaveVar(Settings.Current.Platform).WithName("Plattform").InFolder("Settings");
-        SaveVar(Settings.Current.Language).WithName("Language").InFolder("Settings");
-    }
-
-    /// <summary>Loads this instance.</summary>
-    public static void LoadSettings()
-    {
-        string platform = LoadVar("Plattform").FromFolder("Settings").String;
-        string language = LoadVar("Language").FromFolder("Settings").String;
-
-        Settings.Current = new Settings(platform, language);
-    }
-
     /// <summary>Withes the name.</summary>
     /// <param name="nameVar">The name variable.</param>
     /// <returns>Return data</returns>
     public Data WithName(string nameVar)
     {
-        return new Data(variable, nameVar);
+        return new Data(valueVar, nameVar);
     }
 
     /// <summary>Ins the folder.</summary>
@@ -98,7 +82,7 @@ public class Data
             Directory.CreateDirectory(path);
         }
 
-        Security.Encrypt(path + file, variable.ToString());
+        Security.Encrypt(path + file, valueVar.ToString());
     }
 
     /// <summary>From the folder.</summary>
@@ -107,7 +91,7 @@ public class Data
     public Data FromFolder(string folder)
     {
         string path = Application.persistentDataPath + "/Data/" + folder;
-        string file = "/" + variable.ToString() + ".json";
+        string file = "/" + valueVar.ToString() + ".json";
 
         if (Directory.Exists(path))
         {

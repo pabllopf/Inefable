@@ -18,7 +18,7 @@ public class Settings
     /// <summary>Initializes a new instance of the <see cref="Settings"/> class.</summary>
     /// <param name="platform">The platform.</param>
     /// <param name="language">The language.</param>
-    public Settings(string platform, string language)
+    private Settings(string platform, string language)
     {
         this.platform = platform.Equals("0") ? "Computer" : platform;
         this.language = language.Equals("0") ? "English" : language;
@@ -46,5 +46,21 @@ public class Settings
     {
         get => language;
         set => language = value;
+    }
+
+    /// <summary>Save the settings.</summary>
+    public static void Save()
+    {
+        Data.SaveVar(Settings.Current.Platform).WithName("Plattform").InFolder("Settings");
+        Data.SaveVar(Settings.Current.Language).WithName("Language").InFolder("Settings");
+    }
+
+    /// <summary>Loads this instance.</summary>
+    public static void Load()
+    {
+        string platform = Data.LoadVar("Plattform").FromFolder("Settings").String;
+        string language = Data.LoadVar("Language").FromFolder("Settings").String;
+
+        Current = new Settings(platform, language);
     }
 }

@@ -69,7 +69,7 @@ public class Player : NetworkBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        Data.LoadSettings();
+        Settings.Load();
     }
 
     /// <summary>Starts this instance.</summary>
