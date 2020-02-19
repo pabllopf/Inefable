@@ -3,7 +3,7 @@ using Mono.CecilX;
 
 namespace Mirror.Weaver
 {
-    static class MonoBehaviourProcessor
+    internal static class MonoBehaviourProcessor
     {
         public static void Process(TypeDefinition td)
         {
@@ -11,7 +11,7 @@ namespace Mirror.Weaver
             ProcessMethods(td);
         }
 
-        static void ProcessSyncVars(TypeDefinition td)
+        private static void ProcessSyncVars(TypeDefinition td)
         {
             // find syncvars
             foreach (FieldDefinition fd in td.Fields)
@@ -31,7 +31,7 @@ namespace Mirror.Weaver
             }
         }
 
-        static void ProcessMethods(TypeDefinition td)
+        private static void ProcessMethods(TypeDefinition td)
         {
             // find command and RPC functions
             foreach (MethodDefinition md in td.Methods)

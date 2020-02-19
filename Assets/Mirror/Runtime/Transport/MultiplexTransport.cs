@@ -9,12 +9,11 @@ namespace Mirror
     public class MultiplexTransport : Transport
     {
         public Transport[] transports;
-
-        Transport available;
+        private Transport available;
 
         // used to partition recipients for each one of the base transports
         // without allocating a new list every time
-        List<int>[] recipientsCache;
+        private List<int>[] recipientsCache;
 
         public void Awake()
         {
@@ -41,7 +40,7 @@ namespace Mirror
 
         #region Client
         // clients always pick the first transport
-        void InitClient()
+        private void InitClient()
         {
             // wire all the base transports to my events
             foreach (Transport transport in transports)
@@ -96,7 +95,9 @@ namespace Mirror
         public override void ClientDisconnect()
         {
             if ((object)available != null)
+            {
                 available.ClientDisconnect();
+            }
         }
 
         public override bool ClientSend(int channelId, ArraySegment<byte> segment)
@@ -112,22 +113,22 @@ namespace Mirror
         // transport 0 will produce connection ids [0, 3, 6, 9, ...]
         // transport 1 will produce connection ids [1, 4, 7, 10, ...]
         // transport 2 will produce connection ids [2, 5, 8, 11, ...]
-        int FromBaseId(int transportId, int connectionId)
+        private int FromBaseId(int transportId, int connectionId)
         {
             return connectionId * transports.Length + transportId;
         }
 
-        int ToBaseId(int connectionId)
+        private int ToBaseId(int connectionId)
         {
             return connectionId / transports.Length;
         }
 
-        int ToTransportId(int connectionId)
+        private int ToTransportId(int connectionId)
         {
             return connectionId % transports.Length;
         }
 
-        void InitServer()
+        private void InitServer()
         {
             recipientsCache = new List<int>[transports.Length];
 

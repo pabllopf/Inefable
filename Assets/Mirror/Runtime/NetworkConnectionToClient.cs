@@ -14,11 +14,14 @@ namespace Mirror
 
         // internal because no one except Mirror should send bytes directly to
         // the client. they would be detected as a message. send messages instead.
-        readonly List<int> singleConnectionId = new List<int> { -1 };
+        private readonly List<int> singleConnectionId = new List<int> { -1 };
 
         internal override bool Send(ArraySegment<byte> segment, int channelId = Channels.DefaultReliable)
         {
-            if (logNetworkMessages) Debug.Log("ConnectionSend " + this + " bytes:" + BitConverter.ToString(segment.Array, segment.Offset, segment.Count));
+            if (logNetworkMessages)
+            {
+                Debug.Log("ConnectionSend " + this + " bytes:" + BitConverter.ToString(segment.Array, segment.Offset, segment.Count));
+            }
 
             // validate packet size first.
             if (ValidatePacketSize(segment, channelId))

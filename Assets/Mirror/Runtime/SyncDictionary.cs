@@ -1,8 +1,8 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using JetBrains.Annotations;
 
 namespace Mirror
 {
@@ -27,24 +27,32 @@ namespace Mirror
             OP_DIRTY
         }
 
-        struct Change
+        private struct Change
         {
             internal Operation operation;
             internal TKey key;
             internal TValue item;
         }
 
-        readonly List<Change> changes = new List<Change>();
+        private readonly List<Change> changes = new List<Change>();
+
         // how many changes we need to ignore
         // this is needed because when we initialize the list,
         // we might later receive changes that have already been applied
         // so we need to skip them
-        int changesAhead;
+        private int changesAhead;
 
         protected virtual void SerializeKey(NetworkWriter writer, TKey item) { }
         protected virtual void SerializeItem(NetworkWriter writer, TValue item) { }
-        protected virtual TKey DeserializeKey(NetworkReader reader) => default;
-        protected virtual TValue DeserializeItem(NetworkReader reader) => default;
+        protected virtual TKey DeserializeKey(NetworkReader reader)
+        {
+            return default;
+        }
+
+        protected virtual TValue DeserializeItem(NetworkReader reader)
+        {
+            return default;
+        }
 
         public bool IsDirty => changes.Count > 0;
 
@@ -54,14 +62,17 @@ namespace Mirror
 
         // throw away all the changes
         // this should be called after a successfull sync
-        public void Flush() => changes.Clear();
+        public void Flush()
+        {
+            changes.Clear();
+        }
 
         protected SyncIDictionary(IDictionary<TKey, TValue> objects)
         {
             this.objects = objects;
         }
 
-        void AddOperation(Operation op, TKey key, TValue item)
+        private void AddOperation(Operation op, TKey key, TValue item)
         {
             if (IsReadOnly)
             {
@@ -210,7 +221,10 @@ namespace Mirror
             AddOperation(Operation.OP_CLEAR, default, default);
         }
 
-        public bool ContainsKey(TKey key) => objects.ContainsKey(key);
+        public bool ContainsKey(TKey key)
+        {
+            return objects.ContainsKey(key);
+        }
 
         public bool Remove(TKey key)
         {
@@ -240,7 +254,10 @@ namespace Mirror
             }
         }
 
-        public bool TryGetValue(TKey key, out TValue value) => objects.TryGetValue(key, out value);
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            return objects.TryGetValue(key, out value);
+        }
 
         public void Add(TKey key, TValue value)
         {
@@ -248,7 +265,10 @@ namespace Mirror
             AddOperation(Operation.OP_ADD, key, value);
         }
 
-        public void Add(KeyValuePair<TKey, TValue> item) => Add(item.Key, item.Value);
+        public void Add(KeyValuePair<TKey, TValue> item)
+        {
+            Add(item.Key, item.Value);
+        }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
@@ -284,9 +304,15 @@ namespace Mirror
             return result;
         }
 
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => objects.GetEnumerator();
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            return objects.GetEnumerator();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() => objects.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return objects.GetEnumerator();
+        }
     }
 
     public abstract class SyncDictionary<TKey, TValue> : SyncIDictionary<TKey, TValue>
@@ -303,7 +329,9 @@ namespace Mirror
 
         public new Dictionary<TKey, TValue>.KeyCollection Keys => ((Dictionary<TKey, TValue>)objects).Keys;
 
-        public new Dictionary<TKey, TValue>.Enumerator GetEnumerator() => ((Dictionary<TKey, TValue>)objects).GetEnumerator();
-
+        public new Dictionary<TKey, TValue>.Enumerator GetEnumerator()
+        {
+            return ((Dictionary<TKey, TValue>)objects).GetEnumerator();
+        }
     }
 }

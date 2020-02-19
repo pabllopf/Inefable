@@ -1,15 +1,14 @@
 // this class generates OnSerialize/OnDeserialize when inheriting from MessageBase
 
-using System.Linq;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
+using System.Linq;
 
 namespace Mirror.Weaver
 {
-    static class MessageClassProcessor
+    internal static class MessageClassProcessor
     {
-
-        static bool IsEmptyDefault(this MethodBody body)
+        private static bool IsEmptyDefault(this MethodBody body)
         {
             return body.Instructions.All(instruction => instruction.OpCode == OpCodes.Nop || instruction.OpCode == OpCodes.Ret);
         }
@@ -28,7 +27,7 @@ namespace Mirror.Weaver
             Weaver.DLog(td, "MessageClassProcessor Done");
         }
 
-        static void GenerateSerialization(TypeDefinition td)
+        private static void GenerateSerialization(TypeDefinition td)
         {
             Weaver.DLog(td, "  GenerateSerialization");
             MethodDefinition existingMethod = td.Methods.FirstOrDefault(md => md.Name == "Serialize");
@@ -81,7 +80,9 @@ namespace Mirror.Weaver
             foreach (FieldDefinition field in td.Fields)
             {
                 if (field.IsStatic || field.IsPrivate || field.IsSpecialName)
+                {
                     continue;
+                }
 
                 MethodReference writeFunc = Writers.GetWriteFunc(field.FieldType);
                 if (writeFunc != null)
@@ -105,7 +106,7 @@ namespace Mirror.Weaver
             }
         }
 
-        static void GenerateDeSerialization(TypeDefinition td)
+        private static void GenerateDeSerialization(TypeDefinition td)
         {
             Weaver.DLog(td, "  GenerateDeserialization");
             MethodDefinition existingMethod = td.Methods.FirstOrDefault(md => md.Name == "Deserialize");
@@ -148,7 +149,9 @@ namespace Mirror.Weaver
             foreach (FieldDefinition field in td.Fields)
             {
                 if (field.IsStatic || field.IsPrivate || field.IsSpecialName)
+                {
                     continue;
+                }
 
                 MethodReference readerFunc = Readers.GetReadFunc(field.FieldType);
                 if (readerFunc != null)

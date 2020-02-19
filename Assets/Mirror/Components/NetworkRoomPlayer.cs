@@ -44,7 +44,9 @@ namespace Mirror
                 // in server and all clients, otherwise it will be respawned in the game scene which would
                 // have undesireable effects.
                 if (room.dontDestroyOnLoad)
+                {
                     DontDestroyOnLoad(gameObject);
+                }
 
                 room.roomSlots.Add(this);
                 room.RecalculateRoomPlayerIndices();
@@ -52,7 +54,9 @@ namespace Mirror
                 OnClientEnterRoom();
             }
             else
+            {
                 Debug.LogError("RoomPlayer could not find a NetworkRoomManager. The RoomPlayer requires a NetworkRoomManager object to function. Make sure that there is one in the scene.");
+            }
         }
 
         #endregion
@@ -74,7 +78,7 @@ namespace Mirror
 
         #region SyncVar Hooks
 
-        void ReadyStateChanged(bool oldReadyState, bool newReadyState)
+        private void ReadyStateChanged(bool oldReadyState, bool newReadyState)
         {
             OnClientReady(newReadyState);
         }
@@ -111,25 +115,35 @@ namespace Mirror
         public virtual void OnGUI()
         {
             if (!showRoomGUI)
+            {
                 return;
+            }
 
             NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
             if (room)
             {
                 if (!room.showRoomGUI)
+                {
                     return;
+                }
 
                 if (SceneManager.GetActiveScene().name != room.RoomScene)
+                {
                     return;
+                }
 
                 GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 90f, 130f));
 
                 GUILayout.Label($"Player [{index + 1}]");
 
                 if (readyToBegin)
+                {
                     GUILayout.Label("Ready");
+                }
                 else
+                {
                     GUILayout.Label("Not Ready");
+                }
 
                 if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE"))
                 {
@@ -148,12 +162,16 @@ namespace Mirror
                     if (readyToBegin)
                     {
                         if (GUILayout.Button("Cancel"))
+                        {
                             CmdChangeReadyState(false);
+                        }
                     }
                     else
                     {
                         if (GUILayout.Button("Ready"))
+                        {
                             CmdChangeReadyState(true);
+                        }
                     }
 
                     GUILayout.EndArea();

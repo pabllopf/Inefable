@@ -104,7 +104,7 @@ namespace Mirror
             message.Deserialize(networkReader);
 
             NetworkReaderPool.Recycle(networkReader);
-            
+
             return message;
         }
 
@@ -127,46 +127,49 @@ namespace Mirror
             }
         }
 
-        internal static NetworkMessageDelegate MessageHandler<T>(Action<NetworkConnection, T> handler, bool requireAuthenication) where T : IMessageBase, new() => networkMessage =>
+        internal static NetworkMessageDelegate MessageHandler<T>(Action<NetworkConnection, T> handler, bool requireAuthenication) where T : IMessageBase, new()
         {
-            // protect against DOS attacks if attackers try to send invalid
-            // data packets to crash the server/client. there are a thousand
-            // ways to cause an exception in data handling:
-            // - invalid headers
-            // - invalid message ids
-            // - invalid data causing exceptions
-            // - negative ReadBytesAndSize prefixes
-            // - invalid utf8 strings
-            // - etc.
-            //
-            // let's catch them all and then disconnect that connection to avoid
-            // further attacks.
-            T message = default;
-            try
-            {
-                if (requireAuthenication && !networkMessage.conn.isAuthenticated)
-                {
-                    // message requires authentication, but the connection was not authenticated
-                    Debug.LogWarning($"Closing connection: {networkMessage.conn}. Received message {typeof(T)} that required authentication, but the user has not authenticated yet");
-                    networkMessage.conn.Disconnect();
-                    return;
-                }
+            return networkMessage =>
+{
+    // protect against DOS attacks if attackers try to send invalid
+    // data packets to crash the server/client. there are a thousand
+    // ways to cause an exception in data handling:
+    // - invalid headers
+    // - invalid message ids
+    // - invalid data causing exceptions
+    // - negative ReadBytesAndSize prefixes
+    // - invalid utf8 strings
+    // - etc.
+    //
+    // let's catch them all and then disconnect that connection to avoid
+    // further attacks.
+    T message = default;
+    try
+    {
+        if (requireAuthenication && !networkMessage.conn.isAuthenticated)
+        {
+            // message requires authentication, but the connection was not authenticated
+            Debug.LogWarning($"Closing connection: {networkMessage.conn}. Received message {typeof(T)} that required authentication, but the user has not authenticated yet");
+            networkMessage.conn.Disconnect();
+            return;
+        }
 
-                message = networkMessage.ReadMessage<T>();
-            }
-            catch (Exception exception)
-            {
-                Debug.LogError("Closed connection: " + networkMessage.conn + ". This can happen if the other side accidentally (or an attacker intentionally) sent invalid data. Reason: " + exception);
-                networkMessage.conn.Disconnect();
-                return;
-            }
-            finally
-            {
-                // TODO: Figure out the correct channel
-                NetworkDiagnostics.OnReceive(message, networkMessage.channelId, networkMessage.reader.Length);
-            }
+        message = networkMessage.ReadMessage<T>();
+    }
+    catch (Exception exception)
+    {
+        Debug.LogError("Closed connection: " + networkMessage.conn + ". This can happen if the other side accidentally (or an attacker intentionally) sent invalid data. Reason: " + exception);
+        networkMessage.conn.Disconnect();
+        return;
+    }
+    finally
+    {
+        // TODO: Figure out the correct channel
+        NetworkDiagnostics.OnReceive(message, networkMessage.channelId, networkMessage.reader.Length);
+    }
 
-            handler(networkMessage.conn, message);
-        };
+    handler(networkMessage.conn, message);
+};
+        }
     }
 }

@@ -4,7 +4,6 @@
 //------------------------------------------------------------------------------------------
 
 /// <summary>Save the current settings of the game.</summary>
-[System.Serializable]
 public class Settings
 {
     /// <summary>The current</summary>

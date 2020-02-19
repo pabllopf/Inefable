@@ -11,7 +11,7 @@ namespace Mirror
     {
 #if UNITY_2019_3_OR_NEWER
         [InitializeOnLoadMethod]
-        static void OnInitializeOnLoad()
+        private static void OnInitializeOnLoad()
         {
             // check immediately on load
             CheckPlayModeOptions();
@@ -21,7 +21,7 @@ namespace Mirror
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
         }
 
-        static void OnPlayModeStateChanged(PlayModeStateChange state)
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
             // only check when entering play mode. no need to show it again
             // when exiting.
@@ -31,7 +31,7 @@ namespace Mirror
             }
         }
 
-        static void CheckPlayModeOptions()
+        private static void CheckPlayModeOptions()
         {
             // enabling the checkbox is enough. it controls all the other
             // settings.

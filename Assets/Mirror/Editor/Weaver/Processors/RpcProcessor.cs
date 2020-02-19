@@ -24,7 +24,9 @@ namespace Mirror.Weaver
             rpcWorker.Append(rpcWorker.Create(OpCodes.Castclass, td));
 
             if (!NetworkBehaviourProcessor.ProcessNetworkReaderParameters(md, rpcWorker, false))
+            {
                 return null;
+            }
 
             // invoke actual command function
             rpcWorker.Append(rpcWorker.Create(OpCodes.Callvirt, rpcCallFunc));
@@ -82,7 +84,9 @@ namespace Mirror.Weaver
 
             // write all the arguments that the user passed to the Rpc call
             if (!NetworkBehaviourProcessor.WriteArguments(rpcWorker, md, false))
+            {
                 return null;
+            }
 
             string rpcName = md.Name;
             int index = rpcName.IndexOf(RpcPrefix);

@@ -6,7 +6,7 @@ namespace Mirror.Weaver
 {
     public static class CommandProcessor
     {
-        const string CmdPrefix = "InvokeCmd";
+        private const string CmdPrefix = "InvokeCmd";
 
         /*
             // generates code like:
@@ -63,7 +63,9 @@ namespace Mirror.Weaver
 
             // write all the arguments that the user passed to the Cmd call
             if (!NetworkBehaviourProcessor.WriteArguments(cmdWorker, md, false))
+            {
                 return null;
+            }
 
             string cmdName = md.Name;
             int index = cmdName.IndexOf(CmdPrefix);
@@ -115,7 +117,9 @@ namespace Mirror.Weaver
             cmdWorker.Append(cmdWorker.Create(OpCodes.Castclass, td));
 
             if (!NetworkBehaviourProcessor.ProcessNetworkReaderParameters(md, cmdWorker, false))
+            {
                 return null;
+            }
 
             // invoke actual command function
             cmdWorker.Append(cmdWorker.Create(OpCodes.Callvirt, cmdCallFunc));

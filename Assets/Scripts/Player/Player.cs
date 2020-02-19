@@ -44,7 +44,7 @@ public class Player : NetworkBehaviour
 
     /// <summary>The main camera</summary>
     [SerializeField]
-    private GameObject mainCamera = null;
+    private readonly GameObject mainCamera = null;
 
     /// <summary>The mobile UI</summary>
     private GameObject mobileUI = null;
@@ -69,7 +69,7 @@ public class Player : NetworkBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        Game.LoadSettings();
+        Data.LoadSettings();
     }
 
     /// <summary>Starts this instance.</summary>

@@ -19,26 +19,25 @@ namespace Mirror
         /// average out the last few results from Ping
         /// </summary>
         public static int PingWindowSize = 10;
-
-        static double lastPingTime;
+        private static double lastPingTime;
 
         // Date and time when the application started
-        static readonly Stopwatch stopwatch = new Stopwatch();
+        private static readonly Stopwatch stopwatch = new Stopwatch();
 
         static NetworkTime()
         {
             stopwatch.Start();
         }
 
-        static ExponentialMovingAverage _rtt = new ExponentialMovingAverage(10);
-        static ExponentialMovingAverage _offset = new ExponentialMovingAverage(10);
+        private static ExponentialMovingAverage _rtt = new ExponentialMovingAverage(10);
+        private static ExponentialMovingAverage _offset = new ExponentialMovingAverage(10);
 
         // the true offset guaranteed to be in this range
-        static double offsetMin = double.MinValue;
-        static double offsetMax = double.MaxValue;
+        private static double offsetMin = double.MinValue;
+        private static double offsetMax = double.MaxValue;
 
         // returns the clock time _in this system_
-        static double LocalTime()
+        private static double LocalTime()
         {
             return stopwatch.Elapsed.TotalSeconds;
         }
@@ -66,7 +65,10 @@ namespace Mirror
         // and time from the server
         internal static void OnServerPing(NetworkConnection conn, NetworkPingMessage msg)
         {
-            if (LogFilter.Debug) Debug.Log("OnPingServerMessage  conn=" + conn);
+            if (LogFilter.Debug)
+            {
+                Debug.Log("OnPingServerMessage  conn=" + conn);
+            }
 
             NetworkPongMessage pongMsg = new NetworkPongMessage
             {

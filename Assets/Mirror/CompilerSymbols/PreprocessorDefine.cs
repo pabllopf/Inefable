@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Mirror
 {
-    static class PreprocessorDefine
+    internal static class PreprocessorDefine
     {
         /// <summary>
         /// Add define symbols as soon as Unity gets done compiling.

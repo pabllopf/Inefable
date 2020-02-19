@@ -2,9 +2,9 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Chest.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using Mirror;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 
 /// <summary>Manage a chest of the game.</summary>
@@ -27,7 +27,7 @@ public class Chest : MonoBehaviour
 
     /// <summary>The items</summary>
     [SerializeField]
-    private readonly List<GameObject> items = new List<GameObject>();
+    private List<GameObject> items = new List<GameObject>();
 
     /// <summary>The need key</summary>
     private GameObject needKey = null;
@@ -110,7 +110,7 @@ public class Chest : MonoBehaviour
         needKey.SetActive(false);
         animator.SetTrigger(Open);
         isOpened = true;
-        Audio.Play(Sound.TakeItem, audioSource);
+        Sound.Play(SoundClip.TakeItem, audioSource);
         SpawnObjects();
         return;
     }

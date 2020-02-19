@@ -24,18 +24,19 @@ namespace Mirror
             OP_REMOVE
         }
 
-        struct Change
+        private struct Change
         {
             internal Operation operation;
             internal T item;
         }
 
-        readonly List<Change> changes = new List<Change>();
+        private readonly List<Change> changes = new List<Change>();
+
         // how many changes we need to ignore
         // this is needed because when we initialize the list,
         // we might later receive changes that have already been applied
         // so we need to skip them
-        int changesAhead;
+        private int changesAhead;
 
         protected SyncSet(ISet<T> objects)
         {
@@ -43,15 +44,21 @@ namespace Mirror
         }
 
         protected virtual void SerializeItem(NetworkWriter writer, T item) { }
-        protected virtual T DeserializeItem(NetworkReader reader) => default;
+        protected virtual T DeserializeItem(NetworkReader reader)
+        {
+            return default;
+        }
 
         public bool IsDirty => changes.Count > 0;
 
         // throw away all the changes
         // this should be called after a successfull sync
-        public void Flush() => changes.Clear();
+        public void Flush()
+        {
+            changes.Clear();
+        }
 
-        void AddOperation(Operation op, T item)
+        private void AddOperation(Operation op, T item)
         {
             if (IsReadOnly)
             {
@@ -69,7 +76,10 @@ namespace Mirror
             Callback?.Invoke(op, item);
         }
 
-        void AddOperation(Operation op) => AddOperation(op, default);
+        private void AddOperation(Operation op)
+        {
+            AddOperation(op, default);
+        }
 
         public void OnSerializeAll(NetworkWriter writer)
         {
@@ -215,9 +225,15 @@ namespace Mirror
             AddOperation(Operation.OP_CLEAR);
         }
 
-        public bool Contains(T item) => objects.Contains(item);
+        public bool Contains(T item)
+        {
+            return objects.Contains(item);
+        }
 
-        public void CopyTo(T[] array, int index) => objects.CopyTo(array, index);
+        public void CopyTo(T[] array, int index)
+        {
+            objects.CopyTo(array, index);
+        }
 
         public bool Remove(T item)
         {
@@ -229,9 +245,15 @@ namespace Mirror
             return false;
         }
 
-        public IEnumerator<T> GetEnumerator() => objects.GetEnumerator();
+        public IEnumerator<T> GetEnumerator()
+        {
+            return objects.GetEnumerator();
+        }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         public void ExceptWith(IEnumerable<T> other)
         {
@@ -261,7 +283,7 @@ namespace Mirror
             }
         }
 
-        void IntersectWithSet(ISet<T> otherSet)
+        private void IntersectWithSet(ISet<T> otherSet)
         {
             List<T> elements = new List<T>(objects);
 
@@ -274,17 +296,35 @@ namespace Mirror
             }
         }
 
-        public bool IsProperSubsetOf(IEnumerable<T> other) => objects.IsProperSubsetOf(other);
+        public bool IsProperSubsetOf(IEnumerable<T> other)
+        {
+            return objects.IsProperSubsetOf(other);
+        }
 
-        public bool IsProperSupersetOf(IEnumerable<T> other) => objects.IsProperSupersetOf(other);
+        public bool IsProperSupersetOf(IEnumerable<T> other)
+        {
+            return objects.IsProperSupersetOf(other);
+        }
 
-        public bool IsSubsetOf(IEnumerable<T> other) => objects.IsSubsetOf(other);
+        public bool IsSubsetOf(IEnumerable<T> other)
+        {
+            return objects.IsSubsetOf(other);
+        }
 
-        public bool IsSupersetOf(IEnumerable<T> other) => objects.IsSupersetOf(other);
+        public bool IsSupersetOf(IEnumerable<T> other)
+        {
+            return objects.IsSupersetOf(other);
+        }
 
-        public bool Overlaps(IEnumerable<T> other) => objects.Overlaps(other);
+        public bool Overlaps(IEnumerable<T> other)
+        {
+            return objects.Overlaps(other);
+        }
 
-        public bool SetEquals(IEnumerable<T> other) => objects.SetEquals(other);
+        public bool SetEquals(IEnumerable<T> other)
+        {
+            return objects.SetEquals(other);
+        }
 
         public void SymmetricExceptWith(IEnumerable<T> other)
         {
@@ -321,7 +361,10 @@ namespace Mirror
         protected SyncHashSet(IEqualityComparer<T> comparer = null) : base(new HashSet<T>(comparer ?? EqualityComparer<T>.Default)) { }
 
         // allocation free enumerator
-        public new HashSet<T>.Enumerator GetEnumerator() => ((HashSet<T>)objects).GetEnumerator();
+        public new HashSet<T>.Enumerator GetEnumerator()
+        {
+            return ((HashSet<T>)objects).GetEnumerator();
+        }
     }
 
     public abstract class SyncSortedSet<T> : SyncSet<T>
@@ -329,6 +372,9 @@ namespace Mirror
         protected SyncSortedSet(IComparer<T> comparer = null) : base(new SortedSet<T>(comparer ?? Comparer<T>.Default)) { }
 
         // allocation free enumerator
-        public new SortedSet<T>.Enumerator GetEnumerator() => ((SortedSet<T>)objects).GetEnumerator();
+        public new SortedSet<T>.Enumerator GetEnumerator()
+        {
+            return ((SortedSet<T>)objects).GetEnumerator();
+        }
     }
 }

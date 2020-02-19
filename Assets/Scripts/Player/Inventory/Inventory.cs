@@ -14,10 +14,10 @@ public class Inventory : MonoBehaviour
     private const string ShowUI = "ShowUI";
 
     /// <summary>The use item</summary>
-    private const Sound UseItemSound = Sound.TakeCoin;
+    private const SoundClip UseItemSound = SoundClip.TakeCoin;
 
     /// <summary>The add item sound</summary>
-    private const Sound AddItemSound = Sound.TakeCoin;
+    private const SoundClip AddItemSound = SoundClip.TakeCoin;
 
     /// <summary>The slots</summary>
     private List<Image> inventory = new List<Image>();
@@ -33,22 +33,6 @@ public class Inventory : MonoBehaviour
     /// <c>true</c> if this instance has space; otherwise, <c>false</c>.</value>
     public bool HasSpace => inventory.Any(slot => slot.sprite == null) ? true : false;
 
-    /// <summary>Gets or sets the animator.</summary>
-    /// <value>The animator.</value>
-    private Animator Animator 
-    {
-        get => animator;
-        set => animator = value;
-    }
-
-    /// <summary>Gets or sets the audio source.</summary>
-    /// <value>The audio source.</value>
-    private AudioSource AudioSource 
-    {
-        get => audioSource;
-        set => audioSource = value;
-    }
-
     /// <summary>Adds the item.</summary>
     /// <param name="item">The item.</param>
     public void AddItem(IItem item)
@@ -61,21 +45,15 @@ public class Inventory : MonoBehaviour
         slot.sprite = item.GetIcon();
         slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Action(gameObject); });
 
-        Game.Save(slot.tag).InFolder("Inventory").WithName("Slot" + inventory.IndexOf(slot));
-        Audio.Play(AddItemSound, AudioSource);
-    }
-
-    /// <summary>Awakes this instance.</summary>
-    private void Awake()
-    {
-        Game.LoadSettings();
+        Data.SaveVar(slot.tag).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
+        Sound.Play(AddItemSound, audioSource);
     }
 
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        AudioSource = GetComponent<AudioSource>();
-        Animator = transform.Find("Interface/Inventory").GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        animator = transform.Find("Interface/Inventory").GetComponent<Animator>();
 
         inventory = new List<Image>
         {
@@ -84,7 +62,7 @@ public class Inventory : MonoBehaviour
             transform.Find("Interface/Inventory/Slot3/Item").GetComponent<Image>()
         };
 
-        inventory.ForEach(i => LoadItem(i)); 
+        inventory.ForEach(i => LoadItem(i));
         inventory.FindAll(i => !i.sprite || i.CompareTag("0")).ForEach(i => i.gameObject.SetActive(false));
     }
 
@@ -128,16 +106,16 @@ public class Inventory : MonoBehaviour
             inventory[position].sprite = null;
             inventory[position].gameObject.SetActive(false);
 
-            Audio.Play(UseItemSound, AudioSource);
-            Game.Save("0").InFolder("Inventory").WithName("Slot" + position);
+            Sound.Play(UseItemSound, audioSource);
+            Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
         }
     }
 
     /// <summary>Loads the item.</summary>
     /// <param name="image">The image.</param>
-    private void LoadItem(Image image) 
+    private void LoadItem(Image image)
     {
-        string slot = Game.Load("Slot" + inventory.IndexOf(image)).OfFolder("Inventory").String;
+        string slot = Data.LoadVar("Slot" + inventory.IndexOf(image)).FromFolder("Inventory").String;
         if (!slot.Equals("0"))
         {
             image.tag = slot;

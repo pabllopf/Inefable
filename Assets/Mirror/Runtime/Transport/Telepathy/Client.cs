@@ -8,8 +8,8 @@ namespace Telepathy
     public class Client : Common
     {
         public TcpClient client;
-        Thread receiveThread;
-        Thread sendThread;
+        private Thread receiveThread;
+        private Thread sendThread;
 
         // TcpClient.Connected doesn't check if socket != null, which
         // results in NullReferenceExceptions if connection was closed.
@@ -30,21 +30,21 @@ namespace Telepathy
         // => bools are atomic according to
         //    https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables
         //    made volatile so the compiler does not reorder access to it
-        volatile bool _Connecting;
+        private bool _Connecting;
         public bool Connecting => _Connecting;
 
         // send queue
         // => SafeQueue is twice as fast as ConcurrentQueue, see SafeQueue.cs!
-        SafeQueue<byte[]> sendQueue = new SafeQueue<byte[]>();
+        private readonly SafeQueue<byte[]> sendQueue = new SafeQueue<byte[]>();
 
         // ManualResetEvent to wake up the send thread. better than Thread.Sleep
         // -> call Set() if everything was sent
         // -> call Reset() if there is something to send again
         // -> call WaitOne() to block until Reset was called
-        ManualResetEvent sendPending = new ManualResetEvent(false);
+        private readonly ManualResetEvent sendPending = new ManualResetEvent(false);
 
         // the thread function
-        void ReceiveThreadFunction(string ip, int port)
+        private void ReceiveThreadFunction(string ip, int port)
         {
             // absolutely must wrap with try/catch, otherwise thread
             // exceptions are silent
@@ -60,8 +60,10 @@ namespace Telepathy
                 client.SendTimeout = SendTimeout;
 
                 // start send thread only after connected
-                sendThread = new Thread(() => { SendLoop(0, client, sendQueue, sendPending); });
-                sendThread.IsBackground = true;
+                sendThread = new Thread(() => { SendLoop(0, client, sendQueue, sendPending); })
+                {
+                    IsBackground = true
+                };
                 sendThread.Start();
 
                 // run the receive loop
@@ -112,7 +114,10 @@ namespace Telepathy
         public void Connect(string ip, int port)
         {
             // not if already started
-            if (Connecting || Connected) return;
+            if (Connecting || Connected)
+            {
+                return;
+            }
 
             // We are connecting from now until Connect succeeds or fails
             _Connecting = true;
@@ -132,8 +137,10 @@ namespace Telepathy
             // => the trick is to clear the internal IPv4 socket so that Connect
             //    resolves the hostname and creates either an IPv4 or an IPv6
             //    socket as needed (see TcpClient source)
-            client = new TcpClient(); // creates IPv4 socket
-            client.Client = null; // clear internal IPv4 socket until Connect()
+            client = new TcpClient
+            {
+                Client = null // clear internal IPv4 socket until Connect()
+            }; // creates IPv4 socket
 
             // clear old messages in queue, just to be sure that the caller
             // doesn't receive data from last time and gets out of sync.
@@ -148,8 +155,10 @@ namespace Telepathy
             //    too long, which is especially good in games
             // -> this way we don't async client.BeginConnect, which seems to
             //    fail sometimes if we connect too many clients too fast
-            receiveThread = new Thread(() => { ReceiveThreadFunction(ip, port); });
-            receiveThread.IsBackground = true;
+            receiveThread = new Thread(() => { ReceiveThreadFunction(ip, port); })
+            {
+                IsBackground = true
+            };
             receiveThread.Start();
         }
 

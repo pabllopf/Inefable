@@ -6,7 +6,7 @@ namespace Mirror
 {
     // a server's connection TO a LocalClient.
     // sending messages on this connection causes the client's handler function to be invoked directly
-    class ULocalConnectionToClient : NetworkConnectionToClient
+    internal class ULocalConnectionToClient : NetworkConnectionToClient
     {
         internal ULocalConnectionToServer connectionToServer;
 

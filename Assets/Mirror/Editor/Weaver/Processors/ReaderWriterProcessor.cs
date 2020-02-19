@@ -1,6 +1,6 @@
 using Mono.CecilX;
-using UnityEditor.Compilation;
 using System.IO;
+using UnityEditor.Compilation;
 
 namespace Mirror.Weaver
 {
@@ -35,7 +35,7 @@ namespace Mirror.Weaver
             ProcessAssemblyClasses(CurrentAssembly, CurrentAssembly);
         }
 
-        static void ProcessAssemblyClasses(AssemblyDefinition CurrentAssembly, AssemblyDefinition assembly)
+        private static void ProcessAssemblyClasses(AssemblyDefinition CurrentAssembly, AssemblyDefinition assembly)
         {
             foreach (TypeDefinition klass in assembly.MainModule.Types)
             {
@@ -49,44 +49,60 @@ namespace Mirror.Weaver
             }
         }
 
-        static void LoadWriters(AssemblyDefinition currentAssembly, TypeDefinition klass)
+        private static void LoadWriters(AssemblyDefinition currentAssembly, TypeDefinition klass)
         {
             // register all the writers in this class.  Skip the ones with wrong signature
             foreach (MethodDefinition method in klass.Methods)
             {
                 if (method.Parameters.Count != 2)
+                {
                     continue;
+                }
 
                 if (method.Parameters[0].ParameterType.FullName != "Mirror.NetworkWriter")
+                {
                     continue;
+                }
 
                 if (method.ReturnType.FullName != "System.Void")
+                {
                     continue;
+                }
 
                 if (method.GetCustomAttribute("System.Runtime.CompilerServices.ExtensionAttribute") == null)
+                {
                     continue;
+                }
 
                 TypeReference dataType = method.Parameters[1].ParameterType;
                 Writers.Register(dataType, currentAssembly.MainModule.ImportReference(method));
             }
         }
 
-        static void LoadReaders(AssemblyDefinition currentAssembly, TypeDefinition klass)
+        private static void LoadReaders(AssemblyDefinition currentAssembly, TypeDefinition klass)
         {
             // register all the reader in this class.  Skip the ones with wrong signature
             foreach (MethodDefinition method in klass.Methods)
             {
                 if (method.Parameters.Count != 1)
+                {
                     continue;
+                }
 
                 if (method.Parameters[0].ParameterType.FullName != "Mirror.NetworkReader")
+                {
                     continue;
+                }
 
                 if (method.ReturnType.FullName == "System.Void")
+                {
                     continue;
+                }
 
                 if (method.GetCustomAttribute("System.Runtime.CompilerServices.ExtensionAttribute") == null)
+                {
                     continue;
+                }
 
                 Readers.Register(method.ReturnType, currentAssembly.MainModule.ImportReference(method));
             }

@@ -38,8 +38,8 @@ public class Shield : MonoBehaviour
         marker.text = shield.ToString();
         shieldObj.SetActive((shield > 0) ? true : false);
 
-        Audio.Play(Sound.TakeItem, audioSource);
-        Game.Save(shield).InFolder("Player").WithName("Shield");
+        Sound.Play(SoundClip.TakeItem, audioSource);
+        //Data.Save(shield).InFolder("Player").WithName("Shield");
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -53,8 +53,8 @@ public class Shield : MonoBehaviour
 
         StartCoroutine(TakeAHitEffect(TimeOfEffect));
 
-        Audio.Play(Sound.TakeItem, audioSource);
-        Game.Save(shield).InFolder("Player").WithName("Shield");
+        Sound.Play(SoundClip.TakeItem, audioSource);
+        // Data.Save(shield).InFolder("Player").WithName("Shield");
     }
 
     /// <summary>Awakes this instance.</summary>
@@ -64,7 +64,7 @@ public class Shield : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        shield = Game.Load("Shield").OfFolder("Player").Int;
+        //shield = Data.LoadVar("Shield").OfFolder("Player").Int;
 
         bar = transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
         bar.size = (float)shield * 2 / 100;

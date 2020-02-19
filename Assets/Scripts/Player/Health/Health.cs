@@ -40,8 +40,8 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        Audio.Play(Sound.TakeItem, audioSource);
-        Game.Save(health).InFolder("Player").WithName("Health");
+        Sound.Play(SoundClip.TakeItem, audioSource);
+        //Data.Save(health).InFolder("Player").WithName("Health");
     }
 
     /// <summary>Treat full.</summary>
@@ -51,8 +51,8 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        Audio.Play(Sound.TakeItem, audioSource);
-        Game.Save(health).InFolder("Player").WithName("Health");
+        Sound.Play(SoundClip.TakeItem, audioSource);
+        //Data.Save(health).InFolder("Player").WithName("Health");
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -65,8 +65,8 @@ public class Health : MonoBehaviour
 
         StartCoroutine(TakeAHitEffect(TimeOfEffect));
 
-        Audio.Play(Sound.TakeItem, audioSource);
-        Game.Save(health).InFolder("Player").WithName("Health");
+        Sound.Play(SoundClip.TakeItem, audioSource);
+        //Data.Save(health).InFolder("Player").WithName("Health");
     }
 
     /// <summary>Awakes this instance.</summary>
@@ -75,7 +75,7 @@ public class Health : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
-        health = Game.Load("Health").OfFolder("Player").Int;
+        //health = Data.LoadVar("Health").OfFolder("Player").Int;
         health = (health == 0) ? 100 : health;
 
         bar = transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();

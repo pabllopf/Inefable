@@ -8,9 +8,8 @@ namespace Mirror
     [CanEditMultipleObjects]
     public class NetworkManagerEditor : Editor
     {
-        SerializedProperty spawnListProperty;
-
-        ReorderableList spawnList;
+        private SerializedProperty spawnListProperty;
+        private ReorderableList spawnList;
 
         protected NetworkManager networkManager;
 
@@ -48,7 +47,7 @@ namespace Mirror
             }
         }
 
-        static void DrawHeader(Rect headerRect)
+        private static void DrawHeader(Rect headerRect)
         {
             GUI.Label(headerRect, "Registered Spawnable Prefabs:");
         }

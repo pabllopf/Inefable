@@ -7,7 +7,7 @@ namespace Ninja.WebSockets
     /// <summary>
     /// Ping Pong Manager used to facilitate ping pong WebSocket messages
     /// </summary>
-    interface IPingPongManager
+    internal interface IPingPongManager
     {
         /// <summary>
         /// Raised when a Pong frame is received

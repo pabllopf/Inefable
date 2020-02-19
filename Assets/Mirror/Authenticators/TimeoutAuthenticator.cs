@@ -25,25 +25,35 @@ namespace Mirror.Authenticators
         {
             authenticator.OnClientAuthenticate(conn);
             if (timeout > 0)
+            {
                 StartCoroutine(BeginAuthentication(conn));
+            }
         }
 
         public override void OnServerAuthenticate(NetworkConnection conn)
         {
             authenticator.OnServerAuthenticate(conn);
             if (timeout > 0)
+            {
                 StartCoroutine(BeginAuthentication(conn));
+            }
         }
 
-        IEnumerator BeginAuthentication(NetworkConnection conn)
+        private IEnumerator BeginAuthentication(NetworkConnection conn)
         {
-            if (LogFilter.Debug) Debug.Log($"Authentication countdown started {conn} {timeout}");
+            if (LogFilter.Debug)
+            {
+                Debug.Log($"Authentication countdown started {conn} {timeout}");
+            }
 
             yield return new WaitForSecondsRealtime(timeout);
 
             if (!conn.isAuthenticated)
             {
-                if (LogFilter.Debug) Debug.Log($"Authentication Timeout {conn}");
+                if (LogFilter.Debug)
+                {
+                    Debug.Log($"Authentication Timeout {conn}");
+                }
 
                 conn.Disconnect();
             }

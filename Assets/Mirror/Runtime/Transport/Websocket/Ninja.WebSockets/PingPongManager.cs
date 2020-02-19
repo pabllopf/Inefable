@@ -20,12 +20,12 @@
 // THE SOFTWARE.
 // ---------------------------------------------------------------------
 
+using Ninja.WebSockets.Internal;
 using System;
 using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Ninja.WebSockets.Internal;
 
 namespace Ninja.WebSockets
 {
@@ -34,13 +34,13 @@ namespace Ninja.WebSockets
     /// </summary>
     public class PingPongManager : IPingPongManager
     {
-        readonly WebSocketImplementation _webSocket;
-        readonly Guid _guid;
-        readonly TimeSpan _keepAliveInterval;
-        readonly Task _pingTask;
-        readonly CancellationToken _cancellationToken;
-        Stopwatch _stopwatch;
-        long _pingSentTicks;
+        private readonly WebSocketImplementation _webSocket;
+        private readonly Guid _guid;
+        private readonly TimeSpan _keepAliveInterval;
+        private readonly Task _pingTask;
+        private readonly CancellationToken _cancellationToken;
+        private readonly Stopwatch _stopwatch;
+        private long _pingSentTicks;
 
         /// <summary>
         /// Raised when a Pong frame is received
@@ -64,7 +64,10 @@ namespace Ninja.WebSockets
             WebSocketImplementation webSocketImpl = webSocket as WebSocketImplementation;
             _webSocket = webSocketImpl;
             if (_webSocket == null)
+            {
                 throw new InvalidCastException("Cannot cast WebSocket to an instance of WebSocketImplementation. Please use the web socket factories to create a web socket");
+            }
+
             _guid = guid;
             _keepAliveInterval = keepAliveInterval;
             _cancellationToken = cancellationToken;
@@ -92,7 +95,7 @@ namespace Ninja.WebSockets
             Pong?.Invoke(this, e);
         }
 
-        async Task PingForever()
+        private async Task PingForever()
         {
             Events.Log.PingPongManagerStarted(_guid, (int)_keepAliveInterval.TotalSeconds);
 
@@ -130,7 +133,7 @@ namespace Ninja.WebSockets
             Events.Log.PingPongManagerEnded(_guid);
         }
 
-        void WebSocketImpl_Pong(object sender, PongEventArgs e)
+        private void WebSocketImpl_Pong(object sender, PongEventArgs e)
         {
             _pingSentTicks = 0;
             OnPong(e);

@@ -131,9 +131,6 @@ public class Multiplayer : MonoBehaviour
         GameObject.Find("Interface/Multiplayer/Host").GetComponent<Button>().onClick.AddListener(() => { HostGame(); });
         GameObject.Find("Interface/Multiplayer/FindServers").GetComponent<Button>().onClick.AddListener(() => { FindServers(); });
         GameObject.Find("Interface/Multiplayer/FindLocalMatch").GetComponent<Button>().onClick.AddListener(() => { FindLocalMacth(); });
-
-
-
     }
 
     private void Update()

@@ -50,7 +50,10 @@ namespace Mirror.Websocket
         }
 
         // client
-        public override bool ClientConnected() => client.IsConnected;
+        public override bool ClientConnected()
+        {
+            return client.IsConnected;
+        }
 
         public override void ClientConnect(string host)
         {
@@ -67,12 +70,16 @@ namespace Mirror.Websocket
         public override void ClientConnect(Uri uri)
         {
             if (uri.Scheme != Scheme && uri.Scheme != SecureScheme)
+            {
                 throw new ArgumentException($"Invalid url {uri}, use {Scheme}://host:port or {SecureScheme}://host:port instead", nameof(uri));
+            }
 
             if (uri.IsDefaultPort)
             {
-                UriBuilder uriBuilder = new UriBuilder(uri);
-                uriBuilder.Port = port;
+                UriBuilder uriBuilder = new UriBuilder(uri)
+                {
+                    Port = port
+                };
                 uri = uriBuilder.Uri;
             }
 
@@ -85,20 +92,28 @@ namespace Mirror.Websocket
             return true;
         }
 
-        public override void ClientDisconnect() => client.Disconnect();
+        public override void ClientDisconnect()
+        {
+            client.Disconnect();
+        }
 
         public override Uri ServerUri()
         {
-            UriBuilder builder = new UriBuilder();
-            builder.Scheme = Secure? SecureScheme : Scheme;
-            builder.Host = Dns.GetHostName();
-            builder.Port = port;
+            UriBuilder builder = new UriBuilder
+            {
+                Scheme = Secure ? SecureScheme : Scheme,
+                Host = Dns.GetHostName(),
+                Port = port
+            };
             return builder.Uri;
         }
 
 
         // server
-        public override bool ServerActive() => server.Active;
+        public override bool ServerActive()
+        {
+            return server.Active;
+        }
 
         public override void ServerStart()
         {
@@ -123,7 +138,10 @@ namespace Mirror.Websocket
         {
             // send to all
             foreach (int connectionId in connectionIds)
+            {
                 server.Send(connectionId, segment);
+            }
+
             return true;
         }
 
@@ -136,7 +154,10 @@ namespace Mirror.Websocket
         {
             return server.GetClientAddress(connectionId);
         }
-        public override void ServerStop() => server.Stop();
+        public override void ServerStop()
+        {
+            server.Stop();
+        }
 
         // common
         public override void Shutdown()
