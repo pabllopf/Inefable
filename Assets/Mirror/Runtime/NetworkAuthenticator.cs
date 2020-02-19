@@ -73,7 +73,7 @@ namespace Mirror
 
         #endregion
 
-        private void OnValidate()
+        void OnValidate()
         {
 #if UNITY_EDITOR
             // automatically assign NetworkManager field if we add this to NetworkManager

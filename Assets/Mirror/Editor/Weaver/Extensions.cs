@@ -1,5 +1,5 @@
-using Mono.CecilX;
 using System;
+using Mono.CecilX;
 
 namespace Mirror.Weaver
 {
@@ -8,9 +8,7 @@ namespace Mirror.Weaver
         public static bool IsDerivedFrom(this TypeDefinition td, TypeReference baseClass)
         {
             if (!td.IsClass)
-            {
                 return false;
-            }
 
             // are ANY parent classes of baseClass?
             TypeReference parent = td.BaseType;
@@ -48,9 +46,7 @@ namespace Mirror.Weaver
             foreach (FieldDefinition field in td.Fields)
             {
                 if (!field.IsStatic)
-                {
                     return field.FieldType;
-                }
             }
             throw new ArgumentException($"Invalid enum {td.FullName}");
         }
@@ -63,9 +59,7 @@ namespace Mirror.Weaver
                 foreach (InterfaceImplementation iface in typedef.Interfaces)
                 {
                     if (iface.InterfaceType.FullName == baseInterface.FullName)
-                    {
                         return true;
-                    }
                 }
 
                 try
@@ -88,10 +82,7 @@ namespace Mirror.Weaver
         {
             if ((tr.IsArray && ((ArrayType)tr).ElementType.IsArray) || // jagged array
                 (tr.IsArray && ((ArrayType)tr).Rank > 1)) // multidimensional array
-            {
                 return false;
-            }
-
             return true;
         }
 
@@ -138,14 +129,10 @@ namespace Mirror.Weaver
             };
 
             foreach (ParameterDefinition parameter in self.Parameters)
-            {
                 reference.Parameters.Add(new ParameterDefinition(parameter.ParameterType));
-            }
 
             foreach (GenericParameter generic_parameter in self.GenericParameters)
-            {
                 reference.GenericParameters.Add(new GenericParameter(generic_parameter.Name, reference));
-            }
 
             return Weaver.CurrentAssembly.MainModule.ImportReference(reference);
         }
@@ -155,9 +142,7 @@ namespace Mirror.Weaver
             foreach (CustomAttribute ca in method.CustomAttributes)
             {
                 if (ca.AttributeType.FullName == attributeName)
-                {
                     return ca;
-                }
             }
             return null;
         }

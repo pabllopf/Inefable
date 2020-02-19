@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Mirror
 {
@@ -21,10 +21,11 @@ namespace Mirror
         public bool forceHidden;
 
         public static readonly Dictionary<string, HashSet<NetworkIdentity>> sceneCheckerObjects = new Dictionary<string, HashSet<NetworkIdentity>>();
-        private string currentScene;
+
+        string currentScene;
 
         [ServerCallback]
-        private void Awake()
+        void Awake()
         {
             currentScene = gameObject.scene.name;
         }
@@ -32,20 +33,16 @@ namespace Mirror
         public override void OnStartServer()
         {
             if (!sceneCheckerObjects.ContainsKey(currentScene))
-            {
                 sceneCheckerObjects.Add(currentScene, new HashSet<NetworkIdentity>());
-            }
 
             sceneCheckerObjects[currentScene].Add(netIdentity);
         }
 
         [ServerCallback]
-        private void Update()
+        void Update()
         {
             if (currentScene == gameObject.scene.name)
-            {
                 return;
-            }
 
             // This object is in a new scene so observers in the prior scene
             // and the new scene need to rebuild their respective observers lists.
@@ -61,9 +58,7 @@ namespace Mirror
 
             // Make sure this new scene is in the dictionary
             if (!sceneCheckerObjects.ContainsKey(currentScene))
-            {
                 sceneCheckerObjects.Add(currentScene, new HashSet<NetworkIdentity>());
-            }
 
             // Add this object to the hashset of the new scene
             sceneCheckerObjects[currentScene].Add(netIdentity);
@@ -72,23 +67,17 @@ namespace Mirror
             RebuildSceneObservers();
         }
 
-        private void RebuildSceneObservers()
+        void RebuildSceneObservers()
         {
             foreach (NetworkIdentity networkIdentity in sceneCheckerObjects[currentScene])
-            {
                 if (networkIdentity != null)
-                {
                     networkIdentity.RebuildObservers(false);
-                }
-            }
         }
 
         public override bool OnCheckObserver(NetworkConnection conn)
         {
             if (forceHidden)
-            {
                 return false;
-            }
 
             return conn.identity.gameObject.scene == gameObject.scene;
         }
@@ -99,18 +88,12 @@ namespace Mirror
         {
             // If forceHidden then return true without adding any observers.
             if (forceHidden)
-            {
                 return true;
-            }
 
             // Add everything in the hashset for this object's current scene
             foreach (NetworkIdentity networkIdentity in sceneCheckerObjects[currentScene])
-            {
                 if (networkIdentity != null && networkIdentity.connectionToClient != null)
-                {
                     observers.Add(networkIdentity.connectionToClient);
-                }
-            }
 
             return true;
         }
@@ -125,9 +108,7 @@ namespace Mirror
         public override void OnSetHostVisibility(bool visible)
         {
             foreach (Renderer rend in GetComponentsInChildren<Renderer>())
-            {
                 rend.enabled = visible;
-            }
         }
     }
 }

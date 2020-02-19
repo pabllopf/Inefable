@@ -31,24 +31,23 @@ namespace Mirror
         public Animator animator;
 
         // Note: not an object[] array because otherwise initialization is real annoying
-        private int[] lastIntParameters;
-        private float[] lastFloatParameters;
-        private bool[] lastBoolParameters;
-        private AnimatorControllerParameter[] parameters;
-        private int[] animationHash; // multiple layers
-        private int[] transitionHash;
-        private float sendTimer;
+        int[] lastIntParameters;
+        float[] lastFloatParameters;
+        bool[] lastBoolParameters;
+        AnimatorControllerParameter[] parameters;
 
-        private bool sendMessagesAllowed
+        int[] animationHash; // multiple layers
+        int[] transitionHash;
+        float sendTimer;
+
+        bool sendMessagesAllowed
         {
             get
             {
                 if (isServer)
                 {
                     if (!clientAuthority)
-                    {
                         return true;
-                    }
 
                     // This is a special case where we have client authority but we have not assigned the client who has
                     // authority over it, no animator data will be sent over the network by the server.
@@ -56,16 +55,14 @@ namespace Mirror
                     // So we check here for a connectionToClient and if it is null we will
                     // let the server send animation data until we receive an owner.
                     if (netIdentity != null && netIdentity.connectionToClient == null)
-                    {
                         return true;
-                    }
                 }
 
                 return (hasAuthority && clientAuthority);
             }
         }
 
-        private void Awake()
+        void Awake()
         {
             // store the animator parameters in a variable - the "Animator.parameters" getter allocates
             // a new parameter array every time it is accessed so we should avoid doing it in a loop
@@ -78,18 +75,18 @@ namespace Mirror
             transitionHash = new int[animator.layerCount];
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
             if (!sendMessagesAllowed)
-            {
                 return;
-            }
 
             CheckSendRate();
 
             for (int i = 0; i < animator.layerCount; i++)
             {
-                if (!CheckAnimStateChanged(out int stateHash, out float normalizedTime, i))
+                int stateHash;
+                float normalizedTime;
+                if (!CheckAnimStateChanged(out stateHash, out normalizedTime, i))
                 {
                     continue;
                 }
@@ -102,7 +99,7 @@ namespace Mirror
             }
         }
 
-        private bool CheckAnimStateChanged(out int stateHash, out float normalizedTime, int layerId)
+        bool CheckAnimStateChanged(out int stateHash, out float normalizedTime, int layerId)
         {
             stateHash = 0;
             normalizedTime = 0;
@@ -137,7 +134,7 @@ namespace Mirror
             return false;
         }
 
-        private void CheckSendRate()
+        void CheckSendRate()
         {
             if (sendMessagesAllowed && syncInterval > 0 && sendTimer < Time.time)
             {
@@ -152,7 +149,7 @@ namespace Mirror
             }
         }
 
-        private void SendAnimationMessage(int stateHash, float normalizedTime, int layerId, byte[] parameters)
+        void SendAnimationMessage(int stateHash, float normalizedTime, int layerId, byte[] parameters)
         {
             if (isServer)
             {
@@ -164,7 +161,7 @@ namespace Mirror
             }
         }
 
-        private void SendAnimationParametersMessage(byte[] parameters)
+        void SendAnimationParametersMessage(byte[] parameters)
         {
             if (isServer)
             {
@@ -176,12 +173,10 @@ namespace Mirror
             }
         }
 
-        private void HandleAnimMsg(int stateHash, float normalizedTime, int layerId, NetworkReader reader)
+        void HandleAnimMsg(int stateHash, float normalizedTime, int layerId, NetworkReader reader)
         {
             if (hasAuthority && clientAuthority)
-            {
                 return;
-            }
 
             // usually transitions will be triggered by parameters, if not, play anims directly.
             // NOTE: this plays "animations", not transitions, so any transitions will be skipped.
@@ -194,27 +189,25 @@ namespace Mirror
             ReadParameters(reader);
         }
 
-        private void HandleAnimParamsMsg(NetworkReader reader)
+        void HandleAnimParamsMsg(NetworkReader reader)
         {
             if (hasAuthority && clientAuthority)
-            {
                 return;
-            }
 
             ReadParameters(reader);
         }
 
-        private void HandleAnimTriggerMsg(int hash)
+        void HandleAnimTriggerMsg(int hash)
         {
             animator.SetTrigger(hash);
         }
 
-        private void HandleAnimResetTriggerMsg(int hash)
+        void HandleAnimResetTriggerMsg(int hash)
         {
             animator.ResetTrigger(hash);
         }
 
-        private ulong NextDirtyBits()
+        ulong NextDirtyBits()
         {
             ulong dirtyBits = 0;
             for (int i = 0; i < parameters.Length; i++)
@@ -256,16 +249,14 @@ namespace Mirror
             return dirtyBits;
         }
 
-        private bool WriteParameters(NetworkWriter writer, bool forceAll = false)
+        bool WriteParameters(NetworkWriter writer, bool forceAll = false)
         {
             ulong dirtyBits = forceAll ? (~0ul) : NextDirtyBits();
             writer.WritePackedUInt64(dirtyBits);
             for (int i = 0; i < parameters.Length; i++)
             {
                 if ((dirtyBits & (1ul << i)) == 0)
-                {
                     continue;
-                }
 
                 AnimatorControllerParameter par = parameters[i];
                 if (par.type == AnimatorControllerParameterType.Int)
@@ -287,15 +278,13 @@ namespace Mirror
             return dirtyBits != 0;
         }
 
-        private void ReadParameters(NetworkReader reader)
+        void ReadParameters(NetworkReader reader)
         {
             ulong dirtyBits = reader.ReadPackedUInt64();
             for (int i = 0; i < parameters.Length; i++)
             {
                 if ((dirtyBits & (1ul << i)) == 0)
-                {
                     continue;
-                }
 
                 AnimatorControllerParameter par = parameters[i];
                 if (par.type == AnimatorControllerParameterType.Int)
@@ -408,9 +397,7 @@ namespace Mirror
                 }
 
                 if (ClientScene.readyConnection != null)
-                {
                     CmdOnAnimationTriggerServerMessage(hash);
-                }
             }
             else
             {
@@ -445,9 +432,7 @@ namespace Mirror
                 }
 
                 if (ClientScene.readyConnection != null)
-                {
                     CmdOnAnimationResetTriggerServerMessage(hash);
-                }
             }
             else
             {
@@ -464,12 +449,9 @@ namespace Mirror
         #region server message handlers
 
         [Command]
-        private void CmdOnAnimationServerMessage(int stateHash, float normalizedTime, int layerId, byte[] parameters)
+        void CmdOnAnimationServerMessage(int stateHash, float normalizedTime, int layerId, byte[] parameters)
         {
-            if (LogFilter.Debug)
-            {
-                Debug.Log("OnAnimationMessage for netId=" + netId);
-            }
+            if (LogFilter.Debug) Debug.Log("OnAnimationMessage for netId=" + netId);
 
             // handle and broadcast
             NetworkReader networkReader = NetworkReaderPool.GetReader(parameters);
@@ -480,7 +462,7 @@ namespace Mirror
         }
 
         [Command]
-        private void CmdOnAnimationParametersServerMessage(byte[] parameters)
+        void CmdOnAnimationParametersServerMessage(byte[] parameters)
         {
             // handle and broadcast
             NetworkReader networkReader = NetworkReaderPool.GetReader(parameters);
@@ -491,7 +473,7 @@ namespace Mirror
         }
 
         [Command]
-        private void CmdOnAnimationTriggerServerMessage(int hash)
+        void CmdOnAnimationTriggerServerMessage(int hash)
         {
             // handle and broadcast
             HandleAnimTriggerMsg(hash);
@@ -499,7 +481,7 @@ namespace Mirror
         }
 
         [Command]
-        private void CmdOnAnimationResetTriggerServerMessage(int hash)
+        void CmdOnAnimationResetTriggerServerMessage(int hash)
         {
             // handle and broadcast
             HandleAnimResetTriggerMsg(hash);
@@ -511,7 +493,7 @@ namespace Mirror
         #region client message handlers
 
         [ClientRpc]
-        private void RpcOnAnimationClientMessage(int stateHash, float normalizedTime, int layerId, byte[] parameters)
+        void RpcOnAnimationClientMessage(int stateHash, float normalizedTime, int layerId, byte[] parameters)
         {
             NetworkReader networkReader = NetworkReaderPool.GetReader(parameters);
             HandleAnimMsg(stateHash, normalizedTime, layerId, networkReader);
@@ -519,7 +501,7 @@ namespace Mirror
         }
 
         [ClientRpc]
-        private void RpcOnAnimationParametersClientMessage(byte[] parameters)
+        void RpcOnAnimationParametersClientMessage(byte[] parameters)
         {
             NetworkReader networkReader = NetworkReaderPool.GetReader(parameters);
             HandleAnimParamsMsg(networkReader);
@@ -527,13 +509,13 @@ namespace Mirror
         }
 
         [ClientRpc]
-        private void RpcOnAnimationTriggerClientMessage(int hash)
+        void RpcOnAnimationTriggerClientMessage(int hash)
         {
             HandleAnimTriggerMsg(hash);
         }
 
         [ClientRpc]
-        private void RpcOnAnimationResetTriggerClientMessage(int hash)
+        void RpcOnAnimationResetTriggerClientMessage(int hash)
         {
             HandleAnimResetTriggerMsg(hash);
         }

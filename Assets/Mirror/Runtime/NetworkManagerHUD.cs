@@ -15,7 +15,7 @@ namespace Mirror
     [HelpURL("https://mirror-networking.com/docs/Components/NetworkManagerHUD.html")]
     public class NetworkManagerHUD : MonoBehaviour
     {
-        private NetworkManager manager;
+        NetworkManager manager;
 
         /// <summary>
         /// Whether to show the default control HUD at runtime.
@@ -32,17 +32,15 @@ namespace Mirror
         /// </summary>
         public int offsetY;
 
-        private void Awake()
+        void Awake()
         {
             manager = GetComponent<NetworkManager>();
         }
 
-        private void OnGUI()
+        void OnGUI()
         {
             if (!showGUI)
-            {
                 return;
-            }
 
             GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, 215, 9999));
             if (!NetworkClient.isConnected && !NetworkServer.active)
@@ -75,10 +73,7 @@ namespace Mirror
                     }
                     else
                     {
-                        if (GUILayout.Button("LAN Server Only"))
-                        {
-                            manager.StartServer();
-                        }
+                        if (GUILayout.Button("LAN Server Only")) manager.StartServer();
                     }
                 }
                 else

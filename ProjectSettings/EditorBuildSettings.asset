@@ -11,37 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Online.unity
     guid: 820cccf593cebba42904e941b96ae97a
-  - enabled: 0
-    path: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
-    guid: 48478f4d522f96945b8396f376299d3a
-  - enabled: 0
-    path: Assets/Mirror/Examples/Room/Scenes/OnlineScene.unity
-    guid: d7a6763559b31854586c9e49916273ef
-  - enabled: 0
-    path: Assets/Mirror/Examples/Room/Scenes/OfflineScene.unity
-    guid: 9e6f14982412b2545a0911ebaaa46a23
-  - enabled: 0
-    path: Assets/Scenes/Foreword.unity
-    guid: bf327fd60cea14a43b99362fbef9bb02
-  - enabled: 0
-    path: Assets/Scenes/Start.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/House.unity
-    guid: 13a14ce0a8cbcb543bcca7c3d346a9fb
-  - enabled: 0
-    path: Assets/Scenes/Shop.unity
-    guid: 12a892db3631a5b44990042508449167
-  - enabled: 0
-    path: Assets/Scenes/Town.unity
-    guid: 97c9c5368a7ed1e42b8552c444151593
-  - enabled: 0
-    path: Assets/Scenes/Dungeon.unity
-    guid: 1a99c247be8ffef4299f45c7a42a3e1b
-  - enabled: 0
-    path: Assets/Scenes/Epilogue.unity
-    guid: cf664522955cfc943a78b13c493e80bc
-  - enabled: 0
-    path: Assets/Mirror/Examples/Discovery/Scenes/Scenee.unity
-    guid: 90fddc74fa21c423599167eb28b09dd1
   m_configObjects: {}

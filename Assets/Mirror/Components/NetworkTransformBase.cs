@@ -29,7 +29,7 @@ namespace Mirror
 
         // Is this a client with authority over this transform?
         // This component could be on the player object or any object that has been assigned authority to this client.
-        private bool isClientWithAuthority => hasAuthority && clientAuthority;
+        bool isClientWithAuthority => hasAuthority && clientAuthority;
 
         // Sensitivity is added for VR where human players tend to have micro movements so this can quiet down
         // the network traffic.  Additionally, rigidbody drift should send less traffic, e.g very slow sliding / rolling.
@@ -49,16 +49,16 @@ namespace Mirror
         //    but would cause errors immediately and be pretty obvious.
         [Header("Compression")]
         [Tooltip("Compresses 16 Byte Quaternion into None=12, Much=3, Lots=2 Byte")]
-        [SerializeField] private readonly Compression compressRotation = Compression.Much;
+        [SerializeField] Compression compressRotation = Compression.Much;
         public enum Compression { None, Much, Lots, NoRotation }; // easily understandable and funny
 
         // target transform to sync. can be on a child.
         protected abstract Transform targetComponent { get; }
 
         // server
-        private Vector3 lastPosition;
-        private Quaternion lastRotation;
-        private Vector3 lastScale;
+        Vector3 lastPosition;
+        Quaternion lastRotation;
+        Vector3 lastScale;
 
         // client
         public class DataPoint
@@ -70,13 +70,12 @@ namespace Mirror
             public Vector3 localScale;
             public float movementSpeed;
         }
-
         // interpolation start and goal
-        private DataPoint start;
-        private DataPoint goal;
+        DataPoint start;
+        DataPoint goal;
 
         // local authority send time
-        private float lastClientSendTime;
+        float lastClientSendTime;
 
         // serialization is needed by OnSerialize and by manual sending from authority
         [EditorBrowsable(EditorBrowsableState.Never)] // public only for tests
@@ -127,7 +126,7 @@ namespace Mirror
         // => if this is the first time ever then we use our best guess:
         //    -> delta based on transform.localPosition
         //    -> elapsed based on send interval hoping that it roughly matches
-        private static float EstimateMovementSpeed(DataPoint from, DataPoint to, Transform transform, float sendInterval)
+        static float EstimateMovementSpeed(DataPoint from, DataPoint to, Transform transform, float sendInterval)
         {
             Vector3 delta = to.localPosition - (from != null ? from.localPosition : transform.localPosition);
             float elapsed = from != null ? to.timeStamp - from.timeStamp : sendInterval;
@@ -135,7 +134,7 @@ namespace Mirror
         }
 
         // serialization is needed by OnSerialize and by manual sending from authority
-        private void DeserializeFromReader(NetworkReader reader)
+        void DeserializeFromReader(NetworkReader reader)
         {
             // put it into a data point immediately
             DataPoint temp = new DataPoint
@@ -251,7 +250,7 @@ namespace Mirror
 
         // local authority client sends sync message to server for broadcasting
         [Command]
-        private void CmdClientToServerSync(byte[] payload)
+        void CmdClientToServerSync(byte[] payload)
         {
             // deserialize payload
             NetworkReader networkReader = NetworkReaderPool.GetReader(payload);
@@ -261,16 +260,14 @@ namespace Mirror
             // server-only mode does no interpolation to save computations,
             // but let's set the position directly
             if (isServer && !isClient)
-            {
                 ApplyPositionRotationScale(goal.localPosition, goal.localRotation, goal.localScale);
-            }
 
             // set dirty so that OnSerialize broadcasts it
             SetDirtyBit(1UL);
         }
 
         // where are we in the timeline between start and goal? [0,1]
-        private static float CurrentInterpolationFactor(DataPoint start, DataPoint goal)
+        static float CurrentInterpolationFactor(DataPoint start, DataPoint goal)
         {
             if (start != null)
             {
@@ -284,7 +281,7 @@ namespace Mirror
             return 0;
         }
 
-        private static Vector3 InterpolatePosition(DataPoint start, DataPoint goal, Vector3 currentPosition)
+        static Vector3 InterpolatePosition(DataPoint start, DataPoint goal, Vector3 currentPosition)
         {
             if (start != null)
             {
@@ -303,7 +300,7 @@ namespace Mirror
             return currentPosition;
         }
 
-        private static Quaternion InterpolateRotation(DataPoint start, DataPoint goal, Quaternion defaultRotation)
+        static Quaternion InterpolateRotation(DataPoint start, DataPoint goal, Quaternion defaultRotation)
         {
             if (start != null)
             {
@@ -313,7 +310,7 @@ namespace Mirror
             return defaultRotation;
         }
 
-        private static Vector3 InterpolateScale(DataPoint start, DataPoint goal, Vector3 currentScale)
+        static Vector3 InterpolateScale(DataPoint start, DataPoint goal, Vector3 currentScale)
         {
             if (start != null)
             {
@@ -328,7 +325,7 @@ namespace Mirror
         //    fence between us and the goal
         // -> checking time always works, this way we just teleport if we still
         //    didn't reach the goal after too much time has elapsed
-        private bool NeedsTeleport()
+        bool NeedsTeleport()
         {
             // calculate time between the two data points
             float startTime = start != null ? start.timeStamp : Time.time - syncInterval;
@@ -339,7 +336,7 @@ namespace Mirror
         }
 
         // moved since last time we checked it?
-        private bool HasEitherMovedRotatedScaled()
+        bool HasEitherMovedRotatedScaled()
         {
             // moved or rotated or scaled?
             // local position/rotation/scale for VR support
@@ -363,7 +360,7 @@ namespace Mirror
         }
 
         // set position carefully depending on the target component
-        private void ApplyPositionRotationScale(Vector3 position, Quaternion rotation, Vector3 scale)
+        void ApplyPositionRotationScale(Vector3 position, Quaternion rotation, Vector3 scale)
         {
             // local position/rotation for VR support
             targetComponent.transform.localPosition = position;
@@ -374,7 +371,7 @@ namespace Mirror
             targetComponent.transform.localScale = scale;
         }
 
-        private void Update()
+        void Update()
         {
             // if server then always sync to others.
             if (isServer)
@@ -439,7 +436,7 @@ namespace Mirror
             }
         }
 
-        private static void DrawDataPointGizmo(DataPoint data, Color color)
+        static void DrawDataPointGizmo(DataPoint data, Color color)
         {
             // use a little offset because transform.localPosition might be in
             // the ground in many cases
@@ -457,31 +454,21 @@ namespace Mirror
             Gizmos.DrawRay(data.localPosition + offset, data.localRotation * Vector3.up);
         }
 
-        private static void DrawLineBetweenDataPoints(DataPoint data1, DataPoint data2, Color color)
+        static void DrawLineBetweenDataPoints(DataPoint data1, DataPoint data2, Color color)
         {
             Gizmos.color = color;
             Gizmos.DrawLine(data1.localPosition, data2.localPosition);
         }
 
         // draw the data points for easier debugging
-        private void OnDrawGizmos()
+        void OnDrawGizmos()
         {
             // draw start and goal points
-            if (start != null)
-            {
-                DrawDataPointGizmo(start, Color.gray);
-            }
-
-            if (goal != null)
-            {
-                DrawDataPointGizmo(goal, Color.white);
-            }
+            if (start != null) DrawDataPointGizmo(start, Color.gray);
+            if (goal != null) DrawDataPointGizmo(goal, Color.white);
 
             // draw line between them
-            if (start != null && goal != null)
-            {
-                DrawLineBetweenDataPoints(start, goal, Color.cyan);
-            }
+            if (start != null && goal != null) DrawLineBetweenDataPoints(start, goal, Color.cyan);
         }
     }
 }

@@ -33,9 +33,7 @@ namespace Mirror
                 }
             }
             else
-            {
                 EditorGUI.LabelField(position, label.text, "Use [Scene] with strings.");
-            }
         }
         protected SceneAsset GetSceneObject(string sceneObjectName)
         {

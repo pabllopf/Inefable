@@ -1,28 +1,30 @@
 // this class processes SyncVars, Cmds, Rpcs, etc. of NetworkBehaviours
+using System.Linq;
+using System.Collections.Generic;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Mirror.Weaver
 {
-    internal class NetworkBehaviourProcessor
+    class NetworkBehaviourProcessor
     {
-        private readonly List<FieldDefinition> syncVars = new List<FieldDefinition>();
-        private readonly List<FieldDefinition> syncObjects = new List<FieldDefinition>();
-        private readonly Dictionary<FieldDefinition, FieldDefinition> syncVarNetIds = new Dictionary<FieldDefinition, FieldDefinition>(); // <SyncVarField,NetIdField>
-        private readonly List<MethodDefinition> commands = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> clientRpcs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> targetRpcs = new List<MethodDefinition>();
-        private readonly List<EventDefinition> eventRpcs = new List<EventDefinition>();
-        private readonly List<MethodDefinition> commandInvocationFuncs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> clientRpcInvocationFuncs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> targetRpcInvocationFuncs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> eventRpcInvocationFuncs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> commandCallFuncs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> clientRpcCallFuncs = new List<MethodDefinition>();
-        private readonly List<MethodDefinition> targetRpcCallFuncs = new List<MethodDefinition>();
-        private readonly TypeDefinition netBehaviourSubclass;
+        readonly List<FieldDefinition> syncVars = new List<FieldDefinition>();
+        readonly List<FieldDefinition> syncObjects = new List<FieldDefinition>();
+        readonly Dictionary<FieldDefinition, FieldDefinition> syncVarNetIds = new Dictionary<FieldDefinition, FieldDefinition>(); // <SyncVarField,NetIdField>
+        readonly List<MethodDefinition> commands = new List<MethodDefinition>();
+        readonly List<MethodDefinition> clientRpcs = new List<MethodDefinition>();
+        readonly List<MethodDefinition> targetRpcs = new List<MethodDefinition>();
+        readonly List<EventDefinition> eventRpcs = new List<EventDefinition>();
+        readonly List<MethodDefinition> commandInvocationFuncs = new List<MethodDefinition>();
+        readonly List<MethodDefinition> clientRpcInvocationFuncs = new List<MethodDefinition>();
+        readonly List<MethodDefinition> targetRpcInvocationFuncs = new List<MethodDefinition>();
+        readonly List<MethodDefinition> eventRpcInvocationFuncs = new List<MethodDefinition>();
+
+        readonly List<MethodDefinition> commandCallFuncs = new List<MethodDefinition>();
+        readonly List<MethodDefinition> clientRpcCallFuncs = new List<MethodDefinition>();
+        readonly List<MethodDefinition> targetRpcCallFuncs = new List<MethodDefinition>();
+
+        readonly TypeDefinition netBehaviourSubclass;
 
         public NetworkBehaviourProcessor(TypeDefinition td)
         {
@@ -163,12 +165,10 @@ namespace Mirror.Weaver
         }
         #endregion
 
-        private void GenerateConstants()
+        void GenerateConstants()
         {
             if (commands.Count == 0 && clientRpcs.Count == 0 && targetRpcs.Count == 0 && eventRpcs.Count == 0 && syncObjects.Count == 0)
-            {
                 return;
-            }
 
             Weaver.DLog(netBehaviourSubclass, "  GenerateConstants ");
 
@@ -286,7 +286,7 @@ namespace Mirror.Weaver
             // This generates code like:
             NetworkBehaviour.RegisterCommandDelegate(base.GetType(), "CmdThrust", new NetworkBehaviour.CmdDelegate(ShipControl.InvokeCmdCmdThrust));
         */
-        private void GenerateRegisterCommandDelegate(ILProcessor awakeWorker, MethodReference registerMethod, MethodDefinition func, string cmdName)
+        void GenerateRegisterCommandDelegate(ILProcessor awakeWorker, MethodReference registerMethod, MethodDefinition func, string cmdName)
         {
             awakeWorker.Append(awakeWorker.Create(OpCodes.Ldtoken, netBehaviourSubclass));
             awakeWorker.Append(awakeWorker.Create(OpCodes.Call, Weaver.getTypeFromHandleReference));
@@ -298,16 +298,14 @@ namespace Mirror.Weaver
             awakeWorker.Append(awakeWorker.Create(OpCodes.Call, registerMethod));
         }
 
-        private void GenerateSerialization()
+        void GenerateSerialization()
         {
             Weaver.DLog(netBehaviourSubclass, "  GenerateSerialization");
 
             foreach (MethodDefinition m in netBehaviourSubclass.Methods)
             {
                 if (m.Name == "OnSerialize")
-                {
                     return;
-                }
             }
 
             if (syncVars.Count == 0)
@@ -443,7 +441,7 @@ namespace Mirror.Weaver
             return 0;
         }
 
-        private void DeserializeField(FieldDefinition syncVar, ILProcessor serWorker, MethodDefinition deserialize)
+        void DeserializeField(FieldDefinition syncVar, ILProcessor serWorker, MethodDefinition deserialize)
         {
             // check for Hook function
             if (!SyncVarProcessor.CheckForHookFunction(netBehaviourSubclass, syncVar, out MethodDefinition foundMethod))
@@ -624,16 +622,14 @@ namespace Mirror.Weaver
             }
         }
 
-        private void GenerateDeSerialization()
+        void GenerateDeSerialization()
         {
             Weaver.DLog(netBehaviourSubclass, "  GenerateDeSerialization");
 
             foreach (MethodDefinition m in netBehaviourSubclass.Methods)
             {
                 if (m.Name == "OnDeserialize")
-                {
                     return;
-                }
             }
 
             if (syncVars.Count == 0)
@@ -801,7 +797,7 @@ namespace Mirror.Weaver
             return true;
         }
 
-        private void ProcessMethods()
+        void ProcessMethods()
         {
             HashSet<string> names = new HashSet<string>();
 
@@ -859,7 +855,7 @@ namespace Mirror.Weaver
             }
         }
 
-        private void ProcessClientRpc(HashSet<string> names, MethodDefinition md, CustomAttribute ca)
+        void ProcessClientRpc(HashSet<string> names, MethodDefinition md, CustomAttribute ca)
         {
             if (!RpcProcessor.ProcessMethodsValidateRpc(md, ca))
             {
@@ -888,12 +884,10 @@ namespace Mirror.Weaver
             }
         }
 
-        private void ProcessTargetRpc(HashSet<string> names, MethodDefinition md, CustomAttribute ca)
+        void ProcessTargetRpc(HashSet<string> names, MethodDefinition md, CustomAttribute ca)
         {
             if (!TargetRpcProcessor.ProcessMethodsValidateTargetRpc(md, ca))
-            {
                 return;
-            }
 
             if (names.Contains(md.Name))
             {
@@ -917,12 +911,10 @@ namespace Mirror.Weaver
             }
         }
 
-        private void ProcessCommand(HashSet<string> names, MethodDefinition md, CustomAttribute ca)
+        void ProcessCommand(HashSet<string> names, MethodDefinition md, CustomAttribute ca)
         {
             if (!CommandProcessor.ProcessMethodsValidateCommand(md, ca))
-            {
                 return;
-            }
 
             if (names.Contains(md.Name))
             {

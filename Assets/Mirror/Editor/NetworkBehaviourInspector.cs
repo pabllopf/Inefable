@@ -12,16 +12,17 @@ namespace Mirror
     [CanEditMultipleObjects]
     public class NetworkBehaviourInspector : Editor
     {
-        private bool initialized;
+        bool initialized;
         protected List<string> syncVarNames = new List<string>();
-        private bool syncsAnything;
-        private bool[] showSyncLists;
-        private static readonly GUIContent syncVarIndicatorContent = new GUIContent("SyncVar", "This variable has been marked with the [SyncVar] attribute.");
+        bool syncsAnything;
+        bool[] showSyncLists;
+
+        static readonly GUIContent syncVarIndicatorContent = new GUIContent("SyncVar", "This variable has been marked with the [SyncVar] attribute.");
 
         internal virtual bool HideScriptField => false;
 
         // does this type sync anything? otherwise we don't need to show syncInterval
-        private bool SyncsAnything(Type scriptClass)
+        bool SyncsAnything(Type scriptClass)
         {
             // has OnSerialize that is not in NetworkBehaviour?
             // then it either has a syncvar or custom OnSerialize. either way
@@ -52,12 +53,12 @@ namespace Mirror
             return false;
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             initialized = false;
         }
 
-        private void Init(MonoScript script)
+        void Init(MonoScript script)
         {
             initialized = true;
             Type scriptClass = script.GetClass();
@@ -90,9 +91,7 @@ namespace Mirror
                 serializedObject.Update();
                 SerializedProperty scriptProperty = serializedObject.FindProperty("m_Script");
                 if (scriptProperty == null)
-                {
                     return;
-                }
 
                 MonoScript targetScript = scriptProperty.objectReferenceValue as MonoScript;
                 Init(targetScript);

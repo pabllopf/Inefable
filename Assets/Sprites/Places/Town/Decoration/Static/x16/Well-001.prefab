@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9190199917924241651}
   - component: {fileID: 5512892819273619732}
   - component: {fileID: 858921197062691106}
-  - component: {fileID: 155335161065878060}
+  - component: {fileID: 1499383267187603015}
   m_Layer: 0
   m_Name: Well-001
   m_TagString: Untagged
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -108,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4118471, y: 0.44962692}
   m_EdgeRadius: 0
---- !u!114 &155335161065878060
+--- !u!114 &1499383267187603015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,6 +118,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6990705699495533990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

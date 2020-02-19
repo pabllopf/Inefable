@@ -1,7 +1,7 @@
 // all the SyncEvent code from NetworkBehaviourProcessor in one place
+using System.Collections.Generic;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
-using System.Collections.Generic;
 
 namespace Mirror.Weaver
 {
@@ -52,9 +52,7 @@ namespace Mirror.Weaver
             // read the event arguments
             MethodReference invoke = Resolvers.ResolveMethod(eventField.FieldType, Weaver.CurrentAssembly, "Invoke");
             if (!NetworkBehaviourProcessor.ProcessNetworkReaderParameters(invoke.Resolve(), cmdWorker, false))
-            {
                 return null;
-            }
 
             // invoke actual event delegate function
             cmdWorker.Append(cmdWorker.Create(OpCodes.Callvirt, invoke));
@@ -88,9 +86,7 @@ namespace Mirror.Weaver
 
             // write all the arguments that the user passed to the syncevent
             if (!NetworkBehaviourProcessor.WriteArguments(evtWorker, invoke.Resolve(), false))
-            {
                 return null;
-            }
 
             // invoke interal send and return
             evtWorker.Append(evtWorker.Create(OpCodes.Ldarg_0)); // this

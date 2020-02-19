@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 2347949360486141954}
   - component: {fileID: 1677847728705707125}
   - component: {fileID: 196576018}
-  - component: {fileID: 7233572712991417279}
-  - component: {fileID: 8621925871578287856}
+  - component: {fileID: 838952540711954174}
   m_Layer: 0
   m_Name: Rock-002
   m_TagString: Untagged
@@ -48,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -109,19 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24999905, y: 0.20270157}
   m_EdgeRadius: 0
---- !u!114 &7233572712991417279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5760334900789338921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8621925871578287856
+--- !u!114 &838952540711954174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

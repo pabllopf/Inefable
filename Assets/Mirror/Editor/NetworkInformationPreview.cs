@@ -6,22 +6,22 @@ using UnityObject = UnityEngine.Object;
 namespace Mirror
 {
     [CustomPreview(typeof(GameObject))]
-    internal class NetworkInformationPreview : ObjectPreview
+    class NetworkInformationPreview : ObjectPreview
     {
-        private class NetworkIdentityInfo
+        class NetworkIdentityInfo
         {
             public GUIContent name;
             public GUIContent value;
         }
 
-        private class NetworkBehaviourInfo
+        class NetworkBehaviourInfo
         {
             // This is here just so we can check if it's enabled/disabled
             public NetworkBehaviour behaviour;
             public GUIContent name;
         }
 
-        private class Styles
+        class Styles
         {
             public GUIStyle labelStyle = new GUIStyle(EditorStyles.label);
             public GUIStyle componentName = new GUIStyle(EditorStyles.boldLabel);
@@ -60,11 +60,11 @@ namespace Mirror
             }
         }
 
-        private List<NetworkIdentityInfo> info;
-        private List<NetworkBehaviourInfo> behavioursInfo;
-        private NetworkIdentity identity;
-        private GUIContent title;
-        private Styles styles = new Styles();
+        List<NetworkIdentityInfo> info;
+        List<NetworkBehaviourInfo> behavioursInfo;
+        NetworkIdentity identity;
+        GUIContent title;
+        Styles styles = new Styles();
 
         public override void Initialize(UnityObject[] targets)
         {
@@ -89,22 +89,16 @@ namespace Mirror
         public override void OnPreviewGUI(Rect r, GUIStyle background)
         {
             if (Event.current.type != EventType.Repaint)
-            {
                 return;
-            }
 
             // refresh the data
             GetNetworkInformation(target as GameObject);
 
             if (info == null || info.Count == 0)
-            {
                 return;
-            }
 
             if (styles == null)
-            {
                 styles = new Styles();
-            }
 
             // Get required label size for the names of the information values we're going to show
             // There are two columns, one with label for the name of the info and the next for the value
@@ -180,7 +174,7 @@ namespace Mirror
         }
 
         // Get the maximum size used by the value of information items
-        private Vector2 GetMaxNameLabelSize()
+        Vector2 GetMaxNameLabelSize()
         {
             Vector2 maxLabelSize = Vector2.zero;
             foreach (NetworkIdentityInfo info in info)
@@ -198,7 +192,7 @@ namespace Mirror
             return maxLabelSize;
         }
 
-        private Vector2 GetMaxBehaviourLabelSize()
+        Vector2 GetMaxBehaviourLabelSize()
         {
             Vector2 maxLabelSize = Vector2.zero;
             foreach (NetworkBehaviourInfo behaviour in behavioursInfo)
@@ -216,7 +210,7 @@ namespace Mirror
             return maxLabelSize;
         }
 
-        private void GetNetworkInformation(GameObject gameObject)
+        void GetNetworkInformation(GameObject gameObject)
         {
             identity = gameObject.GetComponent<NetworkIdentity>();
             if (identity != null)
@@ -256,7 +250,7 @@ namespace Mirror
             }
         }
 
-        private NetworkIdentityInfo GetAssetId()
+        NetworkIdentityInfo GetAssetId()
         {
             string assetId = identity.assetId.ToString();
             if (string.IsNullOrEmpty(assetId))
@@ -266,7 +260,7 @@ namespace Mirror
             return GetString("Asset ID", assetId);
         }
 
-        private static NetworkIdentityInfo GetString(string name, string value)
+        static NetworkIdentityInfo GetString(string name, string value)
         {
             NetworkIdentityInfo info = new NetworkIdentityInfo
             {
@@ -276,7 +270,7 @@ namespace Mirror
             return info;
         }
 
-        private static NetworkIdentityInfo GetBoolean(string name, bool value)
+        static NetworkIdentityInfo GetBoolean(string name, bool value)
         {
             NetworkIdentityInfo info = new NetworkIdentityInfo
             {

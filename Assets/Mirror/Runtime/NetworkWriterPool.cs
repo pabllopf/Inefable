@@ -5,7 +5,7 @@ namespace Mirror
 
     public static class NetworkWriterPool
     {
-        private static readonly Stack<NetworkWriter> pool = new Stack<NetworkWriter>();
+        static readonly Stack<NetworkWriter> pool = new Stack<NetworkWriter>();
 
         public static NetworkWriter GetWriter()
         {

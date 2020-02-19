@@ -1,6 +1,6 @@
+using System;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
-using System;
 
 namespace Mirror.Weaver
 {
@@ -36,7 +36,7 @@ namespace Mirror.Weaver
             Console.WriteLine("  ProcessSitesModule " + moduleDef.Name + " elapsed time:" + (DateTime.Now - startTime));
         }
 
-        private static void ProcessSiteClass(TypeDefinition td)
+        static void ProcessSiteClass(TypeDefinition td)
         {
             //Console.WriteLine("    ProcessSiteClass " + td);
             foreach (MethodDefinition md in td.Methods)
@@ -50,7 +50,7 @@ namespace Mirror.Weaver
             }
         }
 
-        private static void ProcessSiteMethod(TypeDefinition td, MethodDefinition md)
+        static void ProcessSiteMethod(TypeDefinition td, MethodDefinition md)
         {
             // process all references to replaced members with properties
             //Weaver.DLog(td, "      ProcessSiteMethod " + md);
@@ -58,9 +58,7 @@ namespace Mirror.Weaver
             if (md.Name == ".cctor" ||
                 md.Name == NetworkBehaviourProcessor.ProcessedFunctionName ||
                 md.Name.StartsWith("InvokeSyn"))
-            {
                 return;
-            }
 
             if (md.Body != null && md.Body.Instructions != null)
             {
@@ -92,7 +90,7 @@ namespace Mirror.Weaver
             }
         }
 
-        private static void InjectServerGuard(TypeDefinition td, MethodDefinition md, bool logWarning)
+        static void InjectServerGuard(TypeDefinition td, MethodDefinition md, bool logWarning)
         {
             if (!Weaver.IsNetworkBehaviour(td))
             {
@@ -114,7 +112,7 @@ namespace Mirror.Weaver
             worker.InsertBefore(top, worker.Create(OpCodes.Ret));
         }
 
-        private static void InjectClientGuard(TypeDefinition td, MethodDefinition md, bool logWarning)
+        static void InjectClientGuard(TypeDefinition td, MethodDefinition md, bool logWarning)
         {
             if (!Weaver.IsNetworkBehaviour(td))
             {
@@ -138,13 +136,11 @@ namespace Mirror.Weaver
         }
 
         // replaces syncvar write access with the NetworkXYZ.get property calls
-        private static void ProcessInstructionSetterField(MethodDefinition md, Instruction i, FieldDefinition opField)
+        static void ProcessInstructionSetterField(MethodDefinition md, Instruction i, FieldDefinition opField)
         {
             // dont replace property call sites in constructors
             if (md.Name == ".ctor")
-            {
                 return;
-            }
 
             // does it set a field that we replaced?
             if (Weaver.WeaveLists.replacementSetterProperties.TryGetValue(opField, out MethodDefinition replacement))
@@ -158,13 +154,11 @@ namespace Mirror.Weaver
         }
 
         // replaces syncvar read access with the NetworkXYZ.get property calls
-        private static void ProcessInstructionGetterField(MethodDefinition md, Instruction i, FieldDefinition opField)
+        static void ProcessInstructionGetterField(MethodDefinition md, Instruction i, FieldDefinition opField)
         {
             // dont replace property call sites in constructors
             if (md.Name == ".ctor")
-            {
                 return;
-            }
 
             // does it set a field that we replaced?
             if (Weaver.WeaveLists.replacementGetterProperties.TryGetValue(opField, out MethodDefinition replacement))
@@ -177,7 +171,7 @@ namespace Mirror.Weaver
             }
         }
 
-        private static int ProcessInstruction(MethodDefinition md, Instruction instr, int iCount)
+        static int ProcessInstruction(MethodDefinition md, Instruction instr, int iCount)
         {
             if (instr.OpCode == OpCodes.Call || instr.OpCode == OpCodes.Callvirt)
             {
@@ -219,13 +213,11 @@ namespace Mirror.Weaver
             return 1;
         }
 
-        private static int ProcessInstructionLoadAddress(MethodDefinition md, Instruction instr, FieldDefinition opField, int iCount)
+        static int ProcessInstructionLoadAddress(MethodDefinition md, Instruction instr, FieldDefinition opField, int iCount)
         {
             // dont replace property call sites in constructors
             if (md.Name == ".ctor")
-            {
                 return 1;
-            }
 
             // does it set a field that we replaced?
             if (Weaver.WeaveLists.replacementSetterProperties.TryGetValue(opField, out MethodDefinition replacement))
@@ -259,7 +251,7 @@ namespace Mirror.Weaver
             return 1;
         }
 
-        private static void ProcessInstructionMethod(MethodDefinition md, Instruction instr, MethodReference opMethodRef, int iCount)
+        static void ProcessInstructionMethod(MethodDefinition md, Instruction instr, MethodReference opMethodRef, int iCount)
         {
             //DLog(td, "ProcessInstructionMethod " + opMethod.Name);
             if (opMethodRef.Name == "Invoke")
@@ -294,7 +286,7 @@ namespace Mirror.Weaver
         }
 
         // this is required to early-out from a function with "ref" or "out" parameters
-        private static void InjectGuardParameters(MethodDefinition md, ILProcessor worker, Instruction top)
+        static void InjectGuardParameters(MethodDefinition md, ILProcessor worker, Instruction top)
         {
             int offset = md.Resolve().IsStatic ? 0 : 1;
             for (int index = 0; index < md.Parameters.Count; index++)
@@ -325,7 +317,7 @@ namespace Mirror.Weaver
         }
 
         // this is required to early-out from a function with a return value.
-        private static void InjectGuardReturnValue(MethodDefinition md, ILProcessor worker, Instruction top)
+        static void InjectGuardReturnValue(MethodDefinition md, ILProcessor worker, Instruction top)
         {
             if (md.ReturnType.FullName != Weaver.voidType.FullName)
             {

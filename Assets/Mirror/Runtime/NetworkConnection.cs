@@ -17,8 +17,9 @@ namespace Mirror
     /// </remarks>
     public abstract class NetworkConnection : IDisposable
     {
-        private readonly HashSet<NetworkIdentity> visList = new HashSet<NetworkIdentity>();
-        private Dictionary<int, NetworkMessageDelegate> messageHandlers;
+        readonly HashSet<NetworkIdentity> visList = new HashSet<NetworkIdentity>();
+
+        Dictionary<int, NetworkMessageDelegate> messageHandlers;
 
         /// <summary>
         /// Unique identifier for this connection that is assigned by the transport layer.
@@ -66,8 +67,14 @@ namespace Mirror
         [Obsolete("Use NetworkConnection.identity instead")]
         public NetworkIdentity playerController
         {
-            get => identity;
-            internal set => identity = value;
+            get
+            {
+                return identity;
+            }
+            internal set
+            {
+                identity = value;
+            }
         }
 
         /// <summary>
@@ -164,10 +171,7 @@ namespace Mirror
         {
             if (messageHandlers.ContainsKey(msgType))
             {
-                if (LogFilter.Debug)
-                {
-                    Debug.Log("NetworkConnection.RegisterHandler replacing " + msgType);
-                }
+                if (LogFilter.Debug) Debug.Log("NetworkConnection.RegisterHandler replacing " + msgType);
             }
             messageHandlers[msgType] = handler;
         }
@@ -347,10 +351,7 @@ namespace Mirror
             if (MessagePacker.UnpackMessage(networkReader, out int msgType))
             {
                 // logging
-                if (logNetworkMessages)
-                {
-                    Debug.Log("ConnectionRecv " + this + " msgType:" + msgType + " content:" + BitConverter.ToString(buffer.Array, buffer.Offset, buffer.Count));
-                }
+                if (logNetworkMessages) Debug.Log("ConnectionRecv " + this + " msgType:" + msgType + " content:" + BitConverter.ToString(buffer.Array, buffer.Offset, buffer.Count));
 
                 // try to invoke the handler for that message
                 if (InvokeHandler(msgType, networkReader, channelId))

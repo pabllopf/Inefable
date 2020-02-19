@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -273,8 +274,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200910836}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -665,11 +667,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39,
-        type: 3}
-      propertyPath: m_Name
-      value: Chest-001 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 712427050648462255, guid: fcee6532d61070d4a87a37ac990d9e39,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,6 +726,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneId
       value: 1755337687
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857658067076840499, guid: fcee6532d61070d4a87a37ac990d9e39,
+        type: 3}
+      propertyPath: m_Name
+      value: Chest-001 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcee6532d61070d4a87a37ac990d9e39, type: 3}
@@ -833,6 +835,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box-001
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sceneId
+      value: 1039989488
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AssetId
+      value: 8636f0ef1a60ab442af2a84f90fd3e58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053044552583134639, guid: 8636f0ef1a60ab442af2a84f90fd3e58,
+        type: 3}
+      propertyPath: sceneId
+      value: 4213746332
+      objectReference: {fileID: 0}
     - target: {fileID: 6912664544292632355, guid: 8636f0ef1a60ab442af2a84f90fd3e58,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -888,17 +903,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2992720697934675790, guid: 8636f0ef1a60ab442af2a84f90fd3e58,
-        type: 3}
-      propertyPath: sceneId
-      value: 1039989488
-      objectReference: {fileID: 0}
-    - target: {fileID: 2992720697934675790, guid: 8636f0ef1a60ab442af2a84f90fd3e58,
-        type: 3}
-      propertyPath: m_AssetId
-      value: 8636f0ef1a60ab442af2a84f90fd3e58
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7238332601645309399, guid: 8636f0ef1a60ab442af2a84f90fd3e58, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8636f0ef1a60ab442af2a84f90fd3e58, type: 3}
 --- !u!4 &1848573264692708271 stripped
 Transform:
@@ -913,10 +919,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 888145622}
     m_Modifications:
-    - target: {fileID: 5760334900789338921, guid: 4fdca11bcbee21d4c92bc1d48318a563,
+    - target: {fileID: 838952540711954174, guid: 4fdca11bcbee21d4c92bc1d48318a563,
         type: 3}
-      propertyPath: m_Name
-      value: Rock-002
+      propertyPath: sceneId
+      value: 360928844
       objectReference: {fileID: 0}
     - target: {fileID: 2347949360486141954, guid: 4fdca11bcbee21d4c92bc1d48318a563,
         type: 3}
@@ -973,17 +979,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8621925871578287856, guid: 4fdca11bcbee21d4c92bc1d48318a563,
+    - target: {fileID: 5760334900789338921, guid: 4fdca11bcbee21d4c92bc1d48318a563,
         type: 3}
+      propertyPath: m_Name
+      value: Rock-002
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: sceneId
       value: 3672432892
       objectReference: {fileID: 0}
-    - target: {fileID: 8621925871578287856, guid: 4fdca11bcbee21d4c92bc1d48318a563,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: m_AssetId
       value: 4fdca11bcbee21d4c92bc1d48318a563
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7233572712991417279, guid: 4fdca11bcbee21d4c92bc1d48318a563, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4fdca11bcbee21d4c92bc1d48318a563, type: 3}
 --- !u!4 &2101455890388827332 stripped
 Transform:
@@ -1211,11 +1221,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc,
-        type: 3}
-      propertyPath: m_Name
-      value: Heart-002
-      objectReference: {fileID: 0}
     - target: {fileID: 3896597436919044297, guid: 3d497da6c092b7f449b20605d4f36dfc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1270,6 +1275,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc,
+        type: 3}
+      propertyPath: m_Name
+      value: Heart-002
       objectReference: {fileID: 0}
     - target: {fileID: 4924576180240124394, guid: 3d497da6c092b7f449b20605d4f36dfc,
         type: 3}

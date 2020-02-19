@@ -1,13 +1,13 @@
 // all the [SyncVar] code from NetworkBehaviourProcessor in one place
+using System.Collections.Generic;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
-using System.Collections.Generic;
 
 namespace Mirror.Weaver
 {
     public static class SyncVarProcessor
     {
-        private const int SyncVarLimit = 64; // ulong = 64 bytes
+        const int SyncVarLimit = 64; // ulong = 64 bytes
 
         // returns false for error, not for no-hook-exists
         public static bool CheckForHookFunction(TypeDefinition td, FieldDefinition syncVar, out MethodDefinition foundMethod)

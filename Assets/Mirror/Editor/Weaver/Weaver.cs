@@ -1,14 +1,14 @@
-using Mono.CecilX;
-using Mono.CecilX.Cil;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Mono.CecilX;
+using Mono.CecilX.Cil;
 
 namespace Mirror.Weaver
 {
     // This data is flushed each time - if we are run multiple times in the same process/domain
-    internal class WeaverLists
+    class WeaverLists
     {
         // setter functions that replace [SyncVar] member variable references. dict<field, replacement>
         public Dictionary<FieldDefinition, MethodDefinition> replacementSetterProperties = new Dictionary<FieldDefinition, MethodDefinition>();
@@ -27,7 +27,7 @@ namespace Mirror.Weaver
         public Dictionary<string, int> numSyncVars = new Dictionary<string, int>();
     }
 
-    internal class Weaver
+    class Weaver
     {
         public static WeaverLists WeaveLists { get; private set; }
         public static AssemblyDefinition CurrentAssembly { get; private set; }
@@ -38,7 +38,7 @@ namespace Mirror.Weaver
         public static bool GenerateLogErrors { get; set; }
 
         // private properties
-        private static readonly bool DebugLogEnabled = true;
+        static readonly bool DebugLogEnabled = true;
 
         // Network types
         public static TypeReference NetworkBehaviourType;
@@ -133,9 +133,7 @@ namespace Mirror.Weaver
         public static void DLog(TypeDefinition td, string fmt, params object[] args)
         {
             if (!DebugLogEnabled)
-            {
                 return;
-            }
 
             Console.WriteLine("[" + td.Name + "] " + string.Format(fmt, args));
         }
@@ -178,7 +176,7 @@ namespace Mirror.Weaver
             }
         }
 
-        private static bool ProcessNetworkBehaviourType(TypeDefinition td)
+        static bool ProcessNetworkBehaviourType(TypeDefinition td)
         {
             if (!NetworkBehaviourProcessor.WasProcessed(td))
             {
@@ -191,7 +189,7 @@ namespace Mirror.Weaver
             return false;
         }
 
-        private static void SetupUnityTypes()
+        static void SetupUnityTypes()
         {
             gameObjectType = UnityAssembly.MainModule.GetType("UnityEngine.GameObject");
             transformType = UnityAssembly.MainModule.GetType("UnityEngine.Transform");
@@ -207,7 +205,7 @@ namespace Mirror.Weaver
             SyncObjectType = NetAssembly.MainModule.GetType("Mirror.SyncObject");
         }
 
-        private static void SetupCorLib()
+        static void SetupCorLib()
         {
             AssemblyNameReference name = AssemblyNameReference.Parse("mscorlib");
             ReaderParameters parameters = new ReaderParameters
@@ -217,7 +215,7 @@ namespace Mirror.Weaver
             CorLibModule = CurrentAssembly.MainModule.AssemblyResolver.Resolve(name, parameters).MainModule;
         }
 
-        private static TypeReference ImportCorLibType(string fullName)
+        static TypeReference ImportCorLibType(string fullName)
         {
             TypeDefinition type = CorLibModule.GetType(fullName) ?? CorLibModule.ExportedTypes.First(t => t.FullName == fullName).Resolve();
             if (type != null)
@@ -228,7 +226,7 @@ namespace Mirror.Weaver
             return null;
         }
 
-        private static void SetupTargetTypes()
+        static void SetupTargetTypes()
         {
             // system types
             SetupCorLib();
@@ -331,7 +329,7 @@ namespace Mirror.Weaver
             return variable.Module.Name == assembly;
         }
 
-        private static void CheckMonoBehaviour(TypeDefinition td)
+        static void CheckMonoBehaviour(TypeDefinition td)
         {
             if (td.IsDerivedFrom(MonoBehaviourType))
             {
@@ -339,12 +337,10 @@ namespace Mirror.Weaver
             }
         }
 
-        private static bool CheckNetworkBehaviour(TypeDefinition td)
+        static bool CheckNetworkBehaviour(TypeDefinition td)
         {
             if (!td.IsClass)
-            {
                 return false;
-            }
 
             if (!IsNetworkBehaviour(td))
             {
@@ -384,12 +380,10 @@ namespace Mirror.Weaver
             return didWork;
         }
 
-        private static bool CheckMessageBase(TypeDefinition td)
+        static bool CheckMessageBase(TypeDefinition td)
         {
             if (!td.IsClass)
-            {
                 return false;
-            }
 
             bool didWork = false;
 
@@ -408,12 +402,10 @@ namespace Mirror.Weaver
             return didWork;
         }
 
-        private static bool CheckSyncList(TypeDefinition td)
+        static bool CheckSyncList(TypeDefinition td)
         {
             if (!td.IsClass)
-            {
                 return false;
-            }
 
             bool didWork = false;
 
@@ -460,7 +452,7 @@ namespace Mirror.Weaver
             return didWork;
         }
 
-        private static bool Weave(string assName, IEnumerable<string> dependencies, string unityEngineDLLPath, string mirrorNetDLLPath, string outputDir)
+        static bool Weave(string assName, IEnumerable<string> dependencies, string unityEngineDLLPath, string mirrorNetDLLPath, string outputDir)
         {
             using (DefaultAssemblyResolver asmResolver = new DefaultAssemblyResolver())
             using (CurrentAssembly = AssemblyDefinition.ReadAssembly(assName, new ReaderParameters { ReadWrite = true, ReadSymbols = true, AssemblyResolver = asmResolver }))

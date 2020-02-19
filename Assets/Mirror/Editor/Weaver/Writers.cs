@@ -1,14 +1,15 @@
+using System.Collections.Generic;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
-using System.Collections.Generic;
 
 namespace Mirror.Weaver
 {
 
     public static class Writers
     {
-        private const int MaxRecursionCount = 128;
-        private static Dictionary<string, MethodReference> writeFuncs;
+        const int MaxRecursionCount = 128;
+
+        static Dictionary<string, MethodReference> writeFuncs;
 
         public static void Init()
         {
@@ -95,7 +96,7 @@ namespace Mirror.Weaver
             return newWriterFunc;
         }
 
-        private static void RegisterWriteFunc(string name, MethodDefinition newWriterFunc)
+        static void RegisterWriteFunc(string name, MethodDefinition newWriterFunc)
         {
             writeFuncs[name] = newWriterFunc;
             Weaver.WeaveLists.generatedWriteFunctions.Add(newWriterFunc);
@@ -104,7 +105,7 @@ namespace Mirror.Weaver
             Weaver.WeaveLists.generateContainerClass.Methods.Add(newWriterFunc);
         }
 
-        private static MethodDefinition GenerateClassOrStructWriterFunction(TypeReference variable, int recursionCount)
+        static MethodDefinition GenerateClassOrStructWriterFunction(TypeReference variable, int recursionCount)
         {
             if (recursionCount > MaxRecursionCount)
             {
@@ -142,9 +143,7 @@ namespace Mirror.Weaver
             foreach (FieldDefinition field in variable.Resolve().Fields)
             {
                 if (field.IsStatic || field.IsPrivate)
-                {
                     continue;
-                }
 
                 MethodReference writeFunc = GetWriteFunc(field.FieldType, recursionCount + 1);
                 if (writeFunc != null)
@@ -169,7 +168,7 @@ namespace Mirror.Weaver
             return writerFunc;
         }
 
-        private static MethodDefinition GenerateArrayWriteFunc(TypeReference variable, int recursionCount)
+        static MethodDefinition GenerateArrayWriteFunc(TypeReference variable, int recursionCount)
         {
 
             if (!variable.IsArrayType())
@@ -271,7 +270,7 @@ namespace Mirror.Weaver
             return writerFunc;
         }
 
-        private static MethodDefinition GenerateArraySegmentWriteFunc(TypeReference variable, int recursionCount)
+        static MethodDefinition GenerateArraySegmentWriteFunc(TypeReference variable, int recursionCount)
         {
             GenericInstanceType genericInstance = (GenericInstanceType)variable;
             TypeReference elementType = genericInstance.GenericArguments[0];

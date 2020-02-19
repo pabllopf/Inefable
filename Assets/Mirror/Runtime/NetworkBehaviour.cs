@@ -87,8 +87,7 @@ namespace Mirror
         public NetworkConnection connectionToClient => netIdentity.connectionToClient;
 
         protected ulong syncVarDirtyBits { get; private set; }
-
-        private ulong syncVarHookGuard;
+        ulong syncVarHookGuard;
 
         protected bool getSyncVarHookGuard(ulong dirtyBit)
         {
@@ -98,13 +97,9 @@ namespace Mirror
         protected void setSyncVarHookGuard(ulong dirtyBit, bool value)
         {
             if (value)
-            {
                 syncVarHookGuard |= dirtyBit;
-            }
             else
-            {
                 syncVarHookGuard &= ~dirtyBit;
-            }
         }
 
         /// <summary>
@@ -121,7 +116,7 @@ namespace Mirror
         /// <summary>
         /// NetworkIdentity component caching for easier access
         /// </summary>
-        private NetworkIdentity netIdentityCache;
+        NetworkIdentity netIdentityCache;
 
         /// <summary>
         /// Returns the NetworkIdentity of this object
@@ -154,9 +149,7 @@ namespace Mirror
                 {
                     NetworkBehaviour component = netIdentity.NetworkBehaviours[i];
                     if (component == this)
-                    {
                         return i;
-                    }
                 }
 
                 // this should never happen
@@ -176,7 +169,7 @@ namespace Mirror
 
         #region Commands
 
-        private static int GetMethodHash(Type invokeClass, string methodName)
+        static int GetMethodHash(Type invokeClass, string methodName)
         {
             // (invokeClass + ":" + cmdName).GetStableHashCode() would cause allocations.
             // so hash1 + hash2 is better.
@@ -367,7 +360,7 @@ namespace Mirror
             public CmdDelegate invokeFunction;
         }
 
-        private static readonly Dictionary<int, Invoker> cmdHandlerDelegates = new Dictionary<int, Invoker>();
+        static readonly Dictionary<int, Invoker> cmdHandlerDelegates = new Dictionary<int, Invoker>();
 
         // helper function register a Command/Rpc/SyncEvent delegate
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -394,10 +387,7 @@ namespace Mirror
                 invokeFunction = func
             };
             cmdHandlerDelegates[cmdHash] = invoker;
-            if (LogFilter.Debug)
-            {
-                Debug.Log("RegisterDelegate hash:" + cmdHash + " invokerType: " + invokerType + " method:" + func.GetMethodName());
-            }
+            if (LogFilter.Debug) Debug.Log("RegisterDelegate hash:" + cmdHash + " invokerType: " + invokerType + " method:" + func.GetMethodName());
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -418,7 +408,7 @@ namespace Mirror
             RegisterDelegate(invokeClass, eventName, MirrorInvokeType.SyncEvent, func);
         }
 
-        private static bool GetInvokerForHash(int cmdHash, MirrorInvokeType invokeType, out Invoker invoker)
+        static bool GetInvokerForHash(int cmdHash, MirrorInvokeType invokeType, out Invoker invoker)
         {
             if (cmdHandlerDelegates.TryGetValue(cmdHash, out invoker) &&
                 invoker != null &&
@@ -430,11 +420,7 @@ namespace Mirror
             // debug message if not found, or null, or mismatched type
             // (no need to throw an error, an attacker might just be trying to
             //  call an cmd with an rpc's hash)
-            if (LogFilter.Debug)
-            {
-                Debug.Log("GetInvokerForHash hash:" + cmdHash + " not found");
-            }
-
+            if (LogFilter.Debug) Debug.Log("GetInvokerForHash hash:" + cmdHash + " not found");
             return false;
         }
 
@@ -495,9 +481,7 @@ namespace Mirror
         protected void SetSyncVarGameObject(GameObject newGameObject, ref GameObject gameObjectField, ulong dirtyBit, ref uint netIdField)
         {
             if (getSyncVarHookGuard(dirtyBit))
-            {
                 return;
-            }
 
             uint newNetId = 0;
             if (newGameObject != null)
@@ -513,11 +497,7 @@ namespace Mirror
                 }
             }
 
-            if (LogFilter.Debug)
-            {
-                Debug.Log("SetSyncVar GameObject " + GetType().Name + " bit [" + dirtyBit + "] netfieldId:" + netIdField + "->" + newNetId);
-            }
-
+            if (LogFilter.Debug) Debug.Log("SetSyncVar GameObject " + GetType().Name + " bit [" + dirtyBit + "] netfieldId:" + netIdField + "->" + newNetId);
             SetDirtyBit(dirtyBit);
             gameObjectField = newGameObject; // assign new one on the server, and in case we ever need it on client too
             netIdField = newNetId;
@@ -537,10 +517,7 @@ namespace Mirror
             // client always looks up based on netId because objects might get in and out of range
             // over and over again, which shouldn't null them forever
             if (NetworkIdentity.spawned.TryGetValue(netId, out NetworkIdentity identity) && identity != null)
-            {
                 return gameObjectField = identity.gameObject;
-            }
-
             return null;
         }
 
@@ -567,9 +544,7 @@ namespace Mirror
         protected void SetSyncVarNetworkIdentity(NetworkIdentity newIdentity, ref NetworkIdentity identityField, ulong dirtyBit, ref uint netIdField)
         {
             if (getSyncVarHookGuard(dirtyBit))
-            {
                 return;
-            }
 
             uint newNetId = 0;
             if (newIdentity != null)
@@ -581,11 +556,7 @@ namespace Mirror
                 }
             }
 
-            if (LogFilter.Debug)
-            {
-                Debug.Log("SetSyncVarNetworkIdentity NetworkIdentity " + GetType().Name + " bit [" + dirtyBit + "] netIdField:" + netIdField + "->" + newNetId);
-            }
-
+            if (LogFilter.Debug) Debug.Log("SetSyncVarNetworkIdentity NetworkIdentity " + GetType().Name + " bit [" + dirtyBit + "] netIdField:" + netIdField + "->" + newNetId);
             SetDirtyBit(dirtyBit);
             netIdField = newNetId;
             identityField = newIdentity; // assign new one on the server, and in case we ever need it on client too
@@ -618,11 +589,7 @@ namespace Mirror
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected void SetSyncVar<T>(T value, ref T fieldValue, ulong dirtyBit)
         {
-            if (LogFilter.Debug)
-            {
-                Debug.Log("SetSyncVar " + GetType().Name + " bit [" + dirtyBit + "] " + fieldValue + "->" + value);
-            }
-
+            if (LogFilter.Debug) Debug.Log("SetSyncVar " + GetType().Name + " bit [" + dirtyBit + "] " + fieldValue + "->" + value);
             SetDirtyBit(dirtyBit);
             fieldValue = value;
         }
@@ -657,7 +624,7 @@ namespace Mirror
             }
         }
 
-        private bool AnySyncObjectDirty()
+        bool AnySyncObjectDirty()
         {
             // note: don't use Linq here. 1200 networked objects:
             //   Linq: 187KB GC/frame;, 2.66ms time
@@ -718,7 +685,7 @@ namespace Mirror
             }
         }
 
-        private ulong DirtyObjectBits()
+        ulong DirtyObjectBits()
         {
             ulong dirtyObjects = 0;
             for (int i = 0; i < syncObjects.Count; i++)
@@ -762,7 +729,7 @@ namespace Mirror
             return dirty;
         }
 
-        private void DeSerializeObjectsAll(NetworkReader reader)
+        void DeSerializeObjectsAll(NetworkReader reader)
         {
             for (int i = 0; i < syncObjects.Count; i++)
             {
@@ -771,7 +738,7 @@ namespace Mirror
             }
         }
 
-        private void DeSerializeObjectsDelta(NetworkReader reader)
+        void DeSerializeObjectsDelta(NetworkReader reader)
         {
             ulong dirty = reader.ReadPackedUInt64();
             for (int i = 0; i < syncObjects.Count; i++)

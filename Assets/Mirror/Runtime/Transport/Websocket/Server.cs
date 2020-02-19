@@ -1,5 +1,3 @@
-using Ninja.WebSockets;
-using Ninja.WebSockets.Internal;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +7,8 @@ using System.Net.WebSockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using Ninja.WebSockets;
+using Ninja.WebSockets.Internal;
 using UnityEngine;
 
 namespace Mirror.Websocket
@@ -20,15 +20,16 @@ namespace Mirror.Websocket
         public event Action<int> Disconnected;
         public event Action<int, Exception> ReceivedError;
 
-        private const int MaxMessageSize = 256 * 1024;
+        const int MaxMessageSize = 256 * 1024;
 
         // listener
-        private TcpListener listener;
-        private readonly IWebSocketServerFactory webSocketServerFactory = new WebSocketServerFactory();
-        private CancellationTokenSource cancellation;
+        TcpListener listener;
+        readonly IWebSocketServerFactory webSocketServerFactory = new WebSocketServerFactory();
+
+        CancellationTokenSource cancellation;
 
         // clients with <connectionId, TcpClient>
-        private readonly Dictionary<int, WebSocket> clients = new Dictionary<int, WebSocket>();
+        Dictionary<int, WebSocket> clients = new Dictionary<int, WebSocket>();
 
         public bool NoDelay = true;
 
@@ -36,7 +37,7 @@ namespace Mirror.Websocket
         // (right now we only use it from one listener thread, but we might have
         //  multiple threads later in case of WebSockets etc.)
         // -> static so that another server instance doesn't start at 0 again.
-        private static int counter = 0;
+        static int counter = 0;
 
         // public next id function in case someone needs to reserve an id
         // (e.g. if hostMode should always have 0 connection and external
@@ -60,7 +61,10 @@ namespace Mirror.Websocket
         }
 
         // check if the server is running
-        public bool Active => listener != null;
+        public bool Active
+        {
+            get { return listener != null; }
+        }
 
         public WebSocket GetClient(int connectionId)
         {
@@ -87,7 +91,7 @@ namespace Mirror.Websocket
                 cancellation = new CancellationTokenSource();
 
                 listener = TcpListener.Create(port);
-                listener.Server.NoDelay = NoDelay;
+                listener.Server.NoDelay = this.NoDelay;
                 listener.Start();
                 Debug.Log($"Websocket server started listening on port {port}");
                 while (true)
@@ -106,7 +110,7 @@ namespace Mirror.Websocket
             }
         }
 
-        private async Task ProcessTcpClient(TcpClient tcpClient, CancellationToken token)
+        async Task ProcessTcpClient(TcpClient tcpClient, CancellationToken token)
         {
 
             try
@@ -165,7 +169,7 @@ namespace Mirror.Websocket
             }
         }
 
-        private bool CertVerificationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        bool CertVerificationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             // Much research has been done on this. When this is initiated from a HTTPS/WSS stream,
             // the certificate is null and the SslPolicyErrors is RemoteCertificateNotAvailable.
@@ -173,7 +177,7 @@ namespace Mirror.Websocket
             return true;
         }
 
-        private async Task ReceiveLoopAsync(WebSocket webSocket, CancellationToken token)
+        async Task ReceiveLoopAsync(WebSocket webSocket, CancellationToken token)
         {
             int connectionId = NextConnectionId();
             clients.Add(connectionId, webSocket);
@@ -198,9 +202,7 @@ namespace Mirror.Websocket
                     ArraySegment<byte> data = await ReadFrames(connectionId, result, webSocket, buffer, token);
 
                     if (data.Count == 0)
-                    {
                         break;
-                    }
 
                     try
                     {
@@ -227,7 +229,7 @@ namespace Mirror.Websocket
 
         // a message might come splitted in multiple frames
         // collect all frames
-        private async Task<ArraySegment<byte>> ReadFrames(int connectionId, WebSocketReceiveResult result, WebSocket webSocket, byte[] buffer, CancellationToken token)
+        async Task<ArraySegment<byte>> ReadFrames(int connectionId, WebSocketReceiveResult result, WebSocket webSocket, byte[] buffer, CancellationToken token)
         {
             int count = result.Count;
 
@@ -251,10 +253,7 @@ namespace Mirror.Websocket
         public void Stop()
         {
             // only if started
-            if (!Active)
-            {
-                return;
-            }
+            if (!Active) return;
 
             Debug.Log("Server: stopping...");
             cancellation.Cancel();

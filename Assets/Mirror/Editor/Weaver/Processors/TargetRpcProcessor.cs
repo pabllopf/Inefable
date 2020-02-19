@@ -6,7 +6,7 @@ namespace Mirror.Weaver
 {
     public static class TargetRpcProcessor
     {
-        private const string TargetRpcPrefix = "InvokeTargetRpc";
+        const string TargetRpcPrefix = "InvokeTargetRpc";
 
         // helper functions to check if the method has a NetworkConnection parameter
         public static bool HasNetworkConnectionParameter(MethodDefinition md)
@@ -41,9 +41,7 @@ namespace Mirror.Weaver
 
             // process reader parameters and skip first one if first one is NetworkConnection
             if (!NetworkBehaviourProcessor.ProcessNetworkReaderParameters(md, rpcWorker, hasNetworkConnection))
-            {
                 return null;
-            }
 
             // invoke actual command function
             rpcWorker.Append(rpcWorker.Create(OpCodes.Callvirt, rpcCallFunc));
@@ -116,9 +114,7 @@ namespace Mirror.Weaver
             // write all the arguments that the user passed to the TargetRpc call
             // (skip first one if first one is NetworkConnection)
             if (!NetworkBehaviourProcessor.WriteArguments(rpcWorker, md, hasNetworkConnection))
-            {
                 return null;
-            }
 
             string rpcName = md.Name;
             int index = rpcName.IndexOf(TargetRpcPrefix);

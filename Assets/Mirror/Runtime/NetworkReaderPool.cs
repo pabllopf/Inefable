@@ -5,7 +5,7 @@ namespace Mirror
 {
     public static class NetworkReaderPool
     {
-        private static readonly Stack<NetworkReader> pool = new Stack<NetworkReader>();
+        static readonly Stack<NetworkReader> pool = new Stack<NetworkReader>();
 
         public static NetworkReader GetReader(byte[] bytes)
         {
