@@ -50,7 +50,7 @@ public class Wallet : MonoBehaviour
         StartCoroutine(ShowUINow(TimeToHideUI));
 
         Sound.Play(SoundClip.TakeItem, audioSource);
-        //Data.Save(money).InFolder("Player").WithName("Money");
+        Data.SaveVar(money).WithName("Money").InFolder("Player");
     }
 
     /// <summary>Spends the specified amount.</summary>
@@ -68,7 +68,7 @@ public class Wallet : MonoBehaviour
         StartCoroutine(ShowUINow(TimeToHideUI));
 
         Sound.Play(SoundClip.TakeItem, audioSource);
-        //Data.Save(money).InFolder("Player").WithName("Money");
+        Data.SaveVar(money).WithName("Money").InFolder("Player");
     }
 
     /// <summary>Awakes this instance.</summary>
@@ -76,7 +76,7 @@ public class Wallet : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        //money = Data.LoadVar("Money").OfFolder("Player").Int;
+        money = Data.LoadVar("Money").FromFolder("Player").Int;
 
         animator = transform.Find("Interface/CounterCoins").GetComponent<Animator>();
 

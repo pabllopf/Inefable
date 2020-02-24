@@ -9,16 +9,16 @@ using UnityEngine;
 public class Data
 {
     /// <summary>The variable</summary>
-    private readonly object valueVar = null;
+    private object valueVar = null;
 
     /// <summary>The name variable</summary>
-    private readonly string nameVar = null;
+    private string nameVar = null;
 
     /// <summary>Initializes a new instance of the <see cref="Data"/> class.</summary>
     /// <param name="variable">The variable.</param>
     private Data(object variable)
     {
-        this.valueVar = variable;
+        valueVar = variable;
     }
 
     /// <summary>Initializes a new instance of the <see cref="Data"/> class.</summary>
@@ -26,7 +26,7 @@ public class Data
     /// <param name="nameVar">The name variable.</param>
     private Data(object variable, string nameVar)
     {
-        this.valueVar = variable;
+        valueVar = variable;
         this.nameVar = nameVar;
     }
 
@@ -82,7 +82,7 @@ public class Data
             Directory.CreateDirectory(path);
         }
 
-        Security.Encrypt(path + file, valueVar.ToString());
+        File.WriteAllText(path + file, valueVar.ToString());
     }
 
     /// <summary>From the folder.</summary>
@@ -91,25 +91,18 @@ public class Data
     public Data FromFolder(string folder)
     {
         string path = Application.persistentDataPath + "/Data/" + folder;
-        string file = "/" + valueVar.ToString() + ".json";
+        string file = "/" + valueVar + ".json";
 
-        if (Directory.Exists(path))
-        {
-            if (File.Exists(file))
-            {
-                return new Data(Security.Decrypt(path + file));
-            }
-            else
-            {
-                Security.Encrypt(path + file, "0");
-                return new Data(Security.Decrypt(path + file));
-            }
-        }
-        else
+        if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
-            Security.Encrypt(path + file, "0");
-            return new Data(Security.Decrypt(path + file));
         }
+
+        if (!File.Exists(path + file))
+        {
+            File.WriteAllText(path + file, "0");
+        }
+
+        return new Data(File.ReadAllText(path + file));
     }
 }

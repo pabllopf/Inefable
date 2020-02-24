@@ -52,7 +52,7 @@ public class Keychain : MonoBehaviour
         }
 
         Sound.Play(SoundClip.TakeItem, audioSource);
-        //Data.Save(numOfKeys).InFolder("Player").WithName("NumOfKeys");
+        Data.SaveVar(numOfKeys).WithName("NumOfKeys").InFolder("Player");
     }
 
     /// <summary>Spend a key.</summary>
@@ -72,7 +72,7 @@ public class Keychain : MonoBehaviour
         }
 
         Sound.Play(SoundClip.TakeItem, audioSource);
-        //Data.Save(numOfKeys).InFolder("Player").WithName("NumOfKeys");
+        Data.SaveVar(numOfKeys).WithName("NumOfKeys").InFolder("Player");
     }
 
     /// <summary>Actives the UI.</summary>
@@ -87,7 +87,7 @@ public class Keychain : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        //numOfKeys = Data.LoadVar("NumOfKeys").OfFolder("Player").Int;
+        numOfKeys = Data.LoadVar("NumOfKeys").FromFolder("Player").Int;
 
         animator = transform.Find("Interface/CounterKeys").GetComponent<Animator>();
 

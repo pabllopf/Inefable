@@ -51,14 +51,14 @@ public class Settings
     /// <summary>Save the settings.</summary>
     public static void Save()
     {
-        Data.SaveVar(Settings.Current.Platform).WithName("Plattform").InFolder("Settings");
-        Data.SaveVar(Settings.Current.Language).WithName("Language").InFolder("Settings");
+        Data.SaveVar(current.platform).WithName("Platform").InFolder("Settings");
+        Data.SaveVar(current.language).WithName("Language").InFolder("Settings");
     }
 
     /// <summary>Loads this instance.</summary>
     public static void Load()
     {
-        string platform = Data.LoadVar("Plattform").FromFolder("Settings").String;
+        string platform = Data.LoadVar("Platform").FromFolder("Settings").String;
         string language = Data.LoadVar("Language").FromFolder("Settings").String;
 
         Current = new Settings(platform, language);
