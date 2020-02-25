@@ -17,7 +17,7 @@ public class Language : MonoBehaviour
 
     /// <summary>Translates to.</summary>
     /// <param name="language">The language.</param>
-    public static void TranslateTo(string language) 
+    public static void TranslateTo(string language)
     {
         Settings.Current.Language = language;
         Settings.Save();

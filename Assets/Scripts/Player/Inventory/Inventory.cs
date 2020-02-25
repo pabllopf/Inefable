@@ -2,6 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Inventory.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,17 +36,17 @@ public class Inventory : MonoBehaviour
 
     /// <summary>Adds the item.</summary>
     /// <param name="item">The item.</param>
-    public void AddItem(IItem item)
+    public void AddItem(Item item)
     {
         Image slot = inventory.Find(i => i.sprite == null);
-
+        
         slot.gameObject.SetActive(true);
+        slot.name = item.NameItem;
+        slot.sprite = item.Icon;
+        slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
 
-        slot.tag = item.GetName();
-        slot.sprite = item.GetIcon();
-        slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Action(gameObject); });
-
-        Data.SaveVar(slot.tag).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
+        string json = JsonUtility.ToJson(item);
+        Data.SaveVar(json).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
         Sound.Play(AddItemSound, audioSource);
     }
 
@@ -103,6 +104,7 @@ public class Inventory : MonoBehaviour
         if (inventory[position].sprite != null)
         {
             inventory[position].GetComponentInParent<Button>().onClick.Invoke();
+            inventory[position].name = string.Empty;
             inventory[position].sprite = null;
             inventory[position].gameObject.SetActive(false);
 
@@ -112,15 +114,24 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>Loads the item.</summary>
-    /// <param name="image">The image.</param>
-    private void LoadItem(Image image)
+    /// <param name="slot">The image.</param>
+    private void LoadItem(Image slot)
     {
-        string slot = Data.LoadVar("Slot" + inventory.IndexOf(image)).FromFolder("Inventory").String;
-        if (!slot.Equals("0"))
-        {
-            image.tag = slot;
-            image.sprite = Resources.Load<Sprite>("Icons/" + image.tag);
-            image.GetComponentInParent<Button>().onClick.AddListener(() => { Resources.Load<GameObject>("Items/" + image.tag).GetComponent<IItem>().Action(gameObject); });
+        string content = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").String;
+
+        if (content.Equals("0")) 
+        { 
+            return; 
         }
+
+        Item item = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").ToItem();
+
+        //JsonUtility.FromJsonOverwrite(content, item);
+
+        item.Target = gameObject;
+
+        slot.name = item.NameItem;
+        slot.sprite = item.Icon;
+        slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
     }
 }

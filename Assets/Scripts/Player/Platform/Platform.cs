@@ -10,13 +10,13 @@ public class Platform : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
             Settings.Current.Platform = "Mobile";
             return;
         }
 
-        if (Input.GetAxisRaw("LeftJoystickX") != 0 || Input.GetAxisRaw("LeftJoystickY") != 0 || Input.GetButton("ButtonA") || Input.GetButton("ButtonB")) 
+        if (Input.GetAxisRaw("LeftJoystickX") != 0 || Input.GetAxisRaw("LeftJoystickY") != 0 || Input.GetButton("ButtonA") || Input.GetButton("ButtonB"))
         {
             Settings.Current.Platform = "Xbox";
             return;

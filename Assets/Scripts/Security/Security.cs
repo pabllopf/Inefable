@@ -11,17 +11,17 @@ using UnityEngine;
 /// <summary>Manage the security of data game.</summary>
 public class Security : MonoBehaviour
 {
-    /// <summary>Encrypts the specified data.</summary>
-    /// <param name="data">The data.</param>
+    /// <summary>Encrypts the specified path file.</summary>
     /// <param name="pathFile">The path file.</param>
+    /// <param name="data">The data.</param>
     public static void Encrypt(string pathFile, string data)
     {
-        string Key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435" + pathFile;
+        string key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435" + pathFile;
         byte[] stringToEncrypt = UTF8Encoding.UTF8.GetBytes(data);
 
         TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
         MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
-        byte[] keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(Key));
+        byte[] keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
         hashmd5.Clear();
 
         tdes.Key = keyArray;
@@ -40,14 +40,14 @@ public class Security : MonoBehaviour
     /// <returns>Return string decrypted</returns>
     public static string Decrypt(string pathFile)
     {
-        string Key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435" + pathFile;
+        string key = "dgwn`SCN7342!/(&2-.MSDUOUQsdbasd3e435" + pathFile;
         string result = string.Empty;
         string stringEncrypt = File.ReadAllText(pathFile);
 
         byte[] arrayEncrypt = Convert.FromBase64String(stringEncrypt);
 
         MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
-        byte[] keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(Key));
+        byte[] keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
         hashmd5.Clear();
 
         TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider

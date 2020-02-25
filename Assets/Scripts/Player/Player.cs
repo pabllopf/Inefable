@@ -2,9 +2,9 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using Mirror;
 using System.Collections;
 using System.Linq;
-using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -115,6 +115,8 @@ public class Player : NetworkBehaviour
             mobileUI.SetActive(Settings.Current.Platform.Equals("Mobile") ? true : false);
 
             SetUpPlayerCamera();
+
+
         }
     }
 
@@ -156,7 +158,7 @@ public class Player : NetworkBehaviour
                 ButtonB();
                 return;
             }
-            
+
             return;
         }
     }

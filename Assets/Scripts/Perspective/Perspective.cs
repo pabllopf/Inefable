@@ -19,7 +19,7 @@ public class Perspective : MonoBehaviour
 
     /// <summary>Gets or sets the order layer front.</summary>
     /// <value>The order layer front.</value>
-    public int OrderLayerFront 
+    public int OrderLayerFront
     {
         get => orderLayerFront;
         set => orderLayerFront = value;

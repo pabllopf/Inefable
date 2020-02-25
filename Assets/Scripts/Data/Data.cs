@@ -9,10 +9,10 @@ using UnityEngine;
 public class Data
 {
     /// <summary>The variable</summary>
-    private object valueVar = null;
+    private readonly object valueVar = null;
 
     /// <summary>The name variable</summary>
-    private string nameVar = null;
+    private readonly string nameVar = null;
 
     /// <summary>Initializes a new instance of the <see cref="Data"/> class.</summary>
     /// <param name="variable">The variable.</param>
@@ -82,7 +82,7 @@ public class Data
             Directory.CreateDirectory(path);
         }
 
-        File.WriteAllText(path + file, valueVar.ToString());
+        Security.Encrypt(path + file, valueVar.ToString());
     }
 
     /// <summary>From the folder.</summary>
@@ -100,9 +100,18 @@ public class Data
 
         if (!File.Exists(path + file))
         {
-            File.WriteAllText(path + file, "0");
+            Security.Encrypt(path + file, "0");
         }
 
-        return new Data(File.ReadAllText(path + file));
+        return new Data(Security.Decrypt(path + file));
+    }
+
+    /// <summary>Converts to item.</summary>
+    /// <returns>The item</returns>
+    public Item ToItem()
+    {
+        Item item = new Item();
+        JsonUtility.FromJsonOverwrite(valueVar.ToString(), item);
+        return item;
     }
 }
