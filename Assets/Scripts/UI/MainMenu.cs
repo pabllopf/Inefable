@@ -59,16 +59,16 @@ public class MainMenu : MonoBehaviour
     /// <summary>Gets or sets the scene to load is new adventure.</summary>
     /// <value>The scene to load is new adventure.</value>
     public string SceneOfNewAdventure { get => sceneOfNewAdventure; set => sceneOfNewAdventure = value; }
-    
+
     /// <summary>Gets or sets the scene of continue adventure.</summary>
     /// <value>The scene of continue adventure.</value>
     public string SceneOfContinueAdventure { get => sceneOfContinueAdventure; set => sceneOfContinueAdventure = value; }
-    
+
     /// <summary>Gets or sets a value indicating whether [neutral stick].</summary>
     /// <value>
     /// <c>true</c> if [neutral stick]; otherwise, <c>false</c>.</value>
     public bool NeutralStick { get => neutralStick; set => neutralStick = value; }
-    
+
     /// <summary>Gets or sets the accept clip.</summary>
     /// <value>The accept clip.</value>
     public AudioClip AcceptClip { get => acceptClip; set => acceptClip = value; }
@@ -76,7 +76,7 @@ public class MainMenu : MonoBehaviour
     /// <summary>Gets or sets the audio source.</summary>
     /// <value>The audio source.</value>
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
-    
+
     /// <summary>Gets or sets the cancel clip.</summary>
     /// <value>The cancel clip.</value>
     public AudioClip CancelClip { get => cancelClip; set => cancelClip = value; }
@@ -199,9 +199,9 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        if (popUpPanel.activeSelf) 
+        if (popUpPanel.activeSelf)
         {
-            CheckAnswer();  
+            CheckAnswer();
         }
     }
 
@@ -213,7 +213,7 @@ public class MainMenu : MonoBehaviour
             NeutralStick = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.W) || (Input.GetAxis("LeftJoystickY") > 0 && NeutralStick == true)) 
+        if (Input.GetKeyDown(KeyCode.W) || (Input.GetAxis("LeftJoystickY") > 0 && NeutralStick == true))
         {
             NeutralStick = false;
             GoUpInTheMenu();
@@ -245,7 +245,7 @@ public class MainMenu : MonoBehaviour
             selectors[selectors.IndexOf(selector) - 1].SetActive(true);
 
             Sound.Play(AcceptClip, AudioSource);
-        }  
+        }
     }
 
     /// <summary>Goes down in the menu.</summary>
@@ -310,6 +310,8 @@ public class MainMenu : MonoBehaviour
     /// <summary>Yeses the new adventure.</summary>
     private void YesNewAdventure()
     {
+        Settings.Current.IsTheFirstTime = false;
+        Settings.Save();
         Sound.Play(AcceptClip, AudioSource);
         SceneManager.LoadScene(SceneOfNewAdventure);
     }

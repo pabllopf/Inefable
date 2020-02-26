@@ -38,11 +38,11 @@ public class Wallet : MonoBehaviour
     /// <summary>Gets or sets the audio source.</summary>
     /// <value>The audio source.</value>
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
-    
+
     /// <summary>Gets or sets the spend coin clip.</summary>
     /// <value>The spend coin clip.</value>
     public AudioClip SpendCoinClip { get => spendCoinClip; set => spendCoinClip = value; }
-    
+
     /// <summary>Gets or sets the add coin clip.</summary>
     /// <value>The add coin clip.</value>
     public AudioClip AddCoinClip { get => addCoinClip; set => addCoinClip = value; }

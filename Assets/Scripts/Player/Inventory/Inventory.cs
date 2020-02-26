@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Gets or sets the use item sound.</summary>
     /// <value>The use item sound.</value>
     public AudioClip UseItemSound { get => useItemSound; set => useItemSound = value; }
-    
+
     /// <summary>Gets or sets the add item sound.</summary>
     /// <value>The add item sound.</value>
     public AudioClip AddItemSound { get => addItemSound; set => addItemSound = value; }
@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Gets or sets the audio source.</summary>
     /// <value>The audio source.</value>
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
-    
+
     /// <summary>Adds the item.</summary>
     /// <param name="item">The item.</param>
     public void AddItem(Item item)

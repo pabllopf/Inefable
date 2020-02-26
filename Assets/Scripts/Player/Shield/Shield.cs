@@ -41,11 +41,11 @@ public class Shield : MonoBehaviour
     /// <summary>Gets or sets the take clip.</summary>
     /// <value>The take clip.</value>
     public AudioClip TakeClip { get => takeClip; set => takeClip = value; }
-    
+
     /// <summary>Gets or sets the full shield clip.</summary>
     /// <value>The full shield clip.</value>
     public AudioClip FullShieldClip { get => fullShieldClip; set => fullShieldClip = value; }
-    
+
     /// <summary>Gets or sets the audio source.</summary>
     /// <value>The audio source.</value>
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }

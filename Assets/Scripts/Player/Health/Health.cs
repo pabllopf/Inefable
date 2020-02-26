@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
     /// <summary>Gets or sets the audio source.</summary>
     /// <value>The audio source.</value>
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
-    
+
     /// <summary>Gets or sets the take clip.</summary>
     /// <value>The take clip.</value>
     public AudioClip TakeClip { get => takeClip; set => takeClip = value; }
