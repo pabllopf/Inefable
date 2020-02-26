@@ -27,8 +27,28 @@ public class Shield : MonoBehaviour
     /// <summary>The health bar</summary>
     private Scrollbar bar = null;
 
+    /// <summary>The treat clip</summary>
+    [SerializeField]
+    private AudioClip fullShieldClip = null;
+
+    /// <summary>The take clip</summary>
+    [SerializeField]
+    private AudioClip takeClip = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
+
+    /// <summary>Gets or sets the take clip.</summary>
+    /// <value>The take clip.</value>
+    public AudioClip TakeClip { get => takeClip; set => takeClip = value; }
+    
+    /// <summary>Gets or sets the full shield clip.</summary>
+    /// <value>The full shield clip.</value>
+    public AudioClip FullShieldClip { get => fullShieldClip; set => fullShieldClip = value; }
+    
+    /// <summary>Gets or sets the audio source.</summary>
+    /// <value>The audio source.</value>
+    public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
 
     /// <summary>Sets the full.</summary>
     public void SetFull()
@@ -38,7 +58,7 @@ public class Shield : MonoBehaviour
         marker.text = shield.ToString();
         shieldObj.SetActive((shield > 0) ? true : false);
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(FullShieldClip, AudioSource);
         Data.SaveVar(shield).WithName("Shield").InFolder("Player");
     }
 
@@ -53,7 +73,7 @@ public class Shield : MonoBehaviour
 
         StartCoroutine(TakeAHitEffect(TimeOfEffect));
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(TakeClip, AudioSource);
         Data.SaveVar(shield).WithName("Shield").InFolder("Player");
     }
 

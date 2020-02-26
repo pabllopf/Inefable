@@ -13,32 +13,32 @@ public class PickUp : MonoBehaviour
 
     /// <summary>Gets or sets the item.</summary>
     /// <value>The item.</value>
-    public Item Item 
-    { 
-        get => item; 
-        set => item = value; 
+    public Item Item
+    {
+        get => item;
+        set => item = value;
     }
 
     /// <summary>Called when [trigger enter2 d].</summary>
     /// <param name="obj">The object.</param>
     public void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.CompareTag("Player")) 
+        if (obj.CompareTag("Player"))
         {
             Item.Target = obj.gameObject;
             if (Item.SaveInInventory)
             {
-                obj.GetComponent<Inventory>().AddItem(Item);
+                if (obj.GetComponent<Inventory>().HasSpace)
+                {
+                    obj.GetComponent<Inventory>().AddItem(Item);
+                    Destroy(gameObject);
+                }
             }
-            else 
+            else
             {
                 Item.Use();
+                Destroy(gameObject);
             }
-
-            string json = JsonUtility.ToJson(Item);
-            Debug.Log(json);
-
-            Destroy(gameObject);
         }
     }
 }

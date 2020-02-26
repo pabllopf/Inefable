@@ -24,6 +24,14 @@ public class Health : MonoBehaviour
     /// <summary>The health bar</summary>
     private Scrollbar bar = null;
 
+    /// <summary>The treat clip</summary>
+    [SerializeField]
+    private AudioClip treatClip = null;
+
+    /// <summary>The take clip</summary>
+    [SerializeField]
+    private AudioClip takeClip = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
@@ -31,6 +39,18 @@ public class Health : MonoBehaviour
     /// <value>
     /// <c>true</c> if this instance is alive; otherwise, <c>false</c>.</value>
     public bool IsAlive => (health > 0) ? true : false;
+
+    /// <summary>Gets or sets the treat clip.</summary>
+    /// <value>The treat clip.</value>
+    public AudioClip TreatClip { get => treatClip; set => treatClip = value; }
+
+    /// <summary>Gets or sets the audio source.</summary>
+    /// <value>The audio source.</value>
+    public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+    
+    /// <summary>Gets or sets the take clip.</summary>
+    /// <value>The take clip.</value>
+    public AudioClip TakeClip { get => takeClip; set => takeClip = value; }
 
     /// <summary>Treat the specified amount.</summary>
     /// <param name="amount">The amount.</param>
@@ -40,7 +60,7 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(TreatClip, AudioSource);
         Data.SaveVar(health).WithName("Health").InFolder("Player");
     }
 
@@ -51,7 +71,7 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(TreatClip, AudioSource);
         Data.SaveVar(health).WithName("Health").InFolder("Player");
     }
 
@@ -65,7 +85,7 @@ public class Health : MonoBehaviour
 
         StartCoroutine(TakeAHitEffect(TimeOfEffect));
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(TakeClip, AudioSource);
         Data.SaveVar(health).WithName("Health").InFolder("Player");
     }
 

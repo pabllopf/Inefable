@@ -24,8 +24,28 @@ public class Wallet : MonoBehaviour
     /// <summary>The animator</summary>
     private Animator animator = null;
 
+    /// <summary>The treat clip</summary>
+    [SerializeField]
+    private AudioClip addCoinClip = null;
+
+    /// <summary>The take clip</summary>
+    [SerializeField]
+    private AudioClip spendCoinClip = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
+
+    /// <summary>Gets or sets the audio source.</summary>
+    /// <value>The audio source.</value>
+    public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+    
+    /// <summary>Gets or sets the spend coin clip.</summary>
+    /// <value>The spend coin clip.</value>
+    public AudioClip SpendCoinClip { get => spendCoinClip; set => spendCoinClip = value; }
+    
+    /// <summary>Gets or sets the add coin clip.</summary>
+    /// <value>The add coin clip.</value>
+    public AudioClip AddCoinClip { get => addCoinClip; set => addCoinClip = value; }
 
     /// <summary>Determines whether this instance can spend the specified amount.</summary>
     /// <param name="amount">The amount.</param>
@@ -49,7 +69,7 @@ public class Wallet : MonoBehaviour
 
         StartCoroutine(ShowUINow(TimeToHideUI));
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(AddCoinClip, AudioSource);
         Data.SaveVar(money).WithName("Money").InFolder("Player");
     }
 
@@ -67,7 +87,7 @@ public class Wallet : MonoBehaviour
 
         StartCoroutine(ShowUINow(TimeToHideUI));
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(SpendCoinClip, AudioSource);
         Data.SaveVar(money).WithName("Money").InFolder("Player");
     }
 

@@ -15,13 +15,18 @@ public class Settings
     /// <summary>The language</summary>
     private string language;
 
+    /// <summary>The is the first time</summary>
+    private bool isTheFirstTime;
+
     /// <summary>Initializes a new instance of the <see cref="Settings"/> class.</summary>
     /// <param name="platform">The platform.</param>
     /// <param name="language">The language.</param>
-    private Settings(string platform, string language)
+    /// <param name="isTheFirstTime">if set to <c>true</c> [is the first time].</param>
+    private Settings(string platform, string language, bool isTheFirstTime)
     {
         this.platform = platform.Equals("0") ? "Computer" : platform;
         this.language = language.Equals("0") ? "English" : language;
+        this.isTheFirstTime = isTheFirstTime.Equals("0") ? true : isTheFirstTime;
     }
 
     /// <summary>Gets or sets the current.</summary>
@@ -48,11 +53,21 @@ public class Settings
         set => language = value;
     }
 
+    /// <summary>Gets or sets a value indicating whether this instance is the first time.</summary>
+    /// <value>
+    /// <c>true</c> if this instance is the first time; otherwise, <c>false</c>.</value>
+    public bool IsTheFirstTime
+    {
+        get => isTheFirstTime;
+        set => isTheFirstTime = value;
+    }
+
     /// <summary>Save the settings.</summary>
     public static void Save()
     {
         Data.SaveVar(current.platform).WithName("Platform").InFolder("Settings");
         Data.SaveVar(current.language).WithName("Language").InFolder("Settings");
+        Data.SaveVar(current.isTheFirstTime).WithName("IsTheFirstTime").InFolder("Settings");
     }
 
     /// <summary>Loads this instance.</summary>
@@ -60,7 +75,8 @@ public class Settings
     {
         string platform = Data.LoadVar("Platform").FromFolder("Settings").String;
         string language = Data.LoadVar("Language").FromFolder("Settings").String;
+        bool isTheFirstTime = Data.LoadVar("IsTheFirstTime").FromFolder("Settings").Bool;
 
-        Current = new Settings(platform, language);
+        Current = new Settings(platform, language, isTheFirstTime);
     }
 }

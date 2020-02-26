@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   nameItem: Key
+  description: 0
+  cost: 10
   icon: {fileID: -2493162504850783776, guid: 2ab777c10a11e224f8931f8a9e6e244d, type: 3}
   saveInInventory: 0
-  action: 1
+  action: 4

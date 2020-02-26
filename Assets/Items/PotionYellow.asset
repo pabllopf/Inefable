@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PotionYellow
   m_EditorClassIdentifier: 
   nameItem: PotionYellow
+  description: 0
+  cost: 10
   icon: {fileID: -9165417312161502194, guid: 25305825eab44434693293f7ffa8c632, type: 3}
   saveInInventory: 1
-  action: 1
+  action: 5

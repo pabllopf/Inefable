@@ -55,24 +55,27 @@ public class PressEffect : MonoBehaviour
     /// <summary>Update this instance.</summary>
     private void Update()
     {
-        if (Settings.Current.Platform.Equals("Mobile"))
+        if (Settings.Current != null)
         {
-            image.enabled = false;
-            return;
-        }
+            if (Settings.Current.Platform.Equals("Mobile"))
+            {
+                image.enabled = false;
+                return;
+            }
 
-        if (Settings.Current.Platform.Equals("Computer"))
-        {
-            image.enabled = true;
-            image.sprite = PlayInComputer;
-            return;
-        }
+            if (Settings.Current.Platform.Equals("Computer"))
+            {
+                image.enabled = true;
+                image.sprite = PlayInComputer;
+                return;
+            }
 
-        if (Settings.Current.Platform.Equals("Xbox"))
-        {
-            image.enabled = true;
-            image.sprite = PlayInXbox;
-            return;
+            if (Settings.Current.Platform.Equals("Xbox"))
+            {
+                image.enabled = true;
+                image.sprite = PlayInXbox;
+                return;
+            }
         }
     }
 }

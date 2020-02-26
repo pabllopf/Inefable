@@ -17,4 +17,4 @@ MonoBehaviour:
   cost: 10
   icon: {fileID: 8249043904041728345, guid: d731e245c11ab0e46b8d66a572c84cbd, type: 3}
   saveInInventory: 1
-  action: 0
+  action: 1

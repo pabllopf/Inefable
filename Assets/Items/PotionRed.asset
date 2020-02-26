@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PotionRed
   m_EditorClassIdentifier: 
   nameItem: PotionRed
+  description: 0
+  cost: 10
   icon: {fileID: -6772615580128998071, guid: e3af0daf6bf60294b92ab1980a4a494a, type: 3}
   saveInInventory: 1
-  action: 1
+  action: 2

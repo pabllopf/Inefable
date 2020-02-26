@@ -24,8 +24,28 @@ public class Keychain : MonoBehaviour
     /// <summary>The animator</summary>
     private Animator animator = null;
 
+    /// <summary>The treat clip</summary>
+    [SerializeField]
+    private AudioClip addKeyClip = null;
+
+    /// <summary>The take clip</summary>
+    [SerializeField]
+    private AudioClip spendKeyClip = null;
+
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
+
+    /// <summary>Gets or sets the audio source.</summary>
+    /// <value>The audio source.</value>
+    public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+
+    /// <summary>Gets or sets the add key clip.</summary>
+    /// <value>The add key clip.</value>
+    public AudioClip AddKeyClip { get => spendKeyClip; set => spendKeyClip = value; }
+
+    /// <summary>Gets or sets the spend key clip.</summary>
+    /// <value>The spend key clip.</value>
+    public AudioClip SpendKeyClip { get => addKeyClip; set => addKeyClip = value; }
 
     /// <summary>Determines whether this instance [can spend a key].</summary>
     /// <returns>
@@ -51,7 +71,7 @@ public class Keychain : MonoBehaviour
             StartCoroutine(ShowUINow(TimeToHideUI));
         }
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(AddKeyClip, AudioSource);
         Data.SaveVar(numOfKeys).WithName("NumOfKeys").InFolder("Player");
     }
 
@@ -71,7 +91,7 @@ public class Keychain : MonoBehaviour
             StartCoroutine(ShowUINow(TimeToHideUI));
         }
 
-        Sound.Play(SoundClip.TakeItem, audioSource);
+        Sound.Play(SpendKeyClip, AudioSource);
         Data.SaveVar(numOfKeys).WithName("NumOfKeys").InFolder("Player");
     }
 

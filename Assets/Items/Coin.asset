@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Coin
   m_EditorClassIdentifier: 
   nameItem: Coin
-  icon: {fileID: 5300791252318710109, guid: ae54453180cb4914e9658d77839e7cff, type: 3}
+  description: 0
+  cost: 0
+  icon: {fileID: -4953213064541771370, guid: 59649245aca00774fb3175cf056ae6c8, type: 3}
   saveInInventory: 0
-  action: 1
+  action: 3

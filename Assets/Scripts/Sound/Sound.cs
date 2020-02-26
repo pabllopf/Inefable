@@ -10,9 +10,9 @@ public class Sound
     /// <summary>Plays the specified sound.</summary>
     /// <param name="sound">The sound.</param>
     /// <param name="audioSource">The audio source.</param>
-    public static void Play(SoundClip sound, AudioSource audioSource)
+    public static void Play(AudioClip sound, AudioSource audioSource)
     {
-        audioSource.clip = (AudioClip)Resources.Load("Sounds/" + sound.ToString());
+        audioSource.clip = sound;
         audioSource.Play();
     }
 }

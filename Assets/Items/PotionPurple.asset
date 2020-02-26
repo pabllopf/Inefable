@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PotionPurple
   m_EditorClassIdentifier: 
   nameItem: PotionPurple
+  description: 0
+  cost: 10
   icon: {fileID: 4002815236019709899, guid: d22368a84ef2ad942b38c394ef436018, type: 3}
   saveInInventory: 1
-  action: 1
+  action: 6

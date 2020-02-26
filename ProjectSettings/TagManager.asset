@@ -90,6 +90,8 @@ TagManager:
   - DataPrefabs
   - TileMap
   - 0
+  - QuestionNewAdventure
+  - QuestionExitGame
   layers:
   - Default
   - TransparentFX

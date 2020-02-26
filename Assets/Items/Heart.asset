@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Heart
   m_EditorClassIdentifier: 
   nameItem: Heart
+  description: 0
+  cost: 0
   icon: {fileID: -6219609241969312862, guid: a8c60f66316e99d4d9a4f142168d900e, type: 3}
   saveInInventory: 0
-  action: 1
+  action: 7

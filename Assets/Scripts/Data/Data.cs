@@ -46,6 +46,11 @@ public class Data
     /// <value>The string.</value>
     public string String => valueVar.ToString();
 
+    /// <summary>Gets a value indicating whether this <see cref="Data"/> is true.</summary>
+    /// <value>
+    /// <c>true</c> if true; otherwise, <c>false</c>.</value>
+    public bool Bool => (valueVar.ToString().Equals("0")) ? true : bool.Parse(valueVar.ToString());
+
     /// <summary>Saves the variable.</summary>
     /// <param name="obj">The object.</param>
     /// <returns>Return data</returns>

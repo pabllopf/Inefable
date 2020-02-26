@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270337716332116010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0012307331, y: -0.49682772, z: 0}
-  m_LocalScale: {x: 2.0689657, y: 2, z: 1}
+  m_LocalPosition: {x: 0.0015, y: -0.1111, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 2743327116594969947}
   m_RootOrder: 0
@@ -49,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 35e3ea49d1386ef4ca94d164c2c871d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 4143777454878029587, guid: ddf9dae985efb7947af04432dbafcce6,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -112,8 +112,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2743327116594969936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.634657, y: 0.017217308, z: 0}
-  m_LocalScale: {x: 0.24, y: 0.25, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2219334865233586857}
   m_Father: {fileID: 0}
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 5300791252318710109, guid: ae54453180cb4914e9658d77839e7cff,
+  m_Sprite: {fileID: -4953213064541771370, guid: 59649245aca00774fb3175cf056ae6c8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,7 +180,7 @@ Animator:
   m_GameObject: {fileID: 2743327116594969936}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1cc35fa563be53643be09096c671b1b7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0a96d9157de83e9409dd2b3eac8b957d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -204,7 +204,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.9
+  m_Radius: 0.25
 --- !u!114 &7571224491297239933
 MonoBehaviour:
   m_ObjectHideFlags: 0

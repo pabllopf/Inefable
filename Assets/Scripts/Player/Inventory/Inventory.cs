@@ -2,7 +2,6 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Inventory.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,11 +13,13 @@ public class Inventory : MonoBehaviour
     /// <summary>The show UI</summary>
     private const string ShowUI = "ShowUI";
 
-    /// <summary>The use item</summary>
-    private const SoundClip UseItemSound = SoundClip.TakeCoin;
+    /// <summary>The treat clip</summary>
+    [SerializeField]
+    private AudioClip useItemSound = null;
 
-    /// <summary>The add item sound</summary>
-    private const SoundClip AddItemSound = SoundClip.TakeCoin;
+    /// <summary>The take clip</summary>
+    [SerializeField]
+    private AudioClip addItemSound = null;
 
     /// <summary>The slots</summary>
     private List<Image> inventory = new List<Image>();
@@ -34,12 +35,23 @@ public class Inventory : MonoBehaviour
     /// <c>true</c> if this instance has space; otherwise, <c>false</c>.</value>
     public bool HasSpace => inventory.Any(slot => slot.sprite == null) ? true : false;
 
+    /// <summary>Gets or sets the use item sound.</summary>
+    /// <value>The use item sound.</value>
+    public AudioClip UseItemSound { get => useItemSound; set => useItemSound = value; }
+    
+    /// <summary>Gets or sets the add item sound.</summary>
+    /// <value>The add item sound.</value>
+    public AudioClip AddItemSound { get => addItemSound; set => addItemSound = value; }
+
+    /// <summary>Gets or sets the audio source.</summary>
+    /// <value>The audio source.</value>
+    public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+    
     /// <summary>Adds the item.</summary>
     /// <param name="item">The item.</param>
     public void AddItem(Item item)
     {
         Image slot = inventory.Find(i => i.sprite == null);
-        
         slot.gameObject.SetActive(true);
         slot.name = item.NameItem;
         slot.sprite = item.Icon;
@@ -47,7 +59,7 @@ public class Inventory : MonoBehaviour
 
         string json = JsonUtility.ToJson(item);
         Data.SaveVar(json).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
-        Sound.Play(AddItemSound, audioSource);
+        Sound.Play(AddItemSound, AudioSource);
     }
 
     /// <summary>Starts this instance.</summary>
@@ -108,7 +120,7 @@ public class Inventory : MonoBehaviour
             inventory[position].sprite = null;
             inventory[position].gameObject.SetActive(false);
 
-            Sound.Play(UseItemSound, audioSource);
+            Sound.Play(UseItemSound, AudioSource);
             Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
         }
     }
@@ -119,14 +131,12 @@ public class Inventory : MonoBehaviour
     {
         string content = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").String;
 
-        if (content.Equals("0")) 
-        { 
-            return; 
+        if (content.Equals("0"))
+        {
+            return;
         }
 
         Item item = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").ToItem();
-
-        //JsonUtility.FromJsonOverwrite(content, item);
 
         item.Target = gameObject;
 

@@ -10,9 +10,12 @@ using UnityEngine.UI;
 /// <summary>Show the current version of the game.</summary>
 public class Version : MonoBehaviour
 {
+    /// <summary>The version type</summary>
+    private const string VersionType = "Alpha ";
+
     /// <summary>Starts this instance.</summary>
     public void Start()
     {
-        GetComponent<Text>().text = Application.version;
+        GetComponent<Text>().text = VersionType + Application.version + " ";
     }
 }
