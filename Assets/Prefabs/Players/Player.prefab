@@ -443,6 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9443954d9eaf7fb43a2b953a6a83084c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  treatClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
+  takeClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
 --- !u!114 &5358616342689431272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449f952df9758f74ab16ad142bd20950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullShieldClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
+  takeClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
 --- !u!114 &-5362261757861055688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47826f38a601ba44097a73c54ddc9d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addCoinClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
+  spendCoinClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
 --- !u!114 &-1612459053620964978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cf34d1636a7234bb23568fefae2bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addKeyClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
+  spendKeyClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
 --- !u!114 &5484080073407255058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,6 +499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcf5b723896b284bb71593b94a2ea65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useItemSound: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
+  addItemSound: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
 --- !u!114 &-3113120528749295135
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,14 +49,14 @@ public class Kinematic : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
+        Settings.Load();
+        Language.Translate();
         Cursor.visible = false;
     }
 
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        Language.Translate();
-
         SoundTrack.clip = audioClip;
         SoundTrack.Play();
 

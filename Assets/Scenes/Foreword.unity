@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -298,15 +299,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c652e7a1dc9db0488ef9b173ac44d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Start
+  scene: Town
   timeBetweenSequences: 2
-  audioClip: {fileID: 8300000, guid: 57d03677ec9e42c4bb2b19993e2a09a9, type: 3}
+  audioClip: {fileID: 8300000, guid: de44c40f85788894aaf2872ee03f7d88, type: 3}
   sequences:
-  - sequence: {fileID: 482171316}
+  - sequenceObj: {fileID: 482171316}
     key: 31
-  - sequence: {fileID: 1547737721}
+  - sequenceObj: {fileID: 1547737721}
     key: 20
-  - sequence: {fileID: 122256711}
+  - sequenceObj: {fileID: 122256711}
     key: 23
 --- !u!4 &213938729
 Transform:
