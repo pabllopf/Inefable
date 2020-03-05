@@ -10,7 +10,7 @@ public class Perspective : MonoBehaviour
     /// <summary>The order layer front</summary>
     [Range(1, 10)]
     [SerializeField]
-    private int orderLayerFront = 2;
+    private int orderLayerFront = 1;
 
     /// <summary>The order layer back</summary>
     [Range(1, 10)]

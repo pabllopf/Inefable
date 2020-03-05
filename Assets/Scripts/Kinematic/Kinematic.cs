@@ -37,11 +37,11 @@ public class Kinematic : MonoBehaviour
     /// <summary>Gets or sets the time between sequences.</summary>
     /// <value>The time between sequences.</value>
     public float TimeBetweenSequences { get => timeBetweenSequences; set => timeBetweenSequences = value; }
-    
+
     /// <summary>Gets or sets the audio clip.</summary>
     /// <value>The audio clip.</value>
     public AudioClip AudioClip { get => audioClip; set => audioClip = value; }
-    
+
     /// <summary>Gets or sets the sequences.</summary>
     /// <value>The sequences.</value>
     public List<Sequence> Sequences { get => sequences; set => sequences = value; }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4029ec49bd0eb894ab799dc6370db4a3, type: 3}
+  m_Name: New Syle
+  m_EditorClassIdentifier: 
+  nameStyle: 
+  floor: {fileID: 0}
+  wallDown: {fileID: 0}
+  wallLeft: {fileID: 0}
+  wallRight: {fileID: 0}
+  wallTop: {fileID: 0}
+  cornerLeftDown: {fileID: 0}
+  cornerRightDown: {fileID: 0}
+  cornerLeftUp: {fileID: 0}
+  cornerRightUp: {fileID: 0}
+  cornerInternalLeftDown: {fileID: 0}
+  cornerInternalLeftUp: {fileID: 0}
+  cornerInternalRightDown: {fileID: 0}
+  cornerInternalRightUp: {fileID: 0}
+  decorations: []

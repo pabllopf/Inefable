@@ -51,6 +51,10 @@ public class Data
     /// <c>true</c> if true; otherwise, <c>false</c>.</value>
     public bool Bool => (valueVar.ToString().Equals("0")) ? true : bool.Parse(valueVar.ToString());
 
+    /// <summary>Gets the item.</summary>
+    /// <value>The item.</value>
+    public Item Item => Resources.Load<Item>("Items/" + valueVar.ToString());
+
     /// <summary>Saves the variable.</summary>
     /// <param name="obj">The object.</param>
     /// <returns>Return data</returns>
@@ -109,14 +113,5 @@ public class Data
         }
 
         return new Data(Security.Decrypt(path + file));
-    }
-
-    /// <summary>Converts to item.</summary>
-    /// <returns>The item</returns>
-    public Item ToItem()
-    {
-        Item item = new Item();
-        JsonUtility.FromJsonOverwrite(valueVar.ToString(), item);
-        return item;
     }
 }

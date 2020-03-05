@@ -43,9 +43,24 @@ public class Follower : MonoBehaviour
     /// <value>The be quiet.</value>
     private Vector2 BeQuiet => transform.position;
 
+    /// <summary>Starts this instance.</summary>
+    private void Start()
+    {
+        Camera camera = GetComponent<Camera>();
+        camera.clearFlags = CameraClearFlags.SolidColor;
+        camera.backgroundColor = Color.black;
+        camera.orthographic = true;
+        camera.orthographicSize = 5;
+        camera.nearClipPlane = 0f;
+        camera.farClipPlane = 1f;
+    }
+
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        CurrentPosition = (DistanceToTarget >= DistanceToStop) ? FollowTarget : BeQuiet;
+        if (Target)
+        {
+            CurrentPosition = (DistanceToTarget >= DistanceToStop) ? FollowTarget : BeQuiet;
+        }
     }
 }

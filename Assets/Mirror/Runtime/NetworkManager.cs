@@ -1684,7 +1684,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnStartHost()
         {
-            transform.Find("Interface").gameObject.SetActive(false);
+            //transform.Find("Interface").gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -1693,7 +1693,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnStartServer()
         {
-            transform.Find("Interface").gameObject.SetActive(false);
+            //transform.Find("Interface").gameObject.SetActive(false);
             //ui = Instantiate(ServerUI, this.transform);
             //ui.transform.Find("Multiplayer/MyIP/Text").GetComponent<Text>().text = networkAddress.ToString();
             //ui.transform.Find("Multiplayer/MyPort/Text").GetComponent<Text>().text = this.GetComponent<TelepathyTransport>().port.ToString();
@@ -1707,7 +1707,7 @@ namespace Mirror
         [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Use OnStartClient() instead of OnStartClient(NetworkClient client). All NetworkClient functions are static now, so you can use NetworkClient.Send(message) instead of client.Send(message) directly now.")]
         public virtual void OnStartClient(NetworkClient client)
         {
-            transform.Find("Interface").gameObject.SetActive(false);
+            //transform.Find("Interface").gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -1725,7 +1725,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnStopServer()
         {
-            transform.Find("Interface").gameObject.SetActive(true);
+            //transform.Find("Interface").gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -1733,7 +1733,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnStopClient()
         {
-            transform.Find("Interface").gameObject.SetActive(true);
+            //transform.Find("Interface").gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -1741,7 +1741,7 @@ namespace Mirror
         /// </summary>
         public virtual void OnStopHost()
         {
-            transform.Find("Interface").gameObject.SetActive(true);
+            //transform.Find("Interface").gameObject.SetActive(true);
         }
 
         #endregion

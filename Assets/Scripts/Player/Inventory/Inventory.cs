@@ -57,8 +57,7 @@ public class Inventory : MonoBehaviour
         slot.sprite = item.Icon;
         slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
 
-        string json = JsonUtility.ToJson(item);
-        Data.SaveVar(json).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
+        Data.SaveVar(item.NameItem).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
         Sound.Play(AddItemSound, AudioSource);
     }
 
@@ -129,19 +128,14 @@ public class Inventory : MonoBehaviour
     /// <param name="slot">The image.</param>
     private void LoadItem(Image slot)
     {
-        string content = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").String;
-
-        if (content.Equals("0"))
+        if (!Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").String.Equals("0"))
         {
-            return;
+            Item item = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").Item;
+            item.Target = gameObject;
+
+            slot.name = item.NameItem;
+            slot.sprite = item.Icon;
+            slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
         }
-
-        Item item = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").ToItem();
-
-        item.Target = gameObject;
-
-        slot.name = item.NameItem;
-        slot.sprite = item.Icon;
-        slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
     }
 }

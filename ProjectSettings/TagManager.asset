@@ -92,6 +92,7 @@ TagManager:
   - 0
   - QuestionNewAdventure
   - QuestionExitGame
+  - Network
   layers:
   - Default
   - TransparentFX

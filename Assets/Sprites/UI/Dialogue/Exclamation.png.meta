@@ -116,7 +116,7 @@ TextureImporter:
       name: Exclamation_0
       rect:
         serializedVersion: 2
-        x: 12
+        x: 4
         y: 0
         width: 8
         height: 11
@@ -127,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bf7d7f7753151c438c216cc53f6f1b9
+      spriteID: 94cb1ab45b6f5b350800000000000000
       internalID: 6031998534451051593
       vertices: []
       indices: 

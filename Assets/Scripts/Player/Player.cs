@@ -2,9 +2,8 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using Mirror;
 using System.Collections;
-using System.Linq;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,29 +13,15 @@ public class Player : NetworkBehaviour
     /// <summary>The run</summary>
     private const string Run = "Run";
 
-    /// <summary>The attack</summary>
-    private const string Attack = "Attack";
-
-    /// <summary>The skill</summary>
-    private const string Skill = "Skill";
-
     /// <summary>The vertical</summary>
     private const string Vertical = "Vertical";
 
     /// <summary>The horizontal</summary>
     private const string Horizontal = "Horizontal";
 
-    /// <summary>The speed to move</summary>
-    private const float SpeedOfMovement = 3f;
-
-    /// <summary>The frequency to attack</summary>
-    private const float FrequencyToAttack = 0.20f;
-
-    /// <summary>The frequency to use skill</summary>
-    private const float FrequencyToUseSkill = 0.20f;
-
-    /// <summary>The radius attack</summary>
-    private const float RadiusAttack = 0.5f;
+    /// <summary>The type player</summary>
+    [SerializeField]
+    private PlayerType typePlayer = null;
 
     /// <summary>The is attacking</summary>
     private bool isAttacking = false;
@@ -64,6 +49,18 @@ public class Player : NetworkBehaviour
 
     /// <summary>The animator</summary>
     private Animator animator = null;
+
+    /// <summary>Gets or sets the type player.</summary>
+    /// <value>The type player.</value>
+    public PlayerType TypePlayer { get => typePlayer; set => typePlayer = value; }
+
+    /// <summary>Gets or sets the animator.</summary>
+    /// <value>The animator.</value>
+    public Animator Animator { get => animator; set => animator = value; }
+
+    /// <summary>Gets or sets the attack vector.</summary>
+    /// <value>The attack vector.</value>
+    public Vector3 AttackVector { get => attackVector; set => attackVector = value; }
 
     /// <summary>Gets the axis x.</summary>
     /// <value>The axis x.</value>
@@ -104,7 +101,9 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             rigbody2D = GetComponent<Rigidbody2D>();
+            
             animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = TypePlayer.Controller;
 
             joystick = transform.Find("Interface/Mobile/Joystick").GetComponent<Joystick>();
 
@@ -114,9 +113,9 @@ public class Player : NetworkBehaviour
             mobileUI = transform.Find("Interface/Mobile").gameObject;
             mobileUI.SetActive(Settings.Current.Platform.Equals("Mobile") ? true : false);
 
+            position = NetworkManager.startPositions[0].transform.position;
+
             SetUpPlayerCamera();
-
-
         }
     }
 
@@ -124,20 +123,13 @@ public class Player : NetworkBehaviour
     private void SetUpPlayerCamera()
     {
         GameObject gameObject = new GameObject("Camera");
+        gameObject.transform.position = position;
 
         gameObject.AddComponent<Camera>();
         gameObject.AddComponent<Follower>();
 
         Follower follower = gameObject.GetComponent<Follower>();
         follower.Target = transform;
-
-        Camera camera = gameObject.GetComponent<Camera>();
-        camera.clearFlags = CameraClearFlags.SolidColor;
-        camera.backgroundColor = Color.black;
-        camera.orthographic = true;
-        camera.orthographicSize = 5;
-        camera.nearClipPlane = 0f;
-        camera.farClipPlane = 1f;
     }
 
     /// <summary>Updates this instance.</summary>
@@ -190,7 +182,7 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            rigbody2D.MovePosition(position + (direction * (SpeedOfMovement * Time.fixedDeltaTime)));
+            rigbody2D.MovePosition(position + (direction * (TypePlayer.SpeedOfMovement * Time.fixedDeltaTime)));
         }
     }
 
@@ -199,9 +191,10 @@ public class Player : NetworkBehaviour
     private IEnumerator SkillNow()
     {
         isUsingSkill = true;
-        animator.SetBool(Skill, true);
 
-        yield return new WaitForSeconds(FrequencyToUseSkill);
+        global::Skill.Invoke(TypePlayer.Skill).OfThis(gameObject);
+
+        yield return new WaitForSeconds(TypePlayer.FrequencyToUseSkill);
         isUsingSkill = false;
     }
 
@@ -210,14 +203,10 @@ public class Player : NetworkBehaviour
     private IEnumerator AttackNow()
     {
         isAttacking = true;
-        animator.SetBool(Attack, true);
 
-        Physics2D.OverlapCircleAll(attackVector, RadiusAttack, LayerMask.GetMask("Enemy"))
-            .ToList()
-            .FindAll(i => i.CompareTag("Enemy"))
-            .ForEach(i => i.GetComponent<IEnemy>().TakeDamage(5));
+        global::Attack.Invoke(TypePlayer.Attack).OfThis(gameObject);
 
-        yield return new WaitForSeconds(FrequencyToAttack);
+        yield return new WaitForSeconds(TypePlayer.FrequencyToAttack);
         isAttacking = false;
     }
 }

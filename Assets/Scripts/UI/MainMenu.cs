@@ -108,7 +108,7 @@ public class MainMenu : MonoBehaviour
     {
         Settings.Load();
         Language.Translate();
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
 
     /// <summary>Starts this instance.</summary>
@@ -181,6 +181,11 @@ public class MainMenu : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
+        if (Settings.Current.Platform.Equals("Mobile"))
+        {
+            selectors.ForEach(i => i.SetActive(false));
+        }
+
         if (startPanel.activeSelf)
         {
             if (Input.anyKey || Input.touchCount > 0)

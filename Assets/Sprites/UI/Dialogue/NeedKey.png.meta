@@ -116,7 +116,7 @@ TextureImporter:
       name: NeedKey_0
       rect:
         serializedVersion: 2
-        x: 12
+        x: 4
         y: 0
         width: 8
         height: 11
@@ -127,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec2968f10073256478698f7c7156f180
+      spriteID: 63de6292f5ac36e60800000000000000
       internalID: 7954423876927548726
       vertices: []
       indices: 
