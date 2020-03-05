@@ -75,10 +75,6 @@ public class Dungeon : NetworkBehaviour
     [SerializeField]
     private List<GameObject> bosses = new List<GameObject>();
 
-    /// <summary>The styles</summary>
-    [SerializeField]
-    private List<Style> styles = new List<Style>();
-
     #region Encapsulate Fields
 
     /// <summary>Gets or sets the altar.</summary>
@@ -87,7 +83,7 @@ public class Dungeon : NetworkBehaviour
 
     /// <summary>Gets the random style.</summary>
     /// <value>The random style.</value>
-    private Style RandomStyle => styles[Random.Range(0, styles.Count)];
+    private Style RandomStyle =>  Resources.LoadAll<Style>("Dungeons")[Random.Range(0, Resources.LoadAll<Style>("Dungeons").Length)];
 
     /// <summary>Gets the random boss.</summary>
     /// <value>The random boss.</value>
