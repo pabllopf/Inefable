@@ -26,6 +26,8 @@ public class Decoration : MonoBehaviour
     [Range(0, 100)]
     private int maxToSpawn = 0;
 
+    #region Encapsulate Fields
+
     /// <summary>Gets or sets the prefab.</summary>
     /// <value>The prefab.</value>
     public GameObject Prefab { get => gameObject; set => prefab = value; }
@@ -37,8 +39,10 @@ public class Decoration : MonoBehaviour
     /// <summary>Gets or sets the minimum to spawn.</summary>
     /// <value>The minimum to spawn.</value>
     public int MinToSpawn { get => minToSpawn; set => minToSpawn = value; }
-    
+
     /// <summary>Gets or sets the maximum to spawn.</summary>
     /// <value>The maximum to spawn.</value>
     public int MaxToSpawn { get => maxToSpawn; set => maxToSpawn = value; }
+
+    #endregion
 }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: hola
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - baseNodeGUID: a4c9894d-11c2-447c-a62f-acf0e05d62b2
+    portName: Next
+    targetNodeGUID: 07dbeb66-619d-40e4-b860-8d34da995649
+  - baseNodeGUID: 07dbeb66-619d-40e4-b860-8d34da995649
+    portName: Option 1
+    targetNodeGUID: 20025170-a86e-4612-b938-37c5182067b0
+  - baseNodeGUID: 07dbeb66-619d-40e4-b860-8d34da995649
+    portName: Option 2
+    targetNodeGUID: f87567b5-e07f-41d6-8c3f-459258490c2b
+  dialogueNodeData:
+  - nodeGUID: 20025170-a86e-4612-b938-37c5182067b0
+    dialogueText: jajajaja
+    position: {x: 543, y: 122}
+  - nodeGUID: f87567b5-e07f-41d6-8c3f-459258490c2b
+    dialogueText: adios
+    position: {x: 537, y: 244}
+  - nodeGUID: 07dbeb66-619d-40e4-b860-8d34da995649
+    dialogueText: hola
+    position: {x: 305, y: 133}

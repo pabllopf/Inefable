@@ -81,8 +81,8 @@ MonoBehaviour:
   - prefab: {fileID: 3792622281800518772, guid: 2a7b91c1cbc1b184ca9513f92bbbd0cd,
       type: 3}
     boxToSpawn: 1
-    minToSpawn: 0
-    maxToSpawn: 0
+    minToSpawn: 6
+    maxToSpawn: 21
   - prefab: {fileID: 1435341065194675076, guid: 7b787e2e44daced4bbaa2bbb9aa5fee1,
       type: 3}
     boxToSpawn: 1

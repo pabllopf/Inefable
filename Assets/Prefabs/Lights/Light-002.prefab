@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 901269434383090518}
   - component: {fileID: 7307957430582079609}
   - component: {fileID: -4582073045700464753}
-  - component: {fileID: 5310421405957781806}
   - component: {fileID: 4092684222445816645}
+  - component: {fileID: -3127076750485143551}
+  - component: {fileID: 3920734805635152382}
   m_Layer: 0
   m_Name: Light-002
   m_TagString: Untagged
@@ -51,6 +52,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -158,18 +160,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.09023929, y: 0.031104684}
   m_EdgeRadius: 0
---- !u!114 &5310421405957781806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8131167399865811844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa9899a77b1ccf4c9de3e825c13f65f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4092684222445816645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,8 +172,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142f07a5f69ae1b46b2f873d0e8d5d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orderLayerFront: 2
+  orderLayerFront: 1
   orderLayerBack: 5
+--- !u!114 &-3127076750485143551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131167399865811844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &3920734805635152382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131167399865811844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 901269434383090518}
 --- !u!1 &8824130178883195339
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,8 +244,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8824130178883195339}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 2
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 15

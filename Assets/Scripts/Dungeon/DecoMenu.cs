@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class DecoMenu
@@ -31,7 +30,7 @@ public class DecoMenu
     public BoardBox BoxToSpawn { get => boxToSpawn; set => boxToSpawn = value; }
 
     public int MinToSpawn { get => minToSpawn; set => minToSpawn = value; }
-    
+
     public int MaxToSpawn { get => maxToSpawn; set => maxToSpawn = value; }
-    
+
 }

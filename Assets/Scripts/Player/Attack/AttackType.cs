@@ -8,7 +8,7 @@ public enum AttackType
 {
     /// <summary>The melee</summary>
     Melee,
-   
+
     /// <summary>The shoot</summary>
     Shoot,
 }

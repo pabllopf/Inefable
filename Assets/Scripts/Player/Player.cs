@@ -2,8 +2,8 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using System.Collections;
 using Mirror;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,7 +101,7 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             rigbody2D = GetComponent<Rigidbody2D>();
-            
+
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = TypePlayer.Controller;
 

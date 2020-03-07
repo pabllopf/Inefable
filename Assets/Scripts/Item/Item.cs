@@ -85,11 +85,11 @@ public class Item : ScriptableObject
     /// <summary>Gets or sets the target.</summary>
     /// <value>The target.</value>
     public GameObject Target { get => target; set => target = value; }
-    
+
     /// <summary>Gets or sets the controller.</summary>
     /// <value>The controller.</value>
     public RuntimeAnimatorController Controller { get => controller; set => controller = value; }
-    
+
     #endregion
 
     #region Use Item

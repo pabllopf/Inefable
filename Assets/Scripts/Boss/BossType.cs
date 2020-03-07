@@ -17,7 +17,7 @@ public class BossType : ScriptableObject
     private string nameBoss = string.Empty;
 
     #region Encapsulate Fields
-    
+
     /// <summary>Gets or sets the name boss.</summary>
     /// <value>The name boss.</value>
     public string NameBoss { get => nameBoss; set => nameBoss = value; }

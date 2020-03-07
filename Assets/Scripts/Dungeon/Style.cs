@@ -140,7 +140,7 @@ public class Style : ScriptableObject
     /// <summary>Gets or sets the corner internal right up.</summary>
     /// <value>The corner internal right up.</value>
     public GameObject CornerInternalRightUp { get => cornerInternalRightUp; set => cornerInternalRightUp = value; }
-    
+
     /// <summary>Gets or sets the decoration.</summary>
     /// <value>The decoration.</value>
     public List<DecoMenu> Decorations { get => decorations; set => decorations = value; }
@@ -150,7 +150,7 @@ public class Style : ScriptableObject
     /// <summary>Gets the tile.</summary>
     /// <param name="tileBox">The tile box.</param>
     /// <returns>Return the texture.</returns>
-    public GameObject GetTile(BoardBox tileBox) 
+    public GameObject GetTile(BoardBox tileBox)
     {
         return
             (tileBox.Equals(BoardBox.WallDown)) ? WallDown :
@@ -201,12 +201,12 @@ public class Style : ScriptableObject
             List<DecoMenu> decoMenuTempList = decocor.ToList();
             Decorations.Clear();
 
-            string path = Application.dataPath + "/Prefabs/Dungeon/"+ NameStyle +"/Decoration";
+            string path = Application.dataPath + "/Prefabs/Dungeon/" + NameStyle + "/Decoration";
             Directory.GetFiles(path)
             .ToList()
-            .ForEach(filePath => 
+            .ForEach(filePath =>
             {
-                if (Path.GetExtension(filePath) == ".prefab") 
+                if (Path.GetExtension(filePath) == ".prefab")
                 {
                     string objPath = "Assets/Prefabs/Dungeon/" + NameStyle + "/Decoration/" + Path.GetFileName(filePath);
 
@@ -227,7 +227,7 @@ public class Style : ScriptableObject
 
                             return;
                         }
-                        else 
+                        else
                         {
                             DecoMenu decoMenu = new DecoMenu();
                             Decoration deco = obj.GetComponent<Decoration>();

@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>Define a style of a dungeon.</summary>
 [System.Serializable]
 [CreateAssetMenu(fileName = "New Player", menuName = "Player/New")]
-public class PlayerType : ScriptableObject 
+public class PlayerType : ScriptableObject
 {
     [Header("Name:")]
 
@@ -41,7 +41,7 @@ public class PlayerType : ScriptableObject
     [SerializeField]
     [Range(0.1f, 1f)]
     private float frequencyToUseSkill = 0.20f;
- 
+
     [Header("Attack:")]
 
     /// <summary>The attack</summary>
@@ -55,7 +55,7 @@ public class PlayerType : ScriptableObject
     private SkillType skill = SkillType.Roll;
 
     [Header("Animator Controller:")]
-   
+
     /// <summary>The controller</summary>
     [SerializeField]
     private RuntimeAnimatorController controller = null;
@@ -65,7 +65,7 @@ public class PlayerType : ScriptableObject
     /// <summary>Gets or sets the name player.</summary>
     /// <value>The name player.</value>
     public string NamePlayer { get => namePlayer; set => namePlayer = value; }
-    
+
     /// <summary>Gets or sets the speed of movement.</summary>
     /// <value>The speed of movement.</value>
     public float SpeedOfMovement { get => speedOfMovement; set => speedOfMovement = value; }
@@ -73,7 +73,7 @@ public class PlayerType : ScriptableObject
     /// <summary>Gets or sets the radius attack.</summary>
     /// <value>The radius attack.</value>
     public float RadiusAttack { get => radiusAttack; set => radiusAttack = value; }
-    
+
     /// <summary>Gets or sets the frequency to attack.</summary>
     /// <value>The frequency to attack.</value>
     public float FrequencyToAttack { get => frequencyToAttack; set => frequencyToAttack = value; }
@@ -93,7 +93,7 @@ public class PlayerType : ScriptableObject
     /// <summary>Gets or sets the controller.</summary>
     /// <value>The controller.</value>
     public RuntimeAnimatorController Controller { get => controller; set => controller = value; }
-   
+
     #endregion
 
     #region Validate Name

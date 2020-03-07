@@ -12,10 +12,10 @@ public class Boss : MonoBehaviour
     private BossType typeBoss = null;
 
     #region Encapsulate Fields
-    
+
     /// <summary>Gets or sets the type boss.</summary>
     /// <value>The type boss.</value>
     public BossType TypeBoss { get => typeBoss; set => typeBoss = value; }
-    
+
     #endregion
 }

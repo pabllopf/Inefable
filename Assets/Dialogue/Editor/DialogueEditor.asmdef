@@ -1,0 +1,17 @@
+{
+    "name": "DialogueEditor",
+    "references": [
+        "GUID:2d40effa6b3cf7c4484428854aeef641"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

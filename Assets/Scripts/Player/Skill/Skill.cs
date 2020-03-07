@@ -12,7 +12,7 @@ public class Skill
 
     /// <summary>Initializes a new instance of the <see cref="Skill"/> class.</summary>
     /// <param name="skillType">Type of the skill.</param>
-    private Skill(SkillType skillType) 
+    private Skill(SkillType skillType)
     {
         this.skillType = skillType;
     }
@@ -26,7 +26,7 @@ public class Skill
 
     /// <summary>Ofs the this.</summary>
     /// <param name="obj">The object.</param>
-    public void OfThis(GameObject obj) 
+    public void OfThis(GameObject obj)
     {
         switch (skillType)
         {
@@ -37,7 +37,7 @@ public class Skill
     }
 
     /// <summary>Rolls the now.</summary>
-    private void RollNow(GameObject obj) 
+    private void RollNow(GameObject obj)
     {
         obj.GetComponent<Animator>().SetBool("Skill", true);
     }
