@@ -85,10 +85,6 @@ public class Dungeon : NetworkBehaviour
     /// <value>The random style.</value>
     private Style RandomStyle => Resources.LoadAll<Style>("Dungeons")[Random.Range(0, Resources.LoadAll<Style>("Dungeons").Length)];
 
-    /// <summary>Gets the random boss.</summary>
-    /// <value>The random boss.</value>
-    private GameObject RandomBoss => bosses[Random.Range(0, bosses.Count)];
-
     #endregion
 
     /// <summary>Starts this instance.</summary>
@@ -193,21 +189,6 @@ public class Dungeon : NetworkBehaviour
         Instantiate(altar, center + new Vector2(1.5f, -1.5f), Quaternion.identity, master.transform);
     }
 
-    /// <summary>Configurations the boss room.</summary>
-    private void ConfigBossRoom()
-    {
-        float xPos = ((rooms[NumOfRooms - 1].XPos + rooms[NumOfRooms - 1].Width) / 2) + 0.5f;
-        float yPos = ((rooms[NumOfRooms - 1].YPos + rooms[NumOfRooms - 1].Height) / 2) + 0.5f;
-
-        GameObject master = new GameObject("Boss");
-        Instantiate(RandomBoss, new Vector2(xPos, yPos), Quaternion.identity, master.transform);
-    }
-
-    /// <summary>Configurations the shop room.</summary>
-    private void ConfigShopRoom()
-    {
-    }
-
     /// <summary>Prints the dungeon.</summary>
     /// <param name="style">The style.</param>
     private void PrintDungeon(Style style)
@@ -223,7 +204,7 @@ public class Dungeon : NetworkBehaviour
             }
         }
 
-        //PrintDecoration(style);
+        PrintDecoration(style);
     }
     /// <summary>Prints the items.</summary>
     private void PrintDecoration(Style style)

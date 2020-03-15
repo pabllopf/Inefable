@@ -178,6 +178,7 @@ public class Style : ScriptableObject
         UnityEditor.EditorApplication.delayCall += () =>
         {
             EditorUtility.SetDirty(this);
+            UpdateDecoration();
         };
 
         UnityEditor.EditorApplication.delayCall += () =>
@@ -244,6 +245,57 @@ public class Style : ScriptableObject
         }
         return tiles;
     }
+
+    public void UpdateDecoration() 
+    {
+        DecoMenu[] decocor = new DecoMenu[Decorations.Count];
+        Decorations.CopyTo(decocor);
+        List<DecoMenu> decoMenuTempList = decocor.ToList();
+        Decorations.Clear();
+
+        string path = Application.dataPath + "/Prefabs/Dungeon/" + NameStyle + "/Decoration";
+        Directory.GetFiles(path)
+        .ToList()
+        .ForEach(filePath =>
+        {
+            if (Path.GetExtension(filePath) == ".prefab")
+            {
+                string objPath = "Assets/Prefabs/Dungeon/" + NameStyle + "/Decoration/" + Path.GetFileName(filePath);
+
+                GameObject obj = (GameObject)AssetDatabase.LoadAssetAtPath(objPath, typeof(GameObject));
+
+                if (obj.GetComponent<Decoration>())
+                {
+                    if (decoMenuTempList.Any(i => i.Prefab == obj.GetComponent<Decoration>().Prefab))
+                    {
+                        DecoMenu decoMenu = decoMenuTempList.Find(i => i.Prefab == obj.GetComponent<Decoration>().Prefab);
+                        Decorations.Add(decoMenu);
+
+                        Decoration deco = obj.GetComponent<Decoration>();
+                        deco.Prefab = decoMenu.Prefab;
+                        deco.BoxToSpawn = decoMenu.BoxToSpawn;
+                        deco.MinToSpawn = decoMenu.MinToSpawn;
+                        deco.MaxToSpawn = decoMenu.MaxToSpawn;
+
+                        return;
+                    }
+                    else
+                    {
+                        DecoMenu decoMenu = new DecoMenu();
+                        Decoration deco = obj.GetComponent<Decoration>();
+
+                        decoMenu.Prefab = deco.Prefab;
+                        decoMenu.BoxToSpawn = deco.BoxToSpawn;
+                        decoMenu.MinToSpawn = deco.MinToSpawn;
+                        decoMenu.MaxToSpawn = deco.MaxToSpawn;
+
+                        Decorations.Add(decoMenu);
+                    }
+                }
+            }
+        });
+    }
+
 #endif
     #endregion
 }

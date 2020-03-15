@@ -48,4 +48,64 @@ MonoBehaviour:
   cornerInternalRightUp:
   - prefab: {fileID: 4455402955386147488, guid: 6eb4731a1de34dd4b9d6fba02bf9815b,
       type: 3}
-  decorations: []
+  decorations:
+  - prefab: {fileID: 5545560213153553992, guid: 9629f551b47411f4297c1b58b25accb7,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 1418002004525905514, guid: b84315b6b11730349b561ae464f14209,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 1
+    maxToSpawn: 15
+  - prefab: {fileID: 6104540607654767890, guid: 2d958fbb6ef4db349a4bdbf37610e8da,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 3
+    maxToSpawn: 6
+  - prefab: {fileID: 3857190637066406122, guid: bb974a60b57d550458ca9beaa03f3239,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 7278500161269428664, guid: 12f0a566d7a66c94d908079e2ac594e6,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 5195270352268140888, guid: d262f2de1c9555a489a1d8f1e488d336,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 6304072383275511242, guid: 376c2885ff9aa654a97f9a3c81874b32,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 4821216072036999873, guid: fd8ea1d5202962d448bf6dfb8e1162bf,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 4177670097215270262, guid: 13f23734aedd5eb43a7fade5a9472e22,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 6089015100723486042, guid: 23336d6c37d75bc409eb3bc9aad1decb,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 2
+    maxToSpawn: 7
+  - prefab: {fileID: 2687139449768470786, guid: 62a4cc830057f5241859aff3aa48b1d2,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 2
+    maxToSpawn: 7
+  - prefab: {fileID: 8575814057883155670, guid: 5dd17f14b0c48774fbed4a0c446016ba,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0

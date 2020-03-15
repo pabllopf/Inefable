@@ -57,4 +57,108 @@ MonoBehaviour:
   cornerInternalRightUp:
   - prefab: {fileID: 4455402955386147488, guid: 0094e1617c275bf4da70b50b1740d044,
       type: 3}
-  decorations: []
+  decorations:
+  - prefab: {fileID: 3910568472796964592, guid: 210994ba5500ac14093a38825fa22d6f,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 6
+    maxToSpawn: 17
+  - prefab: {fileID: 4827289049806175297, guid: 1ee9ef33ae69752459b9801349ce2e2e,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 7599661577980238615, guid: 9329285d3a00d3344842931ee9f343ed,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 6186268067420159905, guid: f5bb82ee993bebd4596f0127f85d9ddb,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 5830105956019888815, guid: b1128e98b2e35704bb943ea56e144f02,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 8374593024463023204, guid: f0df42afd4aa2aa40913edbcd91f20a3,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 4009324050149035446, guid: 097b2992d16fe304ba214ae78476d1e4,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 4406084393435920664, guid: d30e08094bf46f441a98dad0b7c853b8,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 3792622281800518772, guid: 2a7b91c1cbc1b184ca9513f92bbbd0cd,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 1435341065194675076, guid: 7b787e2e44daced4bbaa2bbb9aa5fee1,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 8369970926437621636, guid: 21501c924c4393548825eef1d4ee29a5,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 7951384098566456997, guid: 3aee3febf6da9a44bb01edf0f126d2c2,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 5512706929742432406, guid: 62b6a25fc6cfcad43b6935d2f92af203,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 2991040175751709577, guid: 5a03add70fb291b4a9efce5829126c1c,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 4
+    maxToSpawn: 12
+  - prefab: {fileID: 3643533081097949778, guid: 3dad7d7ca8ba50a499c8a265cb832af5,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 5489896890251847411, guid: 85be6510636861043a73c7a42ccb49f7,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 4
+    maxToSpawn: 14
+  - prefab: {fileID: 6952575790517739196, guid: 0c8c4950f7052ee488411e54c26b3f22,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 801685504570097522, guid: 2365c0d01d051be45a122e6905358196, type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 5792570103841670678, guid: 76e473d857fe80844bb32ce37a7e35ad,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 7796735294550617886, guid: 8d4873d16ee216f4f8539f8dcfda1cbd,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
+  - prefab: {fileID: 2176148125430791068, guid: da49422756daf0745b2049cef2cac26a,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 0
+    maxToSpawn: 0
