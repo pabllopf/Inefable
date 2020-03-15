@@ -19,65 +19,67 @@ public class Style : ScriptableObject
     [SerializeField]
     private string nameStyle = string.Empty;
 
-    [Header("Textures:")]
+    [Header("Floors:")]
 
     /// <summary>The floor</summary>
     [SerializeField]
-    private GameObject floor = null;
+    private List<TileMenu> floors = new List<TileMenu>();
 
-    [Space(10)]
+    [Header("Walls:")]
 
     /// <summary>The wall down</summary>
     [SerializeField]
-    private GameObject wallDown = null;
+    private List<TileMenu> wallDown = new List<TileMenu>();
 
     /// <summary>The wall left</summary>
     [SerializeField]
-    private GameObject wallLeft = null;
+    private List<TileMenu> wallLeft = new List<TileMenu>();
 
     /// <summary>The wall right</summary>
     [SerializeField]
-    private GameObject wallRight = null;
+    private List<TileMenu> wallRight = new List<TileMenu>();
 
     /// <summary>The wall top</summary>
     [SerializeField]
-    private GameObject wallTop = null;
+    private List<TileMenu> wallTop = new List<TileMenu>();
 
-    [Space(10)]
+    [Header("Corners:")]
 
     /// <summary>The corner left down</summary>
     [SerializeField]
-    private GameObject cornerLeftDown = null;
+    private List<TileMenu> cornerLeftDown = new List<TileMenu>();
 
     /// <summary>The corner right down</summary>
     [SerializeField]
-    private GameObject cornerRightDown = null;
+    private List<TileMenu> cornerRightDown = new List<TileMenu>();
 
     /// <summary>The corner left up</summary>
     [SerializeField]
-    private GameObject cornerLeftUp = null;
+    private List<TileMenu> cornerLeftUp = new List<TileMenu>();
 
     /// <summary>The corner right up</summary>
     [SerializeField]
-    private GameObject cornerRightUp = null;
+    private List<TileMenu> cornerRightUp = new List<TileMenu>();
 
-    [Space(10)]
+    [Header("Internal Corners:")]
 
     /// <summary>The corner internal left down</summary>
     [SerializeField]
-    private GameObject cornerInternalLeftDown = null;
+    private List<TileMenu> cornerInternalLeftDown = new List<TileMenu>();
 
     /// <summary>The corner internal left up</summary>
     [SerializeField]
-    private GameObject cornerInternalLeftUp = null;
+    private List<TileMenu> cornerInternalLeftUp = new List<TileMenu>();
 
     /// <summary>The corner internal right down</summary>
     [SerializeField]
-    private GameObject cornerInternalRightDown = null;
+    private List<TileMenu> cornerInternalRightDown = new List<TileMenu>();
 
     /// <summary>The corner internal right up</summary>
     [SerializeField]
-    private GameObject cornerInternalRightUp = null;
+    private List<TileMenu> cornerInternalRightUp = new List<TileMenu>();
+
+    [Header("Decoration:")]
 
     /// <summary>The decoration</summary>
     [SerializeField]
@@ -89,57 +91,57 @@ public class Style : ScriptableObject
     /// <value>The name style.</value>
     public string NameStyle { get => nameStyle; set => nameStyle = value; }
 
-    /// <summary>Gets or sets the floor.</summary>
+    /// <summary>Gets the floor.</summary>
     /// <value>The floor.</value>
-    public GameObject Floor { get => floor; set => floor = value; }
+    public GameObject Floor { get => floors[Random.Range(0, floors.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the wall down.</summary>
+    /// <summary>Gets the wall down.</summary>
     /// <value>The wall down.</value>
-    public GameObject WallDown { get => wallDown; set => wallDown = value; }
+    public GameObject WallDown { get => wallDown[Random.Range(0, wallDown.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the wall left.</summary>
+    /// <summary>Gets the wall left.</summary>
     /// <value>The wall left.</value>
-    public GameObject WallLeft { get => wallLeft; set => wallLeft = value; }
+    public GameObject WallLeft { get => wallLeft[Random.Range(0, wallLeft.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the wall right.</summary>
+    /// <summary>Gets the wall right.</summary>
     /// <value>The wall right.</value>
-    public GameObject WallRight { get => wallRight; set => wallRight = value; }
+    public GameObject WallRight { get => wallRight[Random.Range(0, wallRight.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the wall top.</summary>
+    /// <summary>Gets the wall top.</summary>
     /// <value>The wall top.</value>
-    public GameObject WallTop { get => wallTop; set => wallTop = value; }
+    public GameObject WallTop { get => wallTop[Random.Range(0, wallTop.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner left down.</summary>
+    /// <summary>Gets the corner left down.</summary>
     /// <value>The corner left down.</value>
-    public GameObject CornerLeftDown { get => cornerLeftDown; set => cornerLeftDown = value; }
+    public GameObject CornerLeftDown { get => cornerLeftDown[Random.Range(0, cornerLeftDown.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner right down.</summary>
+    /// <summary>Gets the corner right down.</summary>
     /// <value>The corner right down.</value>
-    public GameObject CornerRightDown { get => cornerRightDown; set => cornerRightDown = value; }
+    public GameObject CornerRightDown { get => cornerRightDown[Random.Range(0, cornerRightDown.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner left up.</summary>
+    /// <summary>Gets the corner left up.</summary>
     /// <value>The corner left up.</value>
-    public GameObject CornerLeftUp { get => cornerLeftUp; set => cornerLeftUp = value; }
+    public GameObject CornerLeftUp { get => cornerLeftUp[Random.Range(0, cornerLeftUp.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner right up.</summary>
+    /// <summary>Gets the corner right up.</summary>
     /// <value>The corner right up.</value>
-    public GameObject CornerRightUp { get => cornerRightUp; set => cornerRightUp = value; }
+    public GameObject CornerRightUp { get => cornerRightUp[Random.Range(0, cornerRightUp.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner internal left down.</summary>
+    /// <summary>Gets the corner internal left down.</summary>
     /// <value>The corner internal left down.</value>
-    public GameObject CornerInternalLeftDown { get => cornerInternalLeftDown; set => cornerInternalLeftDown = value; }
+    public GameObject CornerInternalLeftDown { get => cornerInternalLeftDown[Random.Range(0, cornerInternalLeftDown.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner internal left up.</summary>
+    /// <summary>Gets the corner internal left up.</summary>
     /// <value>The corner internal left up.</value>
-    public GameObject CornerInternalLeftUp { get => cornerInternalLeftUp; set => cornerInternalLeftUp = value; }
+    public GameObject CornerInternalLeftUp { get => cornerInternalLeftUp[Random.Range(0, cornerInternalLeftUp.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner internal right down.</summary>
+    /// <summary>Gets the corner internal right down.</summary>
     /// <value>The corner internal right down.</value>
-    public GameObject CornerInternalRightDown { get => cornerInternalRightDown; set => cornerInternalRightDown = value; }
+    public GameObject CornerInternalRightDown { get => cornerInternalRightDown[Random.Range(0, cornerInternalRightDown.Count - 1)].Prefab; }
 
-    /// <summary>Gets or sets the corner internal right up.</summary>
+    /// <summary>Gets the corner internal right up.</summary>
     /// <value>The corner internal right up.</value>
-    public GameObject CornerInternalRightUp { get => cornerInternalRightUp; set => cornerInternalRightUp = value; }
+    public GameObject CornerInternalRightUp { get => cornerInternalRightUp[Random.Range(0, cornerInternalRightUp.Count - 1)].Prefab; }
 
     /// <summary>Gets or sets the decoration.</summary>
     /// <value>The decoration.</value>
@@ -152,19 +154,19 @@ public class Style : ScriptableObject
     /// <returns>Return the texture.</returns>
     public GameObject GetTile(BoardBox tileBox)
     {
-        return
-            (tileBox.Equals(BoardBox.WallDown)) ? WallDown :
-            (tileBox.Equals(BoardBox.WallLeft)) ? WallLeft :
-            (tileBox.Equals(BoardBox.WallRight)) ? WallRight :
-            (tileBox.Equals(BoardBox.WallTop)) ? WallTop :
-            (tileBox.Equals(BoardBox.CornerLeftUp)) ? CornerLeftUp :
-            (tileBox.Equals(BoardBox.CornerRightUp)) ? CornerRightUp :
-            (tileBox.Equals(BoardBox.CornerLeftDown)) ? CornerLeftDown :
-            (tileBox.Equals(BoardBox.CornerRightDown)) ? CornerRightDown :
-            (tileBox.Equals(BoardBox.CornerInternalLeftDown)) ? CornerInternalLeftDown :
-            (tileBox.Equals(BoardBox.CornerInternalLeftUp)) ? CornerInternalLeftUp :
-            (tileBox.Equals(BoardBox.CornerInternalRightDown)) ? CornerInternalRightDown :
-            (tileBox.Equals(BoardBox.CornerInternalRightUp)) ? CornerInternalRightUp :
+        return 
+            tileBox.Equals(BoardBox.WallDown) ? WallDown :
+            tileBox.Equals(BoardBox.WallLeft) ? WallLeft :
+            tileBox.Equals(BoardBox.WallRight) ? WallRight :
+            tileBox.Equals(BoardBox.WallTop) ? WallTop :
+            tileBox.Equals(BoardBox.CornerLeftUp) ? CornerLeftUp :
+            tileBox.Equals(BoardBox.CornerRightUp) ? CornerRightUp :
+            tileBox.Equals(BoardBox.CornerLeftDown) ? CornerLeftDown :
+            tileBox.Equals(BoardBox.CornerRightDown) ? CornerRightDown :
+            tileBox.Equals(BoardBox.CornerInternalLeftDown) ? CornerInternalLeftDown :
+            tileBox.Equals(BoardBox.CornerInternalLeftUp) ? CornerInternalLeftUp :
+            tileBox.Equals(BoardBox.CornerInternalRightDown) ? CornerInternalRightDown :
+            tileBox.Equals(BoardBox.CornerInternalRightUp) ? CornerInternalRightUp :
             Floor;
     }
 
@@ -175,74 +177,72 @@ public class Style : ScriptableObject
     {
         UnityEditor.EditorApplication.delayCall += () =>
         {
+            EditorUtility.SetDirty(this);
+        };
+
+        UnityEditor.EditorApplication.delayCall += () =>
+        {
             string assetPath = AssetDatabase.GetAssetPath(GetInstanceID());
             AssetDatabase.RenameAsset(assetPath, NameStyle);
+            UpdateButton();
+
             AssetDatabase.SaveAssets();
+        };
 
-            floor = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/floor.prefab", typeof(GameObject));
+        UnityEditor.EditorApplication.delayCall += () =>
+        {
+            AssetDatabase.Refresh();
+        };
+    }
 
-            wallDown = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/WallDown.prefab", typeof(GameObject));
-            wallLeft = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/WallLeft.prefab", typeof(GameObject));
-            WallRight = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/WallRigth.prefab", typeof(GameObject));
-            WallTop = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/WallTop.prefab", typeof(GameObject));
+    /// <summary>Updates the button.</summary>
+    public void UpdateButton() 
+    {
+        floors = UpdateFields(NameStyle + "/Board/Floor", ref floors);
 
-            cornerLeftDown = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerLD.prefab", typeof(GameObject));
-            cornerLeftUp = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerLU.prefab", typeof(GameObject));
-            cornerRightDown = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerRD.prefab", typeof(GameObject));
-            cornerRightUp = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerRU.prefab", typeof(GameObject));
+        wallDown = UpdateFields(NameStyle + "/Board/WallDown", ref wallDown);
+        wallLeft = UpdateFields(NameStyle + "/Board/WallLeft", ref wallLeft);
+        wallRight = UpdateFields(NameStyle + "/Board/WallRight", ref wallRight);
+        wallTop = UpdateFields(NameStyle + "/Board/WallTop", ref wallTop);
 
-            cornerInternalLeftDown = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerILD.prefab", typeof(GameObject));
-            cornerInternalLeftUp = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerILU.prefab", typeof(GameObject));
-            cornerInternalRightDown = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerIRD.prefab", typeof(GameObject));
-            cornerInternalRightUp = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Dungeon/" + NameStyle + "/Board/CornerIRU.prefab", typeof(GameObject));
+        cornerLeftDown = UpdateFields(NameStyle + "/Board/CornerLD", ref cornerLeftDown);
+        cornerLeftUp = UpdateFields(NameStyle + "/Board/CornerLU", ref cornerLeftUp);
+        cornerRightDown = UpdateFields(NameStyle + "/Board/CornerRD", ref cornerRightDown);
+        cornerRightUp = UpdateFields(NameStyle + "/Board/CornerRU", ref cornerRightUp);
 
-            DecoMenu[] decocor = new DecoMenu[Decorations.Count];
-            Decorations.CopyTo(decocor);
-            List<DecoMenu> decoMenuTempList = decocor.ToList();
-            Decorations.Clear();
+        cornerInternalLeftDown = UpdateFields(NameStyle + "/Board/CornerILD", ref cornerInternalLeftDown);
+        cornerInternalLeftUp = UpdateFields(NameStyle + "/Board/CornerILU", ref cornerInternalLeftUp);
+        cornerInternalRightDown = UpdateFields(NameStyle + "/Board/CornerIRD", ref cornerInternalRightDown);
+        cornerInternalRightUp = UpdateFields(NameStyle + "/Board/CornerIRU", ref cornerInternalRightUp);
+    }
 
-            string path = Application.dataPath + "/Prefabs/Dungeon/" + NameStyle + "/Decoration";
-            Directory.GetFiles(path)
-            .ToList()
-            .ForEach(filePath =>
-            {
-                if (Path.GetExtension(filePath) == ".prefab")
+    /// <summary>Updates the fields.</summary>
+    /// <param name="path">The path.</param>
+    /// <returns>Return list of tiles of dungeon.</returns>
+    public List<TileMenu> UpdateFields(string path, ref List<TileMenu> list) 
+    {
+        string pathFiles = Application.dataPath + "/Prefabs/Dungeon/" + path;
+        List<TileMenu> tiles = list;
+
+        if (Directory.Exists(pathFiles)) 
+        {
+            Directory.GetFiles(pathFiles)
+                .ToList()
+                .FindAll(file => Path.GetExtension(file) == ".prefab")
+                .ForEach(filePath =>
                 {
-                    string objPath = "Assets/Prefabs/Dungeon/" + NameStyle + "/Decoration/" + Path.GetFileName(filePath);
-
+                    string objPath = "Assets/Prefabs/Dungeon/" + path + "/" + Path.GetFileName(filePath);
                     GameObject obj = (GameObject)AssetDatabase.LoadAssetAtPath(objPath, typeof(GameObject));
 
-                    if (obj.GetComponent<Decoration>())
+                    if (!tiles.Any(i => i.Prefab == obj))
                     {
-                        if (decoMenuTempList.Any(i => i.Prefab == obj.GetComponent<Decoration>().Prefab))
-                        {
-                            DecoMenu decoMenu = decoMenuTempList.Find(i => i.Prefab == obj.GetComponent<Decoration>().Prefab);
-                            Decorations.Add(decoMenu);
-
-                            Decoration deco = obj.GetComponent<Decoration>();
-                            deco.Prefab = decoMenu.Prefab;
-                            deco.BoxToSpawn = decoMenu.BoxToSpawn;
-                            deco.MinToSpawn = decoMenu.MinToSpawn;
-                            deco.MaxToSpawn = decoMenu.MaxToSpawn;
-
-                            return;
-                        }
-                        else
-                        {
-                            DecoMenu decoMenu = new DecoMenu();
-                            Decoration deco = obj.GetComponent<Decoration>();
-
-                            decoMenu.Prefab = deco.Prefab;
-                            decoMenu.BoxToSpawn = deco.BoxToSpawn;
-                            decoMenu.MinToSpawn = deco.MinToSpawn;
-                            decoMenu.MaxToSpawn = deco.MaxToSpawn;
-
-                            Decorations.Add(decoMenu);
-                        }
+                        TileMenu tileMenu = new TileMenu();
+                        tileMenu.Prefab = obj;
+                        tiles.Add(tileMenu);
                     }
-                }
-            });
-        };
+                });
+        }
+        return tiles;
     }
 #endif
     #endregion

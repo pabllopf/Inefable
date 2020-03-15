@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: raulitoshan
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - baseNodeGUID: 7f12b6dc-52f4-4bc6-81b7-0ed637a5f5a7
+    portName: Next
+    targetNodeGUID: 8fce35b4-348d-4ddf-996e-65508c5aa0fe
+  - baseNodeGUID: 8fce35b4-348d-4ddf-996e-65508c5aa0fe
+    portName: hola
+    targetNodeGUID: c4100b8b-b675-444e-b2b7-9e29e881c021
+  - baseNodeGUID: 8fce35b4-348d-4ddf-996e-65508c5aa0fe
+    portName: vete a la mierda
+    targetNodeGUID: e2f68634-5ad3-4f7b-bbd0-5fa6e5c9e33e
+  dialogueNodeData:
+  - nodeGUID: c4100b8b-b675-444e-b2b7-9e29e881c021
+    dialogueText: Dialogue Node
+    position: {x: 680, y: 111}
+  - nodeGUID: 8fce35b4-348d-4ddf-996e-65508c5aa0fe
+    dialogueText: hola que tal
+    position: {x: 340, y: 139}
+  - nodeGUID: e2f68634-5ad3-4f7b-bbd0-5fa6e5c9e33e
+    dialogueText: Dialogue Node
+    position: {x: 676, y: 241}

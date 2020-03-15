@@ -9,136 +9,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4029ec49bd0eb894ab799dc6370db4a3, type: 3}
+  m_Script: {fileID: 11500000, guid: eee3cf5283a592b45a0971943a163499, type: 3}
   m_Name: Atlantys
   m_EditorClassIdentifier: 
   nameStyle: Atlantys
-  floor: {fileID: 5995512640940380585, guid: 3ebe7a4e697b0064da9529b46baf3e1a, type: 3}
-  wallDown: {fileID: 4666165158059393261, guid: 3273dfb1b7307bb44b22bda71df1098c,
-    type: 3}
-  wallLeft: {fileID: 8333963013168067642, guid: 1c5b7ace64b911742bf1bc93a9fe7059,
-    type: 3}
-  wallRight: {fileID: 6541792069657844282, guid: 578e64f74fe733f4f8b41e890c17874a,
-    type: 3}
-  wallTop: {fileID: 3806535468035757936, guid: fbf802eb17a4a524295270e7a0e5b238, type: 3}
-  cornerLeftDown: {fileID: 693053170268462262, guid: a147abd3c601395418faee14f3a53dca,
-    type: 3}
-  cornerRightDown: {fileID: 7341881910194709755, guid: 886e3d6425c5a2140a4675551c45d67e,
-    type: 3}
-  cornerLeftUp: {fileID: 146701257403200081, guid: 0054c367579da1540b69fd2e6618e5fe,
-    type: 3}
-  cornerRightUp: {fileID: 3464493466365696799, guid: a6508171431057546aac3db12311383d,
-    type: 3}
-  cornerInternalLeftDown: {fileID: 573033356450212254, guid: dcf1f160ec1036545b3c2a610686556d,
-    type: 3}
-  cornerInternalLeftUp: {fileID: 6791371059759396105, guid: b074c9ad143e19b4cabecf7bfaf2845e,
-    type: 3}
-  cornerInternalRightDown: {fileID: 584665492846794692, guid: 2ce317a6d4dad8a41bdda1f1323b7b1b,
-    type: 3}
-  cornerInternalRightUp: {fileID: 4455402955386147488, guid: 22e1fd1160de0464793b3e0d0ebe5f80,
-    type: 3}
-  decorations:
-  - prefab: {fileID: 7183002340033153816, guid: 0992aa1a940074d4282f855937c0a36d,
+  floors:
+  - prefab: {fileID: 5995512640940380585, guid: 3ebe7a4e697b0064da9529b46baf3e1a,
       type: 3}
-    probability: 0
-    minToSpawn: 1
-    maxToSpawn: 9
-  - prefab: {fileID: 8839678898572949911, guid: 1f72c0839072a544a920af1fef1a120e,
+  wallDown:
+  - prefab: {fileID: 4666165158059393261, guid: 3273dfb1b7307bb44b22bda71df1098c,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 5206911670580647685, guid: 2adacbedb10f0804a81061e46a338c62,
+  wallLeft:
+  - prefab: {fileID: 8333963013168067642, guid: 1c5b7ace64b911742bf1bc93a9fe7059,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 7827267542092052371, guid: 70d332761a7962b429e25887e9efe795,
+  wallRight:
+  - prefab: {fileID: 6541792069657844282, guid: 578e64f74fe733f4f8b41e890c17874a,
       type: 3}
-    probability: 1
-    minToSpawn: 1
-    maxToSpawn: 15
-  - prefab: {fileID: 1070606593077784672, guid: 5eaba2fe0d01b69429edaff6d5a4c951,
+  wallTop:
+  - prefab: {fileID: 3806535468035757936, guid: fbf802eb17a4a524295270e7a0e5b238,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 4965778866482508353, guid: bb4f3a5988c5c7d49b751849465922ef,
+  cornerLeftDown:
+  - prefab: {fileID: 693053170268462262, guid: a147abd3c601395418faee14f3a53dca, type: 3}
+  cornerRightDown:
+  - prefab: {fileID: 7341881910194709755, guid: 886e3d6425c5a2140a4675551c45d67e,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 7311174198740533540, guid: 41628db72582f204abfd954514e92e65,
+  cornerLeftUp:
+  - prefab: {fileID: 146701257403200081, guid: 0054c367579da1540b69fd2e6618e5fe, type: 3}
+  cornerRightUp:
+  - prefab: {fileID: 3464493466365696799, guid: a6508171431057546aac3db12311383d,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 7859268821494649638, guid: 745ba631c4fd52342b9b3d361f499f35,
+  cornerInternalLeftDown:
+  - prefab: {fileID: 573033356450212254, guid: dcf1f160ec1036545b3c2a610686556d, type: 3}
+  cornerInternalLeftUp:
+  - prefab: {fileID: 6791371059759396105, guid: b074c9ad143e19b4cabecf7bfaf2845e,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 872552486468013657, guid: 0fbf90a0c4af6924e825a4bf3adc0964, type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 8596390839108972749, guid: 73f71bccf42ee3444acaffeb036bd233,
+  cornerInternalRightDown:
+  - prefab: {fileID: 584665492846794692, guid: 2ce317a6d4dad8a41bdda1f1323b7b1b, type: 3}
+  cornerInternalRightUp:
+  - prefab: {fileID: 4455402955386147488, guid: 22e1fd1160de0464793b3e0d0ebe5f80,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 6168540267739479158, guid: 8f5899b1ecafe024a995b9ada30c38b8,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 5552164234416382014, guid: f0bb25a6144cee440bd76998ca31e499,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 6121584952629557514, guid: 2ea743bf9903fc74b8cf2f85aed8b990,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 2727470550585363770, guid: d277917b712607e4aad520486e00bf46,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 7094349470080536012, guid: 42d5c6795bf0f1347bfe58080ff5d0f2,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 5778542832800220584, guid: 67bde5956e8dd7d4aa3554bef1da8fa7,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 7142240786115863255, guid: f720a59a9c78c324884f95b5bef03af3,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 3517079313194545775, guid: c48d82691b1f9b249a114a5e1da86f55,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 3325894594851999682, guid: 11326add683975a46bc5f79ca085b3ca,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 8270110092229676913, guid: 589fe0ae49247d64cb4cb47b8877df13,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 5876885173881764066, guid: c6a5b484f8314194698c22e513aac442,
-      type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
+  decorations: []

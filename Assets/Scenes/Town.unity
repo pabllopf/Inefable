@@ -22366,6 +22366,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
   - {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
+  - {fileID: 5995512640940380585, guid: 3ebe7a4e697b0064da9529b46baf3e1a, type: 3}
   ports: 611e621e
 --- !u!4 &1461336782
 Transform:
@@ -22798,6 +22799,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8256155125214366612, guid: 681ce531d8225ac45b9931a9a7dd9866,
+        type: 3}
+      propertyPath: dialogueContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b358408243dfca43944355a59abc534,
+        type: 2}
     - target: {fileID: 8256155125214366615, guid: 681ce531d8225ac45b9931a9a7dd9866,
         type: 3}
       propertyPath: sceneId

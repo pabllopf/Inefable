@@ -289,13 +289,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   altar: {fileID: 4242139656732003432, guid: c36fbe5213dfbd145a0035f57b5cf1a3, type: 3}
-  bosses:
-  - {fileID: 47068711228341497, guid: 29fd1d3fd8ed19c41941e8622ebe7e00, type: 3}
-  styles:
-  - {fileID: 11400000, guid: c9a1ab47df17fc4438b86b7269fc9821, type: 2}
-  - {fileID: 11400000, guid: c9a31e82005f6144589d0cf85ed75de8, type: 2}
-  - {fileID: 11400000, guid: e3d8df318d573d54ea9a00c3998e98c9, type: 2}
-  - {fileID: 11400000, guid: ce1f6a761b0b20b489a958ec03a5f297, type: 2}
+  bosses: []
 --- !u!4 &473849020
 Transform:
   m_ObjectHideFlags: 0
@@ -322,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 4149064562
-  serverOnly: 0
+  sceneId: 2247270200
+  serverOnly: 1
   m_AssetId: 
 --- !u!1 &633654779
 GameObject:

@@ -9,56 +9,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4029ec49bd0eb894ab799dc6370db4a3, type: 3}
+  m_Script: {fileID: 11500000, guid: eee3cf5283a592b45a0971943a163499, type: 3}
   m_Name: Landlord
   m_EditorClassIdentifier: 
   nameStyle: Landlord
-  floor: {fileID: 5995512640940380585, guid: 7fe55463069bc1347b04da29d4d447e7, type: 3}
-  wallDown: {fileID: 4666165158059393261, guid: d0db7e319edfc8b4180d6774dc841926,
-    type: 3}
-  wallLeft: {fileID: 8333963013168067642, guid: 4cbc8738b68c51b488ff49937080d851,
-    type: 3}
-  wallRight: {fileID: 6541792069657844282, guid: effd1de0936124b479a3602c05d991a8,
-    type: 3}
-  wallTop: {fileID: 3806535468035757936, guid: d13fdb89799b9bf4985e66baed9f6ad4, type: 3}
-  cornerLeftDown: {fileID: 693053170268462262, guid: 9561a56540c59164cb379823c1b84134,
-    type: 3}
-  cornerRightDown: {fileID: 7341881910194709755, guid: 5f14553e3bdf93e4f8a4ee3811a9a95d,
-    type: 3}
-  cornerLeftUp: {fileID: 146701257403200081, guid: f42e8b20d0e5db64c9a0b3e27c27d3a8,
-    type: 3}
-  cornerRightUp: {fileID: 3464493466365696799, guid: ec3f4f3c6c563ac4e81f4b96139a9211,
-    type: 3}
-  cornerInternalLeftDown: {fileID: 573033356450212254, guid: 4f00c0deac957424f869cbb099140d2c,
-    type: 3}
-  cornerInternalLeftUp: {fileID: 6791371059759396105, guid: 2687cb5b1b2ee7f4282e7175df980d2e,
-    type: 3}
-  cornerInternalRightDown: {fileID: 584665492846794692, guid: b7a4c60818f8d1749bf3ef06df1a0e3d,
-    type: 3}
-  cornerInternalRightUp: {fileID: 4455402955386147488, guid: aafa663e4bf192044a86f96af4f8f08b,
-    type: 3}
-  decorations:
-  - prefab: {fileID: 912929430746833801, guid: 6deb921570d5f4244982ff238d3800d8, type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 6693319548863229260, guid: 028a2e46c7e541a43a99be8c6f70da7f,
+  floors:
+  - prefab: {fileID: 5995512640940380585, guid: 7fe55463069bc1347b04da29d4d447e7,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 4069495582778785942, guid: 215c271fbd384454f82f3036725d5670,
+  wallDown:
+  - prefab: {fileID: 4666165158059393261, guid: d0db7e319edfc8b4180d6774dc841926,
       type: 3}
-    probability: 0.017
-    minToSpawn: 4
-    maxToSpawn: 6
-  - prefab: {fileID: 2870702960043453953, guid: 5e77d90986a74f5429f92ba7d4af501b,
+  wallLeft:
+  - prefab: {fileID: 8333963013168067642, guid: 4cbc8738b68c51b488ff49937080d851,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 7436823093116799167, guid: c02b3b0e8222f3f4d8584a8646e6c499,
+  wallRight:
+  - prefab: {fileID: 6541792069657844282, guid: effd1de0936124b479a3602c05d991a8,
       type: 3}
-    probability: 0
-    minToSpawn: 0
-    maxToSpawn: 0
+  wallTop:
+  - prefab: {fileID: 3806535468035757936, guid: d13fdb89799b9bf4985e66baed9f6ad4,
+      type: 3}
+  cornerLeftDown:
+  - prefab: {fileID: 693053170268462262, guid: 9561a56540c59164cb379823c1b84134, type: 3}
+  cornerRightDown:
+  - prefab: {fileID: 7341881910194709755, guid: 5f14553e3bdf93e4f8a4ee3811a9a95d,
+      type: 3}
+  cornerLeftUp:
+  - prefab: {fileID: 146701257403200081, guid: f42e8b20d0e5db64c9a0b3e27c27d3a8, type: 3}
+  cornerRightUp:
+  - prefab: {fileID: 3464493466365696799, guid: ec3f4f3c6c563ac4e81f4b96139a9211,
+      type: 3}
+  cornerInternalLeftDown:
+  - prefab: {fileID: 573033356450212254, guid: 4f00c0deac957424f869cbb099140d2c, type: 3}
+  cornerInternalLeftUp:
+  - prefab: {fileID: 6791371059759396105, guid: 2687cb5b1b2ee7f4282e7175df980d2e,
+      type: 3}
+  cornerInternalRightDown:
+  - prefab: {fileID: 584665492846794692, guid: b7a4c60818f8d1749bf3ef06df1a0e3d, type: 3}
+  cornerInternalRightUp:
+  - prefab: {fileID: 4455402955386147488, guid: aafa663e4bf192044a86f96af4f8f08b,
+      type: 3}
+  decorations: []

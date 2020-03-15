@@ -2,8 +2,9 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Dungeon.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using Mirror;
 using System.Collections.Generic;
+using System.Linq;
+using Mirror;
 using UnityEngine;
 
 /// <summary>Random dungeon generator.</summary>
@@ -56,19 +57,23 @@ public class Dungeon : NetworkBehaviour
     #region Board Game
 
     /// <summary>The board</summary>
-    private readonly BoardBox[,] board = new BoardBox[BoardWidth, BoardHeight];
+    private BoardBox[,] board = new BoardBox[BoardWidth, BoardHeight];
 
     /// <summary>The rooms</summary>
-    private readonly List<Room> rooms = new List<Room>();
+    private List<Room> rooms = new List<Room>();
 
     /// <summary>The corridors</summary>
-    private readonly List<Corridor> corridors = new List<Corridor>();
+    private List<Corridor> corridors = new List<Corridor>();
 
     #endregion
 
     /// <summary>The altar</summary>
     [SerializeField]
     private GameObject altar = null;
+
+    /// <summary>The boss</summary>
+    [SerializeField]
+    private List<GameObject> bosses = new List<GameObject>();
 
     #region Encapsulate Fields
 
@@ -80,14 +85,11 @@ public class Dungeon : NetworkBehaviour
     /// <value>The random style.</value>
     private Style RandomStyle => Resources.LoadAll<Style>("Dungeons")[Random.Range(0, Resources.LoadAll<Style>("Dungeons").Length)];
 
-    #endregion
+    /// <summary>Gets the random boss.</summary>
+    /// <value>The random boss.</value>
+    private GameObject RandomBoss => bosses[Random.Range(0, bosses.Count)];
 
-    /// <summary>Awakes this instance.</summary>
-    private void Awake()
-    {
-        Settings.Load();
-        Language.Translate();
-    }
+    #endregion
 
     /// <summary>Starts this instance.</summary>
     private void Start()
@@ -98,8 +100,6 @@ public class Dungeon : NetworkBehaviour
 
             ConfigInitialRoom();
             ConfigRoomsAndCorridors();
-            ConfigShopRoom();
-            ConfigBossRoom();
 
             CreateBoard();
 
@@ -200,7 +200,7 @@ public class Dungeon : NetworkBehaviour
         float yPos = ((rooms[NumOfRooms - 1].YPos + rooms[NumOfRooms - 1].Height) / 2) + 0.5f;
 
         GameObject master = new GameObject("Boss");
-        //Instantiate(RandomBoss, new Vector2(xPos, yPos), Quaternion.identity, master.transform);
+        Instantiate(RandomBoss, new Vector2(xPos, yPos), Quaternion.identity, master.transform);
     }
 
     /// <summary>Configurations the shop room.</summary>
@@ -223,7 +223,7 @@ public class Dungeon : NetworkBehaviour
             }
         }
 
-        PrintDecoration(style);
+        //PrintDecoration(style);
     }
     /// <summary>Prints the items.</summary>
     private void PrintDecoration(Style style)
