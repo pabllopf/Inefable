@@ -3,12 +3,10 @@
 // <copyright file="Dungeon.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Linq;
-using Mirror;
 using UnityEngine;
 
 /// <summary>Random dungeon generator.</summary>
-public class Dungeon : NetworkBehaviour
+public class Dungeon : MonoBehaviour
 {
     #region Board Size
 
@@ -71,11 +69,19 @@ public class Dungeon : NetworkBehaviour
     [SerializeField]
     private GameObject altar = null;
 
-    /// <summary>The boss</summary>
-    [SerializeField]
-    private List<GameObject> bosses = new List<GameObject>();
-
     #region Encapsulate Fields
+
+    /// <summary>Gets or sets the board.</summary>
+    /// <value>The board.</value>
+    public BoardBox[,] Board { get => board; set => board = value; }
+
+    /// <summary>Gets or sets the rooms.</summary>
+    /// <value>The rooms.</value>
+    public List<Room> Rooms { get => rooms; set => rooms = value; }
+
+    /// <summary>Gets or sets the corridors.</summary>
+    /// <value>The corridors.</value>
+    public List<Corridor> Corridors { get => corridors; set => corridors = value; }
 
     /// <summary>Gets or sets the altar.</summary>
     /// <value>The altar.</value>
@@ -90,17 +96,14 @@ public class Dungeon : NetworkBehaviour
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        if (isServer)
-        {
-            SetUpRoomsAndCorridors();
+        SetUpRoomsAndCorridors();
 
-            ConfigInitialRoom();
-            ConfigRoomsAndCorridors();
+        ConfigInitialRoom();
+        ConfigRoomsAndCorridors();
 
-            CreateBoard();
+        CreateBoard();
 
-            PrintDungeon(RandomStyle);
-        }
+        PrintDungeon(RandomStyle);
     }
 
     /// <summary>Sets up rooms and corridors.</summary>
