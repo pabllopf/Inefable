@@ -28,9 +28,6 @@ public class OldMultiplayer : MonoBehaviour
     /// <summary>My IP text</summary>
     private readonly Text myIPText = null;
 
-    /// <summary>The number of servers</summary>
-    private readonly Text numOfServers = null;
-
     /// <summary>The scroll rect</summary>
     [SerializeField]
     private readonly Transform content = null;

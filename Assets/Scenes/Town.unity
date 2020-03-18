@@ -22805,6 +22805,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8b358408243dfca43944355a59abc534,
         type: 2}
+    - target: {fileID: 8256155125214366613, guid: 681ce531d8225ac45b9931a9a7dd9866,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8256155125214366615, guid: 681ce531d8225ac45b9931a9a7dd9866,
         type: 3}
       propertyPath: sceneId
@@ -22890,5 +22895,7 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.00010815087
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8256155125214366616, guid: 681ce531d8225ac45b9931a9a7dd9866, type: 3}
+    - {fileID: 8256155125214366613, guid: 681ce531d8225ac45b9931a9a7dd9866, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 681ce531d8225ac45b9931a9a7dd9866, type: 3}
