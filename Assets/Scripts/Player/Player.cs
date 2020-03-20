@@ -2,8 +2,8 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Player.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-using Mirror;
 using System.Collections;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,6 +40,9 @@ public class Player : NetworkBehaviour
 
     /// <summary>The mobile UI</summary>
     private GameObject mobileUI = null;
+
+    /// <summary>The walk effect</summary>
+    private GameObject walkEffect = null;
 
     /// <summary>The joystick</summary>
     private Joystick joystick = null;
@@ -101,6 +104,8 @@ public class Player : NetworkBehaviour
         if (isLocalPlayer)
         {
             rigbody2D = GetComponent<Rigidbody2D>();
+
+            walkEffect = transform.Find("WalkEffect").gameObject;
 
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = TypePlayer.Controller;
@@ -170,9 +175,12 @@ public class Player : NetworkBehaviour
             animator.SetFloat(Horizontal, direction.x);
             animator.SetFloat(Vertical, direction.y);
             animator.SetBool(Run, true);
+
+            walkEffect.SetActive(true);
         }
         else
         {
+            walkEffect.SetActive(false);
             animator.SetBool(Run, false);
         }
     }

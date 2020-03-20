@@ -127,6 +127,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Player
+    uniqueID: 3372536735
+    locked: 0
   - name: foregound
     uniqueID: 1490126623
     locked: 0
