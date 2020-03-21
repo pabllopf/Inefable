@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: c8ce6256d7b0ef64f965d095ddc34d40
+guid: 5a3c22b7ef251114f83e2ff4e3082780
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 1058773942539993440
-    second: Pumpkin-001_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -111,28 +108,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Pumpkin-001_0
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 0
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b809f0e33b5a914d9160d59847288e8
-      internalID: 1058773942539993440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -143,7 +119,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: DecoAfterlife
+  spritePackingTag: BoardAfterlife
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 

@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: 00c6b04e82d5e834083e07569176bf73
+guid: f1039176958c15648a1f372388606761
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 3953843272529480890
-    second: Cauldron-002_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -111,28 +108,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Cauldron-002_0
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 1
-        width: 14
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3899fe497f3f1a4fa30abc638b01911
-      internalID: 3953843272529480890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -143,7 +119,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: DecoAfterlife
+  spritePackingTag: BoardAfterlife
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
