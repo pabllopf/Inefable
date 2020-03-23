@@ -21,6 +21,12 @@ public class Item : ScriptableObject
     [SerializeField]
     private Clef description = Clef.A1;
 
+    [Header("Prefab:")]
+
+    /// <summary>The prefab</summary>
+    [SerializeField]
+    private GameObject prefab = null;
+
     [Header("Stats:")]
 
     /// <summary>The cost</summary>
@@ -89,6 +95,10 @@ public class Item : ScriptableObject
     /// <summary>Gets or sets the controller.</summary>
     /// <value>The controller.</value>
     public RuntimeAnimatorController Controller { get => controller; set => controller = value; }
+    
+    /// <summary>Gets or sets the prefab.</summary>
+    /// <value>The prefab.</value>
+    public GameObject Prefab { get => prefab; set => prefab = value; }
 
     #endregion
 

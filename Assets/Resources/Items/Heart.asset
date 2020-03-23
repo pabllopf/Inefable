@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Heart
   description: 0
+  prefab: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}
   cost: 0
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 1
-  maxNumToSpawn: 5
   saveInInventory: 0
-  appearsInDungeon: 1
   icon: {fileID: -6219609241969312862, guid: a8c60f66316e99d4d9a4f142168d900e, type: 3}
-  boxToSpawn: 1
   action: 7
   controller: {fileID: 9100000, guid: 49d006c0d195e9f40bde1b1e2d3d4b02, type: 2}
-  prefab: {fileID: 3896597436919044298, guid: 3d497da6c092b7f449b20605d4f36dfc, type: 3}

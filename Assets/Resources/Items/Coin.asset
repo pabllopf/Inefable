@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Coin
   description: 0
+  prefab: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
   cost: 0
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 1
-  maxNumToSpawn: 5
   saveInInventory: 0
-  appearsInDungeon: 1
   icon: {fileID: -4953213064541771370, guid: 59649245aca00774fb3175cf056ae6c8, type: 3}
-  boxToSpawn: 1
   action: 3
   controller: {fileID: 9100000, guid: 0a96d9157de83e9409dd2b3eac8b957d, type: 2}
-  prefab: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
