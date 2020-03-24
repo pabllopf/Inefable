@@ -2,6 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Attack.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using EnemyIA;
 using System.Linq;
 using UnityEngine;
 
@@ -49,6 +50,6 @@ public class Attack
         Physics2D.OverlapCircleAll(player.AttackVector, player.TypePlayer.RadiusAttack, LayerMask.GetMask("Enemy"))
             .ToList()
             .FindAll(i => i.CompareTag("Enemy"))
-            .ForEach(i => i.GetComponent<IEnemy>().TakeDamage(5));
+            .ForEach(i => i.GetComponent<Enemy>().TakeDamage(5));
     }
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26099aac2746cbb48a048c04ed886656, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  nameEnemy: Skeleton
+  isStaticEnemy: 0
+  health: 100
+  speedToMove: 2
+  rangeOfVision: 4
+  rangeOfAttack: 0.8
+  frequencyToAttack: 1
+  attackType: 1
+  animator: {fileID: 9100000, guid: 923a280892d72cf4e9f72e4417973419, type: 2}

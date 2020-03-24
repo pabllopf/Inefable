@@ -10,7 +10,7 @@ namespace DungeonGenerator.Configuration
 
     /// <summary>Define a style of a dungeon.</summary>
     [System.Serializable]
-    [CreateAssetMenu(fileName = "New Dungeon", menuName = "System/New Dungeon")]
+    [CreateAssetMenu(fileName = "New Dungeon", menuName = "Game/New Dungeon")]
     public class Style : ScriptableObject
     {
         [Header("Name:")]
