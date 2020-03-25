@@ -1,0 +1,17 @@
+{
+    "name": "EEnemy",
+    "references": [
+        "GUID:fb4f2b103e7571e4e9d010b093fae377"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

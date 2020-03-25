@@ -4897,6 +4897,7 @@ GameObject:
   - component: {fileID: 5484080073407255058}
   - component: {fileID: -3113120528749295135}
   - component: {fileID: 8507525503082003958}
+  - component: {fileID: -1498915843481104297}
   m_Layer: 8
   m_Name: Allard
   m_TagString: Player
@@ -5277,6 +5278,18 @@ EdgeCollider2D:
   - {x: 0.277044, y: -0.07771543}
   - {x: 0.21940446, y: 0.00096452236}
   - {x: -0.03557603, y: 0.0023490824}
+--- !u!114 &-1498915843481104297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107992142917191518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac70c1cd100733245abe58647828af11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1263598280971295199
 GameObject:
   m_ObjectHideFlags: 0
