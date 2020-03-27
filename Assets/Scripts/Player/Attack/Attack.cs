@@ -46,10 +46,14 @@ public class Attack
         Player player = obj.GetComponent<Player>();
 
         player.Animator.SetBool("Attack", true);
-
         Physics2D.OverlapCircleAll(player.AttackVector, player.TypePlayer.RadiusAttack, LayerMask.GetMask("Enemy"))
             .ToList()
             .FindAll(i => i.CompareTag("Enemy"))
-            .ForEach(i => i.GetComponent<Enemy>().TakeDamage(5));
+            .ForEach(i => {
+                if (Vector2.Distance(i.transform.position, player.transform.position) <= player.TypePlayer.RadiusAttack * 2) 
+                {
+                    i.GetComponent<Enemy>().TakeDamage(5);
+                }
+                });
     }
 }

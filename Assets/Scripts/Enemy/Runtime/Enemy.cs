@@ -8,6 +8,7 @@ namespace EnemyIA
     using EnemyIA.Configuration;
     using Mirror;
     using UnityEngine;
+    using Utils.Effect;
 
     /// <summary>Control a enemy of the game.</summary>
     public class Enemy : MonoBehaviour
@@ -37,17 +38,30 @@ namespace EnemyIA
         /// <summary>The health</summary>
         private int health = 1;
 
+        /// <summary>The popup text</summary>
+        private PopupText popupText = null;
+
         /// <summary>The attacking</summary>
         private bool attacking = false;
 
         /// <summary>The is alive</summary>
         private bool isAlive = true;
 
+        /// <summary>The hitting</summary>
+        private bool hitting = false;
+
         /// <summary>The target</summary>
+        [SerializeField]
         private Transform target = null;
 
         /// <summary>The direction</summary>
         private Vector3 direction = Vector3.zero;
+
+        /// <summary>The attack position</summary>
+        private Vector3 attackPosition = Vector3.zero;
+
+        /// <summary>The sprite renderer</summary>
+        private SpriteRenderer spriteRenderer = null;
 
         /// <summary>The rigid body 2d</summary>
         private Rigidbody2D rigid2D = null;
@@ -58,8 +72,15 @@ namespace EnemyIA
         /// <summary>The animator</summary>
         private Animator animator = null;
 
+        /// <summary>The hit clip</summary>
+        [SerializeField]
+        private AudioClip hitClip = null;
+
+        /// <summary>The audio source</summary>
+        private AudioSource audioSource = null;
+
         #region Encapsulate Fields
-        
+
         /// <summary>Gets or sets the type enemy.</summary>
         /// <value>The type enemy.</value>
         public EnemyType TypeEnemy { get => enemy; set => enemy = value; }
@@ -71,6 +92,10 @@ namespace EnemyIA
         /// <summary>Gets or sets the direction.</summary>
         /// <value>The direction.</value>
         public Vector3 Direction { get => direction; set => direction = value; }
+
+        /// <summary>Gets or sets the sprite renderer.</summary>
+        /// <value>The sprite renderer.</value>
+        public SpriteRenderer SpriteRenderer { get => spriteRenderer; set => spriteRenderer = value; }
 
         /// <summary>Gets or sets the rigid2 d.</summary>
         /// <value>The rigid2 d.</value>
@@ -88,6 +113,22 @@ namespace EnemyIA
         /// <value>The distance to target.</value>
         private float DistanceToTarget => Vector2.Distance(transform.position, target.position);
 
+        /// <summary>Gets or sets the popup text.</summary>
+        /// <value>The popup text.</value>
+        public PopupText PopupText { get => popupText; set => popupText = value; }
+
+        /// <summary>Gets or sets the hit clip.</summary>
+        /// <value>The hit clip.</value>
+        public AudioClip HitClip { get => hitClip; set => hitClip = value; }
+
+        /// <summary>Gets or sets the audio source.</summary>
+        /// <value>The audio source.</value>
+        public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+        
+        /// <summary>Gets or sets the attack position.</summary>
+        /// <value>The attack position.</value>
+        public Vector3 AttackPosition { get => attackPosition; set => attackPosition = value; }
+
         #endregion
 
         /// <summary>Called when [trigger stay2 d].</summary>
@@ -103,28 +144,21 @@ namespace EnemyIA
             }
         }
 
-        /// <summary>Called when [trigger exit2 d].</summary>
-        /// <param name="obj">The collision.</param>
-        public void OnTriggerExit2D(Collider2D obj)
-        {
-            if (obj.CompareTag("Player"))
-            {
-                target = null;
-                direction = Vector3.zero;
-                animator.SetBool(Walk, false);
-            }
-        }
-
         /// <summary>Takes the damage.</summary>
-        /// <param name="damage">The damage.</param>
-        public void TakeDamage(int damage)
+        /// <param name="amount">The damage.</param>
+        public void TakeDamage(int amount)
         {
-            health -= damage;
-            if (health <= 0 && isAlive) 
+            health -= amount;
+            popupText.Play(amount.ToString());
+            if (health <= 0 && isAlive)
             {
                 StopAllCoroutines();
                 StartCoroutine(Die());
                 return;
+            }
+            else 
+            {
+                this.StartCoroutine(this.Hit());
             }
         }
 
@@ -132,6 +166,10 @@ namespace EnemyIA
         private void Start()
         {
             health = enemy.Health;
+
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            audioSource = GetComponent<AudioSource>();
 
             rigid2D = GetComponent<Rigidbody2D>();
 
@@ -146,6 +184,8 @@ namespace EnemyIA
             circleCollider.radius = enemy.RangeOfVision;
 
             animator = GetComponent<Animator>();
+
+            popupText = GetComponent<PopupText>();
         }
 
         /// <summary>Updates this instance.</summary>
@@ -153,23 +193,32 @@ namespace EnemyIA
         {
             if (isAlive)
             {
-                if (!target)
+                if (target)
                 {
-                    return;
-                }
-
-                if (DistanceToTarget <= enemy.RangeOfVision)
-                {
-                    if (DistanceToTarget <= enemy.RangeOfAttack)
+                    if (DistanceToTarget <= enemy.RangeOfVision)
                     {
-                        if (!attacking)
+                        if (DistanceToTarget <= enemy.RangeOfAttack)
                         {
-                            StartCoroutine(AttackTarget());
+                            if (!attacking)
+                            {
+                                StartCoroutine(AttackTarget());
+                            }
+                        }
+                        else
+                        {
+                            if (!attacking)
+                            {
+                                FollowTarget();
+                            }
                         }
                     }
                     else
                     {
-                        FollowTarget();
+                        direction = Vector2.zero;
+                        animator.SetBool(Walk, false);
+
+                        target = null;
+                        return;
                     }
                 }
             }
@@ -178,7 +227,7 @@ namespace EnemyIA
         /// <summary>Fixed the update.</summary>
         private void FixedUpdate()
         {
-            if (isAlive && !enemy.IsStaticEnemy) 
+            if (isAlive && !enemy.IsStaticEnemy && !hitting && target) 
             {
                 rigid2D.MovePosition(transform.position + (direction * enemy.SpeedToMove * Time.deltaTime));
             }
@@ -208,7 +257,10 @@ namespace EnemyIA
             animator.SetBool(Walk, false);
 
             yield return new WaitForSeconds(enemy.FrequencyToAttack / 2);
+
             animator.SetTrigger(Attack);
+
+            attackPosition = this.transform.position + (this.direction / 3);
 
             enemy.Target = target.gameObject;
             enemy.Controller = this;
@@ -226,6 +278,9 @@ namespace EnemyIA
             animator.SetBool(Exit, true);
             animator.SetTrigger(Dead);
 
+            rigid2D.velocity = Vector2.zero;
+            rigid2D.isKinematic = true;
+
             Destroy(GetComponent<CircleCollider2D>());
             Destroy(GetComponent<CapsuleCollider2D>());
 
@@ -242,6 +297,39 @@ namespace EnemyIA
             Destroy(gameObject);
         }
 
+        /// <summary>Hits this instance.</summary>
+        /// <returns>Return none</returns>
+        public IEnumerator Hit()
+        {
+            this.rigid2D.isKinematic = false;
+            this.hitting = true;
+            this.rigid2D.AddForce((this.transform.position - this.target.position).normalized * enemy.Thrust, ForceMode2D.Impulse);
+            this.StartCoroutine(this.HitEffect(this.rigid2D));
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.attackPosition = this.transform.position;
+            this.spriteRenderer.color = Color.red;
+
+            Sound.Play(hitClip, audioSource);
+
+            yield return new WaitForSeconds(0.1f);
+            this.spriteRenderer.color = Color.white;
+            this.rigid2D.isKinematic = true;
+        }
+
+
+        /// <summary>Hits the effect.</summary>
+        /// <param name="enemy">The enemy.</param>
+        /// <returns>Return none</returns>
+        private IEnumerator HitEffect(Rigidbody2D rigid)
+        {
+            yield return new WaitForSeconds(enemy.KnockTime);
+            rigid.velocity = Vector2.zero;
+            rigid.isKinematic = true;
+            this.hitting = false;
+        }
+
         #region Gizmos Selected
 
         /// <summary>Called when [draw gizmos selected].</summary>
@@ -252,6 +340,12 @@ namespace EnemyIA
 
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, enemy.RangeOfAttack);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(this.transform.position + (this.direction / 3), enemy.RangeOfAttack);
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(this.attackPosition, enemy.RangeOfAttack);
         }
 
         #endregion

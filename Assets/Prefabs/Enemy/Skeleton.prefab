@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8676689400359619757}
   - component: {fileID: 8676689400359619756}
   - component: {fileID: 1864190903119836615}
+  - component: {fileID: -3791092638439725596}
   m_Layer: 9
   m_Name: Skeleton
   m_TagString: Enemy
@@ -100,7 +101,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: da2a35da8106fb84e9777c449e76eea8, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -119,8 +120,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07773757, y: -0.29733938}
-  m_Size: {x: 0.5090885, y: 0.5090885}
+  m_Offset: {x: -0.07773757, y: -0.15546557}
+  m_Size: {x: 0.5090885, y: 0.7928361}
   m_Direction: 0
 --- !u!50 &8676689400359619759
 Rigidbody2D:
@@ -175,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 68f6781ad3ee4a748a37ec3bf47f76fe, type: 2}
+  target: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: f096d69ce08b065409658be935f20264, type: 3}
 --- !u!114 &8676689400359619757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,3 +305,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3791092638439725596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8676689400359619745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9108478032f860445ac1f713d5def108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageText: {fileID: 8954836190101099924, guid: 50e05867c6273094293d0eb155d8bf69,
+    type: 3}
+  time: 0.56

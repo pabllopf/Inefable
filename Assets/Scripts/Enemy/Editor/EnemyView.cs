@@ -40,6 +40,9 @@ namespace EnemyIA.Editor
 
             Show(serializedObject.FindProperty("health"));
             Show(serializedObject.FindProperty("speedToMove"));
+            Show(serializedObject.FindProperty("thrust"));
+            Show(serializedObject.FindProperty("knockTime"));
+
             Show(serializedObject.FindProperty("rangeOfVision"));
             Show(serializedObject.FindProperty("rangeOfAttack"));
             Show(serializedObject.FindProperty("frequencyToAttack"));

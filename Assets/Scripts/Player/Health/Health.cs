@@ -3,8 +3,10 @@
 // <copyright file="Health.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils.Effect;
 
 /// <summary>Manage the health of the player.</summary>
 public class Health : MonoBehaviour
@@ -35,6 +37,9 @@ public class Health : MonoBehaviour
     /// <summary>The audio source</summary>
     private AudioSource audioSource = null;
 
+    /// <summary>The popup text</summary>
+    private PopupText popupText = null;
+
     /// <summary>Gets a value indicating whether this instance is alive.</summary>
     /// <value>
     /// <c>true</c> if this instance is alive; otherwise, <c>false</c>.</value>
@@ -51,6 +56,10 @@ public class Health : MonoBehaviour
     /// <summary>Gets or sets the take clip.</summary>
     /// <value>The take clip.</value>
     public AudioClip TakeClip { get => takeClip; set => takeClip = value; }
+    
+    /// <summary>Gets or sets the popup text.</summary>
+    /// <value>The popup text.</value>
+    public PopupText PopupText { get => popupText; set => popupText = value; }
 
     /// <summary>Treat the specified amount.</summary>
     /// <param name="amount">The amount.</param>
@@ -83,7 +92,7 @@ public class Health : MonoBehaviour
         bar.size = (float)health / 100;
         marker.text = health.ToString();
 
-        StartCoroutine(TakeAHitEffect(TimeOfEffect));
+        StartCoroutine(TakeAHitEffect(TimeOfEffect, amount));
 
         Sound.Play(TakeClip, AudioSource);
         Data.SaveVar(health).WithName("Health").InFolder("Player");
@@ -103,14 +112,17 @@ public class Health : MonoBehaviour
 
         marker = transform.Find("Interface/Bar/Health/Text").GetComponent<Text>();
         marker.text = health.ToString();
+
+        popupText = GetComponent<PopupText>();
     }
 
     /// <summary>Takes a hit effect.</summary>
     /// <param name="time">The time.</param>
     /// <returns>Return none</returns>
-    private IEnumerator TakeAHitEffect(float time)
+    private IEnumerator TakeAHitEffect(float time, int amount)
     {
         spriteRenderer.color = Color.red;
+        popupText.Play(amount.ToString());
         yield return new WaitForSeconds(time);
         spriteRenderer.color = Color.white;
     }

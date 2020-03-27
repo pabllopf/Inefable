@@ -35,6 +35,16 @@ namespace EnemyIA.Configuration
         [Range(1, 10)]
         private float speedToMove = 1f;
 
+        /// <summary>The thrust</summary>
+        [SerializeField]
+        [Range(1, 10)]
+        private float thrust = 3f;
+
+        /// <summary>The knock time</summary>
+        [SerializeField]
+        [Range(0, 1)]
+        private float knockTime = 0.3f;
+
         /// <summary>The range of vision</summary>
         [SerializeField]
         [Range(1, 10)]
@@ -114,6 +124,14 @@ namespace EnemyIA.Configuration
         /// <summary>Gets or sets the controller.</summary>
         /// <value>The controller.</value>
         public Enemy Controller { get => controller; set => controller = value; }
+       
+        /// <summary>Gets or sets the knock time.</summary>
+        /// <value>The knock time.</value>
+        public float KnockTime { get => knockTime; set => knockTime = value; }
+       
+        /// <summary>Gets or sets the thrust.</summary>
+        /// <value>The thrust.</value>
+        public float Thrust { get => thrust; set => thrust = value; }
 
         #endregion
 

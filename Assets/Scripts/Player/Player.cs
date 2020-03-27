@@ -212,9 +212,22 @@ public class Player : NetworkBehaviour
     {
         isAttacking = true;
 
+        attackVector = this.transform.position + (this.direction / 3);
+
         global::Attack.Invoke(TypePlayer.Attack).OfThis(gameObject);
 
         yield return new WaitForSeconds(TypePlayer.FrequencyToAttack);
         isAttacking = false;
     }
+
+    #region Gizmos Selected
+
+    /// <summary>Called when [draw gizmos selected].</summary>
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position + (this.direction / 3), TypePlayer.RadiusAttack);
+    }
+
+    #endregion
 }

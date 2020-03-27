@@ -5,6 +5,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils.Effect;
 
 /// <summary>The shield of the player</summary>
 public class Shield : MonoBehaviour
@@ -14,6 +15,9 @@ public class Shield : MonoBehaviour
 
     /// <summary>The shield</summary>
     private int shield = 50;
+
+    /// <summary>The popup text</summary>
+    private PopupText popupText = null;
 
     /// <summary>The sprite renderer</summary>
     private SpriteRenderer spriteRenderer = null;
@@ -49,6 +53,10 @@ public class Shield : MonoBehaviour
     /// <summary>Gets or sets the audio source.</summary>
     /// <value>The audio source.</value>
     public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+    
+    /// <summary>Gets or sets the popup text.</summary>
+    /// <value>The popup text.</value>
+    public PopupText PopupText { get => popupText; set => popupText = value; }
 
     /// <summary>Sets the full.</summary>
     public void SetFull()
@@ -71,7 +79,7 @@ public class Shield : MonoBehaviour
         marker.text = shield.ToString();
         shieldObj.SetActive((shield > 0) ? true : false);
 
-        StartCoroutine(TakeAHitEffect(TimeOfEffect));
+        StartCoroutine(TakeAHitEffect(TimeOfEffect, amount));
 
         Sound.Play(TakeClip, AudioSource);
         Data.SaveVar(shield).WithName("Shield").InFolder("Player");
@@ -94,14 +102,17 @@ public class Shield : MonoBehaviour
 
         shieldObj = transform.Find("Interface/Bar/Shield").gameObject;
         shieldObj.SetActive((shield > 0) ? true : false);
+
+        popupText = GetComponent<PopupText>();
     }
 
     /// <summary>Takes a hit effect.</summary>
     /// <param name="time">The time.</param>
     /// <returns>Return none</returns>
-    private IEnumerator TakeAHitEffect(float time)
+    private IEnumerator TakeAHitEffect(float time, int amount)
     {
         spriteRenderer.color = Color.blue;
+        popupText.Play(amount.ToString());
         yield return new WaitForSeconds(time);
         spriteRenderer.color = Color.white;
     }

@@ -16,6 +16,8 @@ MonoBehaviour:
   isStaticEnemy: 0
   health: 100
   speedToMove: 2
+  thrust: 2
+  knockTime: 0.3
   rangeOfVision: 4
   rangeOfAttack: 0.8
   frequencyToAttack: 1

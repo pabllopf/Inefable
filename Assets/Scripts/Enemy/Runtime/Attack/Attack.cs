@@ -54,7 +54,7 @@ namespace EnemyIA.Configuration
         /// <param name="controller">The controller.</param>
         private void Melee(Enemy controller)
         {
-            Physics2D.OverlapCircleAll(controller.gameObject.transform.position + (controller.Direction / 3), 0.6f, LayerMask.GetMask("Player"))
+            Physics2D.OverlapCircleAll(controller.AttackPosition + (controller.Direction / 3), 0.6f, LayerMask.GetMask("Player"))
             .ToList()
             .FindAll(i => i.CompareTag("Player"))
             .ForEach(i => i.GetComponent<Health>().Take(Random.Range(5, 15)));

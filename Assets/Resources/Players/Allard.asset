@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   namePlayer: Allard
   speedOfMovement: 3
+  radiusAttack: 0.5
   frequencyToAttack: 0.2
   frequencyToUseSkill: 0.2
+  attack: 0
+  skill: 0
   controller: {fileID: 9100000, guid: 6bdbe3c68c05091478e862c73b40a710, type: 2}
