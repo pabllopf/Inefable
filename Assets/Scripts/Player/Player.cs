@@ -26,6 +26,9 @@ public class Player : NetworkBehaviour
     /// <summary>The speed of move</summary>
     private float speedOfMove = 0;
 
+    /// <summary>The damage of attack</summary>
+    private int damageOfAttack = 0;
+
     /// <summary>The is attacking</summary>
     private bool isAttacking = false;
 
@@ -79,6 +82,7 @@ public class Player : NetworkBehaviour
     /// <summary>Gets or sets the speed of move.</summary>
     /// <value>The speed of move.</value>
     public float SpeedOfMove { get => speedOfMove; set => speedOfMove = value; }
+    public int DamageOfAttack { get => damageOfAttack; set => damageOfAttack = value; }
 
     /// <summary>Button B</summary>
     public void ButtonA()
@@ -128,6 +132,7 @@ public class Player : NetworkBehaviour
             position = NetworkManager.startPositions[0].transform.position;
 
             speedOfMove = typePlayer.SpeedOfMovement;
+            damageOfAttack = typePlayer.Damage;
 
             SetUpPlayerCamera();
         }

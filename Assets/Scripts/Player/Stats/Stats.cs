@@ -20,6 +20,8 @@ public class Stats : MonoBehaviour
 
     private bool speedIsUp = false;
 
+    private bool damageIsUp = false;
+
     /// <summary>The player</summary>
     private Player player = null;
 
@@ -50,10 +52,20 @@ public class Stats : MonoBehaviour
         StartCoroutine(ActiveUI(time));
     }
 
+    public void IncreasesDamage(float time) 
+    {
+        animator.SetBool(ShowUI, true);
+        damageIsUp = true;
+        timeToDisableSpeed = time;
+        player.DamageOfAttack *= 2;
+        StopAllCoroutines();
+        StartCoroutine(ActiveUI(time));
+    }
+
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (speedIsUp) 
+        if (speedIsUp || damageIsUp) 
         {
             timeToDisableSpeed -= Time.deltaTime;
             if (timeToDisableSpeed > 0)
@@ -71,7 +83,17 @@ public class Stats : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         animator.SetBool(ShowUI, false);
+        if (damageIsUp) 
+        {
+            player.DamageOfAttack /= 2;
+        }
+        if (speedIsUp) 
+        {
+            player.SpeedOfMove /= 2;
+        }
+        
         speedIsUp = false;
-        player.SpeedOfMove /= 2;
+        damageIsUp = false;
+        
     }
 }

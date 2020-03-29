@@ -53,7 +53,7 @@ public class Attack
                 if (Vector2.Distance(i.transform.position, player.transform.position) <= player.TypePlayer.RadiusAttack * 2) 
                 {
                     bool critical = (Random.Range(0f, 100f) <= (player.TypePlayer.CriticalChance * 100)) ? true : false;
-                    i.GetComponent<Enemy>().TakeDamage(player.TypePlayer.Damage, critical);
+                    i.GetComponent<Enemy>().TakeDamage(player.DamageOfAttack, critical);
                 }
                 });
     }

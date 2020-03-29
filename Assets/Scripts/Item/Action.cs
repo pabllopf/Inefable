@@ -111,7 +111,7 @@ public class Action
     /// <param name="target">The target.</param>
     private void DamageIncrease(GameObject target)
     {
-        Debug.LogError("DamageIncrease Action Not Implemented !!!");
+        target.GetComponent<Stats>().IncreasesDamage(10);
     }
 
     /// <summary>Nothings this instance.</summary>
