@@ -104,7 +104,7 @@ public class Action
     /// <param name="target">The target.</param>
     private void SpeedIncrease(GameObject target)
     {
-        Debug.LogError("SpeedIncrease Action Not Implemented !!!");
+        target.GetComponent<Stats>().IncreasesSpeed(10);
     }
 
     /// <summary>Damages the increase.</summary>

@@ -23,6 +23,9 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private PlayerType typePlayer = null;
 
+    /// <summary>The speed of move</summary>
+    private float speedOfMove = 0;
+
     /// <summary>The is attacking</summary>
     private bool isAttacking = false;
 
@@ -73,6 +76,10 @@ public class Player : NetworkBehaviour
     /// <value>The axis y.</value>
     private float AxisY => Input.GetAxisRaw("Vertical") + Input.GetAxisRaw("LeftJoystickY") + joystick.Vertical;
 
+    /// <summary>Gets or sets the speed of move.</summary>
+    /// <value>The speed of move.</value>
+    public float SpeedOfMove { get => speedOfMove; set => speedOfMove = value; }
+
     /// <summary>Button B</summary>
     public void ButtonA()
     {
@@ -119,6 +126,8 @@ public class Player : NetworkBehaviour
             mobileUI.SetActive(Settings.Current.Platform.Equals("Mobile") ? true : false);
 
             position = NetworkManager.startPositions[0].transform.position;
+
+            speedOfMove = typePlayer.SpeedOfMovement;
 
             SetUpPlayerCamera();
         }
@@ -190,7 +199,7 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            rigbody2D.MovePosition(position + (direction * (TypePlayer.SpeedOfMovement * Time.fixedDeltaTime)));
+            rigbody2D.MovePosition(position + (direction * (speedOfMove * Time.fixedDeltaTime)));
         }
     }
 
