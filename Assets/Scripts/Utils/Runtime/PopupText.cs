@@ -2,7 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="PopupText.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-namespace Utils.Effect
+namespace Utils
 {
     using System.Collections;
     using TMPro;
@@ -27,20 +27,30 @@ namespace Utils.Effect
         /// <value>The damage text.</value>
         public GameObject DamageText { get => damageText; set => damageText = value; }
         
+        /// <summary>Gets or sets the effect UI.</summary>
+        /// <value>The effect UI.</value>
+        public GameObject EffectUI { get => effectUI; set => effectUI = value; }
+        
+        /// <summary>Gets or sets the time.</summary>
+        /// <value>The time.</value>
+        public float Time { get => time; set => time = value; }
+
         /// <summary>Plays the specified text.</summary>
         /// <param name="text">The text.</param>
-        public void Play(string text)
+        public void Play(string text, Color color)
         {
             if (effectUI.activeSelf)
             {
                 effectUI.transform.position = this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
                 effectUI.GetComponent<TextMeshPro>().text = text;
+                effectUI.GetComponent<TextMeshPro>().color = color;
             }
             else 
             {
                 effectUI.SetActive(true);
                 effectUI.transform.position = this.transform.position + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
                 effectUI.GetComponent<TextMeshPro>().text = text;
+                effectUI.GetComponent<TextMeshPro>().color = color;
             }
 
             StopAllCoroutines();

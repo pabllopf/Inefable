@@ -7,8 +7,9 @@ namespace EnemyIA
     using System.Collections;
     using EnemyIA.Configuration;
     using Mirror;
+    using TMPro;
     using UnityEngine;
-    using Utils.Effect;
+    using Utils;
 
     /// <summary>Control a enemy of the game.</summary>
     public class Enemy : MonoBehaviour
@@ -145,11 +146,21 @@ namespace EnemyIA
         }
 
         /// <summary>Takes the damage.</summary>
-        /// <param name="amount">The damage.</param>
-        public void TakeDamage(int amount)
+        /// <param name="amount">The amount.</param>
+        /// <param name="critical">if set to <c>true</c> [critical].</param>
+        public void TakeDamage(int amount, bool critical)
         {
-            health -= amount;
-            popupText.Play(amount.ToString());
+            if (critical)
+            {
+                health -= amount * 2;
+                popupText.Play((amount * 2).ToString(), Color.yellow);
+            }
+            else 
+            {
+                health -= amount;
+                popupText.Play(amount.ToString(), Color.red);
+            }
+
             if (health <= 0 && isAlive)
             {
                 StopAllCoroutines();

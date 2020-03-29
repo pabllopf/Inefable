@@ -2,7 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="FPSDisplay.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-namespace Utils.FPS
+namespace Utils
 {
     using UnityEngine;
 

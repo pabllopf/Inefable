@@ -18,5 +18,7 @@ MonoBehaviour:
   frequencyToAttack: 0.2
   frequencyToUseSkill: 0.2
   attack: 0
+  damage: 5
+  criticalChance: 0.1
   skill: 0
   controller: {fileID: 9100000, guid: 6bdbe3c68c05091478e862c73b40a710, type: 2}

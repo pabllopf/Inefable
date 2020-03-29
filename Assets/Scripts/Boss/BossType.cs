@@ -7,7 +7,7 @@ using UnityEngine;
 
 /// <summary>Define a boss of the game.</summary>
 [System.Serializable]
-[CreateAssetMenu(fileName = "New Boss", menuName = "Dungeon/Boss")]
+[CreateAssetMenu(fileName = "New Boss", menuName = "Game/New Boss")]
 public class BossType : ScriptableObject
 {
     [Header("Name:")]

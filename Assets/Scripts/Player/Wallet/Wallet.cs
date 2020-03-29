@@ -5,6 +5,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 /// <summary>Manage the wallet of a player.</summary>
 public class Wallet : MonoBehaviour

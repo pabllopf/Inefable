@@ -3,6 +3,8 @@
 // <copyright file="Settings.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 
+using Utils;
+
 /// <summary>Save the current settings of the game.</summary>
 public class Settings
 {

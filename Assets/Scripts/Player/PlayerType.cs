@@ -7,7 +7,7 @@ using UnityEngine;
 
 /// <summary>Define a style of a dungeon.</summary>
 [System.Serializable]
-[CreateAssetMenu(fileName = "New Player", menuName = "Player/New")]
+[CreateAssetMenu(fileName = "New Player", menuName = "Game/New Player")]
 public class PlayerType : ScriptableObject
 {
     [Header("Name:")]
@@ -48,6 +48,14 @@ public class PlayerType : ScriptableObject
     [SerializeField]
     private AttackType attack = AttackType.Melee;
 
+    [SerializeField]
+    [Range(1, 100)]
+    private int damage = 5;
+
+    [SerializeField]
+    [Range(0, 1)]
+    private float criticalChance = 0.1f;
+
     [Header("Skill:")]
 
     /// <summary>The skill</summary>
@@ -86,6 +94,14 @@ public class PlayerType : ScriptableObject
     /// <value>The attack.</value>
     public AttackType Attack { get => attack; set => attack = value; }
 
+    /// <summary>Gets or sets the damage.</summary>
+    /// <value>The damage.</value>
+    public int Damage { get => damage; set => damage = value; }
+    
+    /// <summary>Gets or sets the critical chance.</summary>
+    /// <value>The critical chance.</value>
+    public float CriticalChance { get => criticalChance; set => criticalChance = value; }
+
     /// <summary>Gets or sets the skill.</summary>
     /// <value>The skill.</value>
     public SkillType Skill { get => skill; set => skill = value; }
@@ -93,7 +109,7 @@ public class PlayerType : ScriptableObject
     /// <summary>Gets or sets the controller.</summary>
     /// <value>The controller.</value>
     public RuntimeAnimatorController Controller { get => controller; set => controller = value; }
-
+    
     #endregion
 
     #region Validate Name

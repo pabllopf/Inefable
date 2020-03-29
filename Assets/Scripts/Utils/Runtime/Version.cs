@@ -2,7 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Version.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-namespace Utils.Version
+namespace Utils
 {
     using UnityEngine;
     using UnityEngine.UI;

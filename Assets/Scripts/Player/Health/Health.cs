@@ -6,7 +6,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Effect;
+using Utils;
 
 /// <summary>Manage the health of the player.</summary>
 public class Health : MonoBehaviour
@@ -122,7 +122,7 @@ public class Health : MonoBehaviour
     private IEnumerator TakeAHitEffect(float time, int amount)
     {
         spriteRenderer.color = Color.red;
-        popupText.Play(amount.ToString());
+        popupText.Play(amount.ToString(), Color.red);
         yield return new WaitForSeconds(time);
         spriteRenderer.color = Color.white;
     }

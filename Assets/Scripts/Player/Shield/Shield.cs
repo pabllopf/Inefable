@@ -5,7 +5,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Effect;
+using Utils;
 
 /// <summary>The shield of the player</summary>
 public class Shield : MonoBehaviour
@@ -112,7 +112,7 @@ public class Shield : MonoBehaviour
     private IEnumerator TakeAHitEffect(float time, int amount)
     {
         spriteRenderer.color = Color.blue;
-        popupText.Play(amount.ToString());
+        popupText.Play(amount.ToString(), Color.blue);
         yield return new WaitForSeconds(time);
         spriteRenderer.color = Color.white;
     }

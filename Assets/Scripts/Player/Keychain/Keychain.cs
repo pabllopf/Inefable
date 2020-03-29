@@ -5,6 +5,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 /// <summary>Manage the Key Chain of a player.</summary>
 public class Keychain : MonoBehaviour

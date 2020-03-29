@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 /// <summary>Manage the inventory of the player.</summary>
 public class Inventory : MonoBehaviour
