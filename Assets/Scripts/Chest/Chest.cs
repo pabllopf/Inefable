@@ -104,11 +104,13 @@ public class Chest : MonoBehaviour
         if (canOpen && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("ButtonA")))
         {
             OpenChest();
+            return;
         }
 
         if (!canOpen && (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("ButtonA"))) 
         {
             HitChest();
+            return;
         }
     }
 

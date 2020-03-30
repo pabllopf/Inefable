@@ -142,6 +142,11 @@ public class MainMenu : MonoBehaviour
 
         popUpPanel = GameObject.FindWithTag("PopUpPanel");
         popUpPanel.SetActive(false);
+
+        if (GameObject.Find("NetworkManager")) 
+        {
+            Destroy(GameObject.Find("NetworkManager").gameObject);
+        }
     }
 
     /// <summary>Gets the selectors.</summary>

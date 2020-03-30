@@ -2464,6 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e839be29a8a56ee458bc43e686c6f740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  versionType: 'Alpha '
 --- !u!114 &1076363791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4442,8 +4443,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1738012226}
   - component: {fileID: 1738012225}
-  - component: {fileID: 1738012228}
   - component: {fileID: 1738012227}
+  - component: {fileID: 1738012228}
   m_Layer: 0
   m_Name: Control
   m_TagString: Untagged

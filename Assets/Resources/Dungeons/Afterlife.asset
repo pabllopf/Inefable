@@ -66,21 +66,6 @@ MonoBehaviour:
     boxToSpawn: 5
     minToSpawn: 6
     maxToSpawn: 22
-  - prefab: {fileID: 5838402379242433088, guid: 62b6a25fc6cfcad43b6935d2f92af203,
-      type: 3}
-    boxToSpawn: 1
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 1924119730384261068, guid: 5a03add70fb291b4a9efce5829126c1c,
-      type: 3}
-    boxToSpawn: 1
-    minToSpawn: 0
-    maxToSpawn: 0
-  - prefab: {fileID: 5890399239058461094, guid: 3dad7d7ca8ba50a499c8a265cb832af5,
-      type: 3}
-    boxToSpawn: 1
-    minToSpawn: 1
-    maxToSpawn: 7
   - prefab: {fileID: 4051429380530969706, guid: 85be6510636861043a73c7a42ccb49f7,
       type: 3}
     boxToSpawn: 1

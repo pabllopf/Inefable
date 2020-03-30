@@ -7,6 +7,7 @@ using Mirror.Discovery;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>Manage multiplayer of the game.</summary>
 public class Multiplayer : MonoBehaviour
@@ -18,7 +19,12 @@ public class Multiplayer : MonoBehaviour
     private NetworkDiscovery networkDiscovery = null;
 
     /// <summary>The discovered servers</summary>
-    private readonly Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
+    private Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
+
+    public NetworkManager NetworkManager { get => networkManager; set => networkManager = value; }
+    public NetworkDiscovery NetworkDiscovery { get => networkDiscovery; set => networkDiscovery = value; }
+
+    public Dictionary<long, ServerResponse> DiscoveredServers => discoveredServers;
 
     /// <summary>Called when [discovered server].</summary>
     /// <param name="info">The information.</param>
@@ -62,7 +68,11 @@ public class Multiplayer : MonoBehaviour
     private void Start()
     {
         Config();
-        HostLocalGame("Town", 1);
+
+        if (SceneManager.GetActiveScene().name == "Town") 
+        {
+            HostLocalGame("Town", 1);
+        }
     }
 
     /// <summary>Configurations this instance.</summary>
@@ -78,6 +88,7 @@ public class Multiplayer : MonoBehaviour
     private void HostLocalGame(string nameScene, int maxConnections)
     {
         discoveredServers.Clear();
+        networkManager.offlineScene = "Runway";
         networkManager.onlineScene = nameScene;
         networkManager.maxConnections = maxConnections;
         networkManager.StartHost();
@@ -90,6 +101,7 @@ public class Multiplayer : MonoBehaviour
     private void ClientLocalGame(string nameScene, ServerResponse info)
     {
         networkManager.maxConnections = 4;
+        networkManager.offlineScene = "Runway";
         networkManager.onlineScene = nameScene;
         networkManager.StartClient(info.uri);
     }

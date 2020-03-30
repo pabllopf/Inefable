@@ -16,7 +16,7 @@ public class Platform : MonoBehaviour
             return;
         }
 
-        if (Input.GetAxisRaw("LeftJoystickX") != 0 || Input.GetAxisRaw("LeftJoystickY") != 0 || Input.GetButton("ButtonA") || Input.GetButton("ButtonB"))
+        if (Input.GetAxisRaw("LeftJoystickX") != 0 || Input.GetAxisRaw("LeftJoystickY") != 0 || Input.GetButton("ButtonA") || Input.GetButton("ButtonB") || Input.GetButton("ButtonY") || Input.GetButton("ButtonX") || Input.GetButton("ButtonStart"))
         {
             Settings.Current.Platform = "Xbox";
             return;
