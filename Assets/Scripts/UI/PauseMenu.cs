@@ -98,12 +98,17 @@ public class PauseMenu : NetworkBehaviour
     /// <summary>Exits this instance.</summary>
     public void Exit() 
     {
-        StartCoroutine(Disconnect());
+        StartCoroutine(Disconnect(sceneMainMenu));
+    }
+
+    public void GoToTown()
+    {
+        StartCoroutine(Disconnect("Town"));
     }
 
     /// <summary>Disconnects this instance.</summary>
     /// <returns>Return none</returns>
-    public IEnumerator Disconnect()
+    public IEnumerator Disconnect(string name)
     {
         GameObject nmObj = GameObject.Find("NetworkManager").gameObject;
 
@@ -112,7 +117,7 @@ public class PauseMenu : NetworkBehaviour
         multiplayer.DiscoveredServers.Clear();
         multiplayer.NetworkDiscovery.StartDiscovery();
 
-        multiplayer.NetworkManager.offlineScene = sceneMainMenu;
+        multiplayer.NetworkManager.offlineScene = name;
 
         yield return new WaitForSeconds(1f);
         multiplayer.NetworkManager.StopHost();

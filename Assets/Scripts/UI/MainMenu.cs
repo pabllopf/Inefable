@@ -106,6 +106,11 @@ public class MainMenu : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
+        if (Application.isBatchMode) 
+        {
+            SceneManager.LoadScene("Town");
+        }
+
         Settings.Load();
         Language.Translate();
         //Cursor.visible = false;

@@ -74,6 +74,10 @@ namespace DungeonGenerator
         [SerializeField]
         private GameObject altar = null;
 
+        /// <summary>The portal</summary>
+        [SerializeField]
+        private GameObject portal = null;
+
         #region Encapsulate Fields
 
         /// <summary>Gets or sets the board.</summary>
@@ -96,6 +100,10 @@ namespace DungeonGenerator
         /// <value>The random style.</value>
         private Style RandomStyle => Resources.LoadAll<Style>("Dungeons")[Random.Range(0, Resources.LoadAll<Style>("Dungeons").Length)];
 
+        /// <summary>Gets or sets the portal.</summary>
+        /// <value>The portal.</value>
+        public GameObject Portal { get => portal; set => portal = value; }
+
         #endregion
 
         /// <summary>Starts this instance.</summary>
@@ -109,6 +117,7 @@ namespace DungeonGenerator
             CreateBoard();
 
             PrintDungeon(RandomStyle);
+            PrintBoss();
         }
 
         /// <summary>Sets up rooms and corridors.</summary>
@@ -248,6 +257,13 @@ namespace DungeonGenerator
                         }
                     }
                 });
+        }
+
+        private void PrintBoss() 
+        {
+            Vector2 posToSpawn = new Vector2(rooms[NumOfRooms - 1].XPos + rooms[NumOfRooms - 1].Width/2, rooms[NumOfRooms - 1].YPos + rooms[NumOfRooms - 1].Height/2);
+            GameObject master = new GameObject("Boss");
+            Instantiate(portal, posToSpawn, Quaternion.identity, master.transform);
         }
     }
 }

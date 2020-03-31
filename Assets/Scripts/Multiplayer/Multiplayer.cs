@@ -67,11 +67,14 @@ public class Multiplayer : MonoBehaviour
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
-        Config();
-
-        if (SceneManager.GetActiveScene().name == "Town") 
+        if (!Application.isBatchMode)
         {
-            HostLocalGame("Town", 1);
+            Config();
+
+            if (SceneManager.GetActiveScene().name == "Town")
+            {
+                HostLocalGame("Town", 1);
+            }
         }
     }
 

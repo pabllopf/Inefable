@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   altar: {fileID: 4242139656732003432, guid: c36fbe5213dfbd145a0035f57b5cf1a3, type: 3}
+  portal: {fileID: 8663063116809241717, guid: 4a37f31759b186a4d9f4f6450c1e74b4, type: 3}
 --- !u!4 &473849020
 Transform:
   m_ObjectHideFlags: 0
