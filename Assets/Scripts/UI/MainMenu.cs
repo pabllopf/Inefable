@@ -2,7 +2,10 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="MainMenu.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,6 +23,9 @@ public class MainMenu : MonoBehaviour
 
     /// <summary>The neutral stick</summary>
     private bool neutralStick = true;
+
+    /// <summary>The is updated</summary>
+    private bool isUpdated = true;
 
     /// <summary>The selectors</summary>
     private List<GameObject> selectors = new List<GameObject>();
@@ -106,14 +112,37 @@ public class MainMenu : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        if (Application.isBatchMode) 
+        if (Application.isBatchMode)
         {
             SceneManager.LoadScene("Town");
         }
 
+        CheckVersion();
         Settings.Load();
         Language.Translate();
-        //Cursor.visible = false;
+        Cursor.visible = false;
+    }
+
+    /// <summary>Checks the version.</summary>
+    private void CheckVersion() 
+    {
+        try
+        {
+            WebClient client = new WebClient();
+
+            Byte[] pageData = client.DownloadData("http://www.contoso.com");
+            string pageHtml = Encoding.ASCII.GetString(pageData);
+            Debug.Log("VersionApp: " + pageHtml);
+
+        }
+        catch (WebException webEx)
+        {
+            Console.WriteLine(webEx.ToString());
+            if (webEx.Status == WebExceptionStatus.ConnectFailure)
+            {
+                Debug.Log("You havent got connection.");
+            }
+        }
     }
 
     /// <summary>Starts this instance.</summary>
@@ -191,32 +220,35 @@ public class MainMenu : MonoBehaviour
     /// <summary>Updates this instance.</summary>
     private void Update()
     {
-        if (Settings.Current.Platform.Equals("Mobile"))
+        if (isUpdated == true)
         {
-            selectors.ForEach(i => i.SetActive(false));
-        }
-
-        if (startPanel.activeSelf)
-        {
-            if (Input.anyKey || Input.touchCount > 0)
+            if (Settings.Current.Platform.Equals("Mobile"))
             {
-                startPanel.SetActive(false);
-                mainPanel.SetActive(true);
-                Sound.Play(AcceptClip, AudioSource);
+                selectors.ForEach(i => i.SetActive(false));
             }
 
-            return;
-        }
+            if (startPanel.activeSelf)
+            {
+                if (Input.anyKey || Input.touchCount > 0)
+                {
+                    startPanel.SetActive(false);
+                    mainPanel.SetActive(true);
+                    Sound.Play(AcceptClip, AudioSource);
+                }
 
-        if (mainPanel.activeSelf)
-        {
-            UseTheMenu();
-            return;
-        }
+                return;
+            }
 
-        if (popUpPanel.activeSelf)
-        {
-            CheckAnswer();
+            if (mainPanel.activeSelf)
+            {
+                UseTheMenu();
+                return;
+            }
+
+            if (popUpPanel.activeSelf)
+            {
+                CheckAnswer();
+            }
         }
     }
 
