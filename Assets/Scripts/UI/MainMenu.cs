@@ -133,7 +133,7 @@ public class MainMenu : MonoBehaviour
         {
             WebClient client = new WebClient();
 
-            string versionServer = client.DownloadString("https://www.inefable.tk/version/version.html");
+            string versionServer = client.DownloadString("https://pabllopf.github.io/Game-Inefable/version.html");
             if (versionServer != Application.version) 
             {
                 isUpdated = false;
