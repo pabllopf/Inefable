@@ -94,6 +94,7 @@ TagManager:
   - QuestionExitGame
   - Network
   - A35
+  - QuestionLastUpdate
   layers:
   - Default
   - TransparentFX

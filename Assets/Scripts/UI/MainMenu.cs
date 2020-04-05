@@ -47,6 +47,9 @@ public class MainMenu : MonoBehaviour
     /// <summary>The question exit of the game</summary>
     private GameObject questionExitOfTheGame = null;
 
+    /// <summary>The question last update</summary>
+    private GameObject questionLastUpdate = null;
+
     /// <summary>The pop up panel</summary>
     private GameObject popUpPanel = null;
 
@@ -130,10 +133,11 @@ public class MainMenu : MonoBehaviour
         {
             WebClient client = new WebClient();
 
-            Byte[] pageData = client.DownloadData("http://www.contoso.com");
-            string pageHtml = Encoding.ASCII.GetString(pageData);
-            Debug.Log("VersionApp: " + pageHtml);
-            Debug.Log("VersionLocal: " + Application.version);
+            string versionServer = client.DownloadString("https://www.inefable.tk/version/version.html");
+            if (versionServer != Application.version) 
+            {
+                isUpdated = false;
+            }
         }
         catch (WebException webEx)
         {
@@ -141,6 +145,7 @@ public class MainMenu : MonoBehaviour
             if (webEx.Status == WebExceptionStatus.ConnectFailure)
             {
                 Debug.Log("You havent got connection.");
+                isUpdated = true;
             }
         }
     }
@@ -173,6 +178,10 @@ public class MainMenu : MonoBehaviour
         questionExitOfTheGame.transform.Find("Question/Yes").GetComponent<Button>().onClick.AddListener(() => { YesExitToTheGame(); });
         questionExitOfTheGame.transform.Find("Question/No").GetComponent<Button>().onClick.AddListener(() => { NoExitToTheGame(); });
         questionExitOfTheGame.SetActive(false);
+
+        questionLastUpdate = GameObject.FindWithTag("QuestionLastUpdate");
+        questionLastUpdate.transform.Find("Question/No").GetComponent<Button>().onClick.AddListener(() => { YesExitToTheGame(); });
+        questionLastUpdate.SetActive(false);
 
         popUpPanel = GameObject.FindWithTag("PopUpPanel");
         popUpPanel.SetActive(false);
@@ -248,6 +257,28 @@ public class MainMenu : MonoBehaviour
             if (popUpPanel.activeSelf)
             {
                 CheckAnswer();
+            }
+        }
+        else
+        {
+            if (Settings.Current.Platform.Equals("Mobile"))
+            {
+                selectors.ForEach(i => i.SetActive(false));
+            }
+
+            if (startPanel.activeSelf)
+            {
+                startPanel.SetActive(false);
+                popUpPanel.SetActive(true);
+                questionLastUpdate.SetActive(true);
+                Sound.Play(AcceptClip, AudioSource);
+                return;
+            }
+
+            if (popUpPanel.activeSelf)
+            {
+                CheckAnswer();
+                return;
             }
         }
     }
@@ -349,6 +380,12 @@ public class MainMenu : MonoBehaviour
             if (questionExitOfTheGame.activeSelf)
             {
                 NoExitToTheGame();
+                return;
+            }
+
+            if (questionLastUpdate.activeSelf) 
+            {
+                YesExitToTheGame();
                 return;
             }
         }
