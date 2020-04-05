@@ -133,7 +133,7 @@ public class MainMenu : MonoBehaviour
             Byte[] pageData = client.DownloadData("http://www.contoso.com");
             string pageHtml = Encoding.ASCII.GetString(pageData);
             Debug.Log("VersionApp: " + pageHtml);
-
+            Debug.Log("VersionLocal: " + Application.version);
         }
         catch (WebException webEx)
         {
