@@ -120,7 +120,6 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("Town");
         }
 
-        CheckVersion();
         Settings.Load();
         Language.Translate();
         Cursor.visible = false;
@@ -178,10 +177,6 @@ public class MainMenu : MonoBehaviour
         questionExitOfTheGame.transform.Find("Question/Yes").GetComponent<Button>().onClick.AddListener(() => { YesExitToTheGame(); });
         questionExitOfTheGame.transform.Find("Question/No").GetComponent<Button>().onClick.AddListener(() => { NoExitToTheGame(); });
         questionExitOfTheGame.SetActive(false);
-
-        questionLastUpdate = GameObject.FindWithTag("QuestionLastUpdate");
-        questionLastUpdate.transform.Find("Question/No").GetComponent<Button>().onClick.AddListener(() => { YesExitToTheGame(); });
-        questionLastUpdate.SetActive(false);
 
         popUpPanel = GameObject.FindWithTag("PopUpPanel");
         popUpPanel.SetActive(false);

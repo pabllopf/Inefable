@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
-  m_Name: HOLA
+  m_Name: hola
   m_EditorClassIdentifier: 
   nodeLinks:
   - baseNodeGUID: d300c6a5-30cc-43dd-ba4b-ec166d1222d8
