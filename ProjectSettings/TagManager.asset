@@ -95,6 +95,9 @@ TagManager:
   - Network
   - A35
   - QuestionLastUpdate
+  - message
+  - process
+  - processBar
   layers:
   - Default
   - TransparentFX
