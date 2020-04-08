@@ -56,10 +56,36 @@ public class Inventory : MonoBehaviour
         slot.gameObject.SetActive(true);
         slot.name = item.NameItem;
         slot.sprite = item.Icon;
-        slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
+        slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
 
         Data.SaveVar(item.NameItem).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
         Sound.Play(AddItemSound, AudioSource);
+    }
+
+    /// <summary>Inventories the menu.</summary>
+    public void InventoryMenu() 
+    {
+        animator.SetBool(ShowUI, animator.GetBool(ShowUI) ? false : true);
+    }
+
+    /// <summary>Uses the item.</summary>
+    /// <param name="position">The position.</param>
+    public void UseItem(int position)
+    {
+        if (inventory[position].sprite != null)
+        {
+            inventory[position].GetComponentInParent<Button>().onClick.Invoke();
+            Sound.Play(UseItemSound, AudioSource);
+            Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
+        }
+    }
+
+    /// <summary>Quits this instance.</summary>
+    public void Quit(int position)
+    {
+        inventory[position].name = string.Empty;
+        inventory[position].sprite = null;
+        inventory[position].gameObject.SetActive(false);
     }
 
     /// <summary>Starts this instance.</summary>
@@ -74,6 +100,8 @@ public class Inventory : MonoBehaviour
             transform.Find("Interface/Inventory/Slot2/Item").GetComponent<Image>(),
             transform.Find("Interface/Inventory/Slot3/Item").GetComponent<Image>()
         };
+
+        transform.Find("Interface/CircleInventory").GetComponent<Button>().onClick.AddListener(() => { InventoryMenu(); });
 
         inventory.ForEach(i => LoadItem(i));
         inventory.FindAll(i => !i.sprite || i.CompareTag("0")).ForEach(i => i.gameObject.SetActive(false));
@@ -109,22 +137,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    /// <summary>Uses the item.</summary>
-    /// <param name="position">The position.</param>
-    private void UseItem(int position)
-    {
-        if (inventory[position].sprite != null)
-        {
-            inventory[position].GetComponentInParent<Button>().onClick.Invoke();
-            inventory[position].name = string.Empty;
-            inventory[position].sprite = null;
-            inventory[position].gameObject.SetActive(false);
-
-            Sound.Play(UseItemSound, AudioSource);
-            Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
-        }
-    }
-
     /// <summary>Loads the item.</summary>
     /// <param name="slot">The image.</param>
     private void LoadItem(Image slot)
@@ -136,7 +148,7 @@ public class Inventory : MonoBehaviour
 
             slot.name = item.NameItem;
             slot.sprite = item.Icon;
-            slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); });
+            slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
         }
     }
 }

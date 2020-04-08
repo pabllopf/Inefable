@@ -66,4 +66,12 @@ public class Language : MonoBehaviour
     {
         return CurrentLanguage.ContainsKey(key.ToString()) ? CurrentLanguage[key.ToString()] : string.Empty;
     }
+
+    /// <summary>Translates the specified key.</summary>
+    /// <param name="key">The key.</param>
+    /// <returns></returns>
+    public static string Translate(string key)
+    {
+        return CurrentLanguage.ContainsKey(key) ? CurrentLanguage[key] : string.Empty;
+    }
 }

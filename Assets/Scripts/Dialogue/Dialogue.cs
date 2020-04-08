@@ -138,8 +138,11 @@ namespace DialogueSystem.DataContainers
         {
             target = collision.GetComponent<Player>();
 
+            target.CanSpeak = true;
+
             exclamation.SetActive(true);
 
+            target.gameObject.transform.Find("Interface/Dialogue/Name/Text").GetComponent<Text>().text = nameNpc;
             sentence = target.gameObject.transform.Find("Interface/Dialogue/Sentence/Text").GetComponent<Text>();
             optionsContainer = target.gameObject.transform.Find("Interface/Dialogue/Options/Viewport/Content");
 
@@ -150,6 +153,8 @@ namespace DialogueSystem.DataContainers
         /// <summary>Cancels this instance.</summary>
         private void Stop() 
         {
+            target.PressButtonA = false;
+            target.CanSpeak = false;
             target.enabled = true;
             target = null;
 
@@ -170,7 +175,7 @@ namespace DialogueSystem.DataContainers
             {
                 if (!dialogueUI.activeSelf)
                 {
-                    if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("ButtonA"))
+                    if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("ButtonA") || target.PressButtonA)
                     {
                         Talk();
                     }
@@ -202,7 +207,7 @@ namespace DialogueSystem.DataContainers
             string text = dialogueContainer.DialogueNodeData.Find(node => node.NodeGUID == targetNodeGUID).DialogueText;
             IEnumerable<LinkData> choices = dialogueContainer.NodeLinks.Where(node => node.BaseNodeGUID == targetNodeGUID);
 
-            sentence.text = text;
+            sentence.text = Language.Translate(text);
 
             selectors.Clear();
             optionsContainer.GetComponentsInChildren<Button>().ToList().ForEach(button => Destroy(button.gameObject));
@@ -211,7 +216,7 @@ namespace DialogueSystem.DataContainers
                 foreach (var choice in choices)
                 {
                     var button = Instantiate(choicePrefab, optionsContainer);
-                    button.GetComponentInChildren<Text>().text = choice.PortName;
+                    button.GetComponentInChildren<Text>().text = Language.Translate(choice.PortName);
                     button.onClick.AddListener(() => Converse(choice.TargetNodeGUID));
                     selectors.Add(button.gameObject.transform.Find("Image").gameObject);
                 }
@@ -219,7 +224,7 @@ namespace DialogueSystem.DataContainers
             else 
             {
                 var button = Instantiate(choicePrefab, optionsContainer);
-                button.GetComponentInChildren<Text>().text = "Adios";
+                button.GetComponentInChildren<Text>().text = Language.GetSentence(Clef.A40);
                 button.onClick.AddListener(() => Stop());
                 selectors.Add(button.gameObject.transform.Find("Image").gameObject);
             }

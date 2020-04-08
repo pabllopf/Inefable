@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b3fd9154634ebdb8c8a48960b9a16a, type: 3}
+  m_Name: Potions
+  m_EditorClassIdentifier: 
+  nodeLinks:
+  - baseNodeGUID: b5691a85-4822-434c-ad81-4f0a6fd7cb22
+    portName: Next
+    targetNodeGUID: d0f6b889-1b5e-4bb9-a862-cd083694c0c3
+  - baseNodeGUID: d0f6b889-1b5e-4bb9-a862-cd083694c0c3
+    portName: A39
+    targetNodeGUID: 3d0b816b-676b-4fa7-911c-67b0bc125f2e
+  - baseNodeGUID: 3d0b816b-676b-4fa7-911c-67b0bc125f2e
+    portName: A44
+    targetNodeGUID: 49cd3684-9870-4fa6-8f05-a8311556b8b1
+  - baseNodeGUID: 3d0b816b-676b-4fa7-911c-67b0bc125f2e
+    portName: A45
+    targetNodeGUID: 4a2906a8-0e0f-4a91-a7de-faed1b686079
+  - baseNodeGUID: 3d0b816b-676b-4fa7-911c-67b0bc125f2e
+    portName: A46
+    targetNodeGUID: 5f06f8cc-7f49-4bc8-853d-bea32b657219
+  - baseNodeGUID: 3d0b816b-676b-4fa7-911c-67b0bc125f2e
+    portName: A47
+    targetNodeGUID: dc7534ff-a97e-4475-b975-b4f15b7596e3
+  - baseNodeGUID: 4a2906a8-0e0f-4a91-a7de-faed1b686079
+    portName: A39
+    targetNodeGUID: d2fffa0f-d1c6-4b3b-aa11-b5f964f97d80
+  - baseNodeGUID: 49cd3684-9870-4fa6-8f05-a8311556b8b1
+    portName: A39
+    targetNodeGUID: d2fffa0f-d1c6-4b3b-aa11-b5f964f97d80
+  - baseNodeGUID: 5f06f8cc-7f49-4bc8-853d-bea32b657219
+    portName: A39
+    targetNodeGUID: d2fffa0f-d1c6-4b3b-aa11-b5f964f97d80
+  - baseNodeGUID: dc7534ff-a97e-4475-b975-b4f15b7596e3
+    portName: A39
+    targetNodeGUID: d2fffa0f-d1c6-4b3b-aa11-b5f964f97d80
+  dialogueNodeData:
+  - nodeGUID: d0f6b889-1b5e-4bb9-a862-cd083694c0c3
+    dialogueText: A42
+    position: {x: 250, y: 114}
+  - nodeGUID: 3d0b816b-676b-4fa7-911c-67b0bc125f2e
+    dialogueText: A43
+    position: {x: 451, y: 59}
+  - nodeGUID: 4a2906a8-0e0f-4a91-a7de-faed1b686079
+    dialogueText: A49
+    position: {x: 713, y: 15}
+  - nodeGUID: 5f06f8cc-7f49-4bc8-853d-bea32b657219
+    dialogueText: A50
+    position: {x: 717, y: 136}
+  - nodeGUID: d2fffa0f-d1c6-4b3b-aa11-b5f964f97d80
+    dialogueText: A52
+    position: {x: 1022, y: 76}
+  - nodeGUID: dc7534ff-a97e-4475-b975-b4f15b7596e3
+    dialogueText: A51
+    position: {x: 708, y: 260}
+  - nodeGUID: 49cd3684-9870-4fa6-8f05-a8311556b8b1
+    dialogueText: A48
+    position: {x: 721, y: -99}

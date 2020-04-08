@@ -107,4 +107,22 @@ public enum Clef
 
     /// <summary>The a35</summary>
     A35,
+    
+    /// <summary>The a36</summary>
+    A36,
+    
+    /// <summary>The a37</summary>
+    A37,
+    
+    /// <summary>The a38</summary>
+    A38,
+    
+    /// <summary>The a39</summary>
+    A39,
+    
+    /// <summary>The a40</summary>
+    A40,
+    
+    /// <summary>The a41</summary>
+    A41,
 }

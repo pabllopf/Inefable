@@ -32,6 +32,12 @@ public class Player : NetworkBehaviour
     /// <summary>The is attacking</summary>
     private bool isAttacking = false;
 
+    /// <summary>The press button a</summary>
+    private bool pressButtonA = false;
+
+    /// <summary>The can speak</summary>
+    private bool canSpeak = false;
+
     /// <summary>The is using skill</summary>
     private bool isUsingSkill = false;
 
@@ -82,11 +88,30 @@ public class Player : NetworkBehaviour
     /// <summary>Gets or sets the speed of move.</summary>
     /// <value>The speed of move.</value>
     public float SpeedOfMove { get => speedOfMove; set => speedOfMove = value; }
+    
+    /// <summary>Gets or sets the damage of attack.</summary>
+    /// <value>The damage of attack.</value>
     public int DamageOfAttack { get => damageOfAttack; set => damageOfAttack = value; }
+    
+    /// <summary>Gets or sets a value indicating whether this instance can speak.</summary>
+    /// <value>
+    /// <c>true</c> if this instance can speak; otherwise, <c>false</c>.</value>
+    public bool CanSpeak { get => canSpeak; set => canSpeak = value; }
+
+    /// <summary>Gets or sets a value indicating whether [press button a].</summary>
+    /// <value>
+    /// <c>true</c> if [press button a]; otherwise, <c>false</c>.</value>
+    public bool PressButtonA { get => pressButtonA; set => pressButtonA = value; }
 
     /// <summary>Button B</summary>
     public void ButtonA()
     {
+        if (canSpeak) 
+        {
+            pressButtonA = true;
+            return;
+        }
+
         if (!isAttacking)
         {
             StartCoroutine(AttackNow());
@@ -164,6 +189,14 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            if (Settings.Current.Platform.Equals("Mobile")) 
+            {
+                if (!mobileUI.activeSelf) 
+                {
+                    mobileUI.SetActive(true);
+                }
+            }
+
             Move(AxisX, AxisY);
 
             if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("ButtonA"))
