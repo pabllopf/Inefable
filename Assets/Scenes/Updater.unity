@@ -377,7 +377,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.59, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -842,7 +842,7 @@ MonoBehaviour:
   message: {fileID: 0}
   process: {fileID: 0}
   processBar: {fileID: 0}
-  urlOfServerToGetVersion: https://pastebin.com/raw/rzbdKc2v
+  urlOfServerToGetVersion: https://pabllopf.github.io/Game-Inefable/version.html
 --- !u!4 &1485641597
 Transform:
   m_ObjectHideFlags: 0

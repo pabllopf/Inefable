@@ -102,6 +102,14 @@ public class Player : NetworkBehaviour
         }
     }
 
+    /// <summary>Stops the player.</summary>
+    public void StopPlayer() 
+    {
+        walkEffect.SetActive(false);
+        animator.SetBool(Run, false);
+        this.enabled = false;
+    }
+
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
