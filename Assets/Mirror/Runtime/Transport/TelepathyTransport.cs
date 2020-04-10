@@ -21,6 +21,7 @@ namespace Mirror
         [Tooltip("Nagle Algorithm can be disabled by enabling NoDelay")]
         public bool NoDelay = true;
 
+        // Deprecated 04/08/2019
         [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Use MaxMessageSizeFromClient or MaxMessageSizeFromServer instead.")]
         public int MaxMessageSize
         {
@@ -37,7 +38,7 @@ namespace Mirror
         protected Telepathy.Client client = new Telepathy.Client();
         protected Telepathy.Server server = new Telepathy.Server();
 
-        private void Awake()
+        void Awake()
         {
             // tell Telepathy to use Unity's Debug.Log
             Telepathy.Logger.Log = Debug.Log;
@@ -60,22 +61,12 @@ namespace Mirror
         }
 
         // client
-        public override bool ClientConnected()
-        {
-            return client.Connected;
-        }
-
-        public override void ClientConnect(string address)
-        {
-            client.Connect(address, port);
-        }
-
+        public override bool ClientConnected() => client.Connected;
+        public override void ClientConnect(string address) => client.Connect(address, port);
         public override void ClientConnect(Uri uri)
         {
             if (uri.Scheme != Scheme)
-            {
                 throw new ArgumentException($"Invalid url {uri}, use {Scheme}://host:port instead", nameof(uri));
-            }
 
             int serverPort = uri.IsDefaultPort ? port : uri.Port;
             client.Connect(uri.Host, serverPort);
@@ -89,7 +80,7 @@ namespace Mirror
             return client.Send(data);
         }
 
-        private bool ProcessClientMessage()
+        bool ProcessClientMessage()
         {
             if (client.GetNextMessage(out Telepathy.Message message))
             {
@@ -114,10 +105,7 @@ namespace Mirror
             }
             return false;
         }
-        public override void ClientDisconnect()
-        {
-            client.Disconnect();
-        }
+        public override void ClientDisconnect() => client.Disconnect();
 
         // IMPORTANT: set script execution order to >1000 to call Transport's
         //            LateUpdate after all others. Fixes race condition where
@@ -135,26 +123,16 @@ namespace Mirror
 
         public override Uri ServerUri()
         {
-            UriBuilder builder = new UriBuilder
-            {
-                Scheme = Scheme,
-                Host = Dns.GetHostName(),
-                Port = port
-            };
+            UriBuilder builder = new UriBuilder();
+            builder.Scheme = Scheme;
+            builder.Host = Dns.GetHostName();
+            builder.Port = port;
             return builder.Uri;
         }
 
         // server
-        public override bool ServerActive()
-        {
-            return server.Active;
-        }
-
-        public override void ServerStart()
-        {
-            server.Start(port);
-        }
-
+        public override bool ServerActive() => server.Active;
+        public override void ServerStart() => server.Start(port);
         public override bool ServerSend(List<int> connectionIds, int channelId, ArraySegment<byte> segment)
         {
             // telepathy doesn't support allocation-free sends yet.
@@ -165,10 +143,7 @@ namespace Mirror
             // send to all
             bool result = true;
             foreach (int connectionId in connectionIds)
-            {
                 result &= server.Send(connectionId, data);
-            }
-
             return result;
         }
         public bool ProcessServerMessage()
@@ -195,11 +170,7 @@ namespace Mirror
             }
             return false;
         }
-        public override bool ServerDisconnect(int connectionId)
-        {
-            return server.Disconnect(connectionId);
-        }
-
+        public override bool ServerDisconnect(int connectionId) => server.Disconnect(connectionId);
         public override string ServerGetClientAddress(int connectionId)
         {
             try
@@ -219,10 +190,7 @@ namespace Mirror
                 return "unknown";
             }
         }
-        public override void ServerStop()
-        {
-            server.Stop();
-        }
+        public override void ServerStop() => server.Stop();
 
         // common
         public override void Shutdown()

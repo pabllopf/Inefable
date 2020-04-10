@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Mirror
 {
-    internal static class PreprocessorDefine
+    static class PreprocessorDefine
     {
         /// <summary>
         /// Add define symbols as soon as Unity gets done compiling.
@@ -22,7 +22,9 @@ namespace Mirror
                 "MIRROR_6_0_OR_NEWER",
                 "MIRROR_7_0_OR_NEWER",
                 "MIRROR_8_0_OR_NEWER",
-                "MIRROR_9_0_OR_NEWER"
+                "MIRROR_9_0_OR_NEWER",
+                "MIRROR_10_0_OR_NEWER",
+                "MIRROR_11_0_OR_NEWER"
             };
             PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, string.Join(";", defines));
         }

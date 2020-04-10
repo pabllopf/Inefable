@@ -15,9 +15,9 @@ namespace Ninja.WebSockets
     /// </summary>
     public class BufferPool : IBufferPool
     {
-        private const int DEFAULT_BUFFER_SIZE = 16384;
-        private readonly ConcurrentStack<byte[]> _bufferPoolStack;
-        private readonly int _bufferSize;
+        const int DEFAULT_BUFFER_SIZE = 16384;
+        readonly ConcurrentStack<byte[]> _bufferPoolStack;
+        readonly int _bufferSize;
 
         public BufferPool() : this(DEFAULT_BUFFER_SIZE)
         {
@@ -34,9 +34,9 @@ namespace Ninja.WebSockets
         /// </summary>
         protected class PublicBufferMemoryStream : MemoryStream
         {
-            private readonly BufferPool _bufferPoolInternal;
-            private byte[] _buffer;
-            private MemoryStream _ms;
+            readonly BufferPool _bufferPoolInternal;
+            byte[] _buffer;
+            MemoryStream _ms;
 
             public PublicBufferMemoryStream(byte[] buffer, BufferPool bufferPool) : base(new byte[0])
             {
@@ -63,8 +63,8 @@ namespace Ninja.WebSockets
             public override bool CanWrite => _ms.CanWrite;
             public override int Capacity
             {
-                get => _ms.Capacity;
-                set => _ms.Capacity = value;
+                get { return _ms.Capacity; }
+                set { _ms.Capacity = value; }
             }
 
             public override void Close()
@@ -110,8 +110,8 @@ namespace Ninja.WebSockets
 
             public override long Position
             {
-                get => _ms.Position;
-                set => _ms.Position = value;
+                get { return _ms.Position; }
+                set { _ms.Position = value; }
             }
 
             public override int Read(byte[] buffer, int offset, int count)
@@ -119,7 +119,7 @@ namespace Ninja.WebSockets
                 return _ms.Read(buffer, offset, count);
             }
 
-            private void EnlargeBufferIfRequired(int count)
+            void EnlargeBufferIfRequired(int count)
             {
                 // we cannot fit the data into the existing buffer, time for a new buffer
                 if (count > (_buffer.Length - _ms.Position))
@@ -183,8 +183,8 @@ namespace Ninja.WebSockets
 
             public override int ReadTimeout
             {
-                get => _ms.ReadTimeout;
-                set => _ms.ReadTimeout = value;
+                get { return _ms.ReadTimeout; }
+                set { _ms.ReadTimeout = value; }
             }
 
             public override long Seek(long offset, SeekOrigin loc)
@@ -208,8 +208,8 @@ namespace Ninja.WebSockets
 
             public override int WriteTimeout
             {
-                get => _ms.WriteTimeout;
-                set => _ms.WriteTimeout = value;
+                get { return _ms.WriteTimeout; }
+                set { _ms.WriteTimeout = value; }
             }
 
 #if !NET45

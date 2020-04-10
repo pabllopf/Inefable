@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
         slot.sprite = item.Icon;
         slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
 
-        Data.SaveVar(item.NameItem).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
+        //Data.SaveVar(item.NameItem).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
         Sound.Play(AddItemSound, AudioSource);
     }
 
@@ -76,7 +76,7 @@ public class Inventory : MonoBehaviour
         {
             inventory[position].GetComponentInParent<Button>().onClick.Invoke();
             Sound.Play(UseItemSound, AudioSource);
-            Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
+            //Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
         }
     }
 
@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
     /// <summary>Loads the item.</summary>
     /// <param name="slot">The image.</param>
     private void LoadItem(Image slot)
-    {
+    {/*
         if (!Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").String.Equals("0"))
         {
             Item item = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").Item;
@@ -149,6 +149,6 @@ public class Inventory : MonoBehaviour
             slot.name = item.NameItem;
             slot.sprite = item.Icon;
             slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
-        }
+        }*/
     }
 }

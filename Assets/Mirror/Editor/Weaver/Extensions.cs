@@ -1,5 +1,5 @@
-using Mono.CecilX;
 using System;
+using Mono.CecilX;
 
 namespace Mirror.Weaver
 {
@@ -8,9 +8,7 @@ namespace Mirror.Weaver
         public static bool IsDerivedFrom(this TypeDefinition td, TypeReference baseClass)
         {
             if (!td.IsClass)
-            {
                 return false;
-            }
 
             // are ANY parent classes of baseClass?
             TypeReference parent = td.BaseType;
@@ -48,9 +46,7 @@ namespace Mirror.Weaver
             foreach (FieldDefinition field in td.Fields)
             {
                 if (!field.IsStatic)
-                {
                     return field.FieldType;
-                }
             }
             throw new ArgumentException($"Invalid enum {td.FullName}");
         }
@@ -63,9 +59,7 @@ namespace Mirror.Weaver
                 foreach (InterfaceImplementation iface in typedef.Interfaces)
                 {
                     if (iface.InterfaceType.FullName == baseInterface.FullName)
-                    {
                         return true;
-                    }
                 }
 
                 try
@@ -86,12 +80,11 @@ namespace Mirror.Weaver
 
         public static bool IsArrayType(this TypeReference tr)
         {
-            if ((tr.IsArray && ((ArrayType)tr).ElementType.IsArray) || // jagged array
-                (tr.IsArray && ((ArrayType)tr).Rank > 1)) // multidimensional array
-            {
+            // jagged array
+            if ((tr.IsArray && ((ArrayType)tr).ElementType.IsArray) ||
+                // multidimensional array
+                (tr.IsArray && ((ArrayType)tr).Rank > 1))
                 return false;
-            }
-
             return true;
         }
 
@@ -125,11 +118,10 @@ namespace Mirror.Weaver
 
         // Given a method of a generic class such as ArraySegment<T>.get_Count,
         // and a generic instance such as ArraySegment<int>
-        // Creates a reference to the specialized method  ArraySegment<int>.get_Count;
+        // Creates a reference to the specialized method  ArraySegment<int>.get_Count
         // Note that calling ArraySegment<T>.get_Count directly gives an invalid IL error
         public static MethodReference MakeHostInstanceGeneric(this MethodReference self, GenericInstanceType instanceType)
         {
-
             MethodReference reference = new MethodReference(self.Name, self.ReturnType, instanceType)
             {
                 CallingConvention = self.CallingConvention,
@@ -138,29 +130,55 @@ namespace Mirror.Weaver
             };
 
             foreach (ParameterDefinition parameter in self.Parameters)
-            {
                 reference.Parameters.Add(new ParameterDefinition(parameter.ParameterType));
-            }
 
             foreach (GenericParameter generic_parameter in self.GenericParameters)
-            {
                 reference.GenericParameters.Add(new GenericParameter(generic_parameter.Name, reference));
-            }
 
             return Weaver.CurrentAssembly.MainModule.ImportReference(reference);
         }
 
-        public static CustomAttribute GetCustomAttribute(this MethodDefinition method, string attributeName)
+        public static CustomAttribute GetCustomAttribute(this ICustomAttributeProvider method, string attributeName)
         {
             foreach (CustomAttribute ca in method.CustomAttributes)
             {
                 if (ca.AttributeType.FullName == attributeName)
-                {
                     return ca;
-                }
             }
             return null;
         }
 
+        public static bool HasCustomAttribute(this ICustomAttributeProvider attributeProvider, TypeReference attribute)
+        {
+            foreach (CustomAttribute ca in attributeProvider.CustomAttributes)
+            {
+                if (ca.AttributeType.FullName == attribute.FullName)
+                    return true;
+            }
+            return false;
+        }
+
+        public static T GetField<T>(this CustomAttribute ca, string field, T def)
+        {
+            foreach (CustomAttributeNamedArgument customField in ca.Fields)
+            {
+                if (customField.Name == field)
+                {
+                    return (T)customField.Argument.Value;
+                }
+            }
+
+            return def;
+        }
+
+        public static MethodDefinition GetMethod(this TypeDefinition td, string methodName)
+        {
+            foreach (MethodDefinition md in td.Methods)
+            {
+                if (md.Name == methodName)
+                    return md;
+            }
+            return null;
+        }
     }
 }

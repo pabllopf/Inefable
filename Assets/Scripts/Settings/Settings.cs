@@ -67,18 +67,18 @@ public class Settings
     /// <summary>Save the settings.</summary>
     public static void Save()
     {
-        Data.SaveVar(current.platform).WithName("Platform").InFolder("Settings");
+        /*Data.SaveVar(current.platform).WithName("Platform").InFolder("Settings");
         Data.SaveVar(current.language).WithName("Language").InFolder("Settings");
-        Data.SaveVar(current.isTheFirstTime).WithName("IsTheFirstTime").InFolder("Settings");
+        Data.SaveVar(current.isTheFirstTime).WithName("IsTheFirstTime").InFolder("Settings");*/
     }
 
     /// <summary>Loads this instance.</summary>
     public static void Load()
     {
-        string platform = Data.LoadVar("Platform").FromFolder("Settings").String;
+        /*string platform = Data.LoadVar("Platform").FromFolder("Settings").String;
         string language = Data.LoadVar("Language").FromFolder("Settings").String;
         bool isTheFirstTime = Data.LoadVar("IsTheFirstTime").FromFolder("Settings").Bool;
 
-        Current = new Settings(platform, language, isTheFirstTime);
+        Current = new Settings(platform, language, isTheFirstTime);*/
     }
 }

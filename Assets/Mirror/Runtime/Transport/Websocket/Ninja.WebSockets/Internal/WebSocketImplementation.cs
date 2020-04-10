@@ -21,7 +21,6 @@
 // ---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Security;
@@ -45,26 +44,24 @@ namespace Ninja.WebSockets.Internal
     /// </summary>
     public class WebSocketImplementation : WebSocket
     {
-        private readonly Guid _guid;
-        private readonly Func<MemoryStream> _recycledStreamFactory;
-        private readonly Stream _stream;
-        private readonly bool _includeExceptionInCloseResponse;
-        private readonly bool _isClient;
-        private readonly string _subProtocol;
-        private readonly CancellationTokenSource _internalReadCts;
-        private WebSocketState _state;
-        private bool _isContinuationFrame;
-        private WebSocketMessageType _continuationFrameMessageType = WebSocketMessageType.Binary;
-        private readonly bool _usePerMessageDeflate = false;
-        private bool _tryGetBufferFailureLogged = false;
-        private const int MAX_PING_PONG_PAYLOAD_LEN = 125;
-        private WebSocketCloseStatus? _closeStatus;
-        private string _closeStatusDescription;
+        readonly Guid _guid;
+        readonly Func<MemoryStream> _recycledStreamFactory;
+        readonly Stream _stream;
+        readonly bool _includeExceptionInCloseResponse;
+        readonly bool _isClient;
+        readonly string _subProtocol;
+        CancellationTokenSource _internalReadCts;
+        WebSocketState _state;
+        bool _isContinuationFrame;
+        WebSocketMessageType _continuationFrameMessageType = WebSocketMessageType.Binary;
+        readonly bool _usePerMessageDeflate = false;
+        bool _tryGetBufferFailureLogged = false;
+        const int MAX_PING_PONG_PAYLOAD_LEN = 125;
+        WebSocketCloseStatus? _closeStatus;
+        string _closeStatusDescription;
 
         public event EventHandler<PongEventArgs> Pong;
 
-        private readonly Queue<ArraySegment<byte>> _messageQueue = new Queue<ArraySegment<byte>>();
-        private readonly SemaphoreSlim _sendSemaphore = new SemaphoreSlim(1, 1);
         public WebSocketHttpContext Context { get; set; }
 
         internal WebSocketImplementation(Guid guid, Func<MemoryStream> recycledStreamFactory, Stream stream, TimeSpan keepAliveInterval, string secWebSocketExtensions, bool includeExceptionInCloseResponse, bool isClient, string subProtocol)
@@ -110,7 +107,7 @@ namespace Ninja.WebSockets.Internal
 
         public override string CloseStatusDescription => _closeStatusDescription;
 
-        public override WebSocketState State => _state;
+        public override WebSocketState State { get { return _state; } }
 
         public override string SubProtocol => _subProtocol;
 
@@ -253,7 +250,8 @@ namespace Ninja.WebSockets.Internal
                 }
 
                 await WriteStreamToNetwork(stream, cancellationToken);
-                _isContinuationFrame = !endOfMessage; // TODO: is this correct??
+                // TODO: is this correct??
+                _isContinuationFrame = !endOfMessage;
             }
         }
 
@@ -318,7 +316,8 @@ namespace Ninja.WebSockets.Internal
         {
             if (_state == WebSocketState.Open)
             {
-                _state = WebSocketState.Closed; // set this before we write to the network because the write may fail
+                // set this before we write to the network because the write may fail
+                _state = WebSocketState.Closed;
 
                 using (MemoryStream stream = _recycledStreamFactory())
                 {
@@ -387,10 +386,11 @@ namespace Ninja.WebSockets.Internal
         /// <param name="closeStatus">The close status</param>
         /// <param name="statusDescription">Optional extra close details</param>
         /// <returns>The payload to sent in the close frame</returns>
-        private ArraySegment<byte> BuildClosePayload(WebSocketCloseStatus closeStatus, string statusDescription)
+        ArraySegment<byte> BuildClosePayload(WebSocketCloseStatus closeStatus, string statusDescription)
         {
             byte[] statusBuffer = BitConverter.GetBytes((ushort)closeStatus);
-            Array.Reverse(statusBuffer); // network byte order (big endian)
+            // network byte order (big endian)
+            Array.Reverse(statusBuffer);
 
             if (statusDescription == null)
             {
@@ -408,7 +408,7 @@ namespace Ninja.WebSockets.Internal
 
         /// NOTE: pong payload must be 125 bytes or less
         /// Pong should contain the same payload as the ping
-        private async Task SendPongAsync(ArraySegment<byte> payload, CancellationToken cancellationToken)
+        async Task SendPongAsync(ArraySegment<byte> payload, CancellationToken cancellationToken)
         {
             // as per websocket spec
             if (payload.Count > MAX_PING_PONG_PAYLOAD_LEN)
@@ -441,7 +441,7 @@ namespace Ninja.WebSockets.Internal
         /// Called when a Close frame is received
         /// Send a response close frame if applicable
         /// </summary>
-        private async Task<WebSocketReceiveResult> RespondToCloseFrame(WebSocketFrame frame, ArraySegment<byte> buffer, CancellationToken token)
+        async Task<WebSocketReceiveResult> RespondToCloseFrame(WebSocketFrame frame, ArraySegment<byte> buffer, CancellationToken token)
         {
             _closeStatus = frame.CloseStatus;
             _closeStatusDescription = frame.CloseStatusDescription;
@@ -480,7 +480,7 @@ namespace Ninja.WebSockets.Internal
         /// You want to avoid a call to stream.ToArray to avoid extra memory allocation
         /// MemoryStream can be configured to have its internal buffer accessible.
         /// </summary>
-        private ArraySegment<byte> GetBuffer(MemoryStream stream)
+        ArraySegment<byte> GetBuffer(MemoryStream stream)
         {
 #if NET45
             // NET45 does not have a TryGetBuffer function on Stream
@@ -521,43 +521,28 @@ namespace Ninja.WebSockets.Internal
 #endif
         }
 
+        Task writeTask = Task.CompletedTask;
+
         /// <summary>
         /// Puts data on the wire
         /// </summary>
         /// <param name="stream">The stream to read data from</param>
-        private async Task WriteStreamToNetwork(MemoryStream stream, CancellationToken cancellationToken)
+        async Task WriteStreamToNetwork(MemoryStream stream, CancellationToken cancellationToken)
         {
             ArraySegment<byte> buffer = GetBuffer(stream);
             if (_stream is SslStream)
             {
-                _messageQueue.Enqueue(buffer);
-                await _sendSemaphore.WaitAsync();
-                try
+                if (writeTask.IsCompleted)
                 {
-                    while (_messageQueue.Count > 0)
-                    {
-                        ArraySegment<byte> _buf = _messageQueue.Dequeue();
-                        try
-                        {
-                            if (_stream != null && _stream.CanWrite)
-                            {
-                                await _stream.WriteAsync(_buf.Array, _buf.Offset, _buf.Count, cancellationToken).ConfigureAwait(false);
-                            }
-                        }
-                        catch (IOException)
-                        {
-                            // do nothing, the socket is not connected
-                        }
-                        catch (SocketException)
-                        {
-                            // do nothing, the socket is not connected
-                        }
-                    }
+                    writeTask = _stream.WriteAsync(buffer.Array, buffer.Offset, buffer.Count, cancellationToken);
                 }
-                finally
+                else
                 {
-                    _sendSemaphore.Release();
+                    writeTask = writeTask.ContinueWith((prevTask) =>
+                        _stream.WriteAsync(buffer.Array, buffer.Offset, buffer.Count, cancellationToken));
                 }
+                await writeTask;
+                await _stream.FlushAsync();
             }
             else
             {
@@ -568,7 +553,7 @@ namespace Ninja.WebSockets.Internal
         /// <summary>
         /// Turns a spec websocket frame opcode into a WebSocketMessageType
         /// </summary>
-        private WebSocketOpCode GetOppCode(WebSocketMessageType messageType)
+        WebSocketOpCode GetOppCode(WebSocketMessageType messageType)
         {
             if (_isContinuationFrame)
             {
@@ -596,7 +581,7 @@ namespace Ninja.WebSockets.Internal
         /// <param name="closeStatus">The close status to use</param>
         /// <param name="statusDescription">A description of why we are closing</param>
         /// <param name="ex">The exception (for logging)</param>
-        private async Task CloseOutputAutoTimeoutAsync(WebSocketCloseStatus closeStatus, string statusDescription, Exception ex)
+        async Task CloseOutputAutoTimeoutAsync(WebSocketCloseStatus closeStatus, string statusDescription, Exception ex)
         {
             TimeSpan timeSpan = TimeSpan.FromSeconds(5);
             Events.Log.CloseOutputAutoTimeout(_guid, closeStatus, statusDescription, ex.ToString());

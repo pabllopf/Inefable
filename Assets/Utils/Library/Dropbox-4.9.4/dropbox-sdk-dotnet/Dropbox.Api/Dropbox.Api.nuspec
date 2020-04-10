@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Dropbox.Api</id>
+    <version>4.9.4</version>
+    <title>Dropbox v2 API</title>
+    <authors>Dropbox Inc</authors>
+    <owners>Dropbox Inc</owners>
+    <licenseUrl>https://github.com/dropbox/dropbox-sdk-dotnet/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://www.dropbox.com/developers</projectUrl>
+    <iconUrl>https://cf.dropboxstatic.com/static/images/icons/blue_dropbox_glyph.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Portable class library for accessing the Dropbox v2 API</description>
+    <releaseNotes>
+What's New:
+
+  - Files namespace:
+    - Added new ExportInfo struct
+    - Added new fields (is_downloadable, export_info) to FileMetadata
+    - Added new include_non_downloadable_files to ListFolderArg
+    - Added new ExportMetadata, ExportArg, Export Result Structs
+    - Added new ExportError union
+    - Added new /export route
+
+  - Sharing namespace:
+    - Added password field to LinkAudience
+    - Added effective_audience and link_access_level fields to LinkPermissions struct
+    - Updated docstrings for LinkPermissions
+    - Added audience and access fields to SharedLinkSettings struct
+    - New LinkAccessLevel and RequestedLinkAccessLevel union
+    - Added new create_view_link and create_edit_link fields to FileAction union
+
+  - Team_log namespace:
+    - New types added
+
+  - Team_policies namespace:
+    - New TwoStepVerificationState union
+
+  - Team_reports namespace:
+    - New TemporaryFailureReason union added.
+
+    </releaseNotes>
+    <copyright>Copyright (c) Dropbox Inc. 2016</copyright>
+    <tags>Dropbox Api</tags>
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
+      </group>
+      <group targetFramework="portable-net45+win8+wpa81">
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
+      </group>
+      <group targetFramework="portable-net40+sl5+wp80+win8+wpa81">
+        <dependency id="Newtonsoft.Json" version="7.0.1" />
+        <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        <dependency id="Microsoft.Net.Http" version="2.2.29" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\net45\Dropbox.Api.dll" target="lib\net45\Dropbox.Api.dll" />
+    <file src="bin\Release\net45\Dropbox.Api.xml" target="lib\net45\Dropbox.Api.xml" />
+    <file src="bin\Release\portable\Dropbox.Api.dll" target="lib\portable-net45+win8+wpa81\Dropbox.Api.dll" />
+    <file src="bin\Release\portable\Dropbox.Api.xml" target="lib\portable-net45+win8+wpa81\Dropbox.Api.xml" />
+    <file src="bin\Release\portable40\Dropbox.Api.dll" target="lib\portable-net40+sl5+wp80+win8+wpa81\Dropbox.Api.dll" />
+    <file src="bin\Release\portable40\Dropbox.Api.xml" target="lib\portable-net40+sl5+wp80+win8+wpa81\Dropbox.Api.xml" />
+    <file src="bin\Release\netstandard2.0\Dropbox.Api.dll" target="lib\netstandard2.0\Dropbox.Api.dll" />
+  </files>
+</package>

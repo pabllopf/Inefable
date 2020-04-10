@@ -8,8 +8,9 @@ namespace Mirror
     [CanEditMultipleObjects]
     public class NetworkManagerEditor : Editor
     {
-        private SerializedProperty spawnListProperty;
-        private ReorderableList spawnList;
+        SerializedProperty spawnListProperty;
+
+        ReorderableList spawnList;
 
         protected NetworkManager networkManager;
 
@@ -30,7 +31,8 @@ namespace Mirror
                     onRemoveCallback = RemoveButton,
                     onChangedCallback = Changed,
                     onAddCallback = AddButton,
-                    elementHeight = 16 // this uses a 16x16 icon. other sizes make it stretch.
+                    // this uses a 16x16 icon. other sizes make it stretch.
+                    elementHeight = 16
                 };
             }
         }
@@ -47,7 +49,7 @@ namespace Mirror
             }
         }
 
-        private static void DrawHeader(Rect headerRect)
+        static void DrawHeader(Rect headerRect)
         {
             GUI.Label(headerRect, "Registered Spawnable Prefabs:");
         }

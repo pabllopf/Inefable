@@ -112,16 +112,16 @@ public class PauseMenu : NetworkBehaviour
     {
         GameObject nmObj = GameObject.Find("NetworkManager").gameObject;
 
-        Multiplayer multiplayer  = nmObj.GetComponent<Multiplayer>();
+        //Multiplayer multiplayer  = nmObj.GetComponent<Multiplayer>();
 
-        multiplayer.DiscoveredServers.Clear();
-        multiplayer.NetworkDiscovery.StartDiscovery();
+        //multiplayer.DiscoveredServers.Clear();
+        //multiplayer.NetworkDiscovery.StartDiscovery();
 
-        multiplayer.NetworkManager.offlineScene = name;
+//        multiplayer.NetworkManager.offlineScene = name;
 
         yield return new WaitForSeconds(1f);
-        multiplayer.NetworkManager.StopHost();
-        multiplayer.NetworkManager.players.Clear();
+  //      multiplayer.NetworkManager.StopHost();
+    //    multiplayer.NetworkManager.players.Clear();
     }
 
     /// <summary>Awakes this instance.</summary>

@@ -48,9 +48,7 @@ namespace Telepathy
 
                 // .Read returns 0 if disconnected
                 if (result == 0)
-                {
                     return false;
-                }
 
                 // otherwise add to bytes read
                 bytesRead += result;

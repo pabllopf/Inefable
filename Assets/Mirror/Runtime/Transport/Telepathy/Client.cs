@@ -8,8 +8,8 @@ namespace Telepathy
     public class Client : Common
     {
         public TcpClient client;
-        private Thread receiveThread;
-        private Thread sendThread;
+        Thread receiveThread;
+        Thread sendThread;
 
         // TcpClient.Connected doesn't check if socket != null, which
         // results in NullReferenceExceptions if connection was closed.
@@ -30,21 +30,21 @@ namespace Telepathy
         // => bools are atomic according to
         //    https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables
         //    made volatile so the compiler does not reorder access to it
-        private bool _Connecting;
+        volatile bool _Connecting;
         public bool Connecting => _Connecting;
 
         // send queue
         // => SafeQueue is twice as fast as ConcurrentQueue, see SafeQueue.cs!
-        private readonly SafeQueue<byte[]> sendQueue = new SafeQueue<byte[]>();
+        SafeQueue<byte[]> sendQueue = new SafeQueue<byte[]>();
 
         // ManualResetEvent to wake up the send thread. better than Thread.Sleep
         // -> call Set() if everything was sent
         // -> call Reset() if there is something to send again
         // -> call WaitOne() to block until Reset was called
-        private readonly ManualResetEvent sendPending = new ManualResetEvent(false);
+        ManualResetEvent sendPending = new ManualResetEvent(false);
 
         // the thread function
-        private void ReceiveThreadFunction(string ip, int port)
+        void ReceiveThreadFunction(string ip, int port)
         {
             // absolutely must wrap with try/catch, otherwise thread
             // exceptions are silent
@@ -60,10 +60,8 @@ namespace Telepathy
                 client.SendTimeout = SendTimeout;
 
                 // start send thread only after connected
-                sendThread = new Thread(() => { SendLoop(0, client, sendQueue, sendPending); })
-                {
-                    IsBackground = true
-                };
+                sendThread = new Thread(() => { SendLoop(0, client, sendQueue, sendPending); });
+                sendThread.IsBackground = true;
                 sendThread.Start();
 
                 // run the receive loop
@@ -115,9 +113,7 @@ namespace Telepathy
         {
             // not if already started
             if (Connecting || Connected)
-            {
                 return;
-            }
 
             // We are connecting from now until Connect succeeds or fails
             _Connecting = true;
@@ -137,10 +133,10 @@ namespace Telepathy
             // => the trick is to clear the internal IPv4 socket so that Connect
             //    resolves the hostname and creates either an IPv4 or an IPv6
             //    socket as needed (see TcpClient source)
-            client = new TcpClient
-            {
-                Client = null // clear internal IPv4 socket until Connect()
-            }; // creates IPv4 socket
+            // creates IPv4 socket
+            client = new TcpClient();
+            // clear internal IPv4 socket until Connect()
+            client.Client = null;
 
             // clear old messages in queue, just to be sure that the caller
             // doesn't receive data from last time and gets out of sync.
@@ -155,10 +151,8 @@ namespace Telepathy
             //    too long, which is especially good in games
             // -> this way we don't async client.BeginConnect, which seems to
             //    fail sometimes if we connect too many clients too fast
-            receiveThread = new Thread(() => { ReceiveThreadFunction(ip, port); })
-            {
-                IsBackground = true
-            };
+            receiveThread = new Thread(() => { ReceiveThreadFunction(ip, port); });
+            receiveThread.IsBackground = true;
             receiveThread.Start();
         }
 
@@ -202,7 +196,8 @@ namespace Telepathy
                     // calling Send here would be blocking (sometimes for long times
                     // if other side lags or wire was disconnected)
                     sendQueue.Enqueue(data);
-                    sendPending.Set(); // interrupt SendThread WaitOne()
+                    // interrupt SendThread WaitOne()
+                    sendPending.Set();
                     return true;
                 }
                 Logger.LogError("Client.Send: message too big: " + data.Length + ". Limit: " + MaxMessageSize);

@@ -8,7 +8,8 @@ namespace Telepathy
 {
     public abstract class Common
     {
-        // common code /////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
+        // common code
         // incoming message queue of <connectionId, message>
         // (not a HashSet because one connection can have multiple new messages)
         protected ConcurrentQueue<Message> receiveQueue = new ConcurrentQueue<Message>();
@@ -53,13 +54,14 @@ namespace Telepathy
         public int SendTimeout = 5000;
 
         // avoid header[4] allocations but don't use one buffer for all threads
-        [ThreadStatic] private static byte[] header;
+        [ThreadStatic] static byte[] header;
 
         // avoid payload[packetSize] allocations but don't use one buffer for
         // all threads
-        [ThreadStatic] private static byte[] payload;
+        [ThreadStatic] static byte[] payload;
 
-        // static helper functions /////////////////////////////////////////////
+        /////////////////////////////////////////////
+        // static helper functions
         // send message (via stream) with the <size,content> message structure
         // this function is blocking sometimes!
         // (e.g. if someone has high latency or wire was cut off)
@@ -73,17 +75,14 @@ namespace Telepathy
                 // packet to avoid TCP overheads and improve performance.
                 int packetSize = 0;
                 for (int i = 0; i < messages.Length; ++i)
-                {
-                    packetSize += sizeof(int) + messages[i].Length; // header + content
-                }
+                    // header + content
+                    packetSize += sizeof(int) + messages[i].Length;
 
                 // create payload buffer if not created yet or previous one is
                 // too small
                 // IMPORTANT: payload.Length might be > packetSize! don't use it!
                 if (payload == null || payload.Length < packetSize)
-                {
                     payload = new byte[packetSize];
-                }
 
                 // create the packet
                 int position = 0;
@@ -91,9 +90,7 @@ namespace Telepathy
                 {
                     // create header buffer if not created yet
                     if (header == null)
-                    {
                         header = new byte[4];
-                    }
 
                     // construct header (size)
                     Utils.IntToBytesBigEndianNonAlloc(messages[i].Length, header);
@@ -124,15 +121,11 @@ namespace Telepathy
 
             // create header buffer if not created yet
             if (header == null)
-            {
                 header = new byte[4];
-            }
 
             // read exactly 4 bytes for header (blocking)
             if (!stream.ReadExactly(header, 4))
-            {
                 return false;
-            }
 
             // convert to int
             int size = Utils.BytesToIntBigEndian(header);
@@ -187,10 +180,10 @@ namespace Telepathy
                 while (true)
                 {
                     // read the next message (blocking) or stop if stream closed
-                    if (!ReadMessageBlocking(stream, MaxMessageSize, out byte[] content))
-                    {
-                        break; // break instead of return so stream close still happens!
-                    }
+                    byte[] content;
+                    if (!ReadMessageBlocking(stream, MaxMessageSize, out content))
+                        // break instead of return so stream close still happens!
+                        break;
 
                     // queue it
                     receiveQueue.Enqueue(new Message(connectionId, EventType.Data, content));
@@ -244,7 +237,8 @@ namespace Telepathy
 
             try
             {
-                while (client.Connected) // try this. client will get closed eventually.
+                // try this. client will get closed eventually.
+                while (client.Connected)
                 {
                     // reset ManualResetEvent before we do anything else. this
                     // way there is no race condition. if Send() is called again
@@ -252,18 +246,19 @@ namespace Telepathy
                     // -> otherwise Send might be called right after dequeue but
                     //    before .Reset, which would completely ignore it until
                     //    the next Send call.
-                    sendPending.Reset(); // WaitOne() blocks until .Set() again
+                    // WaitOne() blocks until .Set() again
+                    sendPending.Reset();
 
                     // dequeue all
                     // SafeQueue.TryDequeueAll is twice as fast as
                     // ConcurrentQueue, see SafeQueue.cs!
-                    if (sendQueue.TryDequeueAll(out byte[][] messages))
+                    byte[][] messages;
+                    if (sendQueue.TryDequeueAll(out messages))
                     {
                         // send message (blocking) or stop if stream is closed
                         if (!SendMessagesBlocking(stream, messages))
-                        {
-                            break; // break instead of return so stream close still happens!
-                        }
+                            // break instead of return so stream close still happens!
+                            break;
                     }
 
                     // don't choke up the CPU: wait until queue not empty anymore

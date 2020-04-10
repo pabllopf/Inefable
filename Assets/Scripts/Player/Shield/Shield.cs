@@ -67,7 +67,7 @@ public class Shield : MonoBehaviour
         shieldObj.SetActive((shield > 0) ? true : false);
 
         Sound.Play(FullShieldClip, AudioSource);
-        Data.SaveVar(shield).WithName("Shield").InFolder("Player");
+        //Data.SaveVar(shield).WithName("Shield").InFolder("Player");
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -82,7 +82,7 @@ public class Shield : MonoBehaviour
         StartCoroutine(TakeAHitEffect(TimeOfEffect, amount));
 
         Sound.Play(TakeClip, AudioSource);
-        Data.SaveVar(shield).WithName("Shield").InFolder("Player");
+        //Data.SaveVar(shield).WithName("Shield").InFolder("Player");
     }
 
     /// <summary>Awakes this instance.</summary>
@@ -92,7 +92,7 @@ public class Shield : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        shield = Data.LoadVar("Shield").FromFolder("Player").Int;
+        //shield = Data.LoadVar("Shield").FromFolder("Player").Int;
 
         bar = transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
         bar.size = (float)shield * 2 / 100;

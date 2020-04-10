@@ -5,8 +5,8 @@ namespace Mirror
     // https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average
     public class ExponentialMovingAverage
     {
-        private readonly float alpha;
-        private bool initialized;
+        readonly float alpha;
+        bool initialized;
 
         public ExponentialMovingAverage(int n)
         {

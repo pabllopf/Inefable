@@ -49,10 +49,6 @@ namespace DialogueSystem.DataContainers
         [SerializeField]
         private AudioClip acceptClip = null;
 
-        /// <summary>The cancel clip</summary>
-        [SerializeField]
-        private AudioClip cancelClip = null;
-
         /// <summary>The audio source</summary>
         private AudioSource audioSource = null;
 

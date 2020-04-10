@@ -1,8 +1,8 @@
 // SyncObject code
-using Mono.CecilX;
-using Mono.CecilX.Cil;
 using System;
 using System.Linq;
+using Mono.CecilX;
+using Mono.CecilX.Cil;
 
 namespace Mirror.Weaver
 {
@@ -18,7 +18,7 @@ namespace Mirror.Weaver
         }
 
         // generates 'syncListInt = new SyncListInt()' if user didn't do that yet
-        private static void GenerateSyncObjectInstanceInitializer(ILProcessor ctorWorker, FieldDefinition fd)
+        static void GenerateSyncObjectInstanceInitializer(ILProcessor ctorWorker, FieldDefinition fd)
         {
             // check the ctor's instructions for an Stfld op-code for this specific sync list field.
             foreach (Instruction ins in ctorWorker.Body.Instructions)
@@ -77,7 +77,7 @@ namespace Mirror.Weaver
             // generates code like:
             this.InitSyncObject(m_sizes);
         */
-        private static void GenerateSyncObjectRegistration(ILProcessor methodWorker, FieldDefinition fd)
+        static void GenerateSyncObjectRegistration(ILProcessor methodWorker, FieldDefinition fd)
         {
             methodWorker.Append(methodWorker.Create(OpCodes.Ldarg_0));
             methodWorker.Append(methodWorker.Create(OpCodes.Ldarg_0));

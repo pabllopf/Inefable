@@ -3,7 +3,7 @@ using Mono.CecilX;
 
 namespace Mirror.Weaver
 {
-    internal static class MonoBehaviourProcessor
+    static class MonoBehaviourProcessor
     {
         public static void Process(TypeDefinition td)
         {
@@ -11,18 +11,13 @@ namespace Mirror.Weaver
             ProcessMethods(td);
         }
 
-        private static void ProcessSyncVars(TypeDefinition td)
+        static void ProcessSyncVars(TypeDefinition td)
         {
             // find syncvars
             foreach (FieldDefinition fd in td.Fields)
             {
-                foreach (CustomAttribute ca in fd.CustomAttributes)
-                {
-                    if (ca.AttributeType.FullName == Weaver.SyncVarType.FullName)
-                    {
-                        Weaver.Error($"[SyncVar] {fd} must be inside a NetworkBehaviour.  {td} is not a NetworkBehaviour");
-                    }
-                }
+                if (fd.HasCustomAttribute(Weaver.SyncVarType))
+                    Weaver.Error($"[SyncVar] {fd} must be inside a NetworkBehaviour.  {td} is not a NetworkBehaviour");
 
                 if (SyncObjectInitializer.ImplementsSyncObject(fd.FieldType))
                 {
@@ -31,7 +26,7 @@ namespace Mirror.Weaver
             }
         }
 
-        private static void ProcessMethods(TypeDefinition td)
+        static void ProcessMethods(TypeDefinition td)
         {
             // find command and RPC functions
             foreach (MethodDefinition md in td.Methods)
@@ -45,7 +40,7 @@ namespace Mirror.Weaver
 
                     if (ca.AttributeType.FullName == Weaver.ClientRpcType.FullName)
                     {
-                        Weaver.Error($"[ClienRpc] {md} must be declared inside a NetworkBehaviour");
+                        Weaver.Error($"[ClientRpc] {md} must be declared inside a NetworkBehaviour");
                     }
 
                     if (ca.AttributeType.FullName == Weaver.TargetRpcType.FullName)

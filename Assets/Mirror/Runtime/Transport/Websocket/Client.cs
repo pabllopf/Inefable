@@ -1,11 +1,11 @@
 #if !UNITY_WEBGL || UNITY_EDITOR
 
-using Ninja.WebSockets;
 using System;
 using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Ninja.WebSockets;
 
 namespace Mirror.Websocket
 {
@@ -17,16 +17,16 @@ namespace Mirror.Websocket
         public event Action Disconnected;
         public event Action<Exception> ReceivedError;
 
-        private const int MaxMessageSize = 1024 * 256;
-        private WebSocket webSocket;
-        private CancellationTokenSource cancellation;
+        const int MaxMessageSize = 1024 * 256;
+        WebSocket webSocket;
+        CancellationTokenSource cancellation;
 
         public bool NoDelay = true;
 
         public bool Connecting { get; set; }
         public bool IsConnected { get; set; }
 
-        private Uri uri;
+        Uri uri;
 
         public async void Connect(Uri uri)
         {
@@ -79,7 +79,7 @@ namespace Mirror.Websocket
             }
         }
 
-        private async Task ReceiveLoop(WebSocket webSocket, CancellationToken token)
+        async Task ReceiveLoop(WebSocket webSocket, CancellationToken token)
         {
             byte[] buffer = new byte[MaxMessageSize];
 
@@ -88,22 +88,15 @@ namespace Mirror.Websocket
                 WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), token);
 
                 if (result == null)
-                {
                     break;
-                }
-
                 if (result.MessageType == WebSocketMessageType.Close)
-                {
                     break;
-                }
 
                 // we got a text or binary message,  need the full message
                 ArraySegment<byte> data = await ReadFrames(result, webSocket, buffer);
 
                 if (data.Count == 0)
-                {
                     break;
-                }
 
                 try
                 {
@@ -118,7 +111,7 @@ namespace Mirror.Websocket
 
         // a message might come splitted in multiple frames
         // collect all frames
-        private async Task<ArraySegment<byte>> ReadFrames(WebSocketReceiveResult result, WebSocket webSocket, byte[] buffer)
+        async Task<ArraySegment<byte>> ReadFrames(WebSocketReceiveResult result, WebSocket webSocket, byte[] buffer)
         {
             int count = result.Count;
 

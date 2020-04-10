@@ -6,6 +6,7 @@ using System.Collections;
 using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 /// <summary>Manage the player of the game.</summary>
 public class Player : NetworkBehaviour
@@ -168,6 +169,7 @@ public class Player : NetworkBehaviour
             damageOfAttack = typePlayer.Damage;
 
             SetUpPlayerCamera();
+
         }
     }
 

@@ -22,7 +22,7 @@ namespace Mirror.Discovery
         [Tooltip("Invoked when a server is found")]
         public ServerFoundUnityEvent OnServerFound;
 
-        public void Start()
+        public override void Start()
         {
             ServerId = RandomLong();
 
@@ -30,9 +30,9 @@ namespace Mirror.Discovery
             // so make sure we set it here in Start()  (after awakes)
             // Or just let the user assign it in the inspector
             if (transport == null)
-            {
                 transport = Transport.activeTransport;
-            }
+
+            base.Start();
         }
 
         /// <summary>
@@ -80,10 +80,7 @@ namespace Mirror.Discovery
         /// Override if you wish to include additional data in the discovery message
         /// such as desired game mode, language, difficulty, etc... </remarks>
         /// <returns>An instance of ServerRequest with data to be broadcasted</returns>
-        protected override ServerRequest GetRequest()
-        {
-            return new ServerRequest();
-        }
+        protected override ServerRequest GetRequest() => new ServerRequest();
 
         /// <summary>
         /// Process the answer from a server

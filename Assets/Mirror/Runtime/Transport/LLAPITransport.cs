@@ -66,17 +66,21 @@ namespace Mirror
             MinTimerTimeout = 1,
             MaxTimerTimeout = 12000
         };
-        private readonly int channelId; // always use first channel
-        private byte error;
-        private int clientId = -1;
-        private int clientConnectionId = -1;
-        private readonly byte[] clientReceiveBuffer = new byte[4096];
-        private byte[] clientSendBuffer;
-        private int serverHostId = -1;
-        private readonly byte[] serverReceiveBuffer = new byte[4096];
-        private byte[] serverSendBuffer;
 
-        private void OnValidate()
+        // always use first channel
+        readonly int channelId;
+        byte error;
+
+        int clientId = -1;
+        int clientConnectionId = -1;
+        readonly byte[] clientReceiveBuffer = new byte[4096];
+        byte[] clientSendBuffer;
+
+        int serverHostId = -1;
+        readonly byte[] serverReceiveBuffer = new byte[4096];
+        byte[] serverSendBuffer;
+
+        void OnValidate()
         {
             // add connectionconfig channels if none
             if (connectionConfig.Channels.Count == 0)
@@ -88,7 +92,7 @@ namespace Mirror
             }
         }
 
-        private void Awake()
+        void Awake()
         {
             NetworkTransport.Init(globalConfig);
             Debug.Log("LLAPITransport initialized!");
@@ -110,13 +114,12 @@ namespace Mirror
             return clientConnectionId != -1;
         }
 
-        private void ClientConnect(string address, int port)
+
+
+        void ClientConnect(string address, int port)
         {
             // LLAPI can't handle 'localhost'
-            if (address.ToLower() == "localhost")
-            {
-                address = "127.0.0.1";
-            }
+            if (address.ToLower() == "localhost") address = "127.0.0.1";
 
             HostTopology hostTopology = new HostTopology(connectionConfig, 1);
 
@@ -142,9 +145,7 @@ namespace Mirror
         public override void ClientConnect(Uri uri)
         {
             if (uri.Scheme != Scheme)
-            {
                 throw new ArgumentException($"Invalid url {uri}, use {Scheme}://host:port instead", nameof(uri));
-            }
 
             int serverPort = uri.IsDefaultPort ? port : uri.Port;
 
@@ -169,9 +170,7 @@ namespace Mirror
         public bool ProcessClientMessage()
         {
             if (clientId == -1)
-            {
                 return false;
-            }
 
             NetworkEventType networkEvent = NetworkTransport.ReceiveFromHost(clientId, out int connectionId, out int channel, clientReceiveBuffer, clientReceiveBuffer.Length, out int receivedSize, out error);
 
@@ -230,12 +229,10 @@ namespace Mirror
         // should we return the list of all available uri?
         public override Uri ServerUri()
         {
-            UriBuilder builder = new UriBuilder
-            {
-                Scheme = Scheme,
-                Host = Dns.GetHostName(),
-                Port = port
-            };
+            UriBuilder builder = new UriBuilder();
+            builder.Scheme = Scheme;
+            builder.Host = Dns.GetHostName();
+            builder.Port = port;
             return builder.Uri;
         }
 
@@ -286,9 +283,7 @@ namespace Mirror
         public bool ProcessServerMessage()
         {
             if (serverHostId == -1)
-            {
                 return false;
-            }
 
             NetworkEventType networkEvent = NetworkTransport.ReceiveFromHost(serverHostId, out int connectionId, out int channel, serverReceiveBuffer, serverReceiveBuffer.Length, out int receivedSize, out error);
 

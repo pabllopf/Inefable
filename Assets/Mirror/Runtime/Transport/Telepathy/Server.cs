@@ -11,11 +11,11 @@ namespace Telepathy
     {
         // listener
         public TcpListener listener;
-        private Thread listenerThread;
+        Thread listenerThread;
 
         // class with all the client's data. let's call it Token for consistency
         // with the async socket methods.
-        private class ClientToken
+        class ClientToken
         {
             public TcpClient client;
 
@@ -36,10 +36,10 @@ namespace Telepathy
         }
 
         // clients with <connectionId, ClientData>
-        private readonly ConcurrentDictionary<int, ClientToken> clients = new ConcurrentDictionary<int, ClientToken>();
+        readonly ConcurrentDictionary<int, ClientToken> clients = new ConcurrentDictionary<int, ClientToken>();
 
         // connectionId counter
-        private int counter;
+        int counter;
 
         // public next id function in case someone needs to reserve an id
         // (e.g. if hostMode should always have 0 connection and external
@@ -68,7 +68,7 @@ namespace Telepathy
         // the listener thread's listen function
         // note: no maxConnections parameter. high level API should handle that.
         //       (Transport can't send a 'too full' message anyway)
-        private void Listen(int port)
+        void Listen(int port)
         {
             // absolutely must wrap with try/catch, otherwise thread
             // exceptions are silent
@@ -122,10 +122,8 @@ namespace Telepathy
                         {
                             Logger.LogError("Server send thread exception: " + exception);
                         }
-                    })
-                    {
-                        IsBackground = true
-                    };
+                    });
+                    sendThread.IsBackground = true;
                     sendThread.Start();
 
                     // spawn a receive thread for each client
@@ -153,10 +151,8 @@ namespace Telepathy
                         {
                             Logger.LogError("Server client thread exception: " + exception);
                         }
-                    })
-                    {
-                        IsBackground = true
-                    };
+                    });
+                    receiveThread.IsBackground = true;
                     receiveThread.Start();
                 }
             }
@@ -185,9 +181,7 @@ namespace Telepathy
         {
             // not if already started
             if (Active)
-            {
                 return false;
-            }
 
             // clear old messages in queue, just to be sure that the caller
             // doesn't receive data from last time and gets out of sync.
@@ -199,11 +193,9 @@ namespace Telepathy
             // (on low priority. if main thread is too busy then there is not
             //  much value in accepting even more clients)
             Logger.Log("Server: Start port=" + port);
-            listenerThread = new Thread(() => { Listen(port); })
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.BelowNormal
-            };
+            listenerThread = new Thread(() => { Listen(port); });
+            listenerThread.IsBackground = true;
+            listenerThread.Priority = ThreadPriority.BelowNormal;
             listenerThread.Start();
             return true;
         }
@@ -212,9 +204,7 @@ namespace Telepathy
         {
             // only if started
             if (!Active)
-            {
                 return;
-            }
 
             Logger.Log("Server: stopping...");
 
@@ -255,13 +245,15 @@ namespace Telepathy
             if (data.Length <= MaxMessageSize)
             {
                 // find the connection
-                if (clients.TryGetValue(connectionId, out ClientToken token))
+                ClientToken token;
+                if (clients.TryGetValue(connectionId, out token))
                 {
                     // add to send queue and return immediately.
                     // calling Send here would be blocking (sometimes for long times
                     // if other side lags or wire was disconnected)
                     token.sendQueue.Enqueue(data);
-                    token.sendPending.Set(); // interrupt SendThread WaitOne()
+                    // interrupt SendThread WaitOne()
+                    token.sendPending.Set();
                     return true;
                 }
                 // sending to an invalid connectionId is expected sometimes.
@@ -280,7 +272,8 @@ namespace Telepathy
         public string GetClientAddress(int connectionId)
         {
             // find the connection
-            if (clients.TryGetValue(connectionId, out ClientToken token))
+            ClientToken token;
+            if (clients.TryGetValue(connectionId, out token))
             {
                 return ((IPEndPoint)token.client.Client.RemoteEndPoint).Address.ToString();
             }
@@ -291,7 +284,8 @@ namespace Telepathy
         public bool Disconnect(int connectionId)
         {
             // find the connection
-            if (clients.TryGetValue(connectionId, out ClientToken token))
+            ClientToken token;
+            if (clients.TryGetValue(connectionId, out token))
             {
                 // just close it. client thread will take care of the rest.
                 token.client.Close();

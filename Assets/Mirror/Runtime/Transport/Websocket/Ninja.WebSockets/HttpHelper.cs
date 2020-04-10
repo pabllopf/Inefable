@@ -20,7 +20,6 @@
 // THE SOFTWARE.
 // ---------------------------------------------------------------------
 
-using Ninja.WebSockets.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,12 +29,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Ninja.WebSockets.Exceptions;
 
 namespace Ninja.WebSockets
 {
     public class HttpHelper
     {
-        private const string HTTP_GET_HEADER_REGEX = @"^GET(.*)HTTP\/1\.1";
+        const string HTTP_GET_HEADER_REGEX = @"^GET(.*)HTTP\/1\.1";
 
         /// <summary>
         /// Calculates a random WebSocket key that can be used to initiate a WebSocket handshake
@@ -76,7 +76,8 @@ namespace Ninja.WebSockets
         /// <returns>The HTTP header</returns>
         public static async Task<string> ReadHttpHeaderAsync(Stream stream, CancellationToken token)
         {
-            int length = 1024 * 16; // 16KB buffer more than enough for http header
+            // 16KB buffer more than enough for http header
+            int length = 1024 * 16;
             byte[] buffer = new byte[length];
             int offset = 0;
             int bytesRead = 0;
@@ -108,7 +109,7 @@ namespace Ninja.WebSockets
         /// </summary>
         /// <param name="header">The HTTP header</param>
         /// <returns>True if this is an http WebSocket upgrade response</returns>
-        public static bool IsWebSocketUpgradeRequest(string header)
+        public static bool IsWebSocketUpgradeRequest(String header)
         {
             Regex getRegex = new Regex(HTTP_GET_HEADER_REGEX, RegexOptions.IgnoreCase);
             Match getRegexMatch = getRegex.Match(header);
@@ -194,7 +195,7 @@ namespace Ninja.WebSockets
         public static async Task WriteHttpHeaderAsync(string response, Stream stream, CancellationToken token)
         {
             response = response.Trim() + "\r\n\r\n";
-            byte[] bytes = Encoding.UTF8.GetBytes(response);
+            Byte[] bytes = Encoding.UTF8.GetBytes(response);
             await stream.WriteAsync(bytes, 0, bytes.Length, token);
         }
     }
