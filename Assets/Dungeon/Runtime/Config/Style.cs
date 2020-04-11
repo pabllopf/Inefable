@@ -79,11 +79,17 @@ namespace DungeonGenerator.Configuration
         [SerializeField]
         private List<GameObject> cornersInternalRightUp = new List<GameObject>();
 
+        [Header("Enemy")]
+
+        /// <summary>The decorations</summary>
+        [SerializeField]
+        private List<Menu> enemys = new List<Menu>();
+
         [Header("Decoration")]
 
         /// <summary>The decorations</summary>
         [SerializeField]
-        private List<DecoMenu> decorations = new List<DecoMenu>();
+        private List<Menu> decorations = new List<Menu>();
 
         #region Encapsulate Fields
 
@@ -142,11 +148,15 @@ namespace DungeonGenerator.Configuration
         /// <summary>Gets or sets the corners internal right up.</summary>
         /// <value>The corners internal right up.</value>
         public List<GameObject> CornersInternalRightUp { get => cornersInternalRightUp; set => cornersInternalRightUp = value; }
-        
+
+        /// <summary>Gets or sets the enemys.</summary>
+        /// <value>The enemys.</value>
+        public List<Menu> Enemys { get => enemys; set => enemys = value; }
+
         /// <summary>Gets or sets the decorations.</summary>
         /// <value>The decorations.</value>
-        public List<DecoMenu> Decorations { get => decorations; set => decorations = value; }
-
+        public List<Menu> Decorations { get => decorations; set => decorations = value; }
+       
         #endregion
 
         /// <summary>Gets the tile.</summary>

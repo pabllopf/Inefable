@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data.Local;
 
 /// <summary>Manage the inventory of the player.</summary>
 public class Inventory : MonoBehaviour
@@ -58,7 +59,7 @@ public class Inventory : MonoBehaviour
         slot.sprite = item.Icon;
         slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
 
-        //Data.SaveVar(item.NameItem).WithName("Slot" + inventory.IndexOf(slot)).InFolder("Inventory");
+        LocalData.Save<string>(item.NameItem, "Slot" + inventory.IndexOf(slot), Application.persistentDataPath + "/Data");
         Sound.Play(AddItemSound, AudioSource);
     }
 
@@ -76,11 +77,12 @@ public class Inventory : MonoBehaviour
         {
             inventory[position].GetComponentInParent<Button>().onClick.Invoke();
             Sound.Play(UseItemSound, AudioSource);
-            //Data.SaveVar("0").WithName("Slot" + position).InFolder("Inventory");
+            LocalData.Save<string>("0", "Slot" + position, Application.persistentDataPath + "/Data");
         }
     }
 
-    /// <summary>Quits this instance.</summary>
+    /// <summary>Quits the specified position.</summary>
+    /// <param name="position">The position.</param>
     public void Quit(int position)
     {
         inventory[position].name = string.Empty;
@@ -140,15 +142,26 @@ public class Inventory : MonoBehaviour
     /// <summary>Loads the item.</summary>
     /// <param name="slot">The image.</param>
     private void LoadItem(Image slot)
-    {/*
-        if (!Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").String.Equals("0"))
-        {
-            Item item = Data.LoadVar("Slot" + inventory.IndexOf(slot)).FromFolder("Inventory").Item;
-            item.Target = gameObject;
+    {
+        string path = Application.persistentDataPath + "/Data";
 
-            slot.name = item.NameItem;
-            slot.sprite = item.Icon;
-            slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
-        }*/
+        if (LocalData.Exits("Slot" + inventory.IndexOf(slot), path))
+        {
+            string itemName = LocalData.Load<string>("Slot" + inventory.IndexOf(slot), path);
+
+            if (!itemName.Equals("0"))
+            {
+                Item item = Resources.Load<Item>("Items/" + itemName);
+                item.Target = gameObject;
+
+                slot.name = item.NameItem;
+                slot.sprite = item.Icon;
+                slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
+            }
+        }
+        else 
+        {
+            LocalData.Save<string>("0", "Slot" + inventory.IndexOf(slot), path);
+        }
     }
 }

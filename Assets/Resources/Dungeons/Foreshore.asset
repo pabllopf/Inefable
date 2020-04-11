@@ -39,12 +39,18 @@ MonoBehaviour:
   - {fileID: 584665492846794692, guid: 0d2a007de0efc464fbfae4fccb5e4c61, type: 3}
   cornersInternalRightUp:
   - {fileID: 4455402955386147488, guid: 6eb4731a1de34dd4b9d6fba02bf9815b, type: 3}
+  enemys:
+  - prefab: {fileID: 8676689400359619745, guid: c0e76b25304a82944a2ffe79118c540b,
+      type: 3}
+    boxToSpawn: 1
+    minToSpawn: 4
+    maxToSpawn: 23
   decorations:
   - prefab: {fileID: 5545560213153553992, guid: 9629f551b47411f4297c1b58b25accb7,
       type: 3}
     boxToSpawn: 1
-    minToSpawn: 0
-    maxToSpawn: 0
+    minToSpawn: 2
+    maxToSpawn: 15
   - prefab: {fileID: 1418002004525905514, guid: b84315b6b11730349b561ae464f14209,
       type: 3}
     boxToSpawn: 1

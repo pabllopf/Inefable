@@ -57,6 +57,8 @@ namespace DungeonGenerator.Editor
             Show(serializedObject.FindProperty("cornersInternalRightDown"));
             Show(serializedObject.FindProperty("cornersInternalRightUp"));
 
+            Show(serializedObject.FindProperty("enemys"));
+
             Show(serializedObject.FindProperty("decorations"));
 
             serializedObject.ApplyModifiedProperties();
@@ -99,6 +101,8 @@ namespace DungeonGenerator.Editor
             style.CornersInternalLeftUp = UpdateField(style.NameStyle + "/Board/CornerILU");
             style.CornersInternalRightDown = UpdateField(style.NameStyle + "/Board/CornerIRD");
             style.CornersInternalRightUp = UpdateField(style.NameStyle + "/Board/CornerIRU");
+
+            style.Enemys = UpdateEnemy(style.NameStyle + "/Enemy", style.Enemys);
 
             style.Decorations = UpdateDecoration(style.NameStyle + "/Decoration", style.Decorations);
         }
@@ -155,7 +159,7 @@ namespace DungeonGenerator.Editor
             return result;
         }
 
-        private List<DecoMenu> UpdateDecoration(string path, List<DecoMenu> oldList) 
+        private List<Configuration.Menu> UpdateDecoration(string path, List<Configuration.Menu> oldList) 
         {
             string prefabDir = Application.dataPath + "/Prefabs";
             if (!Directory.Exists(prefabDir))
@@ -171,7 +175,7 @@ namespace DungeonGenerator.Editor
                 Debug.Log("Directory created at: " + pathFiles);
             }
 
-            List<DecoMenu> result = new List<DecoMenu>();
+            List<Configuration.Menu> result = new List<Configuration.Menu>();
 
             if (Directory.Exists(pathFiles))
             {
@@ -194,7 +198,7 @@ namespace DungeonGenerator.Editor
                         {
                             if (oldList.Any(i => i.Prefab == obj.GetComponent<Decoration>().Prefab))
                             {
-                                DecoMenu decoMenu = oldList.Find(i => i.Prefab == obj.GetComponent<Decoration>().Prefab);
+                                Configuration.Menu decoMenu = oldList.Find(i => i.Prefab == obj.GetComponent<Decoration>().Prefab);
                                 result.Add(decoMenu);
 
                                 Decoration deco = obj.GetComponent<Decoration>();
@@ -207,8 +211,83 @@ namespace DungeonGenerator.Editor
                             }
                             else
                             {
-                                DecoMenu decoMenu = new DecoMenu();
+                                Configuration.Menu decoMenu = new Configuration.Menu();
                                 Decoration deco = obj.GetComponent<Decoration>();
+
+                                decoMenu.Prefab = deco.Prefab;
+                                decoMenu.BoxToSpawn = deco.BoxToSpawn;
+                                decoMenu.MinToSpawn = deco.MinToSpawn;
+                                decoMenu.MaxToSpawn = deco.MaxToSpawn;
+
+                                result.Add(decoMenu);
+                            }
+                        }
+                    });
+            }
+
+            if (result.Count <= 0)
+            {
+                Debug.LogError("Directory of dungeon is empty: " + "Assets/Prefabs/Dungeon/" + path);
+            }
+
+            return result;
+        }
+
+
+        private List<Configuration.Menu> UpdateEnemy(string path, List<Configuration.Menu> oldList)
+        {
+            string prefabDir = Application.dataPath + "/Prefabs";
+            if (!Directory.Exists(prefabDir))
+            {
+                Directory.CreateDirectory(prefabDir);
+                Debug.Log("Directory created at: " + prefabDir);
+            }
+
+            string pathFiles = Application.dataPath + "/Prefabs/Dungeon/" + path;
+            if (!Directory.Exists(pathFiles))
+            {
+                Directory.CreateDirectory(pathFiles);
+                Debug.Log("Directory created at: " + pathFiles);
+            }
+
+            List<Configuration.Menu> result = new List<Configuration.Menu>();
+
+            if (Directory.Exists(pathFiles))
+            {
+                Directory.GetFiles(pathFiles)
+                    .ToList()
+                    .FindAll(file => Path.GetExtension(file) == ".prefab")
+                    .ForEach(filePath =>
+                    {
+                        string dirOfTiles = "Assets/Prefabs/Dungeon/" + path;
+                        if (!Directory.Exists(dirOfTiles))
+                        {
+                            Directory.CreateDirectory(dirOfTiles);
+                            Debug.Log("Directory created at: " + dirOfTiles);
+                        }
+
+                        string objPath = "Assets/Prefabs/Dungeon/" + path + "/" + Path.GetFileName(filePath);
+                        GameObject obj = (GameObject)AssetDatabase.LoadAssetAtPath(objPath, typeof(GameObject));
+
+                        if (obj.GetComponent<Hostile>())
+                        {
+                            if (oldList.Any(i => i.Prefab == obj.GetComponent<Hostile>().Prefab))
+                            {
+                                Configuration.Menu decoMenu = oldList.Find(i => i.Prefab == obj.GetComponent<Hostile>().Prefab);
+                                result.Add(decoMenu);
+
+                                Hostile deco = obj.GetComponent<Hostile>();
+                                deco.Prefab = decoMenu.Prefab;
+                                deco.BoxToSpawn = decoMenu.BoxToSpawn;
+                                deco.MinToSpawn = decoMenu.MinToSpawn;
+                                deco.MaxToSpawn = decoMenu.MaxToSpawn;
+
+                                return;
+                            }
+                            else
+                            {
+                                Configuration.Menu decoMenu = new Configuration.Menu();
+                                Hostile deco = obj.GetComponent<Hostile>();
 
                                 decoMenu.Prefab = deco.Prefab;
                                 decoMenu.BoxToSpawn = deco.BoxToSpawn;

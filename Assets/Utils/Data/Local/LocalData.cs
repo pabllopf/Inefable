@@ -4,7 +4,9 @@
 //------------------------------------------------------------------------------------------
 namespace Utils.Data.Local
 {
+    using System.ComponentModel;
     using System.IO;
+    using System.Text;
     using Newtonsoft.Json;
     using Utils.Security;
 
@@ -16,9 +18,14 @@ namespace Utils.Data.Local
         /// <param name="data">Data to save</param>
         /// <param name="nameFile">Name file (default .JSON extension)</param>
         /// <param name="pathFile">Path file</param>
-        public static void Save<T>(ref T data, string nameFile, string pathFile)
+        public static void Save<T>(T data, string nameFile, string pathFile)
         {
-            File.WriteAllText(pathFile + "/" + nameFile + ".json", JsonConvert.SerializeObject(data));
+            if (!Directory.Exists(pathFile)) 
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+
+            File.WriteAllText(pathFile + "/" + nameFile + ".json", JsonConvert.SerializeObject(data), Encoding.UTF8);
         }
 
         /// <summary>Saves the specified data in a file.</summary>
@@ -27,8 +34,13 @@ namespace Utils.Data.Local
         /// <param name="nameFile">Name file (default .JSON extension)</param>
         /// <param name="pathFile">Path file</param>
         /// <param name="encrypted">if set to <c>true</c> encrypt the data.</param>
-        public static void Save<T>(ref T data, string nameFile, string pathFile, bool encrypted)
+        public static void Save<T>(T data, string nameFile, string pathFile, bool encrypted)
         {
+            if (!Directory.Exists(pathFile))
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+
             File.WriteAllText(pathFile + "/" + nameFile + ".json", encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data)) : JsonConvert.SerializeObject(data));
         }
 
@@ -39,8 +51,13 @@ namespace Utils.Data.Local
         /// <param name="pathFile">Path file</param>
         /// <param name="encrypted">if set to <c>true</c> encrypt the data.</param>
         /// <param name="key">Key to encrypt</param>
-        public static void Save<T>(ref T data, string nameFile, string pathFile, bool encrypted, string key)
+        public static void Save<T>(T data, string nameFile, string pathFile, bool encrypted, string key)
         {
+            if (!Directory.Exists(pathFile))
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+
             File.WriteAllText(pathFile + "/" + nameFile + ".json", encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data), key) : JsonConvert.SerializeObject(data));
         }
 
@@ -50,8 +67,13 @@ namespace Utils.Data.Local
         /// <param name="nameFile">Name file (without extension)</param>
         /// <param name="pathFile">Path file.</param>
         /// <param name="extension">Extension file (.JSON, .txt, etc)</param>
-        public static void Save<T>(ref T data, string nameFile, string pathFile, string extension)
+        public static void Save<T>(T data, string nameFile, string pathFile, string extension)
         {
+            if (!Directory.Exists(pathFile))
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+
             File.WriteAllText(pathFile + "/" + nameFile + extension, JsonConvert.SerializeObject(data));
         }
 
@@ -62,8 +84,13 @@ namespace Utils.Data.Local
         /// <param name="pathFile">Path file.</param>
         /// <param name="extension">Extension file (.JSON, .txt, etc)</param>
         /// <param name="encrypted">if set to <c>true</c> encrypt the data.</param>
-        public static void Save<T>(ref T data, string nameFile, string pathFile, string extension, bool encrypted)
+        public static void Save<T>(T data, string nameFile, string pathFile, string extension, bool encrypted)
         {
+            if (!Directory.Exists(pathFile))
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+
             File.WriteAllText(pathFile + "/" + nameFile + extension, encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data)) : JsonConvert.SerializeObject(data));
         }
 
@@ -75,8 +102,13 @@ namespace Utils.Data.Local
         /// <param name="extension">Extension file (.JSON, .txt, etc)</param>
         /// <param name="encrypted">if set to <c>true</c> encrypt the data.</param>
         /// <param name="key">Key to encrypt</param>
-        public static void Save<T>(ref T data, string nameFile, string pathFile, string extension, bool encrypted, string key)
+        public static void Save<T>(T data, string nameFile, string pathFile, string extension, bool encrypted, string key)
         {
+            if (!Directory.Exists(pathFile))
+            {
+                Directory.CreateDirectory(pathFile);
+            }
+
             File.WriteAllText(pathFile + "/" + nameFile + extension, encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data), key) : JsonConvert.SerializeObject(data));
         }
 
@@ -147,6 +179,25 @@ namespace Utils.Data.Local
         public static T Load<T>(string nameFile, string pathFile, string extension, bool encrypted, string key)
         {
             return JsonConvert.DeserializeObject<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + extension)) : File.ReadAllText(pathFile + "/" + nameFile + extension));
+        }
+
+        /// <summary>Exit the specified name file.</summary>
+        /// <param name="nameFile">The name file.</param>
+        /// <param name="pathFile">The path file.</param>
+        /// <returns>Return true if exit a local data.</returns>
+        public static bool Exits(string nameFile, string pathFile) 
+        {
+            return File.Exists(pathFile + "/" + nameFile + ".json");
+        }
+
+        /// <summary>Exit the specified name file.</summary>
+        /// <param name="nameFile">The name file.</param>
+        /// <param name="pathFile">The path file.</param>
+        /// <param name="extension">The extension.</param>
+        /// <returns>Return true if exit a local data.</returns>
+        public static bool Exits(string nameFile, string pathFile, string extension)
+        {
+            return File.Exists(pathFile + "/" + nameFile + extension);
         }
     }
 }

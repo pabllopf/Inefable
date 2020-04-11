@@ -1,14 +1,15 @@
 ﻿//------------------------------------------------------------------------------------------
 // <author>Pablo Perdomo Falcón</author>
-// <copyright file="DecoMenu.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
+// <copyright file="Hostile.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 namespace DungeonGenerator.Configuration
 {
     using DungeonGenerator.Enum;
     using UnityEngine;
 
+    /// <summary>Hostile enemy of dungeon. </summary>
     [System.Serializable]
-    public class DecoMenu
+    public class Hostile : MonoBehaviour
     {
         /// <summary>The decoration</summary>
         [SerializeField]
@@ -28,9 +29,11 @@ namespace DungeonGenerator.Configuration
         [Range(0, 100)]
         private int maxToSpawn = 0;
 
+        #region Encapsulate Fields
+
         /// <summary>Gets or sets the prefab.</summary>
         /// <value>The prefab.</value>
-        public GameObject Prefab { get => prefab; set => prefab = value; }
+        public GameObject Prefab { get => gameObject; set => prefab = value; }
 
         /// <summary>Gets or sets the box to spawn.</summary>
         /// <value>The box to spawn.</value>
@@ -44,5 +47,6 @@ namespace DungeonGenerator.Configuration
         /// <value>The maximum to spawn.</value>
         public int MaxToSpawn { get => maxToSpawn; set => maxToSpawn = value; }
 
+        #endregion
     }
 }

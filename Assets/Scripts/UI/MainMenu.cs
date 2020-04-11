@@ -125,30 +125,6 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
-    /// <summary>Checks the version.</summary>
-    private void CheckVersion() 
-    {
-        try
-        {
-            WebClient client = new WebClient();
-
-            string versionServer = client.DownloadString("https://pabllopf.github.io/Game-Inefable/version.html");
-            if (versionServer != Application.version) 
-            {
-                isUpdated = false;
-            }
-        }
-        catch (WebException webEx)
-        {
-            Console.WriteLine(webEx.ToString());
-            if (webEx.Status == WebExceptionStatus.ConnectFailure)
-            {
-                Debug.Log("You havent got connection.");
-                isUpdated = true;
-            }
-        }
-    }
-
     /// <summary>Starts this instance.</summary>
     private void Start()
     {
@@ -158,10 +134,10 @@ public class MainMenu : MonoBehaviour
         startPanel.SetActive(true);
 
         newButtons = GameObject.FindWithTag("NewButtons");
-        newButtons.SetActive(Settings.Current.IsTheFirstTime ? true : false);
+        newButtons.SetActive(Settings.Current.FirstTime ? true : false);
 
         normalButtons = GameObject.FindWithTag("NormalButtons");
-        normalButtons.SetActive((!Settings.Current.IsTheFirstTime) ? true : false);
+        normalButtons.SetActive((!Settings.Current.FirstTime) ? true : false);
 
         selectors = ConfigSelectors();
 
@@ -193,7 +169,7 @@ public class MainMenu : MonoBehaviour
     {
         List<GameObject> result = new List<GameObject>();
 
-        if (Settings.Current.IsTheFirstTime)
+        if (Settings.Current.FirstTime)
         {
             result = new List<GameObject>
             {
@@ -389,7 +365,7 @@ public class MainMenu : MonoBehaviour
     /// <summary>Yeses the new adventure.</summary>
     private void YesNewAdventure()
     {
-        Settings.Current.IsTheFirstTime = false;
+        Settings.Current.FirstTime = false;
         Settings.Save();
         Sound.Play(AcceptClip, AudioSource);
         SceneManager.LoadScene(SceneOfNewAdventure);

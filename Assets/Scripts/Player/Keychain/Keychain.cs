@@ -6,6 +6,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data.Local;
 
 /// <summary>Manage the Key Chain of a player.</summary>
 public class Keychain : MonoBehaviour
@@ -73,7 +74,7 @@ public class Keychain : MonoBehaviour
         }
 
         Sound.Play(AddKeyClip, AudioSource);
-        //Data.SaveVar(numOfKeys).WithName("NumOfKeys").InFolder("Player");
+        LocalData.Save<int>(numOfKeys, "NumOfKeys", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Spend a key.</summary>
@@ -93,7 +94,7 @@ public class Keychain : MonoBehaviour
         }
 
         Sound.Play(SpendKeyClip, AudioSource);
-        //Data.SaveVar(numOfKeys).WithName("NumOfKeys").InFolder("Player");
+        LocalData.Save<int>(numOfKeys, "NumOfKeys", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Actives the UI.</summary>
@@ -108,7 +109,7 @@ public class Keychain : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        numOfKeys = 1; //Data.LoadVar("NumOfKeys").FromFolder("Player").Int;
+        numOfKeys = LocalData.Load<int>("NumOfKeys", Application.persistentDataPath + "/Data");
 
         animator = transform.Find("Interface/CounterKeys").GetComponent<Animator>();
 

@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data.Local;
 
 /// <summary>Manage the health of the player.</summary>
 public class Health : MonoBehaviour
@@ -70,7 +71,7 @@ public class Health : MonoBehaviour
         marker.text = health.ToString();
 
         Sound.Play(TreatClip, AudioSource);
-        //Data.SaveVar(health).WithName("Health").InFolder("Player");
+        LocalData.Save<int>(health, "Health", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Treat full.</summary>
@@ -81,7 +82,7 @@ public class Health : MonoBehaviour
         marker.text = health.ToString();
 
         Sound.Play(TreatClip, AudioSource);
-        //Data.SaveVar(health).WithName("Health").InFolder("Player");
+        LocalData.Save<int>(health, "Health", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Takes the specified amount.</summary>
@@ -95,7 +96,7 @@ public class Health : MonoBehaviour
         StartCoroutine(TakeAHitEffect(TimeOfEffect, amount));
 
         Sound.Play(TakeClip, AudioSource);
-        //Data.SaveVar(health).WithName("Health").InFolder("Player");
+        LocalData.Save<int>(health, "Health", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Awakes this instance.</summary>
@@ -104,7 +105,7 @@ public class Health : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
-        //health = Data.LoadVar("Health").FromFolder("Player").Int;
+        health = LocalData.Load<int>("Health", Application.persistentDataPath + "/Data");
         health = (health == 0) ? 100 : health;
 
         bar = transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();

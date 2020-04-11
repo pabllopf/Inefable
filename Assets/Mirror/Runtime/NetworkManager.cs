@@ -146,6 +146,12 @@ namespace Mirror
         /// </summary>
         public int numPlayers => NetworkServer.connections.Count(kv => kv.Value.identity != null);
 
+        /// <summary>The players</summary>
+        public List<GameObject> players = new List<GameObject>();
+
+        /// <summary>The ports</summary>
+        public List<ushort> ports = new List<ushort>() {7777,7778,7779,};
+
         /// <summary>
         /// True if the server or client is started and running
         /// <para>This is set True in StartServer / StartClient, and set False in StopServer / StopClient</para>
@@ -237,8 +243,31 @@ namespace Mirror
             // (tick rate is applied in StartServer!)
             if (isHeadless && startOnHeadless)
             {
+                foreach (ushort port in ports)
+                {
+                    if (port.ToString() == GetArg("-port"))
+                    {
+                        GetComponent<TelepathyTransport>().port = port;
+                    }
+                }
                 StartServer();
             }
+        }
+
+        /// <summary>Gets the argument.</summary>
+        /// <param name="name">The name.</param>
+        /// <returns>Return value of arg.</returns>
+        private static string GetArg(string name)
+        {
+            string[] args = Environment.GetCommandLineArgs();
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == name && args.Length > i + 1)
+                {
+                    return args[i + 1];
+                }
+            }
+            return null;
         }
 
         // NetworkIdentity.UNetStaticUpdate is called from UnityEngine while LLAPI network is active.
@@ -1284,6 +1313,7 @@ namespace Mirror
                 : Instantiate(playerPrefab);
 
             NetworkServer.AddPlayerForConnection(conn, player);
+            players.Add(player);
         }
 
         /// <summary>
@@ -1319,6 +1349,7 @@ namespace Mirror
         /// <param name="player">The player identity to remove.</param>
         public virtual void OnServerRemovePlayer(NetworkConnection conn, NetworkIdentity player)
         {
+            players.Remove(player.gameObject);
             if (player.gameObject != null)
             {
                 NetworkServer.Destroy(player.gameObject);

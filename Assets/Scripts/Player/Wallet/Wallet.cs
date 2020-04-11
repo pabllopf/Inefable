@@ -6,6 +6,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data.Local;
 
 /// <summary>Manage the wallet of a player.</summary>
 public class Wallet : MonoBehaviour
@@ -71,7 +72,7 @@ public class Wallet : MonoBehaviour
         StartCoroutine(ShowUINow(TimeToHideUI));
 
         Sound.Play(AddCoinClip, AudioSource);
-        //Data.SaveVar(money).WithName("Money").InFolder("Player");
+        LocalData.Save<int>(money, "Money", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Spends the specified amount.</summary>
@@ -89,7 +90,7 @@ public class Wallet : MonoBehaviour
         StartCoroutine(ShowUINow(TimeToHideUI));
 
         Sound.Play(SpendCoinClip, AudioSource);
-        //Data.SaveVar(money).WithName("Money").InFolder("Player");
+        LocalData.Save<int>(money, "Money", Application.persistentDataPath + "/Data");
     }
 
     /// <summary>Awakes this instance.</summary>
@@ -97,7 +98,7 @@ public class Wallet : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        money = 1;// Data.LoadVar("Money").FromFolder("Player").Int;
+        money = LocalData.Load<int>("Money", Application.persistentDataPath + "/Data");
 
         animator = transform.Find("Interface/CounterCoins").GetComponent<Animator>();
 
