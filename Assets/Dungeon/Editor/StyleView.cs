@@ -8,6 +8,7 @@ namespace DungeonGenerator.Editor
     using System.IO;
     using System.Linq;
     using DungeonGenerator.Configuration;
+    using Mirror;
     using UnityEditor;
     using UnityEngine;
 
@@ -105,6 +106,9 @@ namespace DungeonGenerator.Editor
             style.Enemys = UpdateEnemy(style.NameStyle + "/Enemy", style.Enemys);
 
             style.Decorations = UpdateDecoration(style.NameStyle + "/Decoration", style.Decorations);
+
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects().ToList().Find(i => i.name == "NetworkManager").GetComponent<NetworkManager>().spawnPrefabs.AddRange(style.Floors);
+            
         }
 
         /// <summary>Updates the field.</summary>
@@ -147,6 +151,7 @@ namespace DungeonGenerator.Editor
                         if (!result.Contains(obj))
                         {
                             result.Add(obj);
+                            
                         }
                     });
             }
@@ -156,6 +161,7 @@ namespace DungeonGenerator.Editor
                 Debug.LogError("Directory of dungeon is empty: " + "Assets/Prefabs/Dungeon/" + path);
             }
 
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects().ToList().Find(i => i.name == "NetworkManager").GetComponent<NetworkManager>().spawnPrefabs.AddRange(result);
             return result;
         }
 

@@ -13,12 +13,15 @@ public class Settings
     private static Settings current;
 
     /// <summary>The platform</summary>
+    [SerializeField]
     private string platform;
 
     /// <summary>The language</summary>
+    [SerializeField]
     private string language;
 
     /// <summary>The is the first time</summary>
+    [SerializeField]
     private bool firstTime;
 
     #region Constructor
@@ -61,21 +64,13 @@ public class Settings
     public static void Load() 
     {
         string dataPath = Application.persistentDataPath + "/Data";
-
-        string platform = (LocalData.Exits("Platform", dataPath)) ? LocalData.Load<string>("Platform", dataPath) : "Computer";
-        string language = (LocalData.Exits("Language", dataPath)) ? LocalData.Load<string>("Language", dataPath) : "English";
-        bool firstTime = (LocalData.Exits("FirstTime", dataPath)) ? LocalData.Load<bool>("FirstTime", dataPath)  :  true;
-
-        Current = new Settings(platform, language, firstTime);
+        Current = (LocalData.Exits("Settings", dataPath)) ? LocalData.Load<Settings>("Settings", dataPath) : new Settings("Computer", "English", true);
     }
 
     /// <summary>Saves this instance.</summary>
     public static void Save() 
     {
         string dataPath = Application.persistentDataPath + "/Data";
-
-        LocalData.Save<string>(data: current.Platform, nameFile: "Platform", pathFile: dataPath);
-        LocalData.Save<string>(data: current.Language, nameFile: "Language", pathFile: dataPath);
-        LocalData.Save<bool>(data: current.FirstTime, nameFile: "FirstTime", pathFile: dataPath);
+        LocalData.Save<Settings>(data: current, nameFile: "Settings", pathFile: dataPath);
     }
 }

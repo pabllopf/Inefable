@@ -121,7 +121,7 @@ public class MainMenu : MonoBehaviour
         }
 
         Settings.Load();
-        Language.Translate();
+        Language.TranslateTo("English");
         Cursor.visible = false;
     }
 

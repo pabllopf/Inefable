@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 1843076038360290438}
   - component: {fileID: 8832415088722370361}
   - component: {fileID: 6852340272490418774}
-  - component: {fileID: 38256929717905807}
   m_Layer: 0
   m_Name: Portal_1
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,15 +152,3 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 8663063116809241716}
---- !u!114 &38256929717905807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8663063116809241717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdccaf9f5de485141bf68120ef48fa38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

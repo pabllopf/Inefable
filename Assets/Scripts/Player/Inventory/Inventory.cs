@@ -10,6 +10,7 @@ using Utils;
 using Utils.Data.Local;
 
 /// <summary>Manage the inventory of the player.</summary>
+[System.Serializable]
 public class Inventory : MonoBehaviour
 {
     /// <summary>The show UI</summary>
@@ -59,7 +60,7 @@ public class Inventory : MonoBehaviour
         slot.sprite = item.Icon;
         slot.GetComponentInParent<Button>().onClick.AddListener(() => { item.Use(); Quit(inventory.IndexOf(slot)); });
 
-        LocalData.Save<string>(item.NameItem, "Slot" + inventory.IndexOf(slot), Application.persistentDataPath + "/Data");
+        LocalData.Save<Slot>(new Slot(item.NameItem), "Slot" + inventory.IndexOf(slot), Application.persistentDataPath + "/Data");
         Sound.Play(AddItemSound, AudioSource);
     }
 
@@ -77,7 +78,8 @@ public class Inventory : MonoBehaviour
         {
             inventory[position].GetComponentInParent<Button>().onClick.Invoke();
             Sound.Play(UseItemSound, AudioSource);
-            LocalData.Save<string>("0", "Slot" + position, Application.persistentDataPath + "/Data");
+
+            LocalData.Save<Slot>(new Slot("0"), "Slot" + position, Application.persistentDataPath + "/Data");
         }
     }
 
@@ -147,7 +149,7 @@ public class Inventory : MonoBehaviour
 
         if (LocalData.Exits("Slot" + inventory.IndexOf(slot), path))
         {
-            string itemName = LocalData.Load<string>("Slot" + inventory.IndexOf(slot), path);
+            string itemName = LocalData.Load<Slot>("Slot" + inventory.IndexOf(slot), path).NameItem;
 
             if (!itemName.Equals("0"))
             {
@@ -161,7 +163,7 @@ public class Inventory : MonoBehaviour
         }
         else 
         {
-            LocalData.Save<string>("0", "Slot" + inventory.IndexOf(slot), path);
+            LocalData.Save<Slot>(new Slot("0"), "Slot" + inventory.IndexOf(slot), path);
         }
     }
 }

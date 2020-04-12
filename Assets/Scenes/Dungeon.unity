@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c7da9ef5a85294983f071f7f7bfcbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterTo: {fileID: 0}
   altar: {fileID: 4242139656732003432, guid: c36fbe5213dfbd145a0035f57b5cf1a3, type: 3}
   portal: {fileID: 8663063116809241717, guid: 4a37f31759b186a4d9f4f6450c1e74b4, type: 3}
 --- !u!4 &473849020

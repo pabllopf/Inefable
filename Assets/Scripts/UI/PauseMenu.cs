@@ -3,6 +3,7 @@
 // <copyright file="PauseMenu.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using Mirror;
+using MultiPlayer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -98,30 +99,12 @@ public class PauseMenu : NetworkBehaviour
     /// <summary>Exits this instance.</summary>
     public void Exit() 
     {
-        StartCoroutine(Disconnect(sceneMainMenu));
+        GameObject.FindWithTag("Network").GetComponent<Multiplayer>().GoToMainMenu();
     }
 
     public void GoToTown()
     {
-        StartCoroutine(Disconnect("Town"));
-    }
-
-    /// <summary>Disconnects this instance.</summary>
-    /// <returns>Return none</returns>
-    public IEnumerator Disconnect(string name)
-    {
-        GameObject nmObj = GameObject.Find("NetworkManager").gameObject;
-
-        //Multiplayer multiplayer  = nmObj.GetComponent<Multiplayer>();
-
-        //multiplayer.DiscoveredServers.Clear();
-        //multiplayer.NetworkDiscovery.StartDiscovery();
-
-//        multiplayer.NetworkManager.offlineScene = name;
-
-        yield return new WaitForSeconds(1f);
-  //      multiplayer.NetworkManager.StopHost();
-    //    multiplayer.NetworkManager.players.Clear();
+        GameObject.FindWithTag("Network").GetComponent<Multiplayer>().GoToMainMenu();
     }
 
     /// <summary>Awakes this instance.</summary>

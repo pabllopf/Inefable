@@ -230,7 +230,6 @@ namespace Mirror
             // setup OnSceneLoaded callback
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
-
         /// <summary>
         /// virtual so that inheriting classes' Start() can call base.Start() too
         /// </summary>

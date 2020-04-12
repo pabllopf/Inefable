@@ -20,7 +20,6 @@ public class Language : MonoBehaviour
     public static void TranslateTo(string language)
     {
         Settings.Current.Language = language;
-        Settings.Save();
         Translate();
     }
 

@@ -9,6 +9,7 @@ namespace DungeonGenerator
     using DungeonGenerator.Enum;
     using System.Collections.Generic;
     using UnityEngine;
+    using Mirror;
 
     /// <summary>Random dungeon generator.</summary>
     public class Dungeon : MonoBehaviour
@@ -70,6 +71,10 @@ namespace DungeonGenerator
 
         #endregion
 
+        /// <summary>The master to</summary>
+        [SerializeField]
+        private GameObject masterTo = null;
+
         /// <summary>The altar</summary>
         [SerializeField]
         private GameObject altar = null;
@@ -103,6 +108,10 @@ namespace DungeonGenerator
         /// <summary>Gets or sets the portal.</summary>
         /// <value>The portal.</value>
         public GameObject Portal { get => portal; set => portal = value; }
+        
+        /// <summary>Gets or sets the master to.</summary>
+        /// <value>The master to.</value>
+        public GameObject MasterTo { get => masterTo; set => masterTo = value; }
 
         #endregion
 
@@ -123,6 +132,8 @@ namespace DungeonGenerator
         /// <summary>Sets up rooms and corridors.</summary>
         private void SetUpRoomsAndCorridors()
         {
+            masterTo = new GameObject("DungeonFinal");
+
             rooms.AddRange(new Room[NumOfRooms]);
             corridors.AddRange(new Corridor[rooms.Count - 1]);
 
@@ -200,10 +211,15 @@ namespace DungeonGenerator
 
             GameObject master = new GameObject("Altar");
 
-            Instantiate(altar, center + new Vector2(1.5f, 1.5f), Quaternion.identity, master.transform);
-            Instantiate(altar, center + new Vector2(-1.5f, -1.5f), Quaternion.identity, master.transform);
-            Instantiate(altar, center + new Vector2(-1.5f, 1.5f), Quaternion.identity, master.transform);
-            Instantiate(altar, center + new Vector2(1.5f, -1.5f), Quaternion.identity, master.transform);
+            GameObject OBJ1 = Instantiate(altar, center + new Vector2(1.5f, 1.5f), Quaternion.identity, master.transform);
+            GameObject OBJ2 = Instantiate(altar, center + new Vector2(-1.5f, -1.5f), Quaternion.identity, master.transform);
+            GameObject OBJ3 = Instantiate(altar, center + new Vector2(-1.5f, 1.5f), Quaternion.identity, master.transform);
+            GameObject OBJ4 = Instantiate(altar, center + new Vector2(1.5f, -1.5f), Quaternion.identity, master.transform);
+
+            NetworkServer.Spawn(OBJ1);
+            NetworkServer.Spawn(OBJ2);
+            NetworkServer.Spawn(OBJ3);
+            NetworkServer.Spawn(OBJ4);
         }
 
         /// <summary>Prints the dungeon.</summary>
@@ -216,12 +232,15 @@ namespace DungeonGenerator
                 {
                     if (board[x, y] != Box.Empty)
                     {
-                        Instantiate(style.GetTile(board[x, y]), new Vector2(x, y), Quaternion.identity, transform);
+                        ClientScene.RegisterPrefab(style.GetTile(board[x, y]));
+                        var obj = Instantiate(style.GetTile(board[x, y]), new Vector2(x, y), Quaternion.identity, masterTo.transform);
+                        NetworkServer.Spawn(obj);
                     }
                 }
             }
 
             PrintDecoration(style);
+            PrintEnemys(style);
         }
 
         
@@ -249,8 +268,48 @@ namespace DungeonGenerator
                                         board[x, y] = Box.Empty;
                                         quantity--;
 
+                                        ClientScene.RegisterPrefab(deco.Prefab);
+
                                         GameObject obj = Instantiate(deco.Prefab, new Vector2(x, y), Quaternion.identity, master.transform);
                                         Destroy(obj.GetComponent<Decoration>());
+
+                                        NetworkServer.Spawn(obj);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+        }
+
+        private void PrintEnemys(Style style) 
+        {
+            style.Enemys
+                .FindAll(deco => (deco.MinToSpawn != 0 && deco.MaxToSpawn != 0 && deco.BoxToSpawn != Box.Empty))
+                .ForEach(deco =>
+                {
+                    int quantity = Random.Range(deco.MinToSpawn, deco.MaxToSpawn);
+                    GameObject master = new GameObject(deco.Prefab.name + " (" + quantity + ")");
+
+                    while (quantity > 0)
+                    {
+                        for (int x = 0; x < BoardWidth; x++)
+                        {
+                            for (int y = 0; y < BoardHeight; y++)
+                            {
+                                if (board[x, y] != Box.Empty)
+                                {
+                                    if (board[x, y] == deco.BoxToSpawn && Random.Range(0, 1000) == 1)
+                                    {
+                                        board[x, y] = Box.Empty;
+                                        quantity--;
+
+                                        ClientScene.RegisterPrefab(deco.Prefab);
+
+                                        GameObject obj = Instantiate(deco.Prefab, new Vector2(x, y), Quaternion.identity, master.transform);
+                                        Destroy(obj.GetComponent<Decoration>());
+
+                                        NetworkServer.Spawn(obj);
                                     }
                                 }
                             }
@@ -263,7 +322,8 @@ namespace DungeonGenerator
         {
             Vector2 posToSpawn = new Vector2(rooms[NumOfRooms - 1].XPos + rooms[NumOfRooms - 1].Width/2, rooms[NumOfRooms - 1].YPos + rooms[NumOfRooms - 1].Height/2);
             GameObject master = new GameObject("Boss");
-            Instantiate(portal, posToSpawn, Quaternion.identity, master.transform);
+            var obj = Instantiate(portal, posToSpawn, Quaternion.identity, master.transform);
+            NetworkServer.Spawn(obj);
         }
     }
 }
