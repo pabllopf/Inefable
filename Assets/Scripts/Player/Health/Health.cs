@@ -3,6 +3,7 @@
 // <copyright file="Health.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using System.Collections.Specialized;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -105,7 +106,8 @@ public class Health : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
-        health = LocalData.Load<int>("Health", Application.persistentDataPath + "/Data");
+        string dataPath = Application.persistentDataPath + "/Data";
+        health = LocalData.Exits("Health", dataPath) ? LocalData.Load<int>("Health", dataPath) : 100;
         health = (health == 0) ? 100 : health;
 
         bar = transform.Find("Interface/Bar/Health").GetComponent<Scrollbar>();

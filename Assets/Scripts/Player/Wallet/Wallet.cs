@@ -96,9 +96,10 @@ public class Wallet : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        string dataPath = Application.persistentDataPath + "/Data";
+        money = LocalData.Exits("Money", dataPath) ? LocalData.Load<int>("Money", dataPath) : 0;
 
-        money = LocalData.Load<int>("Money", Application.persistentDataPath + "/Data");
+        audioSource = GetComponent<AudioSource>();
 
         animator = transform.Find("Interface/CounterCoins").GetComponent<Animator>();
 

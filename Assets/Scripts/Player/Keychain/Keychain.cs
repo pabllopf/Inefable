@@ -107,9 +107,10 @@ public class Keychain : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        string dataPath = Application.persistentDataPath + "/Data";
+        numOfKeys = LocalData.Exits("NumOfKeys", dataPath) ? LocalData.Load<int>("NumOfKeys", dataPath) : 0;
 
-        numOfKeys = LocalData.Load<int>("NumOfKeys", Application.persistentDataPath + "/Data");
+        audioSource = GetComponent<AudioSource>();
 
         animator = transform.Find("Interface/CounterKeys").GetComponent<Animator>();
 

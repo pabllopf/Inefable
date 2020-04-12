@@ -2,11 +2,7 @@
 // <author>Pablo Perdomo Falcón</author>
 // <copyright file="Settings.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
-
-using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using Utils;
 using Utils.Data.Local;
 
 /// <summary>Save the current settings of the game.</summary>
@@ -25,6 +21,8 @@ public class Settings
     /// <summary>The is the first time</summary>
     private bool firstTime;
 
+    #region Constructor
+
     /// <summary>Initializes a new instance of the <see cref="Settings"/> class.</summary>
     /// <param name="platform">The platform.</param>
     /// <param name="language">The language.</param>
@@ -35,6 +33,8 @@ public class Settings
         this.language = language;
         this.firstTime = firstTime;
     }
+
+    #endregion
 
     #region Encapsulate Fields
 

@@ -89,11 +89,12 @@ public class Shield : MonoBehaviour
     /// <summary>Awakes this instance.</summary>
     private void Awake()
     {
+        string dataPath = Application.persistentDataPath + "/Data";
+        shield = LocalData.Exits("Shield", dataPath) ? LocalData.Load<int>("Shield", dataPath) : 0;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         audioSource = GetComponent<AudioSource>();
-
-        shield = LocalData.Load<int>("Shield", Application.persistentDataPath + "/Data");
 
         bar = transform.Find("Interface/Bar/Shield").GetComponent<Scrollbar>();
         bar.size = (float)shield * 2 / 100;
