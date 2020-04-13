@@ -25,6 +25,10 @@ namespace MultiPlayer
         [SerializeField]
         private string runwayScene = "Runway";
 
+        /// <summary>The debug mode</summary>
+        [SerializeField]
+        private bool debugMode = false;
+
         /// <summary>My ip</summary>
         private string myIP = null;
 
@@ -111,8 +115,14 @@ namespace MultiPlayer
                 Config();
                 discovery.OnServerFound.AddListener((ServerResponse response) => OnDiscoveredServer(response));
 
-                //PlayServerMode();
-                StartToHostALocalGame("Town", 1);
+                if (debugMode)
+                {
+                    PlayServerMode();
+                }
+                else 
+                {
+                    StartToHostALocalGame("Town", 1, "127.0.0.1");
+                } 
             }
         }
 
@@ -126,7 +136,7 @@ namespace MultiPlayer
         /// <summary>Starts to host a local game.</summary>
         /// <param name="onlineScene">The online scene.</param>
         /// <param name="maxConnections">The maximum connections.</param>
-        private void StartToHostALocalGame(string onlineScene, int maxConnections)
+        private void StartToHostALocalGame(string onlineScene, int maxConnections, string ip)
         {
             string port = "7779";
             foreach (ushort portt in networkManager.ports)
@@ -139,6 +149,7 @@ namespace MultiPlayer
 
             discoveredServers.Clear();
 
+            networkManager.networkAddress = ip;
             networkManager.offlineScene = runwayScene;
             networkManager.onlineScene = onlineScene;
             networkManager.maxConnections = maxConnections;
@@ -185,7 +196,7 @@ namespace MultiPlayer
 
             if (discoveredServers.Values.Count <= 0)
             {
-                StartToHostALocalGame(onlineScene, maxConnections);
+                StartToHostALocalGame(onlineScene, maxConnections, "localhost");
             }
             else
             {
@@ -201,25 +212,22 @@ namespace MultiPlayer
         /// <returns>Return none</returns>
         private IEnumerator MultiMode()
         {
-            for (int i = 0; i < networkManager.ports.Count; i++)
-            {
-                bool connectNow = false;
-                TcpClient client = new TcpClient();
-                client.Connect("83.34.56.241", networkManager.ports[i]);
+            discoveredServers.Clear();
 
-                if (client.Connected)
-                {
-                    connectNow = true;
-                    client.Close();
-                }
+            networkManager.offlineScene = "Runway";
+            networkManager.onlineScene = "Dungeon";
+            networkManager.networkAddress = "83.34.56.241";
 
-                if (connectNow) 
-                {
-                    ConnectToServerGame(networkManager.ports[i].ToString());
-                }
-            }
-            yield return null;
+            yield return new WaitForSeconds(1f);
+
+            networkManager.StopHost();
+            networkManager.players.Clear();
+
+            yield return new WaitForSeconds(1f);
+            
+            ConnectToServerGame("7777");
         }
+
 
         /// <summary>Connects to server game.</summary>
         /// <param name="port">The port.</param>
@@ -227,7 +235,7 @@ namespace MultiPlayer
         {
             foreach (ushort portt in networkManager.ports)
             {
-                if (portt.ToString() == port)
+                if (portt.ToString() == port && portt.ToString() != "7779")
                 {
                     GetComponent<TelepathyTransport>().port = portt;
                 }

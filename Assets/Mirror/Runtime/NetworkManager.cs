@@ -1280,8 +1280,8 @@ namespace Mirror
         /// <param name="conn">Connection from client.</param>
         public virtual void OnServerDisconnect(NetworkConnection conn)
         {
+            Debug.Log("OnServerDisconnect: Client disconnected.");
             NetworkServer.DestroyPlayerForConnection(conn);
-            if (LogFilter.Debug) Debug.Log("OnServerDisconnect: Client disconnected.");
         }
 
         /// <summary>
