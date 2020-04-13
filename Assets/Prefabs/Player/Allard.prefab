@@ -4896,7 +4896,6 @@ GameObject:
   - component: {fileID: 7893793977587869500}
   - component: {fileID: 3568660234882172298}
   - component: {fileID: 1441808695091873302}
-  - component: {fileID: 924066699069988325}
   - component: {fileID: 3317400050954332658}
   - component: {fileID: 3687268734229218387}
   - component: {fileID: 3670521213505354428}
@@ -5247,18 +5246,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useItemSound: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
   addItemSound: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
---- !u!114 &924066699069988325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303183915456222042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4bf92afa1a16146bd8c2f297bc5ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!68 &3317400050954332658
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -5351,6 +5338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3506e0b347d105945b4d7d696b74ebe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptClip: {fileID: 8300000, guid: 713c874160562da418037958b7cfffc7, type: 3}
+  cancelClip: {fileID: 8300000, guid: 9d255dbf95218104a87ea1459a9c60aa, type: 3}
 --- !u!1 &6348114614936214077
 GameObject:
   m_ObjectHideFlags: 0

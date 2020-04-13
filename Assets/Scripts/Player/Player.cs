@@ -191,6 +191,24 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            if (Input.touchCount > 0)
+            {
+                Settings.Current.Platform = "Mobile";
+                return;
+            }
+
+            if (Input.GetAxisRaw("LeftJoystickX") != 0 || Input.GetAxisRaw("LeftJoystickY") != 0 || Input.GetButton("ButtonA") || Input.GetButton("ButtonB") || Input.GetButton("ButtonY") || Input.GetButton("ButtonX") || Input.GetButton("ButtonStart"))
+            {
+                Settings.Current.Platform = "Xbox";
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.D))
+            {
+                Settings.Current.Platform = "Computer";
+                return;
+            }
+
             if (Settings.Current.Platform.Equals("Mobile")) 
             {
                 if (!mobileUI.activeSelf) 
