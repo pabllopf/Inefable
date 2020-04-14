@@ -6,14 +6,12 @@ namespace Utils.Data.Cloud
 {
     using System.IO;
     using System.Text;
-    using Dropbox.Api;
-    using Dropbox.Api.Files;
     using UnityEngine;
 
     /// <summary>Manage the cloud data.</summary>
     public class CloudData
     {
-        /// <summary>Save data in the cloud.</summary>
+        /*/// <summary>Save data in the cloud.</summary>
         /// <typeparam name="T">Data type</typeparam>
         /// <param name="data">Data to save</param>
         /// <param name="nameFile">Name file (default .JSON extension)</param>
@@ -33,6 +31,6 @@ namespace Utils.Data.Cloud
         public static T LoadOfDropbox<T>(string nameFile, string pathFile, User user)
         {
             return JsonUtility.FromJson<T>(new DropboxClient(user.AccessToken).Files.DownloadAsync(pathFile + "/" + nameFile + ".json").Result.GetContentAsStringAsync().Result);
-        }
+        }*/
     }
 }
