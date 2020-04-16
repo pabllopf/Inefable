@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: PotionYellow
   description: 0
-  cost: 10
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 0
-  maxNumToSpawn: 0
-  saveInInventory: 1
-  appearsInDungeon: 0
+  prefab: {fileID: 2654193044966584634, guid: 94e9c871c0167e54e9627844adcda37a, type: 3}
+  cost: 100
+  saveInInventory: 0
   icon: {fileID: -9165417312161502194, guid: 25305825eab44434693293f7ffa8c632, type: 3}
-  boxToSpawn: 0
   action: 5
   controller: {fileID: 9100000, guid: 448b1018dbad8a343860df06612d9d1f, type: 2}
-  prefab: {fileID: 2654193044966584634, guid: 94e9c871c0167e54e9627844adcda37a, type: 3}

@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: PotionRed
   description: 0
-  cost: 10
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 0
-  maxNumToSpawn: 0
+  prefab: {fileID: 1865404144754482058, guid: a34297c3630bcd94fb3566497cb6e44a, type: 3}
+  cost: 100
   saveInInventory: 1
-  appearsInDungeon: 0
   icon: {fileID: -6772615580128998071, guid: e3af0daf6bf60294b92ab1980a4a494a, type: 3}
-  boxToSpawn: 0
   action: 2
   controller: {fileID: 9100000, guid: f2cf6badf89080d4bb774cca02ebc2aa, type: 2}
-  prefab: {fileID: 1865404144754482058, guid: a34297c3630bcd94fb3566497cb6e44a, type: 3}

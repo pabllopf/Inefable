@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: Key
   description: 0
-  cost: 10
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 1
-  maxNumToSpawn: 2
+  prefab: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}
+  cost: 100
   saveInInventory: 0
-  appearsInDungeon: 1
   icon: {fileID: -2493162504850783776, guid: 2ab777c10a11e224f8931f8a9e6e244d, type: 3}
-  boxToSpawn: 1
   action: 4
   controller: {fileID: 9100000, guid: 5a32a441c3dbcf547b9167c3bd9330a2, type: 2}
-  prefab: {fileID: 1924541910963658, guid: 5e91d2b83ecb02445849e52cef5d9800, type: 3}

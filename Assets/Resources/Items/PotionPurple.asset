@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: PotionPurple
   description: 0
-  cost: 10
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 0
-  maxNumToSpawn: 0
+  prefab: {fileID: 590371459442855282, guid: 2c7759b72a14147499a061e8850bc1fc, type: 3}
+  cost: 52
   saveInInventory: 1
-  appearsInDungeon: 0
   icon: {fileID: 4002815236019709899, guid: d22368a84ef2ad942b38c394ef436018, type: 3}
-  boxToSpawn: 0
   action: 6
   controller: {fileID: 9100000, guid: 16895212951076c449485ec177437b85, type: 2}
-  prefab: {fileID: 590371459442855282, guid: 2c7759b72a14147499a061e8850bc1fc, type: 3}

@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem: PotionBlue
   description: 0
-  cost: 10
-  probabilityToSpawn: 0.5
-  minNumToSpawn: 0
-  maxNumToSpawn: 0
+  prefab: {fileID: 8871127516767024113, guid: ef5116a5366578e40b11b0f37c634f55, type: 3}
+  cost: 100
   saveInInventory: 1
-  appearsInDungeon: 0
   icon: {fileID: 8249043904041728345, guid: d731e245c11ab0e46b8d66a572c84cbd, type: 3}
-  boxToSpawn: 0
   action: 1
   controller: {fileID: 9100000, guid: 91b3a51e0eb797c409ad942473377b1f, type: 2}
-  prefab: {fileID: 8871127516767024113, guid: ef5116a5366578e40b11b0f37c634f55, type: 3}

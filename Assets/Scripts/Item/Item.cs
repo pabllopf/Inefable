@@ -4,9 +4,12 @@
 //------------------------------------------------------------------------------------------
 using UnityEditor;
 using UnityEngine;
+using Utils.Data.Cloud;
+using Utils.Data.Local;
 
 /// <summary>Item of the game. </summary>
 [CreateAssetMenu(fileName = "New Item", menuName = "Game/New Item")]
+[System.Serializable]
 public class Item : ScriptableObject
 {
     [Header("Name:")]
@@ -120,6 +123,9 @@ public class Item : ScriptableObject
             string assetPath = AssetDatabase.GetAssetPath(GetInstanceID());
             AssetDatabase.RenameAsset(assetPath, NameItem);
             AssetDatabase.SaveAssets();
+
+            DataItem data = new DataItem(nameItem, description, cost, saveInInventory, action);
+            LocalData.Save<DataItem>(data, name, Application.persistentDataPath + "/Resources");
         };
     }
 #endif

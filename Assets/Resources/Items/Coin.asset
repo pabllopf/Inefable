@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Coin
   m_EditorClassIdentifier: 
   nameItem: Coin
-  description: 0
+  description: 1
   prefab: {fileID: 2743327116594969936, guid: 5c51482f3fab0784db8711b2026256af, type: 3}
   cost: 0
   saveInInventory: 0
