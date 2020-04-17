@@ -15,7 +15,7 @@ MonoBehaviour:
   nameItem: PotionBlue
   description: 0
   prefab: {fileID: 8871127516767024113, guid: ef5116a5366578e40b11b0f37c634f55, type: 3}
-  cost: 100
+  cost: 24
   saveInInventory: 1
   icon: {fileID: 8249043904041728345, guid: d731e245c11ab0e46b8d66a572c84cbd, type: 3}
   action: 1

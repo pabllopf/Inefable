@@ -15,7 +15,7 @@ MonoBehaviour:
   nameItem: PotionYellow
   description: 0
   prefab: {fileID: 2654193044966584634, guid: 94e9c871c0167e54e9627844adcda37a, type: 3}
-  cost: 100
+  cost: 25
   saveInInventory: 0
   icon: {fileID: -9165417312161502194, guid: 25305825eab44434693293f7ffa8c632, type: 3}
   action: 5

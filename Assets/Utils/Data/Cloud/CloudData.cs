@@ -12,6 +12,7 @@ namespace Utils.Data.Cloud
     using System.Linq;
     using System.Text;
     using UnityEngine;
+    using Utils.Debug;
 
     /// <summary>Manage the cloud data.</summary>
     public class CloudData
@@ -50,10 +51,10 @@ namespace Utils.Data.Cloud
 
             for (int i = 0; i < listFiles.Count; i++)
             {
-                FileStream file = File.OpenRead(listFiles[i]);
-                client.Files.UploadAsync(pathOfCloud + "/" + Path.GetFileName(listFiles[i]), WriteMode.Overwrite.Instance, body: file);
-                file.Close();
+                string pathFileInTheCloud = pathOfCloud + "/" + new FileInfo(listFiles[i]).Name;
+                client.Files.UploadAsync(pathFileInTheCloud, WriteMode.Overwrite.Instance, body: new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText(listFiles[i]))));
             }
+            Console.Print("Updated folder with: " + listFiles.Count + " elements.");
         }
 
         /// <summary>Loads the of dropbox a folder.</summary>
@@ -86,6 +87,17 @@ namespace Utils.Data.Cloud
                 stream.CopyTo(file);
                 file.Close();
             }
+        }
+
+        /// <summary>Numbers the of files in folder of dropbox.</summary>
+        /// <param name="path">The path.</param>
+        /// <returns>Return num of files in folder</returns>
+        public static int NumOfFilesInFolderOfDropbox(string pathOfCloud, User user, List<string> extensions) 
+        {
+            DropboxClient client = new DropboxClient(user.AccessToken);
+            ListFolderResult cloudList = client.Files.ListFolderAsync(pathOfCloud, true).Result;
+            List<Metadata> listFiles = cloudList.Entries.ToList().FindAll(i => i.IsFile).FindAll(i => extensions.Any(j => i.Name.Contains(j)));
+            return listFiles.Count;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Utils.Data.Cloud
         private string password = string.Empty;
 
         /// <summary>The access token</summary>
-        private string accessToken = "jqOpre72KvAAAAAAAAAAD3N52Cpc0--0EeBdyhz_NvEmLBqCViN-fI6dqpgsGBz-";
+        private string accessToken = "jqOpre72KvAAAAAAAAAAEFcQXuC15pXVIyJqpvis-9vLY48JLA3vz81eba4rTIR0";
 
         /// <summary>Initializes a new instance of the <see cref="User"/> class.</summary>
         /// <param name="name">The name.</param>
@@ -34,13 +34,13 @@ namespace Utils.Data.Cloud
         {
             this.name = name;
             this.password = password;
-            this.accessToken = "jqOpre72KvAAAAAAAAAAD3N52Cpc0--0EeBdyhz_NvEmLBqCViN-fI6dqpgsGBz-";
+            this.accessToken = "jqOpre72KvAAAAAAAAAAEFcQXuC15pXVIyJqpvis-9vLY48JLA3vz81eba4rTIR0";
         }
 
         /// <summary>Initializes a new instance of the <see cref="User"/> class.</summary>
         public User()
         {
-            this.accessToken = "jqOpre72KvAAAAAAAAAAD3N52Cpc0--0EeBdyhz_NvEmLBqCViN-fI6dqpgsGBz-";
+            this.accessToken = "jqOpre72KvAAAAAAAAAAEFcQXuC15pXVIyJqpvis-9vLY48JLA3vz81eba4rTIR0";
         }
 
         /// <summary>Gets or sets the name.</summary>

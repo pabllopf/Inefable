@@ -18,11 +18,13 @@ public class Testt : MonoBehaviour
 
     private void Start()
     {
-        //AutoUpdate.Now();
+        
+
+        
 
         //Item itemInstance = ScriptableObject.CreateInstance("Item") as Item;
         //DataItem dataItem = LocalData.Load<DataItem>(item.NameItem, Application.persistentDataPath + "/Resources");
-        
+
         //itemInstance.NameItem = dataItem.NameItem;
         //text.text = itemInstance.NameItem;
 

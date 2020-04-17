@@ -125,7 +125,7 @@ public class Item : ScriptableObject
             AssetDatabase.SaveAssets();
 
             DataItem data = new DataItem(nameItem, description, cost, saveInInventory, action);
-            LocalData.Save<DataItem>(data, name, Application.persistentDataPath + "/Resources");
+            LocalData.Save<DataItem>(data, name, Application.persistentDataPath + "/resources");
         };
     }
 #endif

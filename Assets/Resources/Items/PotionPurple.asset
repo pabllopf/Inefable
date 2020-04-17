@@ -15,7 +15,7 @@ MonoBehaviour:
   nameItem: PotionPurple
   description: 0
   prefab: {fileID: 590371459442855282, guid: 2c7759b72a14147499a061e8850bc1fc, type: 3}
-  cost: 52
+  cost: 31
   saveInInventory: 1
   icon: {fileID: 4002815236019709899, guid: d22368a84ef2ad942b38c394ef436018, type: 3}
   action: 6

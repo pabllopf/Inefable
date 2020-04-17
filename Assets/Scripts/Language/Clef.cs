@@ -125,4 +125,22 @@ public enum Clef
     
     /// <summary>The a41</summary>
     A41,
+    A42,
+    A43,
+    A44,
+    A45,
+    A46,
+    A47,
+    A48,
+    A49,
+    A50,
+    A51,
+    A52,
+    A53,
+    A54,
+    A55,
+    A56,
+    A57,
+    A58,
+    A59,
 }
