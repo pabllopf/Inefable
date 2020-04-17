@@ -12,7 +12,6 @@ namespace Utils.Data.Cloud
     using System.Text;
     using System.Threading.Tasks;
     using UnityEngine;
-    using Utils.Debug;
 
     /// <summary>Manage the cloud data.</summary>
     public class CloudData
@@ -53,25 +52,22 @@ namespace Utils.Data.Cloud
             {
                 var task = Task.Run(() => Upload(client, pathOfCloud, new FileInfo(listFiles[i]).Name, listFiles[i]));
                 task.Wait();
-                Console.Print("File uploaded: " + pathOfCloud + "/" + new FileInfo(listFiles[i]).Name);
+                Debug.Log("File uploaded: " + pathOfCloud + "/" + new FileInfo(listFiles[i]).Name);
             }
 
-            Console.Print("Finish to upload " + listFiles.Count + " files.");
+            Debug.Log("Finish to upload " + listFiles.Count + " files.");
         }
 
         /// <summary>Uploads the specified DBX.</summary>
         /// <param name="dbx">The DBX.</param>
         /// <param name="folder">The folder.</param>
         /// <param name="file">The file.</param>
-        /// <param name="content">The content.</param>
-        public static async Task Upload(DropboxClient dbx, string folder, string file, string content)
+        /// <param name="pathFile">The content.</param>
+        public static async Task Upload(DropboxClient dbx, string folder, string file, string pathFile)
         {
-            using (var mem = new MemoryStream(Encoding.UTF8.GetBytes(content)))
+            using (var mem = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText(pathFile))))
             {
-                var updated = await dbx.Files.UploadAsync(
-                    folder + "/" + file,
-                    WriteMode.Overwrite.Instance,
-                    body: mem);
+                var updated = await dbx.Files.UploadAsync(folder + "/" + file, WriteMode.Overwrite.Instance, body: mem);
             }
         }
 

@@ -6,7 +6,7 @@ namespace Utils.Data.Local
 {
     using System.IO;
     using System.Text;
-    using Newtonsoft.Json;
+    using UnityEngine;
     using Utils.Security;
 
     /// <summary>Manage data</summary>
@@ -23,7 +23,7 @@ namespace Utils.Data.Local
             {
                 Directory.CreateDirectory(pathFile);
             }
-            File.WriteAllText(pathFile + "/" + nameFile + ".json", JsonConvert.SerializeObject(data), Encoding.UTF8);
+            File.WriteAllText(pathFile + "/" + nameFile + ".json", JsonUtility.ToJson(data), Encoding.UTF8);
         }
 
         /// <summary>Saves the specified data in a file.</summary>
@@ -39,7 +39,7 @@ namespace Utils.Data.Local
                 Directory.CreateDirectory(pathFile);
             }
 
-            File.WriteAllText(pathFile + "/" + nameFile + ".json", encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data)) : JsonConvert.SerializeObject(data));
+            File.WriteAllText(pathFile + "/" + nameFile + ".json", encrypted ? Crypto.Encrypt(JsonUtility.ToJson(data)) : JsonUtility.ToJson(data));
         }
 
         /// <summary>Saves the specified data in a file.</summary>
@@ -56,7 +56,7 @@ namespace Utils.Data.Local
                 Directory.CreateDirectory(pathFile);
             }
 
-            File.WriteAllText(pathFile + "/" + nameFile + ".json", encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data), key) : JsonConvert.SerializeObject(data));
+            File.WriteAllText(pathFile + "/" + nameFile + ".json", encrypted ? Crypto.Encrypt(JsonUtility.ToJson(data), key) : JsonUtility.ToJson(data));
         }
 
         /// <summary>Saves the specified data.</summary>
@@ -72,7 +72,7 @@ namespace Utils.Data.Local
                 Directory.CreateDirectory(pathFile);
             }
 
-            File.WriteAllText(pathFile + "/" + nameFile + extension, JsonConvert.SerializeObject(data));
+            File.WriteAllText(pathFile + "/" + nameFile + extension, JsonUtility.ToJson(data));
         }
 
         /// <summary>Saves the specified data.</summary>
@@ -89,7 +89,7 @@ namespace Utils.Data.Local
                 Directory.CreateDirectory(pathFile);
             }
 
-            File.WriteAllText(pathFile + "/" + nameFile + extension, encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data)) : JsonConvert.SerializeObject(data));
+            File.WriteAllText(pathFile + "/" + nameFile + extension, encrypted ? Crypto.Encrypt(JsonUtility.ToJson(data)) : JsonUtility.ToJson(data));
         }
 
         /// <summary>Saves the specified data.</summary>
@@ -107,7 +107,7 @@ namespace Utils.Data.Local
                 Directory.CreateDirectory(pathFile);
             }
 
-            File.WriteAllText(pathFile + "/" + nameFile + extension, encrypted ? Crypto.Encrypt(JsonConvert.SerializeObject(data), key) : JsonConvert.SerializeObject(data));
+            File.WriteAllText(pathFile + "/" + nameFile + extension, encrypted ? Crypto.Encrypt(JsonUtility.ToJson(data), key) : JsonUtility.ToJson(data));
         }
        
         /// <summary>Loads the specified name file.</summary>
@@ -117,7 +117,7 @@ namespace Utils.Data.Local
         /// <returns>Return the data in the correct format</returns>
         public static T Load<T>(string nameFile, string pathFile) 
         {
-            return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathFile + "/" + nameFile + ".json"));
+            return JsonUtility.FromJson<T>(File.ReadAllText(pathFile + "/" + nameFile + ".json"));
         }
 
         /// <summary>Loads the specified name file.</summary>
@@ -128,7 +128,7 @@ namespace Utils.Data.Local
         /// <returns>Return the data in the correct format</returns>
         public static T Load<T>(string nameFile, string pathFile, bool encrypted)
         {
-            return JsonConvert.DeserializeObject<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + ".json")) : File.ReadAllText(pathFile + "/" + nameFile + ".json"));
+            return JsonUtility.FromJson<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + ".json")) : File.ReadAllText(pathFile + "/" + nameFile + ".json"));
         }
 
         /// <summary>Loads the specified name file.</summary>
@@ -140,7 +140,7 @@ namespace Utils.Data.Local
         /// <returns>Return the data in the correct format</returns>
         public static T Load<T>(string nameFile, string pathFile, bool encrypted, string key)
         {
-            return JsonConvert.DeserializeObject<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + ".json"), key) : File.ReadAllText(pathFile + "/" + nameFile + ".json"));
+            return JsonUtility.FromJson<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + ".json"), key) : File.ReadAllText(pathFile + "/" + nameFile + ".json"));
         }
 
         /// <summary>Loads the specified name file.</summary>
@@ -151,7 +151,7 @@ namespace Utils.Data.Local
         /// <returns>Return the data in the correct format</returns>
         public static T Load<T>(string nameFile, string pathFile, string extension)
         {
-            return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathFile + "/" + nameFile + extension));
+            return JsonUtility.FromJson<T>(File.ReadAllText(pathFile + "/" + nameFile + extension));
         }
 
         /// <summary>Loads the specified name file.</summary>
@@ -163,7 +163,7 @@ namespace Utils.Data.Local
         /// <returns>Return the data in the correct format</returns>
         public static T Load<T>(string nameFile, string pathFile, string extension, bool encrypted)
         {
-            return JsonConvert.DeserializeObject<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + extension)) : File.ReadAllText(pathFile + "/" + nameFile + extension));
+            return JsonUtility.FromJson<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + extension)) : File.ReadAllText(pathFile + "/" + nameFile + extension));
         }
 
         /// <summary>Loads the specified name file.</summary>
@@ -176,7 +176,7 @@ namespace Utils.Data.Local
         /// <returns>Return the data in the correct format</returns>
         public static T Load<T>(string nameFile, string pathFile, string extension, bool encrypted, string key)
         {
-            return JsonConvert.DeserializeObject<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + extension)) : File.ReadAllText(pathFile + "/" + nameFile + extension));
+            return JsonUtility.FromJson<T>(encrypted ? Crypto.Decrypt(File.ReadAllText(pathFile + "/" + nameFile + extension)) : File.ReadAllText(pathFile + "/" + nameFile + extension));
         }
 
         /// <summary>Exit the specified name file.</summary>

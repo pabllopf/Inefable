@@ -3,11 +3,9 @@
 // <copyright file="UpdaterUI.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Utils.Data.Cloud;
 using Utils.Updater;
 
 /// <summary>Auto update interface</summary>
@@ -44,27 +42,27 @@ public class UpdaterUI : MonoBehaviour
     /// <summary>Gets or sets the message.</summary>
     /// <value>The message.</value>
     public Text Message { get => message; set => message = value; }
-    
+
     /// <summary>Gets or sets the load bar.</summary>
     /// <value>The load bar.</value>
     public Scrollbar LoadBar { get => loadBar; set => loadBar = value; }
-    
+
     /// <summary>Gets or sets the checking update.</summary>
     /// <value>The checking update.</value>
     public Clef CheckingUpdate { get => checkingUpdate; set => checkingUpdate = value; }
-    
+
     /// <summary>Gets or sets the main menu scene.</summary>
     /// <value>The main menu scene.</value>
     public string MainMenuScene { get => mainMenuScene; set => mainMenuScene = value; }
-    
+
     /// <summary>Gets or sets the updated.</summary>
     /// <value>The updated.</value>
     public Clef Updated { get => updated; set => updated = value; }
-    
+
     /// <summary>Gets or sets the file sentence.</summary>
     /// <value>The file sentence.</value>
     public Clef FileSentence { get => fileSentence; set => fileSentence = value; }
-    
+
     /// <summary>Gets or sets the finish update.</summary>
     /// <value>The finish update.</value>
     public Clef FinishUpdate { get => finishUpdate; set => finishUpdate = value; }
@@ -73,72 +71,58 @@ public class UpdaterUI : MonoBehaviour
     /// <value>The load bar text.</value>
     public Text LoadBarText { get => loadBarText; set => loadBarText = value; }
 
-    /// <summary>Awakes this instance.</summary>
-    private void Awake()
-    {
-        Settings.Load();
-        Language.TranslateTo("Spanish");
-    }
-
     /// <summary>Starts this instance.</summary>
-    private void Start()
+    public void Start()
     {
-        if (!AutoUpdate.HaveConnection)
+        message = GameObject.Find("Interface/Panel/Start/Back/Message").GetComponent<Text>();
+        loadBar = GameObject.Find("Interface/Panel/Start/Scrollbar").GetComponent<Scrollbar>();
+        loadBarText = GameObject.Find("Interface/Panel/Start/Scrollbar/SlidingArea/Process").GetComponent<Text>();
+
+        AutoUpdate autoUpdate = new AutoUpdate("/resources", Application.persistentDataPath);
+
+        if (autoUpdate.NeedUpdate)
         {
-            SceneManager.LoadScene(mainMenuScene);
+            StartCoroutine(UpdateNow(autoUpdate));
         }
         else 
         {
-            message = GameObject.Find("Interface/Panel/Start/Back/Message").GetComponent<Text>();
-            loadBar = GameObject.Find("Interface/Panel/Start/Scrollbar").GetComponent<Scrollbar>();
-            loadBarText = GameObject.Find("Interface/Panel/Start/Scrollbar/SlidingArea/Process").GetComponent<Text>();
-            StartCoroutine(CheckUpdate());
+            SceneManager.LoadScene(mainMenuScene);
         }
     }
 
-    /// <summary>Checks the update.</summary>
+    /// <summary>Updates the now.</summary>
+    /// <param name="autoUpdate">The automatic update.</param>
     /// <returns>Return none</returns>
-    private IEnumerator CheckUpdate() 
+    private IEnumerator UpdateNow(AutoUpdate autoUpdate) 
     {
-        bool update = AutoUpdate.CheckUpdate("/resources", Application.persistentDataPath);
-        message.text = Language.GetSentence(checkingUpdate);
+        message.text = "Checking Update";
 
         yield return new WaitForSeconds(1f);
 
-        if (update)
+        float totalFile = autoUpdate.NumOfFiles("/resources");
+        float total = totalFile;
+        float numFile = 1;
+
+        while (total > 0)
         {
-            message.text = Language.GetSentence(updated);
+            message.text = "File " + numFile + " of " + totalFile;
+
+            loadBar.size = numFile / totalFile;
+            loadBarText.text = (int)((numFile / totalFile) * 100) + "%";
+
+            numFile++;
+            total--;
 
             yield return new WaitForSeconds(0.5f);
-
-            SceneManager.LoadScene(mainMenuScene);
         }
-        else 
-        {
-            float totalFile = AutoUpdate.NumOfFiles("/resources");
-            float total = totalFile;
-            float numFile = 1;
 
-            while (total > 0) 
-            {
-                message.text = Language.GetSentence(fileSentence) + ": " + numFile + " of " + totalFile;
-                loadBar.size = (numFile / totalFile);
-                loadBarText.text = (int)((numFile / totalFile) * 100) + "%";
-
-                numFile++;
-                total--;
-
-                yield return new WaitForSeconds(0.5f);
-            }
-
-            message.text = Language.GetSentence(finishUpdate);
-
-            yield return new WaitForSeconds(0.5f);
-
-            AutoUpdate.Now("/resources", Application.persistentDataPath);
-        }
+        message.text = "Finishing update.. ";
 
         yield return new WaitForSeconds(0.5f);
+
+        autoUpdate.Now();
+
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(mainMenuScene);
     }

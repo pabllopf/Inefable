@@ -4,106 +4,134 @@
 //------------------------------------------------------------------------------------------
 namespace Utils.Updater
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Net;
+    using UnityEngine;
     using Utils.Data.Cloud;
     using Utils.Data.Local;
-    using Newtonsoft.Json;
-    using Utils.Debug;
-    using System.Net.NetworkInformation;
-    using System.IO;
-
+    
     /// <summary>Auto update necessary data.</summary>
-    public static class AutoUpdate
+    public class AutoUpdate
     {
         /// <summary>The default URL</summary>
-        private static string url = "https://pabllopf.github.io/Game-Inefable/version.html";
+        private string url = "https://pabllopf.github.io/Game-Inefable/version.html";
+
+        /// <summary>The name folder</summary>
+        private string nameFolder = string.Empty;
+
+        /// <summary>The path folder</summary>
+        private string pathFolder = string.Empty;
+
+        /// <summary>Initializes a new instance of the <see cref="AutoUpdate"/> class.</summary>
+        /// <param name="nameFolder">The name folder.</param>
+        /// <param name="pathFolder">The path folder.</param>
+        /// <param name="url">The URL.</param>
+        public AutoUpdate(string nameFolder, string pathFolder, string url)
+        {
+            this.url = url;
+            this.nameFolder = nameFolder;
+            this.pathFolder = pathFolder;
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="AutoUpdate"/> class.</summary>
+        /// <param name="nameFolder">The name folder.</param>
+        /// <param name="pathFolder">The path folder.</param>
+        public AutoUpdate(string nameFolder, string pathFolder)
+        {
+            this.nameFolder = nameFolder;
+            this.pathFolder = pathFolder;
+        }
 
         /// <summary>Gets or sets the url.</summary>
         /// <value>The url.</value>
-        public static string Url { get => url; set => url = value; }
-        
-        /// <summary>Gets a value indicating whether [have connection].</summary>
-        /// <value>
-        /// <c>true</c> if [have connection]; otherwise, <c>false</c>.</value>
-        public static bool HaveConnection => (new Ping().Send("www.google.com.mx").Status == IPStatus.Success) ? true : false;
+        public string Url { get => url; set => url = value; }
 
-        /// <summary>Gets the last version.</summary>
-        /// <value>The last version.</value>
-        private static Version LastVersion => JsonConvert.DeserializeObject<Version>(new WebClient().DownloadString(url));
+        /// <summary>Gets or sets the name folder.</summary>
+        /// <value>The name folder.</value>
+        public string NameFolder { get => nameFolder; set => nameFolder = value; }
+
+        /// <summary>Gets or sets the path folder.</summary>
+        /// <value>The path folder.</value>
+        public string PathFolder { get => pathFolder; set => pathFolder = value; }
+
+        /// <summary>Gets a value indicating whether [need update].</summary>
+        /// <value>
+        /// <c>true</c> if [need update]; otherwise, <c>false</c>.</value>
+        public bool NeedUpdate => (LastVersion().Id > CurrentVersion().Id) ? true : false;
 
         /// <summary>Update now the config data of game.</summary>
-        public static void Now(string nameFolder, string pathFolder)
+        public void Now()
         {
-            Console.Print("Auto Updater Active.");
-            if (HaveConnection)
+            if (HaveInternetConnection())
             {
-                Console.Print("Have Connection.");
-                if (LastVersion.Id > CurrentVersion(nameFolder, pathFolder).Id)
+                if (NeedUpdate)
                 {
-                    Console.Print("Loading Files Of Cloud.");
-                    LoadDataOfCloud(nameFolder, pathFolder);
+                    LoadDataOfCloud();
                 }
             }
         }
 
-        /// <summary>Checks the update.</summary>
-        /// <param name="nameFolder">The name folder.</param>
-        /// <param name="pathFolder">The path folder.</param>
-        /// <returns>Return is has update.</returns>
-        public static bool CheckUpdate(string nameFolder, string pathFolder)
+        /// <summary>Haves the internet connection.</summary>
+        /// <returns>Return true if it is connected</returns>
+        public bool HaveInternetConnection()
         {
-            if (HaveConnection)
+            try
             {
-                if (LastVersion.Id > CurrentVersion(nameFolder, pathFolder).Id)
-                {
-                    return false;
-                }
-                else 
+                using (new WebClient().OpenRead("http://google.com/generate_204"))
                 {
                     return true;
                 }
             }
-            return true;
+            catch
+            {
+                return false;
+            }
         }
 
+
         /// <summary>Numbers the of files.</summary>
+        /// <param name="pathCloud">The path cloud.</param>
         /// <returns></returns>
-        public static int NumOfFiles(string pathCloudFolder) 
+        public int NumOfFiles(string pathCloud) 
         {
-            return CloudData.NumOfFilesInFolderOfDropbox(pathCloudFolder, new User(), new List<string>(new string[] { ".json", ".csv" }));
+            return CloudData.NumOfFilesInFolderOfDropbox(pathCloud, new User(), new List<string>(new string[] { ".json", ".csv" }));
+        }
+
+        /// <summary>Lasts the version.</summary>
+        /// <returns>Return the last version.</returns>
+        public Version LastVersion()
+        {
+            return JsonUtility.FromJson<Version>(new WebClient().DownloadString(url));
         }
 
         /// <summary>Currents the version.</summary>
-        /// <returns>Return the current version</returns>
-        private static Version CurrentVersion(string nameFolder, string pathFolder) 
+        /// <returns>Return the current version.</returns>
+        public Version CurrentVersion()
         {
-            Version result;
-            string path = pathFolder;
-
-            if (LocalData.Exits("version", path))
+            if (LocalData.Exits("version", pathFolder))
             {
-                result = LocalData.Load<Version>("version", path);
+                return LocalData.Load<Version>("version", pathFolder);
             }
-            else 
+            else
             {
-                result = new Version(0.01, "");
-                LocalData.Save<Version>(result, "version", path);
+                Version result = new Version(0.01, string.Empty);
+                LocalData.Save<Version>(result, "version", pathFolder);
+                return result;
             }
-
-            return result;
         }
 
         /// <summary>Loads the data of cloud.</summary>
-        private static void LoadDataOfCloud(string nameFolder, string pathFolder) 
+        private void LoadDataOfCloud()
         {
-            if (Directory.Exists(pathFolder + "/" + nameFolder)) 
+            if (Directory.Exists(pathFolder + "/" + nameFolder))
             {
                 Directory.Delete(pathFolder + "/" + nameFolder, true);
             }
 
             CloudData.LoadOfDropboxAFolder(nameFolder, pathFolder, new User(), new List<string>(new string[] { ".json", ".csv" }));
-            LocalData.Save<Version>(LastVersion, "version", pathFolder);
+            LocalData.Save<Version>(LastVersion(), "version", pathFolder);
         }
     }
 }

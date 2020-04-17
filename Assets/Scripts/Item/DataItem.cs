@@ -5,21 +5,27 @@
 using UnityEngine;
 
 /// <summary>Data Item of the game</summary>
+[System.Serializable]
 public class DataItem 
 {
     /// <summary>The name</summary>
+    [SerializeField]
     private string nameItem = "New Item";
 
     /// <summary>The description</summary>
+    [SerializeField]
     private Clef description = Clef.A1;
 
     /// <summary>The cost</summary>
+    [SerializeField]
     private int cost = 0;
 
     /// <summary>The save in inventory</summary>
+    [SerializeField]
     private bool saveInInventory = false;
 
     /// <summary>The action</summary>
+    [SerializeField]
     private ActionType action = ActionType.Nothing;
 
     public DataItem(string nameItem, Clef description, int cost, bool saveInInventory, ActionType action)

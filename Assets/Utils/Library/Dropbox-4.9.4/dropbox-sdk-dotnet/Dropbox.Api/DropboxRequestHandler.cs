@@ -199,7 +199,6 @@ namespace Dropbox.Api
         /// <exception cref="ApiException{TError}">
         /// This exception is thrown when there is an error reported by the server.
         /// </exception>
-        [Obsolete]
         async Task<TResponse> ITransport.SendUploadRequestAsync<TRequest, TResponse, TError>(
             TRequest request,
             Stream body,

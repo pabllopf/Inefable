@@ -14,7 +14,7 @@ namespace Utils.Data.Cloud
         private string password = string.Empty;
 
         /// <summary>The access token</summary>
-        private string accessToken = "jqOpre72KvAAAAAAAAAAEf_WNkvkWk_WGg8amo2OTIf6WqOFp-IYPxqo68Baieqj";
+        private string accessToken = "jqOpre72KvAAAAAAAAAAFHzQGFGyrceq37MEZ1roiDyfvzEtLRyn65gfmXjzF3BA";
 
         /// <summary>Initializes a new instance of the <see cref="User"/> class.</summary>
         /// <param name="name">The name.</param>

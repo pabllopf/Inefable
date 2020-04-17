@@ -6,12 +6,11 @@
 
 namespace Dropbox.Api.Stone
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-
-    using Newtonsoft.Json;
 
     /// <summary>
     /// Parse and read from json string.
