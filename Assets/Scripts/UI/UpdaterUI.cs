@@ -3,9 +3,11 @@
 // <copyright file="UpdaterUI.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
 //------------------------------------------------------------------------------------------
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Utils.Data.Cloud;
 using Utils.Updater;
 
 /// <summary>Auto update interface</summary>

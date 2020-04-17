@@ -6,11 +6,11 @@ namespace Utils.Data.Cloud
 {
     using Dropbox.Api;
     using Dropbox.Api.Files;
-    using Ionic.Zip;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using UnityEngine;
     using Utils.Debug;
 
@@ -43,7 +43,7 @@ namespace Utils.Data.Cloud
         /// <param name="pathOfCloud">The path of cloud.</param>
         /// <param name="user">The user.</param>
         /// <param name="extensions">The extensions.</param>
-        public static void SaveInDropboxAFolder(string pathOfCloud, string pathToCopy, User user, List<string> extensions)
+        public static void SaveInDropboxAFolderAsync(string pathOfCloud, string pathToCopy, User user, List<string> extensions)
         {
             DropboxClient client = new DropboxClient(user.AccessToken);
             string[] entries = Directory.GetFileSystemEntries(pathToCopy, "*.*", SearchOption.AllDirectories);
@@ -51,10 +51,28 @@ namespace Utils.Data.Cloud
 
             for (int i = 0; i < listFiles.Count; i++)
             {
-                string pathFileInTheCloud = pathOfCloud + "/" + new FileInfo(listFiles[i]).Name;
-                client.Files.UploadAsync(pathFileInTheCloud, WriteMode.Overwrite.Instance, body: new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText(listFiles[i]))));
+                var task = Task.Run(() => Upload(client, pathOfCloud, new FileInfo(listFiles[i]).Name, listFiles[i]));
+                task.Wait();
+                Console.Print("File uploaded: " + pathOfCloud + "/" + new FileInfo(listFiles[i]).Name);
             }
-            Console.Print("Updated folder with: " + listFiles.Count + " elements.");
+
+            Console.Print("Finish to upload " + listFiles.Count + " files.");
+        }
+
+        /// <summary>Uploads the specified DBX.</summary>
+        /// <param name="dbx">The DBX.</param>
+        /// <param name="folder">The folder.</param>
+        /// <param name="file">The file.</param>
+        /// <param name="content">The content.</param>
+        public static async Task Upload(DropboxClient dbx, string folder, string file, string content)
+        {
+            using (var mem = new MemoryStream(Encoding.UTF8.GetBytes(content)))
+            {
+                var updated = await dbx.Files.UploadAsync(
+                    folder + "/" + file,
+                    WriteMode.Overwrite.Instance,
+                    body: mem);
+            }
         }
 
         /// <summary>Loads the of dropbox a folder.</summary>

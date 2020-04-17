@@ -1,22 +1,16 @@
-﻿//------------------------------------------------------------------------------------------
-// <author>Pablo Perdomo Falcón</author>
-// <copyright file="Tools.cs" company="Pabllopf">GNU General Public License v3.0</copyright>
-//------------------------------------------------------------------------------------------
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Utils.Data.Cloud;
 
-/// <summary>Tools Editor</summary>
-public class Tools
+public class Tools: Editor
 {
-    /// <summary>Updates the cloud.</summary>
-    [MenuItem("Tools/Resources To Cloud")]
-    public static void UpdateCloud()
+    [MenuItem("Tools/Upgrade Resources")]
+    private static void UpgradeResources()
     {
         UnityEditor.EditorApplication.delayCall += () =>
         {
-            CloudData.SaveInDropboxAFolder("/resources", Application.persistentDataPath + "/resources", new User(), new List<string>(new string[] { ".json", ".csv" }));
+            CloudData.SaveInDropboxAFolderAsync("/resources", Application.persistentDataPath + "/resources", new User(), new List<string>(new string[] { ".json", ".csv" }));
         };
     }
 }
