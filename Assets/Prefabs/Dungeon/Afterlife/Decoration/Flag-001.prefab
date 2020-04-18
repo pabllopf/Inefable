@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4953740843022076367}
   - component: {fileID: 507403839871821326}
   - component: {fileID: 2085338686069525660}
+  - component: {fileID: -8796135671064537069}
   - component: {fileID: 5881111288270233957}
   m_Layer: 0
   m_Name: Flag-001
@@ -98,6 +99,27 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
+--- !u!114 &-8796135671064537069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5667252121882196332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visRange: 10
+  visUpdateInterval: 1
+  checkMethod: 1
+  forceHidden: 1
+  castLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &5881111288270233957
 MonoBehaviour:
   m_ObjectHideFlags: 0

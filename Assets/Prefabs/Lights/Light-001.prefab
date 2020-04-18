@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5882007416605581682}
   - component: {fileID: 5983689169914940866}
   - component: {fileID: 1744850079481322108}
+  - component: {fileID: 6377134568924889345}
   m_Layer: 0
   m_Name: Light-001
   m_TagString: Untagged
@@ -136,6 +137,27 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 5882007416605581682}
+--- !u!114 &6377134568924889345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269650030846384322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visRange: 10
+  visUpdateInterval: 1
+  checkMethod: 1
+  forceHidden: 0
+  castLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1394421044947662416
 GameObject:
   m_ObjectHideFlags: 0

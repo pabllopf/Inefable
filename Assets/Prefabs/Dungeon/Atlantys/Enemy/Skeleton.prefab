@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1864190903119836615}
   - component: {fileID: -3791092638439725596}
   - component: {fileID: -2931945678182828970}
+  - component: {fileID: -3761810846835241412}
   m_Layer: 9
   m_Name: Skeleton
   m_TagString: Enemy
@@ -337,3 +338,24 @@ MonoBehaviour:
   boxToSpawn: 1
   minToSpawn: 0
   maxToSpawn: 0
+--- !u!114 &-3761810846835241412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8676689400359619745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visRange: 10
+  visUpdateInterval: 1
+  checkMethod: 1
+  forceHidden: 0
+  castLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295

@@ -99,8 +99,9 @@ GameObject:
   - component: {fileID: 3874423725913066554}
   - component: {fileID: 3874423725913066555}
   - component: {fileID: 3874423725913066552}
+  - component: {fileID: -6388386887033919056}
   m_Layer: 0
-  m_Name: PC
+  m_Name: PC-Welcome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +346,6 @@ MonoBehaviour:
   dialogueContainer: {fileID: 11400000, guid: 7b57003842bb79a4ca16dcec2036076c, type: 2}
   selectors: []
   acceptClip: {fileID: 8300000, guid: 3974114ae299617449f505ac433210b1, type: 3}
-  cancelClip: {fileID: 8300000, guid: 9b933c199c8559e4dbe3da1a13d7f389, type: 3}
 --- !u!114 &3874423725913066555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,3 +377,24 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 3874423725913066551}
+--- !u!114 &-6388386887033919056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874423725913066553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visRange: 10
+  visUpdateInterval: 1
+  checkMethod: 1
+  forceHidden: 0
+  castLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295

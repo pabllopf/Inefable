@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7152856367544334789}
   - component: {fileID: 6663178356306564180}
   - component: {fileID: 4168561081817133592}
+  - component: {fileID: 4949474219525416611}
   - component: {fileID: 6068579761320101893}
   m_Layer: 0
   m_Name: Cauldron-001
@@ -98,6 +99,27 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   m_AssetId: 
+--- !u!114 &4949474219525416611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3561558325328698711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1731d8de2d0c84333b08ebe1e79f4118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  visRange: 10
+  visUpdateInterval: 1
+  checkMethod: 1
+  forceHidden: 0
+  castLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &6068579761320101893
 MonoBehaviour:
   m_ObjectHideFlags: 0
