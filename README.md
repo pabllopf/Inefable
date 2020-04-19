@@ -2,7 +2,7 @@
 
 ![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/Home/TopBanner.png)
 ## What is Inefable?
-> Inefable is a Roguelike 2D with RPG, strategy and arcade components.
+> Inefable is a Roguelike 2D multiplayer with RPG and arcade components (available MacOs, Linux, Windows, IOS and Android). 
 
 [![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/ReadMore/ReadMore.png)](https://www.inefable.tk/)
 
