@@ -1,4 +1,4 @@
-[`Version 0.02 Alpha`](https://github.com/pabllopf/Game-Inefable/wiki/0.01-Alpha)
+[`Version 0.02 Alpha`](https://www.inefable.tk/)
 
 ![](https://github.com/pabllopf/Game-Inefable/blob/master/Wiki/Home/TopBanner.png)
 ## What is Inefable?
