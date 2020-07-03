@@ -1,0 +1,46 @@
+.header {
+    overflow: hidden;
+    position: relative;
+}
+
+@media screen and (min-width: 1920px) {
+    .header {
+        background: #1B2030 url("../resource/header/header-pc-2560.png") center no-repeat;
+        height: 90vh;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    .header {
+        background: #1B2030 url("../resource/header/header-pc-1920.png") center no-repeat;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        background: #1B2030 url("../resource/header/header-pc-1024.png") center no-repeat;
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header {
+        background: #1B2030 url("../resource/header/header-pc-1024.png") center no-repeat;
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .header {
+        background: #1B2030 url("../resource/header/header-pc-1024.png") center no-repeat;
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header {
+        background: #1B2030 url("../resource/header/header-pc-512.png") center no-repeat;
+        height: 190px;
+    }
+}

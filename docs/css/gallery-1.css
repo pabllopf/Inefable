@@ -1,0 +1,53 @@
+#gallery-1 
+{
+    box-sizing: border-box;
+    column-count: 3;
+}  
+
+#gallery-1 p
+{
+	font-size: 15px;
+	text-align:left;
+    color:black;
+} 
+
+#gallery-1 article 
+{
+	z-index:-1;
+    background:#fff;
+    text-align: left;
+	margin:0 0 20px 0;
+	border-radius:5px;
+    border:1px solid #ccc;
+	box-shadow:inset 0 0 30px rgba(0,0,0,0.1),1px 1px 3px rgba(0,0,0,0.2);
+}       
+#gallery-1 figure 
+{
+    box-sizing: border-box;
+}
+
+#gallery-1 img {
+    max-width: 100%;
+}
+
+
+@media screen and (min-width: 1920px) {
+    #gallery-1 
+	{
+		columns: 3;
+	}
+}
+
+@media screen and (max-width: 700px) {
+    #gallery-1 
+	{
+		columns: 2;
+	}
+}
+
+@media screen and (max-width: 400px) {
+    #gallery-1 
+	{
+		columns: 1;
+	}
+}

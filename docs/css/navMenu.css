@@ -1,0 +1,137 @@
+@font-face {
+    font-family: 'PressStartReg';
+    src: url("../font/PressStartReg.eot?#iefix") format('embedded-opentype'), url("../font/PressStartReg.woff") format('woff'), url("../font/PressStartReg.ttf") format('truetype'), url("../font/PressStartReg.svg#PressStartReg") format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navMenu {
+    background-color: #333;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    z-index: 3;
+
+    overflow: hidden;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+.navMenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navMenu li a {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: white;
+    font-family: PressStartReg;
+    border-bottom: 5px solid transparent;
+}
+
+.navMenu li a:hover {
+    background-color: #555;
+    border-bottom: 5px solid #C00;
+}
+
+.button-download a {
+    display: block;
+    padding: 20px;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
+    background-color: darkgreen;
+    cursor: pointer;
+}
+
+/* menu */
+
+.navMenu .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+/* menu icon */
+
+.navMenu .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+
+.navMenu .menu-icon .navicon {
+    background: white;
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 18px;
+}
+
+.navMenu .menu-icon .navicon:after,
+.navMenu .menu-icon .navicon:before {
+    background: white;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 0.2s ease-out;
+    width: 100%;
+}
+
+.navMenu .menu-icon .navicon:before {
+    top: 5px;
+}
+
+.navMenu .menu-icon .navicon:after {
+    top: -5px;
+}
+
+/* menu btn mobile*/
+
+.navMenu .menu-btn {
+    display: none;
+}
+
+.navMenu .menu-btn:checked ~ .menu {
+    max-height: 240px;
+}
+
+.navMenu .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+}
+
+.navMenu .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.navMenu .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.navMenu .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after,
+.navMenu .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before {
+    top: 0;
+}
+
+@media screen and (min-width: 1024px) {
+    .navMenu li {
+        float: left;
+    }
+    .navMenu li a {
+        padding: 20px 30px;
+    }
+    .navMenu .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    .navMenu .menu-icon {
+        display: none;
+    }
+}
